@@ -1,153 +1,96 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-.login{
-    height: calc(100vh - 100px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.wrapper{
-    width: 50%;
-    height: 75%;
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    -webkit-box-shadow:0px 5px 33px -21px rgba(66,68,90,1);
-    -moz-box-shadow:0px 5px 33px -21px rgba(66,68,90,1);
-    box-shadow:0px 5px 33px -21px rgba(66,68,90,1);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.left, .right{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.login {
+  width: 100%;
+  height: 100vh;
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.center{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-.or{
-    border: 2px solid lightgrey;
-    border-radius: 50%;
-    padding: 10px;
-    color: gray;
-    background-color: white;
-    font-weight: bolder;
+.login-container {
+  width: 90%; /* Adjust the width to your preference */
+  max-width: 400px; /* Max width for responsiveness */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.line{
-    width: 1px;
-    height: 75%;
-    background-color: lightgrey;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: -1;
-
+.login-container h1 {
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.loginButton{
-    width: 150px;
-    padding: 15px 25px;
-    border-radius: 5px;
-    color: white;
-    display: flex;
-    align-items: center;
-    font-weight: bolder;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-.google{
-    background-color: #df4930;
-}
-.facebook{
-    background-color: #507cc0;
-}
-.github{
-    background-color: black;
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.con{
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-input{
-    width: 200px;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    
-    border: solid lightgray 1px;
-    border-radius: 10px;
-}
-.submit{
-    width: 200px;
-    border: none;
-    padding: 15px 20px;
-    background-color: rgba(128,0,128,1);
-    color: white;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 1.5rem;
-    cursor: pointer; 
-
-}
-.loginTitle{
-    position: absolute;
-    top: 220px;
-    color: lightgrey;
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
-@media (max-width:850px) {
-    .wrapper{
-        width: 100%;
-        height: 100%;
-    }
-    
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-@media (max-width:400px) {
-    .wrapper{
-        width: 100%;
-        height: 100%;
-        display:flex;
-        align-items: center;
-        flex-direction: row;
-    }
-    .loginButton{
-        width: 100px;
-        padding: 10px 15px;
-        
-        margin-bottom: 20px;
-        cursor: pointer;
-    }
-    input{
-        width: 100px;
-        padding: 10px 15px;
-        margin-bottom: 8px;
-        
-        
-    }
-    .submit{
-        width: 100px;
-       
-        padding: 10px 15px;
-        
-        font-size: 0.5rem;
-       ; 
-    
-    }
-    
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Media Queries for Tablet and Mobile */
+@media screen and (max-width: 768px) {
+  .login-container {
+    width: 90%;
+    max-width: 300px; /* Adjust max-width for smaller screens */
+  }
+}
+@media screen and (max-height: 380px) {
+  .login-container {
+    width: 90%;
+    max-height: 300px; /* Adjust max-width for smaller screens */
+  }
+  .login{
+    height: 300px;
+  }
 }

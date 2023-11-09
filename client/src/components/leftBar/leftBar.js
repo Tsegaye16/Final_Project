@@ -1,9 +1,12 @@
 import React from 'react'
 import "./leftBar.css"
-function leftBar() {
+
+function LeftBar() {
   return (
-    <div>leftBar</div>
+    <div>
+  
+    </div>
   )
 }
 
-export default leftBar
+export default LeftBar;

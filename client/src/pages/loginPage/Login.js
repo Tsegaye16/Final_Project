@@ -1,49 +1,52 @@
 import React from 'react'
 import "./Login.css"
-import NavBar from '../../components/navBar/NavBar'
-import Google from "../../assets/google.png"
-import Facebook from "../../assets/facebook.png"
-import Github from "../../assets/github.png"
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useState } from 'react'
 
 function Login() {
+  const [values,setValues] = useState({
+  
+    email:"",
+    password:""
+  })
+
+  const navigate = useNavigate()
+  axios.defaults.withCredentials = true
+
+  function handleSubmit(event){
+    event.preventDefault()
+    axios.post("http://localhost:8080/login", values)
+    .then(res=>{
+      if(res.data.Status ==="Success"){
+        navigate("/")
+      }else{
+        alert("Error")
+      }
+    })
+    .then(err=>console.log(err))
+    
+  }
+
   return (
-    <div>
-        
-        <div className='login' >
-        <h1 className='loginTitle' >Choose a Login Method</h1> 
-        <div className='wrapper' >
-        
-          <div className='left' >
-            <div className='loginButton google' >
-              <img src={Google} className='icon' />
-              Google
-            </div>
-
-            <div className='loginButton facebook' >
-            <img src={Facebook} className='icon' />
-              Facebook
-            </div>
-
-            <div className='loginButton github' >
-              <img src={Github} className='icon' />
-              Github
-            </div>
-
-          </div>
-          <div className='center' >
-         
-            <div className='line' />
-            <div className='or' >OR</div>
-          </div>
-          <div className='right' >
-            <input type='text' placeholder='Username' />
-            <input type='password' placeholder='Password' />
-            
-            <button className='submit'>Login</button>
-          </div>
-        </div>
-        </div>
+    <div className="login">
+    <div className="login-container">
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit} >
+      <div className="form-group">
+        <label>Email:</label>
+        <input onChange={event=>setValues({...values, email:event.target.value})} type="email" name='email'/>
+      </div>
+      <div className="form-group">
+        <label>Password:</label>
+        <input onChange={event=>setValues({...values, password:event.target.value})}type="password" name='password'/>
+      </div>
+      <button>Login</button>
+      <p>Don't have an account? <a href="/register">Sign up</a></p>
+      </form>
     </div>
-  )
+  </div>
+  );
 }
+
 export default Login
