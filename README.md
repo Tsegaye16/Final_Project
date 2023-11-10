@@ -1,5 +1,12 @@
 # Project Title: Interactive Data Structure and Algorithm Visualizer (Simulator).
 
+- [Project Title: Interactive Data Structure and Algorithm Visualizer (Simulator).](#project-title-interactive-data-structure-and-algorithm-visualizer-simulator)
+- [1. Introduction](#1-introduction)
+- [1. Background of Project](#1-background-of-project)
+- [3. Statements of problem](#3-statements-of-problem)
+- [4. Objective](#4-objective)
+  - [4.1. General Objective](#41-general-objective)
+  - [4.2. Specific objectives](#42-specific-objectives)
 
 
 # 1. Introduction
@@ -54,7 +61,7 @@ __Limited practical exposure:__ developers may face challenges in fully understa
 __Missed opportunities:__ may lead to missed opportunities for developers to explore and experiment with different data structures and algorithmic concepts dynamically and engagingly.
 
 # 4. Objective
-##  4.1. Specific Objective
+##  4.1. General Objective
 Develop an Interactive Data Structure and Algorithm Visualizer (simulator).
 
 ## 4.2. Specific objectives
