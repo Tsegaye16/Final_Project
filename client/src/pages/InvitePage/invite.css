@@ -1,0 +1,196 @@
+.Imain {
+    width: 100%;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .Icontainer {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    padding: 20px;
+    height: 100px;
+    background-color: #007bff;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    top: 0;
+    position:fixed;
+    position: sticky;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .body {
+    max-height: 100vh; /* Set maximum height */
+    overflow-y: auto;
+    min-height: calc(100vh - 200px);
+  }
+  
+  .footer {
+    padding: 20px;
+    height: 100px;
+    background-color: #007bff;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    opacity: 0.5;
+   
+    
+  }
+  .moto{
+    border:none;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+  }
+  .start{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 30px;
+    padding-top: 20px;
+    width: 35%;
+    height: 300px;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    margin-left: 20px;
+    border-radius: 30px;
+    box-shadow: 5px 10px 50px goldenrod;
+    transition: transform 1.5s ease;
+
+  }
+  .start:hover{
+    transform: rotate3d(1, 0, 1, 360deg)
+  }
+  .start button{
+    width: 300px;
+    background-color: #007bff;
+    font-size: 2rem;
+    border-radius: 10px;
+  }
+  .moto a{
+    width: 60%;
+    height: 300px;
+    border: white solid 1px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-decoration: none;
+  
+    
+  }
+  .moto-card{
+    
+    width: 100%;
+    height:100%;
+    border: none;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: transform 0.3s ease;
+  
+    
+  }
+  .moto-card:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 40px 24px lightsteelblue;
+  }
+  .moto img{
+    width: 300px;
+    height: 300px;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+  }
+  .moto-card spam{
+    font-size: 4rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color:black;
+    padding-left: 10px;
+    
+  }
+  .queues{
+    width: 60%;
+    height: 500px;
+    margin-top: 100px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+  
+
+
+  }
+  .queues:hover{
+    transform: rotate3d(100, 890, 51, -20deg);
+    box-shadow: 20px 0 24px lightsteelblue;
+  }
+  .queues img{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    
+    
+  }
+
+  .about{
+    width: 60%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    margin-top: 20px;
+    min-height: 300px;
+    top: 25%;
+    left: 25%;
+  }
+ 
+ .about h1{
+    position: absolute;
+    top: 5px;
+    right: 20px;
+
+  }
+ .about h1:hover{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    cursor: pointer;
+
+  }
+  
+  
+  

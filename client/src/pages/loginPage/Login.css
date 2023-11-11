@@ -7,7 +7,8 @@
 .login {
   width: 100%;
   height: 100vh;
-  background-color: #007bff;
+  background-image: url("../../assets/tree.jpg");
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,8 +16,8 @@
 }
 
 .login-container {
-  width: 90%; /* Adjust the width to your preference */
-  max-width: 400px; /* Max width for responsiveness */
+  width: 90%; 
+  max-width: 400px; 
   margin: 0 auto;
   padding: 20px;
   background-color: #f4f4f4;
