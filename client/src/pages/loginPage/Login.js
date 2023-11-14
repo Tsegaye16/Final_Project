@@ -19,12 +19,14 @@ function Login() {
     axios.post("http://localhost:8080/login", values)
     .then(res=>{
       if(res.data.Status ==="Success"){
-        navigate("/")
+        navigate("/home")
       }else{
         alert("Error")
+        navigate("/login")
       }
     })
     .then(err=>console.log(err))
+    navigate("/login")
     
   }
 

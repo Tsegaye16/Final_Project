@@ -1,52 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import "./Home.css"
-import axios from 'axios'
-
-//import { useNavigate } from 'react-router-dom'
-
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import "./Home.css";
+import axios from 'axios';
+import Login from '../loginPage/Login';
+import Invite from '../InvitePage/Invite';
+import NavBar from '../../components/navBar/NavBar';
+import LeftBar from '../../components/leftBar/leftBar';
+import Stack from '../../DSA/stack/stack';
 
 function Home() {
-  const [auth, setAuth] = useState(false)
-  //const navigate = useNavigate()
-  const [message, setMessage]=useState("")
-  const [name,setName] = useState("")
-  axios.defaults.withCredentials = true
-  useEffect(()=>{
-    axios.get("http://localhost:8080").then(res=>{
-      if(res.data.Status === "Success"){
-        setAuth(true)
-        setName(res.data.name)
-        
-      }else{
-        setAuth(false)
-        setMessage(res.data.Error)
-      }
-    }).then(err=>console.log(err))
-  })
+  const [auth, setAuth] = useState(false);
+  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  axios.defaults.withCredentials = true;
+  const navigate = useNavigate();
 
-  const handleDelete = ()=>{
-    axios.get("http://localhost:8080/logout")
-    .then(res=>{
-      window.location.reload(true);
-    }).catch(err=>console.log(err))
-  }
+  useEffect(() => {
+    axios.get("http://localhost:8080").then(res => {
+      if (res.data.Status === "Success") {
+        setAuth(true);
+        setName(res.data.name);
+      } else {
+        setAuth(false);
+        setMessage(res.data.Error);
+        navigate('/login'); // Redirect to the login page if not authenticated
+      }
+    }).then(err => console.log(err));
+  }, [navigate]);
+
   return (
-    <div className='container mt-4' > 
-    {
-      auth ?
-      <div>
-        <h3>You are Authorized --- {name}</h3>
-        <button className='btn btn-danger' onClick={handleDelete} >Logout</button>
-      </div>
-      :
-      <div>
-        <h3>{message}</h3>
-        <h3>Login Now</h3>
-        <a href='/login' className='btn btn-primary' >Login</a>
-      </div>
-    }     
-        
+    <div className='main-home'>
+      {auth ? (
+        <div>
+          <div className='NavBar'>
+            <NavBar />
+          </div>
+          <div className='main-body'>
+            <div className='left-bar'>
+              <LeftBar />
+            </div>
+            <div className='main-body-part'>
+              <Stack />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/invite" element={<Invite />} />
+        </Routes>
+      )}
     </div>
-  )
+  );
 }
-export default Home
+
+export default Home;

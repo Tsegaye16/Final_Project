@@ -1,0 +1,46 @@
+
+.main-home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .main-home .NavBar {
+    
+    color: black;
+    background-color: white;
+    border-bottom: lightgray solid 1px;
+    padding: 0;
+    height: 100px;
+    
+  }
+  
+  .main-body {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    background-color: white;
+  }
+  
+  .left-bar {
+   display: flex;
+   background-color: white;
+   border-right: 1px solid lightgray;
+   flex: 1;
+    overflow-y: auto; /* Allow vertical scrolling */
+   /* Set a maximum height */
+  }
+  
+  .main-body-part {
+    
+    
+        flex: 5;
+        background: white;
+        padding: 0;
+        overflow-y: auto; /* Allow vertical scrolling */
+         /* Set a maximum height */
+      
+  }
+  
+  
