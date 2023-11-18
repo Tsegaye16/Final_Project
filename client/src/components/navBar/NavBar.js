@@ -1,42 +1,40 @@
-import React from 'react'
-import "./NavBar.css"
-import tsegaye from "../../assets/Tsegaye.jpg"
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import React from 'react';
 
+import { useNavigate } from 'react-router-dom';
 
-export default function NavBar() {
+import './NavBar.css';
+import tsegaye from '../../assets/Tsegaye.jpg';
+
+const NavBar = () => {
   const navigate = useNavigate();
 
-  const handleDelete = () => {
-    axios.get("http://localhost:8080/logout")
-      .then(res => {
-        navigate("/"); // Redirect to the "/" page
-      })
-      .catch(err => console.log(err));
+  const handleLogout = () => {
+    // Clear user authentication details from state or context
+
+    // Redirect to the login page or perform any other action
+    navigate('/login');
   };
-  
+
   return (
-    <div className='main-navbar' >
-      <div className='navbar-container' >
-        <div className='logo' >
+    <div className='main-navbar'>
+      <div className='navbar-container'>
+        <div className='logo'>
           <h1>Logo</h1>
         </div>
         <div className='button-container'>
           <button>About</button>
           <button>Contact</button>
-          <button onClick={handleDelete} >Logout</button>
-          <div className='user' >
-            <img src={tsegaye} alt={tsegaye}/>
+          <button onClick={handleLogout}>Logout</button>
+          <div className='user'>
+            <img src={tsegaye} alt='Tsegaye' />
             <span>Tsegaye</span>
-            </div>
+          </div>
         </div>
-
       </div>
-
-      
-        
     </div>
-  )
-}
+  );
+};
+
+export default NavBar;
+
+

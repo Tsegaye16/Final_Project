@@ -16,8 +16,8 @@
 }
 
 .login-container {
-  width: 90%; 
-  max-width: 400px; 
+  width: 90%;
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f4f4f4;
@@ -83,15 +83,21 @@ a:hover {
 @media screen and (max-width: 768px) {
   .login-container {
     width: 90%;
-    max-width: 300px; /* Adjust max-width for smaller screens */
+    max-width: 300px;
   }
 }
-@media screen and (max-height: 380px) {
+
+@media screen and (max-width: 480px) {
   .login-container {
     width: 90%;
-    max-height: 300px; /* Adjust max-width for smaller screens */
+    max-width: 250px;
   }
-  .login{
-    height: 300px;
+
+  .form-group input {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 16px;
   }
 }
