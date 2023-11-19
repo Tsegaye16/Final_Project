@@ -8,7 +8,8 @@
   .main-home .NavBar {
     
     color: black;
-    background-color: white;
+    background-color: #2c3e50;
+    /* background-color: white; */
     border-bottom: lightgray solid 1px;
     padding: 0;
     height: 100px;
@@ -24,12 +25,16 @@
   }
   
   .left-bar {
+    
    display: flex;
-   background-color: white;
+   background-color: #2c3e50;
+   padding-top: 10px;
    border-right: 1px solid lightgray;
    flex: 1;
-    overflow-y: auto; /* Allow vertical scrolling */
-   /* Set a maximum height */
+    overflow-y: auto; 
+   overflow: hidden;
+    
+   
   }
   
   .main-body-part {

@@ -53,7 +53,7 @@
   font-size: 16px;
 }
 
-button {
+.main .register-container button {
   background-color: #007bff;
   color: #fff;
   border: none;

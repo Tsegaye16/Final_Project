@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './invite.css';
+import './invite.scss';
 import unlock from '../../assets/unlock.png';
 import add_1 from '../../assets/queues/add_1.jpg';
 import add_2 from '../../assets/queues/add_2.jpg';
@@ -38,62 +38,71 @@ const Invite = () => {
     window.location.href = '/register';
   };
 
-  const Popup = () => {
-    setPopup(true);
-  };
-
-  const ClosePopup = () => {
-    setPopup(false);
-  };
+  
 
   return (
-    <div className='Imain'>
-      <div className='Icontainer'>
-        <div className='header'>
-          <div className='logo'>Logo</div>
-          <div className='button-list'>
-            <button onClick={Popup}>About</button>
-            <button>Contact</button>
-            <Link to='/register'>
-              <button>Signup</button>
-            </Link>
-            <Link to='/login'>
-              <button>Login</button>
-            </Link>
-          </div>
+    <div className='invite-main'>
+      <div className='header'>
+        <div className='logo' ><h1>Logo</h1></div>
+        <div className='button-list'>
+          <Link className='button'>
+          <button>About</button>
+          </Link>
+          <Link className='button'>
+          <button>Contact</button>
+          </Link>
+          <Link to={"/register"} className='button'>
+          <button>Signup</button>
+          </Link>
+          <Link to={"/login"} className='button'>
+          <button>Login</button>
+          </Link>
         </div>
-        {popup ? (
-          <div className='about'>
-            <h1 onClick={ClosePopup}>x</h1>
-          </div>
-        ) : (
-          <>
-            <div className='body'>
-              <div className='moto'>
-                <div className='start'>
-                  <h2>You can explore and grasp the magic of data structure and algorithm quickly</h2>
-                  <Link to='/login'>
-                    <button>Start</button>
-                  </Link>
-                </div>
-                <Link to='/login'>
-                  <div className='moto-card'>
-                    <img src={unlock} alt='unlock' />
-                    <span>"the power of Data structure and algorithm"</span>
-                  </div>
-                </Link>
-              </div>
-              <div className='dsa'>
-                <div className='queues' onClick={handleQueueClick}>
-                  <img src={images[currentImage]} alt={`Image ${currentImage + 1}`} />
-                </div>
-                <div className='stack'></div>
-              </div>
-            </div>
-            <div className='footer'>Footer</div>
-          </>
-        )}
       </div>
+     <div className='body-container'>
+
+     
+      <div className='body'>      
+       
+        <div>huy</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>hey</div>
+        
+      </div>
+      </div>
+      <div className='footer'>
+        footer
+      </div>
+      
     </div>
   );
 };

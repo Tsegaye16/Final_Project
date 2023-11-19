@@ -5,6 +5,34 @@ function Stack() {
     <div className='main-stack' >
       
       <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
+      <h1>Stack</h1>
       
     </div>
   )
