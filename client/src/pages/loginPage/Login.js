@@ -57,9 +57,8 @@ function Login() {
               onChange={handleChange}
             />
           </div>
-
           <button type="submit">Login</button>
-        </form>
+        </form> did you haven't an account yet?
         <Link to="/register">Register</Link>
       </div>
     </div>

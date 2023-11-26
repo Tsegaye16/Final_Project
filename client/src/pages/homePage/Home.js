@@ -27,12 +27,13 @@ function Home() {
         return <Welcome/>;
     }
   };
+  let isUser = true
  return (
     <div className='main-home'>
       
         <div>
           <div className='NavBar'>
-            <NavBar />
+            <NavBar isUser={isUser}/>
           </div>
           <div className='main-body'>
             <div className='left-bar'>

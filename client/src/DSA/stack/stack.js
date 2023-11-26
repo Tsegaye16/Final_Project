@@ -1,39 +1,14 @@
 import React from 'react'
-import "./stack.css"
+import "./stack.scss"
 function Stack() {
   return (
-    <div className='main-stack' >
-      
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      <h1>Stack</h1>
-      
+    <div className='main-array'>
+      <div className='title'>Title</div>
+      <div className='introduction'>Introduction</div>   
+      <div className='operation'>Operation</div>   
+      <div className='implementation'>Implementation</div>
+      <div className='visualization'>Visualization</div>
+      <div className='summery'>Summary</div>
     </div>
   )
 }

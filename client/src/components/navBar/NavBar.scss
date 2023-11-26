@@ -1,21 +1,15 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.invite-main {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  color: white;
-
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
   .header {
-    height: 100px;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: #2c3e50;
+    background-color: inherit;
     color: white;
     border-bottom: 1px solid lightgray;
     position: fixed;
@@ -23,6 +17,7 @@
     z-index: 1000;
 
     .logo {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -30,12 +25,14 @@
     }
 
     .button-list {
+      flex: 2;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       height: 100%;
 
       .button {
+        
         text-decoration: none;
         margin: 0 15px;
         border-radius: 15px;
@@ -60,27 +57,28 @@
           color: black;
         }
       }
+      .user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 55px;
+        cursor: pointer;
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 1px lightgray solid;
+          margin-right: 10px;
+        }
+        span {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+      }
+      
+     
+      
+      
     }
   }
-
-  .body-container {
-    flex: 1;
-    color: black;
-    padding-top: 110px; /* Ensure content starts below the fixed header */
-    padding-bottom: 110px; /* Ensure content ends above the fixed footer */
-    overflow-y: auto; /* Enable scrolling for body-container content */
-  }
-
-  .footer {
-    height: 100px;
-    width: 100%;
-    background-color: #2c3e50;
-    color: white;
-    border-top: 1px solid lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-  }
-}
