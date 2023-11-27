@@ -3,29 +3,29 @@
 - [Project Title: Interactive Data Structure and Algorithm Visualizer (Simulator).](#project-title-interactive-data-structure-and-algorithm-visualizer-simulator)
 - [__Chapter One__](#chapter-one)
 - [__1. Introduction__](#1-introduction)
-- [__1. Background of Project__](#1-background-of-project)
-- [__3. Statements of problem__](#3-statements-of-problem)
-- [__4. Objective__](#4-objective)
-  - [__4.1. General Objective__](#41-general-objective)
-  - [__4.2. Specific objectives__](#42-specific-objectives)
-- [__5. Feasiblity Study__](#5-feasiblity-study)
-  - [__5.1.	Technical Feasibility__](#51technical-feasibility)
-  - [__5.2.	Operational Feasibility__](#52operational-feasibility)
-- [__6.	Scope and limitations__](#6scope-and-limitations)
-  - [__6.1.	Scope__](#61scope)
-  - [__6.2. Limitations__](#62-limitations)
-- [__7. Significance and beneficiary of the project__](#7-significance-and-beneficiary-of-the-project)
-  - [__7.1.	Significance__](#71significance)
-  - [__7.2.	Beneficiaries__](#72beneficiaries)
-- [__8.The methodology of the project__](#8the-methodology-of-the-project)
-  - [__8.1.	Data collection tools and techniques__](#81data-collection-tools-and-techniques)
-  - [__8.2.	System Analysis and Design__](#82system-analysis-and-design)
-- [__8.3.	System Development Models__](#83system-development-models)
-  - [__8.4.	System Testing Methodology__](#84system-testing-methodology)
-- [__9.	System Development Tools and Techniques__](#9system-development-tools-and-techniques)
-  - [__9.1.	Modeling tools__](#91modeling-tools)
-  - [__9.2.	Frontend Technologies__](#92frontend-technologies)
-- [__9.3.	Back-end technology__](#93back-end-technology)
+- [__1.1 Background of Project__](#11-background-of-project)
+- [__1.2. Statements of problem__](#12-statements-of-problem)
+- [__1.3. Objective__](#13-objective)
+  - [__1.3.1. General Objective__](#131-general-objective)
+  - [__1.3.2. Specific objectives__](#132-specific-objectives)
+- [__1.4. Feasiblity Study__](#14-feasiblity-study)
+  - [__1.4.1.	Technical Feasibility__](#141technical-feasibility)
+  - [__1.4.2.	Operational Feasibility__](#142operational-feasibility)
+- [__1.5.	Scope and limitations__](#15scope-and-limitations)
+  - [__1.5.1.	Scope__](#151scope)
+  - [__1.5.2. Limitations__](#152-limitations)
+- [__1.6. Significance and beneficiary of the project__](#16-significance-and-beneficiary-of-the-project)
+  - [__1.6.1.	Significance__](#161significance)
+  - [__1.6.2.	Beneficiaries__](#162beneficiaries)
+- [__1.7.The methodology of the project__](#17the-methodology-of-the-project)
+  - [__1.7.1.	Data collection tools and techniques__](#171data-collection-tools-and-techniques)
+  - [__1.7.2.	System Analysis and Design__](#172system-analysis-and-design)
+- [__1.7.3.	System Development Models__](#173system-development-models)
+  - [__1.7.4.	System Testing Methodology__](#174system-testing-methodology)
+- [__1.8.	System Development Tools and Techniques__](#18system-development-tools-and-techniques)
+  - [__1.8.1.	Modeling tools__](#181modeling-tools)
+  - [__1.8.2.	Frontend Technologies__](#182frontend-technologies)
+- [__1.8.3.	Back-end technology__](#183back-end-technology)
 - [__Chapter Two__](#chapter-two)
 - [__2. Description Of Existing System__](#2-description-of-existing-system)
 - [__2.1.	Introduction__](#21introduction)
@@ -62,7 +62,7 @@ An interactive data structure and algorithm visualizer is a software tool or app
 
 This project is motivated by the imperative to render these fundamental building blocks accessible, engaging, and versatile. It seeks to provide an interactive platform that provides to students, educators, and developers alike, empowering them to comprehend and apply data structures and algorithms effectively. By offering a user-friendly interface and opportunities for self-paced learning, this project aims to bridge the gap between theory and practice, making these subjects more approachable, and ultimately enhancing the learning experience and practical application of these essential concepts.
 
-# __1. Background of Project__
+# __1.1 Background of Project__
 
 An interactive data structure and algorithm visualization project typically involves addressing the significance of the project within the context of computer science education, programming, and software development. Here are some key points we will consider including in the background section:
 
@@ -79,7 +79,7 @@ __Teaching Aid:__ The project facilitates visual learning by providing interacti
 __Active Participation:__ The interactive nature of the project encourages active student participation during classroom sessions.
 By addressing the above points, we will provide a comprehensive understanding of the project's purpose, its educational significance, and its potential impact on the field of computer science education and software development.
 
-# __3. Statements of problem__
+# __1.2. Statements of problem__
 
 Due to the current text-based and static teaching and learning methods, individuals within the field, including educators and students, encounter challenges in understanding and explaining the subject matter.
  
@@ -100,11 +100,11 @@ __Limited practical exposure:__ developers may face challenges in fully understa
 
 __Missed opportunities:__ may lead to missed opportunities for developers to explore and experiment with different data structures and algorithmic concepts dynamically and engagingly.
 
-# __4. Objective__
-##  __4.1. General Objective__
+# __1.3. Objective__
+##  __1.3.1. General Objective__
 Develop an Interactive Data Structure and Algorithm Visualizer (simulator).
 
-## __4.2. Specific objectives__
+## __1.3.2. Specific objectives__
 
 Specific objectives of this proposed project are:
 
@@ -116,18 +116,18 @@ Specific objectives of this proposed project are:
 
 *	Explore core concept 
 
-# __5. Feasiblity Study__
+# __1.4. Feasiblity Study__
 Feasibility analysis enables the system to determine whether the project can be developed or not. Therefore, the feasibility analysis of the proposed system involves the following concepts: 
-## __5.1.	Technical Feasibility__
+## __1.4.1.	Technical Feasibility__
 The required technologies, including web development tools such as React, material-UI, bootstrap, Node, express, and MySQL are readily available. Adequate resources in terms of manpower, including programmers, testers, and debuggers, can be allocated to the project. Additionally, the necessary software and hardware, such as servers and databases, can be procured and configured to support the development and deployment of the interactive data structure and algorithm visualizer.
-## __5.2.	Operational Feasibility__
+## __1.4.2.	Operational Feasibility__
 It will address a clear need in the field of computer science education, where students, educators, and developers can benefit from an interactive learning platform. Current practices often lack the interactive and hands-on elements offered by this visualizer, making it a valuable addition. The system's ability to reduce the time required for students and learners to grasp complex concepts further enhances its operational feasibility.
 *	It offers a greater level of user satisfaction 
 *	Produce the best result and provide high-quality service.
 *	It can solve the existing system problems and challenges
 
-# __6.	Scope and limitations__
-## __6.1.	Scope__
+# __1.5.	Scope and limitations__
+## __1.5.1.	Scope__
 The project's scope will encompass a wide array of essential components, including educational content, performance analysis, customization, step-by-step guidance, progress tracking, an interactive notebook, and quizzes. These features are meticulously designed to provide an all-encompassing and interactive educational experience for users, whether they are students, developers, or educators. With the ability to customize data and algorithm parameters, analyze performance, and track their progress, users will have a comprehensive platform to enhance their understanding and skills in data structures and algorithms, aligning with the vision of promoting quality education at the heart of this project.
 
 In this proposed system we will cover the following concepts.
@@ -145,48 +145,48 @@ In this proposed system we will cover the following concepts.
     * Sorting (Bubble Sort, Selection Sort, Insertion Sort, Merge Sort Quick Sort)
     * searching (linear and binary search)
     * Graph algorithms (Breadth-First-Search, Depth-First-Search)
-## __6.2. Limitations__
+## __1.5.2. Limitations__
 -	Because high-level programming has its garbage collector; our system cannot visualize the exact memory usage of an algorithm. Rather display related numerical value for demonstration and understanding purpose
 -	We are not going to develop a mobile app for our system to allow users to access the system via mobile due to the time and resources.
 
-# __7. Significance and beneficiary of the project__
-## __7.1.	Significance__
+# __1.6. Significance and beneficiary of the project__
+## __1.6.1.	Significance__
 The Interactive Data Structure and Algorithm Visualizer project holds significant value in the realm of computer science education. It addresses a crucial need for accessible and engaging learning tools in the field of data structures and algorithms. By providing a platform for interactive exploration and visualization of these fundamental concepts, it bridges the gap between theoretical knowledge and practical application. This project not only enhances the learning experience but also serves as a valuable resource for educators, students, and developers aiming to strengthen their understanding of these core principles.
-## __7.2.	Beneficiaries__
+## __1.6.2.	Beneficiaries__
  __Students:__  The project benefits students pursuing computer science degrees by offering a dynamic learning environment. It empowers them to grasp complex data structures and algorithms with hands-on experience, thereby improving their academic performance and future career prospects.
 __Educators:__  Teachers and instructors find a valuable teaching aid in this project. It simplifies complex concepts, making it easier to explain and demonstrate these topics in classrooms and online courses. It also allows them to track their student's progress and adapt their teaching methods accordingly.
 __Developers:__  The project caters to software developers and engineers keen on advancing their skills in data structures and algorithms. They can use the platform to practice, experiment, and gain expertise in these areas, which is vital for career growth.
 __College:__  Computing College can integrate this project into its curriculum to enhance the quality of education and keep up with modern teaching methods.
 
-# __8.The methodology of the project__ 
-## __8.1.	Data collection tools and techniques__ 
+# __1.7.The methodology of the project__ 
+## __1.7.1.	Data collection tools and techniques__ 
 To get the precise data, the team member will use the following data collection techniques:
 -	__Interview:__  to get the basic and background information about the existing system we will interview students and instructors.
 -	__Direct observation:__ By existing physically in the classroom, we observe how data structure and algorithm courses are offered.
 - __Analyzing existing Documents:__ We will analyze useful documents and materials that are currently used.
 
-## __8.2.	System Analysis and Design__ 
+## __1.7.2.	System Analysis and Design__ 
 We will use object-oriented system analysis and design methodology for proposed project system development. Because it has better advantages over structural system analysis and design methodology. Some benefits of using the object-oriented paradigm are as follows: 
 -	__System stability:__ object-oriented techniques tend to produce systems that are resilient to change, where changes can be made without major disruption, with minimal time and effort, and with little fear of disturbing something else in the system.
 -	__Maintainability:__ object-oriented methods produce systems that can be maintained and enhanced more readily.
 -	__Reusable components:__ object-oriented features such as inheritance and polymorphism lead to smoother, more efficient reuse in both code reuse and design reuse.
 -	__Reality-based systems:__ the techniques used with object-oriented methods give a far more accurate picture of the users' business operation and information needs, leading to a final system that is closer to what the customer wants.
 -	__Data accessibility:__ object-oriented methods tend to lead to better design of databases; this data is more accessible and usable. 
-# __8.3.	System Development Models__ 
+# __1.7.3.	System Development Models__ 
 The SDLC gives structure to the challenge of transitioning from the beginning to the end of our project without forgetting a step. We are going to use the __agile__ model, which quickly delivers a working product and is considered a very realistic development approach. It produces ongoing releases, each with small, incremental changes from the previous release. Emphasize interaction as the customers, developers, and testers work together via the project. It can adapt well to the changes that occur during the life of the project. It is also communicative, which means welcoming feedback from the end-user, and encourages changing requirements as needed. 
-## __8.4.	System Testing Methodology__ 
+## __1.7.4.	System Testing Methodology__ 
 This methodology is used to test a particular product to ensure that the product fits its purpose. it involves testing that the product works following its specification, and has no undesirable side effects when used in ways outside of its design parameters. Ensure that the developed software successfully operates in all the anticipated environments with the required usability and security. Consider both functional Testing and non-functional Testing, functional testing is to ensure that all requirements should be met and the proper working of all the functionalities of an application. Non-functional is to ensure security and establish the reliability of the application and that the application developed is robust enough to work.
 
 The system testing methodology for the Interactive Data Structure and Algorithm Visualizer project will encompass a comprehensive approach that includes various levels of testing to ensure its reliability and functionality. This methodology comprises unit testing to evaluate individual components, integration testing to assess the interaction between different modules, system testing to validate the system as a whole, and acceptance testing to confirm that it meets user requirements. 
 
-# __9.	System Development Tools and Techniques__
-  ## __9.1.	Modeling tools__
+# __1.8.	System Development Tools and Techniques__
+  ## __1.8.1.	Modeling tools__
 Drawio and Edraw Max were used for designing different models in our project.
-## __9.2.	Frontend Technologies__
+## __1.8.2.	Frontend Technologies__
 -	__React__ is a popular JavaScript library for building user interfaces. Its component-based architecture makes it suitable for creating interactive and reusable UI components. React allows efficient updating and rendering of the visualizations of data structures and algorithms as users interact with the system.
 -	__Material-UI:__ is a popular React UI framework that provides pre-designed components following Google's Material Design guidelines.
 -	__Bootstrap:__ Bootstrap is a front-end framework that provides pre-designed UI components and a responsive grid system. It will help to create a consistent and mobile-friendly user interface.
-# __9.3.	Back-end technology__
+# __1.8.3.	Back-end technology__
 -	__Node.js:__ Node.js is a popular choice for building the backend of web applications. It's known for its scalability and non-blocking I/O, making it well-suited for real-time applications and APIs.
 -	__Express.js:__ Express is a minimal and flexible Node.js web application framework. It's widely used for building robust and efficient APIs. We will create routes, handle requests, and manage middleware with ease.
 -	__MySQL:__ is an open-source relational database management system (RDBMS). It is one of the most popular and widely used database systems in the world. MySQL is known for its reliability, performance, and ease of use.
