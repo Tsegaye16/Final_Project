@@ -1,6 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import "./leftBar.scss";
 import Home from '../../pages/homePage/Home';
+////////////Proggress
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 function LeftBar({ setSelectedItem }) {
   const [dataStructureVisible, setDataStructureVisible] = useState(true);
@@ -37,55 +40,45 @@ function LeftBar({ setSelectedItem }) {
   const handleItemClick = (itemName) => {
     setSelectedItem(itemName);
   };
+// Timing
 
-
-  const [progress, setProgress] = useState(0);
+const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    let timer;
-    let startTime;
-    let elapsedTime = 0;
+    let interval;
+    const startTime = Date.now();
 
-    const startTimer = () => {
-      startTime = Date.now() - elapsedTime;
-      timer = setInterval(updateProgress, 1000);
+    const updateCounter = () => {
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime =  60 * 60 * 1000 - elapsedTime; // 2 hours in milliseconds
+
+      if (remainingTime > 0) {
+        setCounter((prevCounter) => prevCounter + 1000);
+      } else {
+        clearInterval(interval);
+      }
     };
 
-    const updateProgress = () => {
-      const currentTime = Date.now();
-      elapsedTime = currentTime - startTime;
-      const newProgress = Math.min((elapsedTime / (5 * 60 * 1000)) * 100, 100); // Assuming a 5-minute timer
-      setProgress(newProgress);
-    };
+    interval = setInterval(updateCounter, 1000);
 
+    // Pause the interval when the tab is not active
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        // Window is not visible, save the timer state
-        localStorage.setItem('timerStartTime', startTime);
-        clearInterval(timer);
+        clearInterval(interval);
       } else {
-        // Window is visible, resume the timer using the saved state
-        const savedStartTime = localStorage.getItem('timerStartTime');
-        if (savedStartTime) {
-          startTime = parseInt(savedStartTime, 10);
-          startTimer();
-        }
+        interval = setInterval(updateCounter, 1000);
       }
-
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    startTimer(); // Start the timer when the component mounts
-    
-
     return () => {
-      clearInterval(timer); // Clear the timer when the component unmounts
+      clearInterval(interval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []); 
-  const greenPercentage = progress;
- const redPercentage = 100 - progress;// 
+  }, []);
+  
+  
   return (
     <div className='main-leftbar'>
       <div className='dsa-content'>
@@ -143,9 +136,16 @@ function LeftBar({ setSelectedItem }) {
             </div>
           </div>
         </div>
-        <div className='progress' style={{ border: `2px solid transparent`, background: `conic-gradient(green ${greenPercentage}%, red ${redPercentage}%)` }}>
-        {Math.round(progress)}%
-        </div>
+        <div className="progress-container">
+      <CircularProgressbar
+        value={(counter / (60 * 60 * 1000)) * 100}
+        text={`${Math.floor((60 * 60 * 1000 - counter) / (60 * 1000))}m`}
+        styles={buildStyles({
+          pathColor: counter > 0 ? 'green' : 'red',
+          trailColor: 'transparent',
+        })}
+      />
+    </div>
       </div>
     </div>
   );

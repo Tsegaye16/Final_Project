@@ -1,21 +1,24 @@
-import React from 'react'; 
+import React,{useState} from 'react'; 
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import {Link, useNavigate } from 'react-router-dom';
 import './NavBar.scss';
 import tsegaye from '../../assets/Tsegaye.jpg';
+
+
 const NavBar = ({isUser}) => {
   const navigate = useNavigate();
-
+ 
   const handleLogout = () => {
    
     navigate('/login');
   };
-  
+
+ 
 
   return (
     <div className="invite-main">
     <div className='header'>
-        <div className='logo' ><h1>Logo</h1></div>
+        <div className='logo' ><h1>DSA</h1></div>
         <div className='button-list'>
         <ScrollLink to="home" smooth={true} duration={900} className='button'>
             <button>Home</button>
@@ -43,11 +46,16 @@ const NavBar = ({isUser}) => {
           </>
           }
           
-          {isUser && <div className='user'>
+          {isUser && 
+         
+          <div className='user' >
             <img src={tsegaye} alt='Tsegaye' />
             <span>Tsegaye</span>
-          </div>}
+            
+          </div>
           
+          }
+           
         </div>
       </div>
       </div>

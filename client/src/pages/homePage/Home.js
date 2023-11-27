@@ -28,6 +28,14 @@ function Home() {
     }
   };
   let isUser = true
+
+  const CustomComponent = () => (
+    // Replace this with the component you want to display
+    <div>
+      <h1>This is a custom component</h1>
+      <p>You can pass any component here to be displayed inside renderSelectedComponent.</p>
+    </div>
+  );
  return (
     <div className='main-home'>
       
@@ -40,9 +48,9 @@ function Home() {
             <LeftBar setSelectedItem={setSelectedItem} />
             </div>
             <div className='main-body-part'>
-              
+            <CustomComponent />
             {renderSelectedComponent()}
-                
+            
               
             </div>
           </div>

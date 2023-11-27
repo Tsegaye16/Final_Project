@@ -173,17 +173,10 @@
 
       }
   
-      .progress{
-        margin-top: 50px;
-        margin-left: 50px;
-        width: 90px;
-        height: 90px;
+      .progress-container{
+        background-color: aliceblue;
+        border: none;
         border-radius: 50%;
-        background-color: white;
-        color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
       
       

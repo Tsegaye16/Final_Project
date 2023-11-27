@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { animateScroll, Link as ScrollLink } from 'react-scroll';
 import { Link } from 'react-router-dom';
 import './invite.scss';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faGithub, faLinkedin, faTwitter,faEnvelope } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+//import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 //import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-solid-svg-icons';
 import tsegaye from '../../assets/Tsegaye.jpg';
 import NavBar from '../../components/navBar/NavBar';
@@ -14,7 +15,8 @@ import module from "../../assets/module.jfif"
 import enjoy from "../../assets/enjoy.avif"
 import senario from "../../assets/senario.gif"
 import friendly from "../../assets/user-friendly-interface.png"
-
+import { ContactUs } from './contact';
+import {  toast } from 'react-toastify';
 
 
 
@@ -111,7 +113,8 @@ const Invite = () => {
             </p>
             </div>
           <div className='social-media'>
-          {/* <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer">
+            <div className='link'>
+          <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faGithub} size="2x" />
       </a>
       <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener noreferrer">
@@ -119,14 +122,15 @@ const Invite = () => {
       </a>
       <a href="https://twitter.com/your-twitter" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faTwitter} size="2x" />
-      </a> */}
-      {/* <a href="mailto:your.email@example.com">
-        <FontAwesomeIcon icon={faEnvelope} size="2x" />
-      </a> */}
+      </a> 
+      </div>
           </div>
         </div>
         </div>
-        <div className='contact' id='contact'>Contact</div>
+        <div className='contact' id='contact'>
+          <span>Contact me at</span>
+          <ContactUs/>
+        </div>
        </div>
       </div>
       <div className='footer'>
