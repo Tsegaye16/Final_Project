@@ -1,5 +1,6 @@
 import React from 'react'
 import "./queues.scss"
+
 function Queues() {
   return (
     <div className='main-array'>

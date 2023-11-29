@@ -1,5 +1,6 @@
 import React from 'react'
 import "./stack.scss"
+
 function Stack() {
   return (
     <div className='main-array'>
