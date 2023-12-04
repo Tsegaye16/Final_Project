@@ -1,16 +1,18 @@
 import React from 'react';
-import './Popup.css';
+import './Popup.scss';
+import Team from '../../popup/team/team';
 
-const Popup = ({ handleClose, show, children }) => {
+const Popup = ({ handleClose, show }) => {
   const showHideClassName = show ? 'popup display-block' : 'popup display-none';
 
   return (
     <div className={showHideClassName}>
-      <section className="popup-main">
-        <button onClick={handleClose} className="close-btn">
+      <button onClick={handleClose} className="close-btn">
           &times;
         </button>
-        {children}
+      <section className="popup-main">
+        <Team/>
+       
       </section>
     </div>
   );

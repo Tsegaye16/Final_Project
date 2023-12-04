@@ -5,7 +5,7 @@ import './NavBar.scss';
 import tsegaye from '../../assets/Tsegaye.jpg';
 import Popup from './popUp';
 
-const NavBar = ({isUser}) => {
+const NavBar = ({isUser,popup}) => {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
  
@@ -35,7 +35,7 @@ const NavBar = ({isUser}) => {
             <button>About</button>
           </ScrollLink>
           <ScrollLink to="team" smooth={true} duration={900} className='button'>
-            <button onClick={togglePopup}>Team</button>
+            <button onClick={() => { if (popup) togglePopup(); }}>Team</button>
           </ScrollLink>
           <ScrollLink to="contact" smooth={true} duration={900} className='button'>
             <button>Contact</button>
@@ -64,10 +64,7 @@ const NavBar = ({isUser}) => {
         </div>
         <Popup show={showPopup} handleClose={togglePopup}>
         {/* Content you want to display in the popup */}
-        <div>
-          <h2>Team Information</h2>
-          {/* Add your team information here */}
-        </div>
+        
       </Popup>
       </div>
       </div>

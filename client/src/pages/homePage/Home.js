@@ -66,14 +66,14 @@ function Home() {
     }
   };
   let isUser = true
-
+  let popup = true
  
  return (
     <div className='main-home'>
       
         <div>
           <div className='NavBar'>
-            <NavBar isUser={isUser}/>
+            <NavBar isUser={isUser} popup={popup}/>
           </div>
           <div className='main-body'>
             <div className='left-bar'>
