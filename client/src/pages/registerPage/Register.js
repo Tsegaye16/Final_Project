@@ -19,6 +19,7 @@ function Register() {
 const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
 
     try {
       // Make a request to your registration endpoint

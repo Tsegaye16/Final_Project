@@ -6,28 +6,21 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 // import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import LinearSearch from './logic';
+import { codeStrings } from './logic_data';
 
 
 function Linear_search() {
+
+  const [selectedLanguage, setSelectedLanguage] = useState('javascript');
+  const [codeString, setCodeString] = useState(codeStrings.javascript)
+  const handleLanguageChange = (language, code) => {
+    setSelectedLanguage(language);
+    setCodeString (code)
+  };
+  
  
-  const codeString = `
-    function linear_search(arr, item) {
-      let flag = [];
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] == item) {
-          flag.push(i);
-        }
-      }
-      if (!flag[0]) {
-        console.log("the item is not found in the list");
-      } else {
-        for (let j = 0; j < flag.length; j++) {
-          console.log(\`the item \${item} is found at the index \${flag}\`);
-        }
-      }
-    }
-    linear_search([3, 6, 9, 2, 0, -5, 9], 10);
-  `;
+  
+ 
   return (
     <div className='main-Lsearch'>
       <div className='title'>Linear Search</div>
@@ -52,13 +45,20 @@ function Linear_search() {
       </div>   
       <div className='implementation'>
         <span>Implementation</span>
-      </div>
+        </div>
+      <div className="language-buttons">
+        <div className='button-list'>
+
+          <button onClick={() => handleLanguageChange('c', codeStrings.c)}>C</button>
+          <button onClick={() => handleLanguageChange('python', codeStrings.python)}>Python</button>
+          <button onClick={() => handleLanguageChange('javascript', codeStrings.javascript) }>JavaScript</button>
+        </div>
       
 
-        <SyntaxHighlighter language="javascript" style={dark} customStyle={{ fontSize: '20px', lineHeight: '1.6' }}>
+      <SyntaxHighlighter language={selectedLanguage} style={dark} customStyle={{ fontSize: '20px', lineHeight: '1.6' }}>
           {codeString}
-        </SyntaxHighlighter>
-     
+      </SyntaxHighlighter>
+      </div>
       
    
     <div className='visualization'>

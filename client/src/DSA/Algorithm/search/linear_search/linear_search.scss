@@ -62,7 +62,7 @@
         }
         .implementation{
                        
-            width: 100%;
+            width: 60%;
             display: flex;
             flex-direction: column;
             padding-left: 15px;
@@ -73,11 +73,31 @@
             span{
                 font-size: 23px;
             font-weight: bold;
-            }       
+            } 
+        }
+            .language-buttons{
+                display: flex;
+                flex-direction: column;
+                background-color: rgb(122, 102, 82);
+                border: 0.3em solid rgb(122, 102, 82);
+                .button-list{
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 15px;
+                    width: 100%;
+                    
+                    button{
+                        width: 100px;
+                        background-color: rgb(122, 102, 82);
+                        color: white;
+                        border: none;
+                    }
+                }
+            }      
            
             
 
-        }
+        
         .visualization{
             width: 100%;
             align-items: center;
