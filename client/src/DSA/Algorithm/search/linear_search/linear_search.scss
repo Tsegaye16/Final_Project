@@ -1,0 +1,141 @@
+
+    .main-Lsearch{
+
+        width: 100%;        
+        display: flex;
+        align-items: center;        
+        flex-direction: column;
+
+        .title{
+           
+            width: 100%;
+            background-color: lightgray;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px; 
+            font-weight: 900; 
+            
+            border: 0.2em solid rgb(150, 150, 150); 
+            box-shadow: black 1px 1px 0.2em inset;
+            //box-shadow: black 1px 1px 0.5em inset;        
+            
+            
+        }
+        
+        
+        .introduction{           
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-right: 50px; 
+            background-color: inherit; 
+            span{
+                font-size: 25px;
+                font-weight: bold;
+            }   
+            p{
+                font-size: 23px;
+            }     
+            
+            
+
+        }
+        .operation{
+           
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-right: 50px;
+           background-color: inherit; 
+           font-size: 23px; 
+           p{
+            font-size: 23px;
+           }         
+            
+            
+        }
+        .implementation{
+                       
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-right: 50px;
+            background-color: inherit; 
+            
+            span{
+                font-size: 23px;
+            font-weight: bold;
+            } 
+        }
+            .language-buttons{
+                display: flex;
+                flex-direction: column;
+                background-color: rgb(122, 102, 82);
+                border: 0.3em solid rgb(122, 102, 82);
+                .button-list{
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 15px;
+                    width: 100%;
+                    
+                    button{
+                        width: 100px;
+                        background-color: rgb(122, 102, 82);
+                        color: white;
+                        border: none;
+                    }
+                }
+            }      
+           
+            
+
+        
+        .visualization{
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            
+            display: flex;
+            flex-direction: column;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-right: 50px;
+            
+            span{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                font-size: 35px;
+                text-shadow: rgb(147, 139, 139) 3px -0.1em 0.2em;
+                
+                
+                
+            }       
+            
+
+        }
+        .summery{
+         
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-right: 50px;
+            background-color: inherit;           
+            
+
+        }
+    }
+
+

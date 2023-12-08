@@ -1,0 +1,49 @@
+  .popup {
+    position: fixed;
+    top: 100px;
+    left: 267px;
+    width: calc(100% - 267px);  
+      
+    background-color: green;  
+    display: block;
+    align-items: center;
+    justify-content: center; 
+    
+
+    .popup-main {
+      display: block;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      
+      overflow-y: auto;
+      background-color: red;
+      flex-wrap: wrap;  
+        
+
+      
+    }
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background-color: inherit;
+      width: 30px;
+      height: 30px;
+    }
+
+    .close-btn:hover {
+      background-color: red;
+    }
+  }
+
+  .display-block {
+    display: block;
+  }
+
+  .display-none {
+    display: none;
+  }

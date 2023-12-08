@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+}
 
 .invite-main {
   min-height: 100vh;
@@ -60,7 +60,7 @@
         flex-direction: column;
         padding-left: 10px;
         padding-right: 10px;
-        margin-top: 10px;
+        margin-top: 30px;
         margin-bottom: 10px;
         margin-left: 15px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -134,55 +134,127 @@
       // }
         
       }
+      
 
-      .feature{
-        
-        
-        width: 100%;        
+      #feature {
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
-        margin: 0 auto;
-        justify-content: center;  
-        border-bottom: solid 2px lightgray; 
-        .feature-list{
-          width: 450px;                    
+        justify-content: center;
+        width: 100%;
+        border-bottom: solid 2px lightgray;
+      
+        .feature-list {
+          width: 450px;
+          margin-top: 40px;
           background-color: inherit;
-          border-radius: 15px;          
-          margin: 38px 38px; 
-          
-          display: flex;           
+          //border-radius: 0.7rem;
+          margin-right: 15px;
+          display: flex;
           flex-direction: column;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;   
-          span{
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+          span {
             width: 100%;
             background-color: #2c3e50;
-            border: none;
+            
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-top-left-radius: 15px;
-            border-top-right-radius:15px;
+            //border-top-left-radius: 0.7rem;
+           // border-top-right-radius: 0.7rem;
             font-size: 2rem;
             font-weight: bolder;
-            
-          } 
-          p{
-            margin: 10px 10px;
-          }   
-          img{
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius:15px;            
-          }          
+          }
+      
+          p {
+            margin: 10px;
+          }
+      
+          img {
+            //border-bottom-left-radius: 0.7rem;
+            //border-bottom-right-radius: 0.7rem;
+            width: 100%;
+          }
+      
+          
         }
-        .feature-list:hover{
-          border: lightgrey solid 1px;
-        transform: translateY(-40px); /* Move the container up by 10 pixels */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .feature-list:hover {
+          border: 0.7em solid rgb(100, 100, 100);
+          border-radius: 0.7rem;
+          transform: translateY(-40px);
+          box-shadow: black 1px 1px 0.5em inset;
         }
-            
+        .feature-list:last-child {
+          margin-right: 0;
+}
+
+        .slick-prev,
+  .slick-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 24px;
+    color: #2c3e50;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: dodgerblue;
+    }
+  }
+
+  .slick-prev {
+    left: 10px;
+    
+  }
+
+  .slick-next {
+    right: 40px;
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+    display: flex;
+    padding: 0;
+
+    li {
+      margin: 0 5px;
+      button {
+        font-size: 12px;
+        width: 12px;
+        height: 12px;
+        border: none;
+        border-radius: 50%;
+        background-color: #2c3e50;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: dodgerblue;
+        }
       }
+
+      &.slick-active button {
+        background-color: dodgerblue;
+      }
+    }
+  }
+
+
+
+      }
+      .slick-slider {
+        width: 100%;
+      }
+      
+      
       .team{
         
         
@@ -190,92 +262,7 @@
         align-items: center;
         justify-content: center;
         
-        .team-list{
-          width: 550px;
-          background: lightgrey;
-          display: flex;
-          flex-direction: column;
-          border: none;
-        border-radius: 20px;
-          .introductory{
-            width: 100%;
-            background-color: black;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 0 30px 0;
-            border-top-left-radius: 20px;
-            border-top-right-radius:20px;
-            span{
-              font-size: 1.8rem;
-              font-weight: bolder;
-            }            
-          }
-          .photo{
-            width: 500px;
-            
-            background-color: inherit;
-            border: none;            
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          img{
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border: none;
-            border-radius: 50%;
-          }
-          span{
-            font-size: 1.6rem;
-            font-weight: bold;
-          }
-        }
-          .story{
-            width: 100%;
-            padding: 15px 15px;
-            display: flex;
-            flex-direction: column;
-            span{
-              font-size: 1.5rem;
-            }
-          }
-          .social-media{
-            width: 100%;
-            margin-top: 15px;
-            margin-bottom: 25px;  
-            
-            .link{
-              width: 100%;
-              
-              display: flex;
-              flex-direction: row;
-              align-items: center;            
-              justify-content: center;
-              
-             a{
-              text-decoration: none;
-              color: #333;
-              margin: 20px 20px;
-              transition: transform 0.3s ease;
-              &:hover {
-                color: #007bff; // Adjust the color on hover
-              }
-          
-              &:not(:last-child) {
-                margin-right: 10px; // Adjust the space between icons
-              }
-             }
-             a:hover{
-              transform: translateY(-10px); /* Move the container up by 10 pixels */
-                         
-             }
-            }
-           
-          }
-        }
+       
         
       }
       .contact{
@@ -308,4 +295,5 @@
     
   }
 }
-}
+
+

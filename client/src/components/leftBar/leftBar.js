@@ -4,6 +4,8 @@ import Home from '../../pages/homePage/Home';
 ////////////Proggress
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faBreadSlice, faTree,faHatCowboy, faCircle, faSearch, faSort, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 
 function LeftBar({ setSelectedItem }) {
   const [dataStructureVisible, setDataStructureVisible] = useState(true);
@@ -42,41 +44,6 @@ function LeftBar({ setSelectedItem }) {
   };
 // Timing
 
-const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    let interval;
-    const startTime = Date.now();
-
-    const updateCounter = () => {
-      const elapsedTime = Date.now() - startTime;
-      const remainingTime =  60 * 60 * 1000 - elapsedTime; // 2 hours in milliseconds
-
-      if (remainingTime > 0) {
-        setCounter((prevCounter) => prevCounter + 1000);
-      } else {
-        clearInterval(interval);
-      }
-    };
-
-    interval = setInterval(updateCounter, 1000);
-
-    // Pause the interval when the tab is not active
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        clearInterval(interval);
-      } else {
-        interval = setInterval(updateCounter, 1000);
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      clearInterval(interval);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, []);
   
   
   return (
@@ -89,20 +56,36 @@ const [counter, setCounter] = useState(0);
             <div className='linear '>
               <div className='category' onClick={toggleLinearDatastructure}>Linear</div>
               <ul>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('array')}}>Array</li>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('stack')}}>Stack</li>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('queue')}}>Queues</li>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('linked-list')}}>Linked list</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('array')}}>
+                <FontAwesomeIcon icon={faCircle} className='icon' />  
+                Array</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('stack')}}>
+                <FontAwesomeIcon icon={faCircle} className='icon' />  
+                Stack</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('queue')}}>
+                <FontAwesomeIcon icon={faCircle} className='icon'/>  
+                Queues</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('linked-list')}}>
+                <FontAwesomeIcon icon={faCircle} className='icon'/>  
+                Linked list</li>
               </ul>
             </div>
             <div className='non-linear ' >
               <div className='category' onClick={toggleNoneLinearDatastructure}>Non-linear</div>
               <ul>
                 <li className='visible-none-linear'>Tree</li>
-                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`}>Binary Tree</li>
-                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`}>Binary Search Tree</li>
-                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`}>Hash Table</li>
-                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`}>Graph</li>
+                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`} onClick={() => {handleItemClick('binary_tree')}}>
+                <FontAwesomeIcon icon={faTree} className='icon'/>  
+                Binary Tree</li>
+                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`} onClick={() => {handleItemClick('bst')}}>
+                <FontAwesomeIcon icon={faTree} className='icon'/>  
+                Binary Search Tree</li>
+                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`} onClick={() => {handleItemClick('hash_table')}}>
+                <FontAwesomeIcon icon={faTree} className='icon'/>  
+                Hash Table</li>
+                <li className={` ${!noneLinearDatastructureVisible ? '':'visible-none-linear'}`} onClick={() => {handleItemClick('graph')}}>
+                <FontAwesomeIcon icon={faProjectDiagram} className='icon' />  
+                Graph</li>
               </ul>
             </div>
           </div>
@@ -113,38 +96,49 @@ const [counter, setCounter] = useState(0);
             <div className='search'>
               <div className='category' onClick={toggleSearchAlgorithm}>Search</div>
               <ul>
-                <li className={`${!searchAlgorithVisible ? '':'search-visible'}`}>Linear Search</li>
-                <li className={`${!searchAlgorithVisible ? '':'search-visible'}`}>Binary Search</li>
+                <li className={`${!searchAlgorithVisible ? '':'search-visible'}`} onClick={() => {handleItemClick('linear_search')}}>
+                <FontAwesomeIcon icon={faSearch} className='icon' /> 
+                Linear Search</li>
+                <li className={`${!searchAlgorithVisible ? '':'search-visible'}`}  onClick={() => {handleItemClick('binary_search')}}>
+                <FontAwesomeIcon icon={faSearch} className='icon'/>
+                Binary Search</li>
               </ul>
             </div>
             <div className='sorting'>
               <div className='category' onClick={toggleSortingAlgorithm}>Sorting</div>
               <ul>
-                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`} >Bubble Sort</li>
-                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`}>Insertion Sort</li>
-                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`}>Selection Sort</li>
-                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`}>Merge Sort</li>
-                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`}>Quick Sort</li>
+                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`}  onClick={() => {handleItemClick('bubble_sort')}}>
+                <FontAwesomeIcon icon={faSort}  className='icon'/>  
+                Bubble Sort</li>
+                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`} onClick={() => {handleItemClick('insertion_sort')}}>
+                  <FontAwesomeIcon icon={faSort} className='icon'/>  
+                Insertion Sort</li>
+                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`} onClick={() => {handleItemClick('selection_sort')}}>
+                <FontAwesomeIcon icon={faSort} className='icon'/> 
+                Selection Sort</li>
+                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`} onClick={() => {handleItemClick('merge_sort')}}>
+                <FontAwesomeIcon icon={faSort} className='icon'/>
+                Merge Sort</li>
+                <li className={`${!sortingAlgorithVisible ? '':'sorting-visible'}`}onClick={() => {handleItemClick('quick_sort')}}>
+                <FontAwesomeIcon icon={faSort} className='icon'/>  
+                Quick Sort</li>
               </ul>
             </div>
             <div className='graph-algo'>
               <div className='category' onClick={toggleGraphAlgorithm}>Graph Algorithm</div>
               <ul>
-                <li className={`${!graphAlgorithmVisble ? '': 'graph-algorithm'}`}>Breadth First Search (BFS)</li>
-                <li className={`${!graphAlgorithmVisble ? '': 'graph-algorithm'}`}>Depth First Search (DFS)</li>
+                <li className={`${!graphAlgorithmVisble ? '': 'graph-algorithm'}`} onClick={() => {handleItemClick('bfs')}}>
+                <FontAwesomeIcon icon={faHatCowboy} className='icon'/>  
+                Breadth First Search (BFS)</li>
+                <li className={`${!graphAlgorithmVisble ? '': 'graph-algorithm'}`} onClick={() => {handleItemClick('dfs')}}>
+                <FontAwesomeIcon icon={faBreadSlice} className='icon'/>  
+                Depth First Search (DFS)</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="progress-container">
-      <CircularProgressbar
-        value={(counter / (60 * 60 * 1000)) * 100}
-        text={`${Math.floor((60 * 60 * 1000 - counter) / (60 * 1000))}m`}
-        styles={buildStyles({
-          pathColor: counter > 0 ? 'green' : 'red',
-          trailColor: 'transparent',
-        })}
-      />
+     
     </div>
       </div>
     </div>

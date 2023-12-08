@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
 
     try {
       // Make a request to your login endpoint
@@ -25,12 +27,17 @@ function Login() {
 
       // Handle the response, e.g., store user information in state or context
       console.log('Login successful:', response.data);
-      navigate("/home")
+      toast.success("Login successful")
+      setTimeout(() => {
+        navigate("/home");
+      }, 4000);
+  
 
       // Redirect or perform any other action after successful login
     } catch (error) {
       // Handle login failure, e.g., show an error message
       console.error('Login failed:', error.message);
+      toast.error("Login failed")
     }
   };
 
@@ -38,6 +45,7 @@ function Login() {
     <div className="login">
       <div className="login-container">
         <h1>Login</h1>
+        <ToastContainer/>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>User name:</label>

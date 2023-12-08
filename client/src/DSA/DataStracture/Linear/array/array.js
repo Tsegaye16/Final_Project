@@ -1,5 +1,6 @@
 import React from 'react'
 import "./array.scss"
+
 function Array() {
   return (
     <div className='main-array'>
