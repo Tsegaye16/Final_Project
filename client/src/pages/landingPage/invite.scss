@@ -52,7 +52,7 @@
       .left{
                
         width: 45%;
-        height: 90%;
+        //height: 90%;
         background-color: inherit;
         border-radius: 30px;
         display: flex; 
@@ -60,13 +60,12 @@
         flex-direction: column;
         padding-left: 10px;
         padding-right: 10px;
-        margin-top: 30px;
-        margin-bottom: 10px;
+        margin-top: 80px;
+        margin-bottom: 50px;
         margin-left: 15px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         .moto{
-          width: 100%;
-          
+          width: 100%;         
           
           border-radius: 10px;
           display: flex;
@@ -80,19 +79,21 @@
         .expression{
           width: 100%;        
           border-radius: 10px;
+          
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 30px;
           flex-direction: column;
-          margin-bottom: 60px;
+          //margin-bottom: 60px;
 
           span{
             font-size: 1.5rem;
+            color: black;
 
           }
           button{
-            margin-top: 30px;
+            margin-top: 10px;
             height: 50px;
             width: 220px;
             border: none;
@@ -155,9 +156,9 @@
       
           span {
             width: 100%;
-            background-color: #2c3e50;
+            background-color: inherit;
             
-            color: white;
+            color: black;
             display: flex;
             align-items: center;
             justify-content: center;
