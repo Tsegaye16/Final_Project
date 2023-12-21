@@ -2,6 +2,9 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import { MdOutlineQuiz } from "react-icons/md";
+import { BiBookContent } from "react-icons/bi";
+import { TbUsersGroup } from "react-icons/tb";
 
 export const SidebarData = [
   {
@@ -11,15 +14,21 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Reports',
-    path: '/reports',
-    icon: <IoIcons.IoIosPaper />,
+    title: 'Manage Quiz',
+    path: '/quiz',
+    icon: <MdOutlineQuiz />,
     cName: 'nav-text'
   },
   {
-    title: 'Products',
-    path: '/products',
-    icon: <FaIcons.FaCartPlus />,
+    title: 'Content',
+    path: '/content',
+    icon: <BiBookContent />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Users',
+    path: '/users',
+    icon: <TbUsersGroup />,
     cName: 'nav-text'
   },
   {
@@ -28,16 +37,10 @@ export const SidebarData = [
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
-  {
-    title: 'Messages',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Support',
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
-    cName: 'nav-text'
-  }
+  // {
+  //   title: 'Support',
+  //   path: '/support',
+  //   icon: <IoIcons.IoMdHelpCircle />,
+  //   cName: 'nav-text'
+  // }
 ];

@@ -1,49 +1,48 @@
-  .popup {
-    position: fixed;
-    top: 100px;
-    left: 267px;
-    width: calc(100% - 267px);  
-      
-    background-color: green;  
-    display: block;
-    align-items: center;
-    justify-content: center; 
-    
+// Popup.scss
 
-    .popup-main {
-      display: block;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      
-      overflow-y: auto;
-      background-color: red;
-      flex-wrap: wrap;  
-        
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Semi-transparent overlay color
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 
-      
-    }
-    .close-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 18px;
-      cursor: pointer;
-      border: none;
-      background-color: inherit;
-      width: 30px;
-      height: 30px;
-    }
-
-    .close-btn:hover {
-      background-color: red;
-    }
-  }
-
-  .display-block {
-    display: block;
-  }
-
-  .display-none {
+  &.display-none {
     display: none;
   }
+
+  .popup-main {
+    //position: relative;
+    background-color: white; // Popup background color
+    border: 1px solid #ccc; // Popup border color
+    padding: 20px;
+    max-height: 90vh; // Maximum height for popup-main
+    overflow-y: auto; // Enable vertical scrolling if needed
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); // Popup box shadow
+    width: 80%; // Adjust as needed
+
+    .close-btn {     
+      position: absolute;
+      top: 30px;
+      right: 145px;
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+      width: 30px;
+      height: 30px; 
+      font-weight: bolder;// Close button color
+
+      &:hover {
+        color: #555; 
+        background-color: red;// Close button color on hover
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
 .main {
   width: 100%;
   min-height: 100vh;
-  background-image: url("../../assets/tree.jpg");
+  background:url("../../assets/contact.jpg");
   background-size: cover;
   display: flex;
   align-items: center;
@@ -21,11 +21,14 @@
   max-width: 300px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
+  /* background-color: #f4f4f4; */
+  background-color: rgba(200, 200, 200, 0.5);
+  /* border: 1px solid #ddd; */
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   text-align: center;
+  box-shadow: black 1px 1px 0.5em inset;
+  border: 0.3em solid rgb(122, 102, 82);
 }
 
 .register-container h2 {
@@ -51,6 +54,9 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+}
+.form-group input:focus{
+  outline: none;
 }
 
 .main .register-container button {

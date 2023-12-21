@@ -28,8 +28,8 @@ const Invite = () => {
     window.location.href = '/login';
   };
 
-  const scrollToFeature = () => {
-    animateScroll.scrollTo(document.getElementById('feature').offsetTop, {
+  const scrollToFeature = (variable) => {
+    animateScroll.scrollTo(document.getElementById(variable).offsetTop, {
       duration: 500,
       smooth: 'easeInOutQuad',
     });
@@ -52,7 +52,7 @@ const Invite = () => {
     <div className="invite-main">
       <div className='header'>
        
-        <NavBar isUser={isUser} popup = {popup}/>
+        <NavBar isUser={isUser} popup = {popup} />
       </div>
      <div className='body-container'>     
       <div className='body'>

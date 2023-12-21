@@ -4,10 +4,13 @@ import {Link, useNavigate } from 'react-router-dom';
 import './NavBar.scss';
 import tsegaye from '../../assets/Tsegaye.jpg';
 import Popup from './popUp';
+import  {ContactUs}  from '../../pages/landingPage/contact';
+import Team from '../../popup/team/team';
 
 const NavBar = ({isUser,popup}) => {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState(null);
  
   const handleLogout = () => {
    
@@ -15,7 +18,9 @@ const NavBar = ({isUser,popup}) => {
   };
 
 
-  const togglePopup = () => {
+  const togglePopup = (content) => {
+    console.log('Content to be displayed:', content);
+    setPopupContent(content);
     setShowPopup(!showPopup);
   };
  
@@ -23,23 +28,27 @@ const NavBar = ({isUser,popup}) => {
   return (
     <div className="invite-main">
     <div className='header'>
-        <div className='logo' ><h1>DSA</h1></div>
+        <div className='logo' >Data Structure And Algorithm(DSA)</div>
         <div className='button-list'>
-        <ScrollLink to="home" smooth={true} duration={900} className='button'>
-            <button>Home</button>
-          </ScrollLink>
-          <ScrollLink to="feature" smooth={true} duration={900} className='button'>
-            <button>Feature</button>
-          </ScrollLink>
-          <ScrollLink to="about" smooth={true} duration={900} className='button'>
-            <button>About</button>
-          </ScrollLink>
-          <ScrollLink to="team" smooth={true} duration={900} className='button'>
-            <button onClick={() => { if (popup) togglePopup(); }}>Team</button>
-          </ScrollLink>
-          <ScrollLink to="contact" smooth={true} duration={900} className='button'>
-            <button>Contact</button>
-          </ScrollLink>
+        {isUser && 
+        <>
+        <button>Home</button>
+          
+          
+        <button>Feature</button>
+      
+      
+        <button>About</button>
+      
+      
+      
+        <button onClick={() => togglePopup(<Team />)}>Team</button>
+      
+        <button onClick={() => togglePopup(<ContactUs />)}>Contact</button>
+        </>
+        }
+            
+          
           {!isUser && 
           <>
           <Link to={"/register"} className='button'>

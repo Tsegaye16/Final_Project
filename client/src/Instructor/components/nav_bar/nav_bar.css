@@ -1,9 +1,30 @@
 .navbar {
     background-color: #2c3e50;
+    
     height: 80px;
     display: flex;
     justify-content: start;
     align-items: center;
+  }
+  .navbar .user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 45px;
+    cursor: pointer;
+  }
+  .navbar .user img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px lightgray solid;
+    margin-right: 10px;
+  }
+  .navbar .user span{
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
   }
   
   .menu-bars {
