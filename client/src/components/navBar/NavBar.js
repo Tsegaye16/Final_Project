@@ -3,7 +3,7 @@ import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import {Link, useNavigate } from 'react-router-dom';
 import './NavBar.scss';
 import tsegaye from '../../assets/Tsegaye.jpg';
-import Popup from './popUp';
+import Popup from '../../popup/team/TeamPopUp';
 
 const NavBar = ({isUser,popup}) => {
   const navigate = useNavigate();
@@ -18,28 +18,44 @@ const NavBar = ({isUser,popup}) => {
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
- 
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    window.scrollTo({
+      top: section.offsetTop,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <div className="invite-main">
     <div className='header'>
         <div className='logo' ><h1>DSA</h1></div>
         <div className='button-list'>
-        <ScrollLink to="home" smooth={true} duration={900} className='button'>
+          {isUser && 
+            <>
+              <div className='button'>
             <button>Home</button>
-          </ScrollLink>
-          <ScrollLink to="feature" smooth={true} duration={900} className='button'>
+          </div>
+        {/* <ScrollLink to="home" smooth={true} duration={900} className='button'>
+            <button>Home</button>
+          </ScrollLink> */}
+         
+          <div className='button'>
             <button>Feature</button>
-          </ScrollLink>
-          <ScrollLink to="about" smooth={true} duration={900} className='button'>
-            <button>About</button>
-          </ScrollLink>
-          <ScrollLink to="team" smooth={true} duration={900} className='button'>
+          </div>
+          
+          <div className='button'>
+            <button >About</button>
+          </div>
+          <div className='button' >
             <button onClick={() => { if (popup) togglePopup(); }}>Team</button>
-          </ScrollLink>
-          <ScrollLink to="contact" smooth={true} duration={900} className='button'>
+          </div>
+          <div className='button'>
             <button>Contact</button>
-          </ScrollLink>
+          </div>
+            </>
+          }
+          
           {!isUser && 
           <>
           <Link to={"/register"} className='button'>

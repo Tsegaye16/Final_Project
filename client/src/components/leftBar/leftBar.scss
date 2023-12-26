@@ -1,208 +1,207 @@
 /* leftBar.css */
 
 .main-leftbar {
-    width: 100%;
-    background-color: #2c3e50;
-    color: white;
-    height: 100%;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    
-    overflow-y: auto;
-   
+  width: 100%;
+  background-color: #2c3e50;
+  color: white;
+  height: 100%;
+  padding: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   
-    .dsa-content {
-      font-family: 'Arial', sans-serif;
-      .data-structure{
+  overflow-y: auto;
+ 
 
-        .category {
-          font-size: 18px;
-          font-weight: bold;
-          margin-bottom: 8px;
-          cursor: pointer;
+  .dsa-content {
+    font-family: 'Arial', sans-serif;
+    .data-structure{
+
+      .category {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        cursor: pointer;
+        
+      }
+      .sub-category {
+        margin-left: 10px;
+
+        .linear{
           
-        }
-        .sub-category {
-          margin-left: 15px;
-
-          .linear{
+          .category{             
+            margin-bottom: 5px;
+          }
+          ul {
+            margin-top: 0;
+            list-style-type: none;
             
-            .category{             
+            
+            
+    
+            li {
+              font-size: 14px;
               margin-bottom: 5px;
-            }
-            ul {
-              margin-top: 0;
-              list-style-type: none;
-              
-              
-              
-      
-              li {
-                font-size: 14px;
-                margin-bottom: 5px;
-                .icon{
-                  margin-right: 10px;
-                  color: #d3c1aa
-                }
-                
-      
-                &:hover {
-                  cursor: pointer;
-                  text-decoration: underline;
-                }
+              .icon{
+                margin-right: 10px;
+                color: #d3c1aa
               }
-            }
-            .visible-linear{
-              display: none;
-            }
-
-          }
-          .non-linear{
-            .category{
-             
-            }
-            ul {
-              list-style: none;
               
-      
-              li {
-                font-size: 14px;
-                margin-bottom: 5px;
-                list-style-type: none;
-                .icon{
-                  margin-right: 10px;
-                  color: #d3c1aa
-                }
-      
-                &:hover {
-                  cursor: pointer;
-                  text-decoration: underline;
-                }
-              }
-            }
-            .visible-none-linear{
-              
-              display: none;
-            }
-
-          }
     
-          
-        }
-        .invisible-data-structures{
-          display: none;
-          
-        }
-        
-
-      }
-
-      .algorithms{
-
-        .category {
-          font-size: 18px;
-          font-weight: bold;
-          margin-bottom: 8px;
-          cursor: pointer;
-        }
-        .sub-category {
-          .search{
-            .category{
-
+              &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+              }
             }
-            ul {
-              list-style-type: none;
+          }
+          .visible-linear{
+            display: none;
+          }
+
+        }
+        .non-linear{
+          .category{
            
-      
-              li {
-                font-size: 14px;
-                margin-bottom: 5px;
-                list-style-type: none;
-                .icon{
-                  margin-right: 10px;
-                  color: #d3c1aa
-                }
-      
-                &:hover {
-                  cursor: pointer;
-                  text-decoration: underline;
-                }
-              }
-            }
-            .search-visible{
-              display: none;
-            }
           }
-          .sorting{
-            .category{
-
-            }
-            ul {
-              list-style-type: none;
-              
-      
-              li {
-                font-size: 14px;
-                margin-bottom: 5px;
-                list-style-type: none;
-                .icon{
-                  margin-right: 10px;
-                  color: #d3c1aa
-                }
-      
-                &:hover {
-                  cursor: pointer;
-                  text-decoration: underline;
-                }
-              }
-            }
-            .sorting-visible{
-              display: none;
-            }
-          }
-          margin-left: 15px;
-          .graph-algo{
-            .category{
-
-            }
-            ul {
-              list-style-type: none;
-             
-      
-              li {
-                font-size: 14px;
-                margin-bottom: 5px;
-                list-style-type: none;
-                .icon{
-                  margin-right: 10px;
-                  color: #d3c1aa;
-                  font-weight: bolder;
-                }
-      
-                &:hover {
-                  cursor: pointer;
-                  text-decoration: underline;
-                }
-              }
-            }
-            .graph-algorithm{display: none;}
-          }
+          ul {
+            list-style: none;
+            
     
-          
-        }
-        .invisible-algorithms{
-          display: none;
-          
-        }
-        
+            li {
+              font-size: 14px;
+              margin-bottom: 5px;
+              list-style-type: none;
+              .icon{
+                margin-right: 10px;
+                color: #d3c1aa
+              }
+    
+              &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+              }
+            }
+          }
+          .visible-none-linear{
+            
+            display: none;
+          }
 
+        }
+  
+        
       }
-  
-     
+      .invisible-data-structures{
+        display: none;
+        
+      }
       
-      
-      
-      
+
     }
-  }
+
+    .algorithms{
+
+      .category {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        cursor: pointer;
+      }
+      .sub-category {
+        .search{
+          .category{
+
+          }
+          ul {
+            list-style-type: none;
+         
+    
+            li {
+              font-size: 14px;
+              margin-bottom: 5px;
+              list-style-type: none;
+              .icon{
+                margin-right: 10px;
+                color: #d3c1aa
+              }
+    
+              &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+              }
+            }
+          }
+          .search-visible{
+            display: none;
+          }
+        }
+        .sorting{
+          .category{
+
+          }
+          ul {
+            list-style-type: none;
+            
+    
+            li {
+              font-size: 14px;
+              margin-bottom: 5px;
+              list-style-type: none;
+              .icon{
+                margin-right: 10px;
+                color: #d3c1aa
+              }
+    
+              &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+              }
+            }
+          }
+          .sorting-visible{
+            display: none;
+          }
+        }
+        margin-left: 10px;
+        .graph-algo{
+          .category{
+
+          }
+          ul {
+            list-style-type: none;
+           
+    
+            li {
+              font-size: 14px;
+              margin-bottom: 5px;
+              list-style-type: none;
+              .icon{
+                margin-right: 10px;
+                color: #d3c1aa;
+                font-weight: bolder;
+              }
+    
+              &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+              }
+            }
+          }
+          .graph-algorithm{display: none;}
+        }
   
+        
+      }
+      .invisible-algorithms{
+        display: none;
+        
+      }
+      
+
+    }
+
+   
+    
+    
+    
+    
+  }
+}

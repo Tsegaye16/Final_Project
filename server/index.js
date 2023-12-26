@@ -127,7 +127,7 @@ app.post('/logout', (req, res) => {
     res.clearCookie('accessToken');
     res.status(200).json({ message: 'Logout successful' });
   } catch (error) {
-    console.error(error);
+    console.error("My Error",error);
     res.status(500).json({ message: 'Logout failed' });
   }
   });

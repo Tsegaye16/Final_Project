@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './sidebar_data';
 import './nav_bar.css';
 import { IconContext } from 'react-icons';
+import tsegaye from '../../../assets/Tsegaye.jpg';
 
 export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
   return (
@@ -20,6 +21,11 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
               <FaIcons.FaTimes />
             </Link>
           )}
+          <div className='user' >
+            <img src={tsegaye} alt='Tsegaye' />
+            <span>Tsegaye</span>
+            
+          </div>
         </div>
         <nav className={sidebarWidth !== 0 ? 'nav-menu active' : 'nav-menu'} >
           <ul className='nav-menu-items'>

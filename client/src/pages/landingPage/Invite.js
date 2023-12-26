@@ -13,8 +13,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-import { ContactUs } from './contact';
-import {  toast } from 'react-toastify';
+import { ContactUs } from '../../popup/contact/contact';
+//import {  toast } from 'react-toastify';
 import Team from '../../popup/team/team';
 import { data } from './data';
 

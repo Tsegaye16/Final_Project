@@ -37,7 +37,7 @@ const navigate = useNavigate()
     } catch (error) {
       // Handle registration failure, e.g., show an error message
       console.error('Registration failed:', error.message);
-      toast.error("Registration failed")
+      toast.error(`Registration failed: ${error.message}`)
     }
   };
 
