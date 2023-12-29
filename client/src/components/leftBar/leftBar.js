@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import "./leftBar.scss";
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Home from '../../pages/homePage/Home';
 ////////////Proggress
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -10,6 +11,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
 
 function LeftBar({ setSelectedItem }) {
+  const [isVisible, setIsVisible] = useState(true);
   const [dataStructureVisible, setDataStructureVisible] = useState(true);
   const [linearDatastructureVisible,setLinearDatastructureVisible] = useState(true)
   const [noneLinearDatastructureVisible,setNoneLinearDatastructureVisible] = useState(true)
@@ -18,6 +20,9 @@ function LeftBar({ setSelectedItem }) {
   const [sortingAlgorithVisible,setSortingAlgorithVisible] = useState(true)
   const [graphAlgorithmVisble, setGraphAlgorithVisisble] = useState(true)
   
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
 
   const toggleDataStructure = () => {
     setDataStructureVisible(!dataStructureVisible);    
@@ -50,6 +55,7 @@ function LeftBar({ setSelectedItem }) {
   
   return (
     <div className='main-leftbar'>
+      
       <div className='dsa-content'>
         <div className='data-structure'>
           <div className='category' onClick={toggleDataStructure}> {dataStructureVisible ? <FaAngleRight /> : <FaAngleDown />} Data Structure</div>
@@ -58,18 +64,10 @@ function LeftBar({ setSelectedItem }) {
             <div className='linear '>
               <div className='category' onClick={toggleLinearDatastructure}> {linearDatastructureVisible ? <FaAngleRight /> : <FaAngleDown />} Linear</div>
               <ul>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('array')}}>
-                 
-                Array</li>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('stack')}}>
-                  
-                Stack</li>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('queue')}}>
-                  
-                Queues</li>
-                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('linked-list')}}>
-                  
-                Linked list</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('array')}}>{<FiberManualRecordIcon/>} Array</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('stack')}}>{<FiberManualRecordIcon/>}  stack</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('queue')}}>{<FiberManualRecordIcon/>}  Queues</li>
+                <li className={`${!linearDatastructureVisible ? '':'visible-linear'}`} onClick={() => {handleItemClick('linked-list')}}>{<FiberManualRecordIcon/>} Linked list</li>
               </ul>
             </div>
             <div className='non-linear ' >
@@ -139,9 +137,7 @@ function LeftBar({ setSelectedItem }) {
             </div>
           </div>
         </div>
-        <div className="progress-container">
-     
-    </div>
+        
       </div>
     </div>
   );
