@@ -31,6 +31,7 @@ import Merge_sort from '../../DSA/Algorithm/sort/merge_sort/merge_sort';
 import Quick_sort from '../../DSA/Algorithm/sort/quick_sort/quick_sort';
 import BFS from '../../DSA/Algorithm/graph/breadth_first_search/BFS';
 import DFS from '../../DSA/Algorithm/graph/debth_first_search/DFS';
+import NavBar from '../navBar/NavBar';
 
 export default function SideBar() {
   const [selectedItem, setSelectedItem] = useState('');
@@ -120,20 +121,30 @@ export default function SideBar() {
     setSidebarWidth((prevWidth) => (prevWidth === 0 ? 250 : 0));
   };
   return (
-    <>
+    <div className='father'>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='sidebar-container'>
+          
           <div className='navbar'>
             {sidebarWidth === 0 ? (
+              
               <Link to='#' className='menu-bars' onClick={toggleSidebar}>
                 <FaIcons.FaBars />
+                
               </Link>
+              
+              
             ) : (
+              
               <Link to='#' className='menu-bars' onClick={toggleSidebar}>
                 <FaIcons.FaTimes />
+                
               </Link>
-            )}
+              
+              
+            )}            
           </div>
+          
           <div className='entire-side-bar-menu'>
           <nav className={sidebarWidth !== 0 ? 'nav-menu active' : 'nav-menu'}>
             
@@ -232,6 +243,6 @@ export default function SideBar() {
           
         </div>
       </IconContext.Provider>
-    </>
+    </div>
   );
 }
