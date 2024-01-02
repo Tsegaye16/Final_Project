@@ -1,10 +1,9 @@
-import React from 'react';
-import './Popup.scss';
-import Team from './team';
-//import { ContactUs } from '../contact/contact';
+import React from 'react'
+import Feature from './feature';
+import "../team/Popup.scss"
 
-const Teampopup = ({ handleClose, show }) => {
-  const showHideClassName = show ? 'popup display-block' : 'popup display-none';
+export default function FeaturePopup({ handleClose, show }) {
+    const showHideClassName = show ? 'popup display-block' : 'popup display-none';
 
   const handleBackgroundClick = (e) => {
     // Check if the click occurred on the background div, not its children
@@ -12,16 +11,15 @@ const Teampopup = ({ handleClose, show }) => {
       handleClose();
     }
   };
-
   return (
     <div className={showHideClassName} onClick={handleBackgroundClick}>
       <section className="popup-main">
         
-        <Team />
+        Features
+        
+        <Feature />
         
       </section>
     </div>
-  );
-};
-
-export default Teampopup;
+  )
+}

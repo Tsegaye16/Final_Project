@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //height: 100vh;
+    padding-top: 20px;
+    background: url("../../assets/contact.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .form-container {
+    background-color: #f4f4f4;
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 1px 1px 0.5em black inset;
+    border: 0.3em solid rgb(122, 102, 82);
+  
+    .profile-picture {
+      text-align: center;
+      position: relative;
+  
+      img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+  
+      label {
+        position: absolute;
+        bottom: 10px;
+        right: 130px;
+        cursor: pointer;
+        color: black;
+        font-size: 0.5rem;
+      }
+  
+      input {
+        display: none;
+      }
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+  
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+  
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
+  
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+  

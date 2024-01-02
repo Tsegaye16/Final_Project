@@ -3,21 +3,37 @@ import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import {Link, useNavigate } from 'react-router-dom';
 import './NavBar.scss';
 import tsegaye from '../../assets/Tsegaye.jpg';
-import Popup from '../../popup/team/TeamPopUp';
+import Teampopup from '../../popup/team/TeamPopUp';
+import Contactopup from "../../popup/contact/ContactPopup"
+import FeaturePopup from '../../popup/feature/featurePopup';
+import UserPopup from '../../popup/user/userPopup';
 
 const NavBar = ({isUser,popup}) => {
   const navigate = useNavigate();
-  const [showPopup, setShowPopup] = useState(false);
+  const [showTeamPopup, setShowTeamPopup] = useState(false);
+  const [showContactPopup, setShowContactPopup] = useState(false);
+  const [showFeaturePopup, setShowFeaturePopup] = useState(false)
+  const [showUserPopup, setShowUserPopup] = useState(false)
  
-  const handleLogout = () => {
+  const handleHome = () => {
    
-    navigate('/login');
+    navigate('/');
   };
 
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
+  const toggleTeamPopup = () => {
+    setShowTeamPopup(!showTeamPopup);
   };
+  const toggleUserPopup = () => {
+    setShowUserPopup(!showUserPopup);
+  };
+
+  const toggleContactPopup = () => {
+    setShowContactPopup(!showContactPopup);
+  };
+  const toggleFeaturePopup = () => {
+    setShowFeaturePopup(!showFeaturePopup)
+  }
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     window.scrollTo({
@@ -33,7 +49,7 @@ const NavBar = ({isUser,popup}) => {
         <div className='button-list'>
           {isUser && 
             <>
-              <div className='button'>
+              <div className='button' onClick={handleHome}>
             <button>Home</button>
           </div>
         {/* <ScrollLink to="home" smooth={true} duration={900} className='button'>
@@ -41,17 +57,17 @@ const NavBar = ({isUser,popup}) => {
           </ScrollLink> */}
          
           <div className='button'>
-            <button>Feature</button>
+            <button onClick={toggleFeaturePopup}>Feature</button>
           </div>
           
           <div className='button'>
             <button >About</button>
           </div>
           <div className='button' >
-            <button onClick={() => { if (popup) togglePopup(); }}>Team</button>
+            <button onClick={toggleTeamPopup}>Team</button>
           </div>
           <div className='button'>
-            <button>Contact</button>
+            <button onClick={toggleContactPopup}>Contact</button>
           </div>
             </>
           }
@@ -69,7 +85,7 @@ const NavBar = ({isUser,popup}) => {
           
           {isUser && 
          
-          <div className='user' >
+          <div className='user' onClick={toggleUserPopup}>
             <img src={tsegaye} alt='Tsegaye' />
             <span>Tsegaye</span>
             
@@ -78,15 +94,22 @@ const NavBar = ({isUser,popup}) => {
           }
            
         </div>
-        <Popup show={showPopup} handleClose={togglePopup}>
-        {/* Content you want to display in the popup */}
-        
-      </Popup>
+        <Teampopup show={showTeamPopup} handleClose={toggleTeamPopup}>
+          {/* Content you want to display in the Team popup */}
+        </Teampopup>
+        <Contactopup show={showContactPopup} handleClose={toggleContactPopup}>
+          {/* Content you want to display in the Contact popup */}
+        </Contactopup>
+        <FeaturePopup show={showFeaturePopup} handleClose={toggleFeaturePopup}>
+
+        </FeaturePopup>
+
+        <UserPopup show={showUserPopup} handleClose={toggleUserPopup}>
+
+        </UserPopup>
       </div>
       </div>
   );
 };
 
 export default NavBar;
-
-

@@ -17,6 +17,7 @@ import { ContactUs } from '../../popup/contact/contact';
 //import {  toast } from 'react-toastify';
 import Team from '../../popup/team/team';
 import { data } from './data';
+import Feature from '../../popup/feature/feature';
 
 
 
@@ -38,16 +39,7 @@ const Invite = () => {
   const isUser = false;
   const popup = false;
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 2000,
-    cssEase: "linear"
-  };
+  
   return (
     <div className="invite-main">
       <div className='header'>
@@ -73,15 +65,11 @@ const Invite = () => {
           </div>
         </div>
         <div id="feature" className='feature'>
-        <Slider {...settings}>
-          {data.map((datas)=>(
-            <div className='feature-list' key={datas.feature}>
-            <span>{datas.feature}</span>
-            <p>{datas.description}</p>
-            <img src={datas.image} alt='coverage'/>
-          </div>
-          ))}                 
-             </Slider>              
+          <div className='feature-title'>Features</div>
+
+        <div className='imported-feature'>
+        <Feature/>   
+        </div>           
         </div>
         <div className='about' id='about'>About</div>
         <div className='team' id='team'>

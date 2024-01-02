@@ -1,6 +1,8 @@
 import React from 'react';
-import './Popup.scss';
-import Team from '..team/team';
+//import './Popup.scss';
+import "../team/Popup.scss"
+//import Team from '..team/team';
+import { ContactUs } from './contact';
 
 const Contactopup = ({ handleClose, show }) => {
   const showHideClassName = show ? 'popup display-block' : 'popup display-none';
@@ -15,8 +17,9 @@ const Contactopup = ({ handleClose, show }) => {
   return (
     <div className={showHideClassName} onClick={handleBackgroundClick}>
       <section className="popup-main">
+        Ask any question
         
-        <Team />
+        <ContactUs />
       </section>
     </div>
   );

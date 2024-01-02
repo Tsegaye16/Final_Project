@@ -1,0 +1,47 @@
+
+
+.feature-list {
+    width: 500px;
+    margin-top: 40px;
+    background-color: inherit;
+    //border-radius: 0.7rem;
+    //margin-top: 30px;
+    //display: flex;
+    //flex-wrap: wrap;
+    //flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: black;
+
+    span {
+      width: 100%;
+      background-color: inherit;
+      
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      //border-top-left-radius: 0.7rem;
+     // border-top-right-radius: 0.7rem;
+      font-size: 2rem;
+      font-weight: bolder;
+    }
+
+    p {
+      margin: 10px;
+    }
+
+    img {
+      //border-bottom-left-radius: 0.7rem;
+      //border-bottom-right-radius: 0.7rem;
+      width: 100%;
+    }
+
+    
+  }
+  .feature-list:hover {
+    border: 0.7em solid rgb(100, 100, 100);
+    border-radius: 0.7rem;
+    transform: translateY(-30px);
+    box-shadow: black 1px 1px 0.5em inset;
+  }
+  

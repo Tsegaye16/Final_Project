@@ -6,13 +6,29 @@
   }
   
   .main-home .NavBar {
-    
-    color: black;
+    display: flex;
+    flex-direction: row;
     background-color: #2c3e50;
     /* background-color: white; */
-    border-bottom: lightgray solid 1px;
+    border-bottom: lightgray solid 1px; 
+    
     padding: 0;
     height: 100px;
+    
+  }
+  .toggle-side-bar{
+    color: white;
+  }
+  .main-home .NavBar .toggle-side-bar{
+    width: 100px;
+    height: 98%;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    
     
   }
   
@@ -27,15 +43,21 @@
   
   .left-bar {
     
-   display: flex;
-   background-color: #2c3e50;
-   padding-top: 10px;
-   border-right: 1px solid lightgray;
-   flex: 1;
+    display: none;
+    background-color: #2c3e50;
+    padding-top: 10px;
+    border-right: 1px solid lightgray;
+    flex: 1;
     overflow-y: auto; 
-   overflow: hidden;
-    
+    overflow: hidden;
+    transition: 1s;   
    
+  }
+  .left-bar:hover{
+    color: white;
+  }
+  .active{
+    display: flex;
   }
   
   .main-body-part {
@@ -45,49 +67,25 @@
         background: white;
         padding: 0;
         overflow-y: auto; /* Allow vertical scrolling */
-         /* Set a maximum height */
+         
       
   }
-  
-  
-  .custom-component {
+  .chat {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    bottom: 5px;
+    right: 20px;
+    background-color: #3498db;
+    color: white;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .custom{
-    width: 150px;
-    
-    background-color: lightgrey;
-    margin-top: 0%;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: calc(100% - 170px);
-    margin-right: 20px;
-    border: none;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    font-size: 24px;
+
+    /* // Optional: Add box-shadow for a subtle effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  .custom .view, .logout{
-    width: 100%;
-    cursor: pointer;
-    margin: 5px 5px;
-    padding-left: 10px;
-    
-  }
-  .custom .view:hover, .logout:hover{
-    background-color: #2c3e50;
-    color: aliceblue;
-  }
-  .custom .logout:hover{
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
+  
+  

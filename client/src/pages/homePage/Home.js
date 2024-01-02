@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './Home.css';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
 import NavBar from '../../components/navBar/NavBar';
 import LeftBar from '../../components/leftBar/leftBar';
 import Stack from '../../DSA/DataStracture/Linear/stack/stack';
@@ -21,9 +23,21 @@ import Merge_sort from '../../DSA/Algorithm/sort/merge_sort/merge_sort';
 import Quick_sort from '../../DSA/Algorithm/sort/quick_sort/quick_sort';
 import BFS from '../../DSA/Algorithm/graph/breadth_first_search/BFS';
 import DFS from '../../DSA/Algorithm/graph/debth_first_search/DFS';
-
+import { FaBars, FaTimes } from 'react-icons/fa';
+import ChatIcon from '@mui/icons-material/Chat';
+import { useNavigate } from 'react-router-dom';
 function Home() {
   const [selectedItem, setSelectedItem] = useState('');
+  const [icon, setIcon] = useState('times');
+  const navigate = useNavigate()
+
+  const toggleSidebar = () => {
+    setIcon((prevIcon) => (prevIcon === 'bars' ? 'times' : 'bars'));
+  };
+
+  const handleChat = ()=>{
+    navigate("/chatBot")
+  }
 
   const renderSelectedComponent = () => {
     switch (selectedItem) {
@@ -66,22 +80,30 @@ function Home() {
     }
   };
   let isUser = true
-  let popup = true
+  
  
  return (
     <div className='main-home'>
       
         <div>
           <div className='NavBar'>
-            <NavBar isUser={isUser} popup={popup}/>
+            <div className='toggle-side-bar' onClick={toggleSidebar}>
+
+            {icon === 'bars' ? <FaBars /> : <FaTimes />}
+            </div>
+            <NavBar isUser={isUser}/>
           </div>
           <div className='main-body'>
-            <div className='left-bar'>
+            <div className={`left-bar ${icon === 'times' ? 'active' : 'inactive'}`}>
             <LeftBar setSelectedItem={setSelectedItem} />
             </div>
-            <div className='main-body-part'>            
+            <div className='main-body-part'>   
+            <div className='rendered'>
             {renderSelectedComponent()}           
-  
+            </div>       
+            <div className='chat' onClick={handleChat}>
+              {<ChatIcon/>}
+            </div>  
             </div>
           </div>
         </div>

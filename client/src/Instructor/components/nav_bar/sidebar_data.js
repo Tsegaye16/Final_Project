@@ -9,7 +9,7 @@ import { TbUsersGroup } from "react-icons/tb";
 export const SidebarData = [
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: '/instructor',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
   },

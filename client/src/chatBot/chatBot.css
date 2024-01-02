@@ -1,0 +1,71 @@
+/* Add these styles to your App.css file or create a new CSS file */
+
+.App {
+    font-family: 'Arial, sans-serif';
+  }
+  
+  /* Adjust styles for the chat container */
+  .MainContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .ChatContainer {
+    flex: 1;
+    overflow: hidden; /* Ensure the chat container doesn't overflow its parent */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for the message list */
+  .MessageList {
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  /* Style for individual messages */
+  .Message {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the message input */
+  .MessageInput {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  /* Style for the typing indicator */
+  .TypingIndicator {
+    color: #777;
+    font-style: italic;
+  }
+  
+  /* Optional: Add styles for the system message */
+  .Message[role="system"] {
+    color: #888;
+    font-style: italic;
+  }
+  
+  /* Optional: Style for outgoing messages */
+  .Message[direction="outgoing"] {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    max-width: 70%;
+    align-self: flex-end;
+  }
+  
+  /* Optional: Style for incoming messages */
+  .Message[direction="incoming"] {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 8px;
+    max-width: 70%;
+    align-self: flex-start;
+  }
+  

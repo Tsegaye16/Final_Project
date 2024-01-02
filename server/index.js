@@ -34,6 +34,7 @@ app.post('/register', async (req, res) => {
       const checkQuery = 'SELECT COUNT(*) AS count FROM user';
       db.query(checkQuery, async (checkErr, checkResult) => {
         if (checkErr) {
+          console.log(checkErr)
           return res.status(500).json({ message: 'Registration failed' });
         }
   
@@ -43,6 +44,7 @@ app.post('/register', async (req, res) => {
           const registerQuery = 'INSERT INTO user (name, email, username, password) VALUES (?, ?, ?, ?)';
           db.query(registerQuery, [name, email, username, hashedPassword], (regErr, regResult) => {
             if (regErr) {
+              console.log(regErr)
               return res.status(500).json({ message: 'Registration failed' });
             }
             res.status(201).json({ message: 'Registration successful' });
@@ -52,6 +54,7 @@ app.post('/register', async (req, res) => {
           const emailCheckQuery = 'SELECT * FROM user WHERE email = ?';
           db.query(emailCheckQuery, [email], async (emailCheckErr, emailCheckResult) => {
             if (emailCheckErr) {
+              console.log(emailCheckErr)
               return res.status(500).json({ message: 'Registration failed' });
             }
   

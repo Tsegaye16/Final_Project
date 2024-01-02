@@ -21,7 +21,9 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
               <FaIcons.FaTimes />
             </Link>
           )}
+          <div className='instructor-title'>Instructor Page</div>
           <div className='user' >
+            <button>Logout</button>
             <img src={tsegaye} alt='Tsegaye' />
             <span>Tsegaye</span>
             
