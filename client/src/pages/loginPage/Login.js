@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-  const navigate = useNavigate()
-   axios.defaults.withCredentials = true
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,25 +19,51 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
 
     try {
       // Make a request to your login endpoint
       const response = await axios.post('http://localhost:8800/login', formData);
 
       // Handle the response, e.g., store user information in state or context
-      console.log('Login successful:', response.data);
-      toast.success("Login successful")
-      setTimeout(() => {
-        navigate("/home");
-      }, 4000);
-  
+      toast.success('Login successful',{
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
 
-      // Redirect or perform any other action after successful login
+      // Extract user ID from the response
+      const userId = response.data.user.id;
+
+      // Store the token in local storage
+      localStorage.setItem('accessToken', response.data.token);
+
+      // Set a timer to clear the token after one minute
+      setTimeout(() => {
+        localStorage.removeItem('accessToken');
+        toast.error('Token expired, cleared from local storage', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }, 60000); // 60000 milliseconds = 1 minute
+
+      // Redirect to the user-specific route
+      setTimeout(() =>{
+        navigate(`/student/${userId}`);
+      }, 6000)
     } catch (error) {
       // Handle login failure, e.g., show an error message
-      console.error('Login failed:', error.message);
-      toast.error("Login failed")
+      if (error.response) {
+        toast.error(`Login failed: ${error.response.data.message}`);
+      } else {
+        toast.error(`Login failed: ${error.message}`);
+      }
     }
   };
 
@@ -45,7 +71,7 @@ function Login() {
     <div className="login">
       <div className="login-container">
         <h1>Login</h1>
-        <ToastContainer/>
+        <ToastContainer />
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>User name:</label>
@@ -66,8 +92,8 @@ function Login() {
             />
           </div>
           <button type="submit">Login</button>
-        </form> did you haven't an account yet?
-        <Link to="/register">Register</Link>
+        </form>
+        <p>Don't have an account yet? <Link to="/register">Register</Link></p>
       </div>
     </div>
   );

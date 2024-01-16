@@ -14,7 +14,7 @@ function DashBoard() {
     <div className="dashboard-container">
       <NavBar toggleSidebar={toggleSidebar} sidebarWidth={sidebarWidth}  />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px`}}>
-       <div className='dashboard'>
+      <div className='dashboard'>
        
         
        </div>

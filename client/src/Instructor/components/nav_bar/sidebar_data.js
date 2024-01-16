@@ -15,25 +15,25 @@ export const SidebarData = [
   },
   {
     title: 'Manage Quiz',
-    path: '/quiz',
+    path: '/instructor/quiz',
     icon: <MdOutlineQuiz />,
     cName: 'nav-text'
   },
   {
     title: 'Content',
-    path: '/content',
+    path: '/instructor/content',
     icon: <BiBookContent />,
     cName: 'nav-text'
   },
   {
     title: 'Users',
-    path: '/users',
+    path: '/instructor/users',
     icon: <TbUsersGroup />,
     cName: 'nav-text'
   },
   {
     title: 'Team',
-    path: '/team',
+    path: '/instructor/team',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },

@@ -8,7 +8,7 @@ import Contactopup from "../../popup/contact/ContactPopup"
 import FeaturePopup from '../../popup/feature/featurePopup';
 import UserPopup from '../../popup/user/userPopup';
 
-const NavBar = ({isUser,popup}) => {
+const NavBar = ({isUser}) => {
   const navigate = useNavigate();
   const [showTeamPopup, setShowTeamPopup] = useState(false);
   const [showContactPopup, setShowContactPopup] = useState(false);

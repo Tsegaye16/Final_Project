@@ -35,6 +35,7 @@ const Invite = () => {
       smooth: 'easeInOutQuad',
     });
   };
+  
 
   const isUser = false;
   const popup = false;

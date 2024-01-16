@@ -23,6 +23,7 @@ import Merge_sort from '../../DSA/Algorithm/sort/merge_sort/merge_sort';
 import Quick_sort from '../../DSA/Algorithm/sort/quick_sort/quick_sort';
 import BFS from '../../DSA/Algorithm/graph/breadth_first_search/BFS';
 import DFS from '../../DSA/Algorithm/graph/debth_first_search/DFS';
+import Tree from '../../DSA/DataStracture/non_Linear/tree/tree';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useNavigate } from 'react-router-dom';
@@ -75,6 +76,8 @@ function Home() {
         return <BFS/>
       case 'dfs':
         return <DFS/>
+      case 'tree':
+        return <Tree/>
       default:
         return <Welcome/>;
     }

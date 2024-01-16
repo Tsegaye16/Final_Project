@@ -1,44 +1,92 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Validation from './registerValidation';
 
 function Register() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    username: '',
-    password: '',
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    username: "",
+    password: "",
   });
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    // Validate the form when values change
+    setErrors(Validation(values));
+  }, [values]);
+
+  const handleInput = (event) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   };
-const navigate = useNavigate()
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
 
-    try {
-      // Make a request to your registration endpoint
-      const response = await axios.post('http://localhost:8800/register', formData);
-
-      // Handle the response, e.g., show a success message
-      console.log('Registration successful:', response.data);
-      toast.success("Registration successful")
-      setTimeout(() => {
-        navigate("/login")
-      }, 4000);
-      
-
-      // Redirect or perform any other action after successful registration
-    } catch (error) {
-      // Handle registration failure, e.g., show an error message
-      console.error('Registration failed:', error.message);
-      toast.error(`Registration failed: ${error.message}`)
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Validation is now handled by the useEffect
+    if (!errors.name && !errors.email && !errors.username && !errors.password) {
+      axios
+        .post("http://localhost:8800/register", values)
+        .then((res) => {
+          toast.success(`${values.username} successfully registered`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          })
+          setTimeout(() => {
+            navigate("/login")
+          }, 4000);
+        })
+        .catch((err) => {
+          if (err.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            toast.error(`Registration failed: ${err.response.data.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          } else if (err.request) {
+            // The request was made but no response was received
+            toast.error('Network error. Please try again later.', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            toast.error('Registration failed. Please try again later.', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }
+        });
     }
+  };
+
+  const myStyle = {
+    color: "red",
   };
 
   return (
@@ -46,49 +94,49 @@ const navigate = useNavigate()
       <div className="register-container">
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
-        <ToastContainer/>
+          <ToastContainer/>
           <div className="form-group">
             <label htmlFor="name">Name:</label>
             <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
+            type="text"
+            name="name"
+            placeholder="your Name.."
+            onChange={handleInput}
+          />
+          {errors.name && <p style={myStyle}>{errors.name}</p>}
           </div>
 
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+            type="email"
+            name="email"
+            placeholder="Your E-mail.."
+            onChange={handleInput}
+          />
+          {errors.email && <p style={myStyle}>{errors.email}</p>}
           </div>
 
           <div className="form-group">
             <label htmlFor="username">Username:</label>
             <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
+            type="text"
+            name="username"
+            placeholder="User Name.."
+            onChange={handleInput}
+          />
+          {errors.username && <p style={myStyle}>{errors.username}</p>}
           </div>
 
           <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            type="password"
+            name="password"
+            placeholder="Your password"
+            onChange={handleInput}
+          />
+          {errors.password && <p style={myStyle}>{errors.password}</p>}
           </div>
 
           <button type="submit">Register</button>
