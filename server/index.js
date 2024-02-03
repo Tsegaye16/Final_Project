@@ -104,11 +104,11 @@ app.get("/admin/viewRecent", async (req, res) => {
   await recentlyRegistered(db, req, res)
 })
 
-app.post('/admin/updateRecentUser', async (req, res) => {
+app.post('/admin/updateRecentUser', upload.single('image'), async (req, res) => {
   await updateRecentUser(db, req, res)
 })
 
-app.post('/admin/updateInstructor', async (req, res) => {
+app.post('/admin/updateInstructor', upload.single('image'), async (req, res) => {
   await updateInstructorProfile(db, req, res)
 })
 app.delete('/admin/deleteInstructor/:instructor_id', async (req, res) => {

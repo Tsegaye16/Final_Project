@@ -187,7 +187,7 @@ const StudentList = () => {
                 <td>{user.phone_number ? user.phone_number : 'No'}</td>
                 <td>{user.sex ? user.sex : 'No'}</td>
                 <td>
-                {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '80%', height: '80%', borderRadius: '50%', objectFit: 'cover' }} />: 'No'}
+                {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '70px', height: '70px', borderRadius: '50%', objectFit: 'cover' }} />: 'No'}
                 </td>
                
                 <td>

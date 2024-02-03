@@ -37,7 +37,18 @@ const InstructorList = () => {
     // Send the updated information to server-side
     const handleUpdateSave = (updatedUser) => {
       // Send the updated user information to the backend server
-      axios.post("http://localhost:8800/admin/updateInstructor/", updatedUser)
+      const formData = new FormData();
+      formData.append('user_id', updatedUser.user_id);
+      formData.append('name', updatedUser.name);
+      formData.append('email', updatedUser.email);
+      formData.append('username', updatedUser.username);
+      formData.append('role_name', updatedUser.role_name);
+      formData.append('image', updatedUser.image); 
+      axios.post("http://localhost:8800/admin/updateInstructor/", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
         .then((resp) => {
           console.log('Updated user information:', updatedUser);
           // Close the update popup
@@ -173,7 +184,9 @@ const InstructorList = () => {
                 <td>{user.birth_date ? user.birth_date : 'No'}</td>
                 <td>{user.phone_number ? user.phone_number : 'No'}</td>
                 <td>{user.sex ? user.sex : 'No'}</td>
-                <td>{user.image ? user.image : 'No'}</td>
+                <td>
+                {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '70px', height: '70px', borderRadius: '50%', objectFit: 'cover' }} />: 'No'}
+                </td>
                
                 <td>
                   <button onClick={() => handleUpdateClick(user)} style={{ color: 'black', background: '#3498db', border: 'none', padding: '5px', width:'40px' }}>{<FaEdit />}</button>

@@ -1,4 +1,3 @@
-// UpdateUserPopup.js
 import React, { useState, forwardRef } from 'react';
 import './studentPopup.scss'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
@@ -11,7 +10,7 @@ const UpdateUserPopup = forwardRef(({ user, onClose, onSave }, ref) => {
     email: user.email,
     username: user.username,
     role_name: user.role_name,
-    image:null,
+    image:user.image,
     // Add other fields as needed
   });
 
@@ -43,7 +42,7 @@ const UpdateUserPopup = forwardRef(({ user, onClose, onSave }, ref) => {
       <form>
         <div className='photo'>
          {/* <PersonIcon style={{fontSize:"7rem"}}/> */}
-         {updatedUser.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '80%', height: '80%', borderRadius: '50%', objectFit: 'cover' }} />:<PersonIcon style={{fontSize:"7rem"}}/> }
+         {updatedUser.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />:<PersonIcon style={{fontSize:"7rem"}}/> }
          
          <label htmlFor='image'>{<AddAPhotoIcon/>}</label>
          <input

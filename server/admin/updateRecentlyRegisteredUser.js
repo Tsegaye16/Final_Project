@@ -7,15 +7,17 @@ const updateRecentUser = async (db, req, res) => {
       const { user_id, name, email, username } = req.body;
       const role_name = req.body.role_name
       console.log(role_name)
-      //const image = req.file ? req.file.filename : null;
+      const image = req.file ? req.file.filename : null;
   
       // Use the MySQL connection pool to execute queries
       const query = promisify(db.query).bind(db);
+      const currentImageResult = await query('SELECT image FROM users WHERE user_id = ?', [user_id]);
+      const currentImage = currentImageResult[0] ? currentImageResult[0].image : null;
   
       // Update the user record
       await query(
-        'UPDATE users SET name = ?, email = ?, username = ?, role_name = ? WHERE user_id = ?',
-        [name, email, username, role_name, user_id]
+        'UPDATE users SET name = ?, email = ?, username = ?, role_name = ?, image = IFNULL(?, image) WHERE user_id = ?',
+        [name, email, username, role_name, image, user_id]
       );
   console.log(role_name)
       if (role_name === 'Instructor') {
