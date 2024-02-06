@@ -50,24 +50,24 @@ const NavBar = ({isUser}) => {
           {isUser && 
             <>
               <div className='button' onClick={handleHome}>
-            <button>Home</button>
+            <button className='nav-button'>Home</button>
           </div>
         {/* <ScrollLink to="home" smooth={true} duration={900} className='button'>
             <button>Home</button>
           </ScrollLink> */}
          
           <div className='button'>
-            <button onClick={toggleFeaturePopup}>Feature</button>
+            <button onClick={toggleFeaturePopup} className='nav-button'>Feature</button>
           </div>
           
           <div className='button'>
-            <button >About</button>
+            <button className='nav-button'>About</button>
           </div>
           <div className='button' >
-            <button onClick={toggleTeamPopup}>Team</button>
+            <button onClick={toggleTeamPopup} className='nav-button'>Team</button>
           </div>
           <div className='button'>
-            <button onClick={toggleContactPopup}>Contact</button>
+            <button onClick={toggleContactPopup} className='nav-button'>Contact</button>
           </div>
             </>
           }
@@ -75,10 +75,10 @@ const NavBar = ({isUser}) => {
           {!isUser && 
           <>
           <Link to={"/register"} className='button'>
-          <button>Signup</button>
+          <button className='nav-button'>Signup</button>
           </Link>
           <Link to={"/login"} className='button'>
-          <button>Login</button>
+          <button className='nav-button'>Login</button>
           </Link>
           </>
           }

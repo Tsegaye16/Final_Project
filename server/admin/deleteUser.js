@@ -19,7 +19,7 @@ const deleteUser = async (db, req, res) => {
 
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
-        console.error('Error deleting instructor:', error);
+      //  console.error('Error deleting instructor:', error);
         res.status(500).json({ error: 'An error occurred while deleting instructor' });
     }
 };

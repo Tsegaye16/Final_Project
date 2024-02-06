@@ -1,0 +1,45 @@
+.add-question-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  
+    label {
+      font-weight: bold;
+    }
+  
+    input[type='number'] {
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      width: 100px;
+    }
+  
+    .question-container {
+      margin-top: 20px;
+  
+      p {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+  
+      input[type='text'] {
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 100%;
+      }
+  
+      .choice-container {
+        margin-left: 20px;
+  
+        input[type='text'] {
+          margin-bottom: 5px;
+          width: calc(100% - 25px);
+        }
+      }
+    }
+  }
+  

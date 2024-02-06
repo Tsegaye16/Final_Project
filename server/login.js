@@ -11,7 +11,7 @@ export default async function loginUser(db, req, res) {
     const userQuery = 'SELECT * FROM user WHERE username = ?';
     db.query(userQuery, [username], async (userErr, userResult) => {
       if (userErr) {
-        console.log(userErr);
+        //console.log(userErr);
         return res.status(500).json({ success: false, message: 'Login failed' });
       }
 

@@ -53,7 +53,7 @@ export default async function registerUser(db, req, res) {
           }
         });
       } catch (error) {
-    console.error(error);
+   // console.error(error);
     res.status(500).json({ message: 'Registration failed' });
   }
 }

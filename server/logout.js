@@ -18,7 +18,7 @@ export default function logoutUser(req, res) {
       res.status(401).json({ message: 'Not authenticated' });
     }
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     res.status(500).json({ message: 'Logout failed' });
   }
 }

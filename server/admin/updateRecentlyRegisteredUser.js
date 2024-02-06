@@ -2,11 +2,11 @@ import { promisify } from 'util';
 
 const updateRecentUser = async (db, req, res) => {
     try {
-        console.log('Received update request:', req.body);
+        //console.log('Received update request:', req.body);
 
       const { user_id, name, email, username } = req.body;
       const role_name = req.body.role_name
-      console.log(role_name)
+     // console.log(role_name)
       const image = req.file ? req.file.filename : null;
   
       // Use the MySQL connection pool to execute queries
@@ -31,7 +31,7 @@ const updateRecentUser = async (db, req, res) => {
   
       res.status(200).json({ message: 'User data updated successfully' });
     } catch (error) {
-      console.error('Error updating user profile:', error);
+     // console.error('Error updating user profile:', error);
       res.status(500).json({ error: 'An error occurred while updating user profile' });
     }
   };

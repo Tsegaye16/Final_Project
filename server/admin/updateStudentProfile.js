@@ -31,7 +31,7 @@ const updateStudentProfile = async (db, req, res) => {
 
     res.status(200).json({ message: 'User data updated successfully' });
   } catch (error) {
-    console.error('Error updating user profile:', error);
+   // console.error('Error updating user profile:', error);
     res.status(500).json({ error: 'An error occurred while updating user profile' });
   }
 };

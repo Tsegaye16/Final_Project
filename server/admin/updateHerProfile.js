@@ -17,7 +17,7 @@ const updateAdminProfile = async (db, req, res) => {
 
     res.status(200).json({ message: 'Admin data updated successfully' });
   } catch (error) {
-    console.error('Error updating admin profile:', error);
+    //console.error('Error updating admin profile:', error);
     res.status(500).json({ error: 'An error occurred while updating admin profile' });
   }
 };
