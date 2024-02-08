@@ -24,6 +24,7 @@ import deleteUser from './admin/deleteUser.js';
 import addQuiz from './instructor/addQuiz.js';
 import viewQuiz from './instructor/viewQuiz.js';
 import deleteQuiz from "./instructor/deleteQuiz.js"
+import addQuestion from './instructor/addQuestion.js';
 
 
 const app = express();
@@ -134,6 +135,11 @@ app.get("/getQuizzes", async (req, res)=>{
 //Delete quiz
 app.delete("/deleteQuiz/:id", async (req, res) => {
   await deleteQuiz(db, req, res)
+})
+
+//Add questio
+app.post("/addQuestion", async (req, res) => {
+  await addQuestion(db, req, res)
 })
 
 const PORT = 8800;

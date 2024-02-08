@@ -40,6 +40,99 @@
           width: calc(100% - 25px);
         }
       }
+      .selection-field{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 20px;
+        .correct-answer{
+          width: 50%;
+          
+          select{
+            height: 30px;
+            width: 75%;
+          }
+        }
+        .difficulty{
+          width: 50%;
+         
+          select{
+            height: 30px;
+            width: 75%;
+          }
+        }
+        
+      }
     }
+    .button-cont{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+    .save{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25%;
+      border-radius: 10px;
+      margin-top: 20px;
+      
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      background-color: #007bff;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #0056b3;
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+          }
+          .disable{
+            display: none;
+          }
+    .cancel{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15%;
+        border-radius: 10px;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      
+        &:hover {
+          background-color: #e0e0e0;
+          color: #000;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+      
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+      
+        &:active {
+          background-color: #ccc;
+          box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+      }
+  }
   }
   

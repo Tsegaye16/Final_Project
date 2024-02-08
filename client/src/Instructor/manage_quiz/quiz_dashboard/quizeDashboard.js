@@ -4,20 +4,32 @@ import './quizDashboard.scss';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddQuestion from './addQuestion';
 
 function QuizDashboard() {
   const [sidebarWidth, setSidebarWidth] = useState(0);
   const [isHover, setIsHover] = useState(false)
   const [isQuiz, setIsQuiz] = useState(false)
+  const [isQuestion, setIsQuestion] = useState(false)
   const [input, setInput] = useState({
     name:"",
     description:""
   })
   const [quizzes, setQuizzes] = useState([]);
+  const [selectedQuizName, setSelectedQuizName] = useState('');
+  const [selectedQuizId, setSelectedQuizId] = useState('')
 
   const handleAddQuiz = () => {
     setIsQuiz(true)
+    setIsQuestion(false)
   }
+  const handleAddQuestion = (quizName,quizId) => {
+    setSelectedQuizName(quizName);
+    setSelectedQuizId(quizId)
+    setIsQuiz(false)
+    setIsQuestion(true)
+  }
+
   const handleInput = (e) =>{
     setInput((prev) => ({
       ...prev,
@@ -52,11 +64,16 @@ function QuizDashboard() {
     } catch (error) {
       console.error("Failed:", error);
     }
+  
   };
   
   
   const handleQuizCacell = () => {
     setIsQuiz(false)
+    
+  }
+  const handleQuestionCancel = () => {
+    setIsQuestion(false)
   }
   const dispayHover = ()=>{
     setIsHover(true)
@@ -74,6 +91,7 @@ function QuizDashboard() {
   try {
     const response = await axios.get("http://localhost:8800/getQuizzes");
     setQuizzes(response.data.quizzes);
+    console.log(quizzes)
   } catch (error) {
     console.error("Failed to fetch quizzes:", error);
   }
@@ -130,6 +148,9 @@ const handleDeleteQuiz = async (id) => {
               </div>
             </form>
           </div>
+          <div className={`question-container ${!isQuestion ? 'question-display': ''}`}>
+          <AddQuestion cancel = {handleQuestionCancel} quiz_name= {selectedQuizName} quiz_id = {selectedQuizId}/>
+          </div>
         </div>
 
         <div className='available-quiz'>
@@ -149,7 +170,8 @@ const handleDeleteQuiz = async (id) => {
           <td>{quiz.description}</td>
           
         </tr><tr key={`${quiz.id}-actions`}>
-            <td className='actions'><button className="add-question-btn">Add Question</button></td>
+            <td className='actions'>
+              <button className="add-question-btn" onClick={() => handleAddQuestion(quiz.name, quiz.id)}>Add Question</button></td>
             <td className="actions">
               <button className="remove-btn" onClick={() => handleDeleteQuiz(quiz.id)}>Remove Quiz</button>
             </td>

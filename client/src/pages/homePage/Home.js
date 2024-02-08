@@ -25,7 +25,7 @@ import BFS from '../../DSA/Algorithm/graph/breadth_first_search/BFS';
 import DFS from '../../DSA/Algorithm/graph/debth_first_search/DFS';
 import Tree from '../../DSA/DataStracture/non_Linear/tree/tree';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import ChatIcon from '@mui/icons-material/Chat';
+import QuizIcon from '@mui/icons-material/Quiz';
 import { useNavigate } from 'react-router-dom';
 function Home() {
   const [selectedItem, setSelectedItem] = useState('');
@@ -105,7 +105,7 @@ function Home() {
             {renderSelectedComponent()}           
             </div>       
             <div className='chat' onClick={handleChat}>
-              {<ChatIcon/>}
+              {<QuizIcon/>}
             </div>  
             </div>
           </div>
