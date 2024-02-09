@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const navigate = useNavigate();
@@ -74,11 +74,11 @@ function Login() {
         <ToastContainer />
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>User name:</label>
+            <label>E-mail:</label>
             <input
               type="text"
-              name="username"
-              value={formData.username}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
             />
           </div>

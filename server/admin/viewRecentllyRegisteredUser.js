@@ -1,6 +1,6 @@
 const recentlyRegistered = (db, req, res) => {
-    const adminData = "SELECT * FROM users WHERE role_name = ?";
-    db.query(adminData, ['null'],(err, result) => {
+    const adminData = "SELECT * FROM users WHERE role_name IS NULL";
+    db.query(adminData,(err, result) => {
         if (err) {
             //console.error('Error querying database:', err);
             return res.status(500).json({ error: 'An error occurred while processing the request' });

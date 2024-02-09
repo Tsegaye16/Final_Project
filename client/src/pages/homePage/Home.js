@@ -27,6 +27,7 @@ import Tree from '../../DSA/DataStracture/non_Linear/tree/tree';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { useNavigate } from 'react-router-dom';
+
 function Home() {
   const [selectedItem, setSelectedItem] = useState('');
   const [icon, setIcon] = useState('times');
@@ -107,6 +108,7 @@ function Home() {
             <div className='chat' onClick={handleChat}>
               {<QuizIcon/>}
             </div>  
+          
             </div>
           </div>
         </div>
