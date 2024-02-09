@@ -5,18 +5,18 @@ const jwtSecretKey = 'AmareAbewaDemekeClubGood';
 
 export default async function loginUser(db, req, res) {
   try {
-    const { username, password } = req.body;
-
+    const { email, password } = req.body;
+    console.log(email)
     // Check if the user exists with the provided username
-    const userQuery = 'SELECT * FROM user WHERE username = ?';
-    db.query(userQuery, [username], async (userErr, userResult) => {
+    const userQuery = 'SELECT * FROM users WHERE email = ?';
+    db.query(userQuery, [email], async (userErr, userResult) => {
       if (userErr) {
-        //console.log(userErr);
+        console.log(userErr);
         return res.status(500).json({ success: false, message: 'Login failed' });
       }
 
       if (userResult.length === 0) {
-        return res.status(401).json({ success: false, message: 'Invalid username or password' });
+        return res.status(401).json({ success: false, message: 'Invalid email or password' });
       }
 
       // Compare the provided password with the hashed password in the database
@@ -30,7 +30,7 @@ export default async function loginUser(db, req, res) {
       const token = jwt.sign({ userId: userResult[0].id }, jwtSecretKey, { expiresIn: '1m' });
 
       // Send the token as a response to the client
-      res.status(200).json({ success: true, token, user: { id: userResult[0].id, username: userResult[0].username } });
+      res.status(200).json({ success: true, token, user: { id: userResult[0].id, email: userResult[0].email } });
     });
   } catch (error) {
     console.error(error);
