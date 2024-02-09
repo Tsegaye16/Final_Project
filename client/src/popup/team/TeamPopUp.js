@@ -1,6 +1,7 @@
 import React from 'react';
 import './Popup.scss';
 import Team from './team';
+//import { ContactUs } from '../contact/contact';
 
 const Teampopup = ({ handleClose, show }) => {
   const showHideClassName = show ? 'popup display-block' : 'popup display-none';
@@ -17,6 +18,7 @@ const Teampopup = ({ handleClose, show }) => {
       <section className="popup-main">
         
         <Team />
+        
       </section>
     </div>
   );

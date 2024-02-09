@@ -9,31 +9,31 @@ import { TbUsersGroup } from "react-icons/tb";
 export const SidebarData = [
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: '/instructor',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
   },
   {
     title: 'Manage Quiz',
-    path: '/quiz',
+    path: '/instructor/quiz',
     icon: <MdOutlineQuiz />,
     cName: 'nav-text'
   },
   {
     title: 'Content',
-    path: '/content',
+    path: '/instructor/content',
     icon: <BiBookContent />,
     cName: 'nav-text'
   },
   {
     title: 'Users',
-    path: '/users',
+    path: '/instructor/users',
     icon: <TbUsersGroup />,
     cName: 'nav-text'
   },
   {
     title: 'Team',
-    path: '/team',
+    path: '/instructor/team',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },

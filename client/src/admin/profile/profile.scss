@@ -1,0 +1,205 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.user-list {
+  margin-top: 0%;
+  
+  width: 100%; 
+  .profile{
+    margin-top: 0;
+    width: 100%;
+    //height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 245, 245);
+  .default-visual{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(200, 200, 200) 1px 1px 0.5rem;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    
+    
+    .photo{
+      position: relative;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      display: flex;
+      //flex: 2;
+      align-items: center;
+      justify-content: center;
+      label{
+        position: absolute;
+        bottom: 20px;
+        left: 160px;
+        cursor: pointer;
+        color: black;
+        font-size: 0.5rem;
+      }
+      input {
+        display: none;
+      }
+      
+      img{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+    }
+    .information{
+      width: 90%;
+      //background-color: #2c3e50;
+      display: flex;
+      flex-direction: column;
+      
+      .info{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 10px);
+        height: 40px;
+        margin: 5px 5px;
+        background-color: rgb(230, 230, 230);
+        border-radius: 6px;
+        span{
+          display: flex;
+          flex: 2;
+          align-items: center;
+          justify-content: flex-start;
+          //background-color: aqua;
+          height: 100%;
+        }
+        p{
+          display: flex;
+          margin-top: 16px;
+          flex: 4;
+          align-items: center;
+          justify-content: flex-start;
+          height: 100%;
+          //margin-left: 10px;
+          //height: 40px;
+          //background-color: aqua;
+        }
+       
+      }
+      
+    }
+    button{
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      background-color: #4caf50;
+      height: 40px;
+      margin: 5px 5px; 
+      width: 25%;  
+      border: none;  
+      border-radius: 10px;  
+      font-size: 2rem;
+    }
+  }
+  .form{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(200, 200, 200) 1px 1px 0.5rem;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    
+    
+    .photo{
+      position: relative;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+     
+      display: flex;
+      //flex: 2;
+      align-items: center;
+      justify-content: center;
+      label{
+        position: absolute;
+        bottom: 20px;
+        left: 160px;
+        cursor: pointer;
+        color: black;
+        font-size: 0.5rem;
+      }
+      input {
+        display: none;
+      }
+      
+      img{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        
+      }
+    }
+    .information{
+      width: 90%;
+      //background-color: #2c3e50;
+      display: flex;
+      flex-direction: column;
+      
+      .info{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 10px);
+        height: 40px;
+        margin: 5px 5px;
+        background-color: rgb(200, 200, 200);
+        border-radius: 6px;
+        
+        input{
+          display: flex;
+          //margin-top: 16px;
+          width: 100%;
+          align-items: center;
+          justify-content: flex-start;
+          height: 100%;
+          //border: none;
+          font-size: 1.3rem;
+          background-color: rgb(230, 230, 230);
+        border-radius: 6px;
+        padding-left: 5px;
+          //background-color: bisque;
+          //margin-left: 10px;
+          //height: 40px;
+          //background-color: aqua;
+        }
+        
+       
+      }
+      
+    }
+    button{
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      background-color: #4caf50;
+      height: 40px;
+      margin: 5px 5px; 
+      width: 25%;  
+      border: none;  
+      border-radius: 10px;  
+      font-size: 2rem;
+    }
+  }
+}
+}

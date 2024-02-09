@@ -139,121 +139,39 @@
 
       #feature {
         display: flex;
+        //flex-wrap: wrap;
+        flex-direction: column;
+        
         align-items: center;
         justify-content: center;
         width: 100%;
         border-bottom: solid 2px lightgray;
-      
-        .feature-list {
-          width: 450px;
-          margin-top: 40px;
-          background-color: inherit;
-          //border-radius: 0.7rem;
-          margin-right: 15px;
+        .imported-feature{
+          width: 100%;
           display: flex;
-          flex-direction: column;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-      
-          span {
-            width: 100%;
-            background-color: inherit;
-            
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            //border-top-left-radius: 0.7rem;
-           // border-top-right-radius: 0.7rem;
-            font-size: 2rem;
-            font-weight: bolder;
-          }
-      
-          p {
-            margin: 10px;
-          }
-      
-          img {
-            //border-bottom-left-radius: 0.7rem;
-            //border-bottom-right-radius: 0.7rem;
-            width: 100%;
-          }
-      
-          
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
         }
-        .feature-list:hover {
-          border: 0.7em solid rgb(100, 100, 100);
-          border-radius: 0.7rem;
-          transform: translateY(-40px);
-          box-shadow: black 1px 1px 0.5em inset;
+        .feature-title{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 3rem;
+          //background-color: aqua;
         }
-        .feature-list:last-child {
-          margin-right: 0;
-}
+      
+       
+         
 
-        .slick-prev,
-  .slick-next {
-    background-color: rgba(0, 0, 0, 0.5);
-    font-size: 24px;
-    color: #2c3e50;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    cursor: pointer;
-    transition: color 0.3s ease;
 
-    &:hover {
-      color: dodgerblue;
-    }
-  }
 
-  .slick-prev {
-    left: 10px;
-    
-  }
-
-  .slick-next {
-    right: 40px;
-  }
-
-  .slick-dots {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    list-style: none;
-    display: flex;
-    padding: 0;
-
-    li {
-      margin: 0 5px;
-      button {
-        font-size: 12px;
-        width: 12px;
-        height: 12px;
-        border: none;
-        border-radius: 50%;
-        background-color: #2c3e50;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: dodgerblue;
-        }
-      }
-
-      &.slick-active button {
-        background-color: dodgerblue;
-      }
-    }
-  }
 
 
 
       }
-      .slick-slider {
-        width: 100%;
-      }
+     
       
       
       .team{

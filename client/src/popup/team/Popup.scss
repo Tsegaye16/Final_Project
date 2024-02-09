@@ -15,32 +15,19 @@
   }
 
   .popup-main {
-    //position: relative;
-    background-color: white; // Popup background color
+    
+    display: inline-block;
+    background-color: white;
+    font-size: 2rem;
+    flex-wrap: wrap;
+    color: black;
+    flex-direction: column;
+    
     border: 1px solid #ccc; // Popup border color
     padding: 20px;
     max-height: 90vh; // Maximum height for popup-main
     overflow-y: auto; // Enable vertical scrolling if needed
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); // Popup box shadow
-    width: 80%; // Adjust as needed
-
-    // .close-btn {     
-    //   position: absolute;
-    //   top: 30px;
-    //   right: 145px;
-    //   font-size: 20px;
-    //   cursor: pointer;
-    //   background: none;
-    //   border: none;
-    //   color: #333;
-    //   width: 30px;
-    //   height: 30px; 
-    //   font-weight: bolder;// Close button color
-
-    //   &:hover {
-    //     color: #555; 
-    //     background-color: red;// Close button color on hover
-    //   }
-    // }
+    
   }
 }

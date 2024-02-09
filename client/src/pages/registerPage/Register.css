@@ -41,6 +41,15 @@
   margin-bottom: 20px;
   text-align: left;
 }
+.error {
+  color: red;
+  margin-top: 5px; /* Adjust the margin for spacing */
+  display: none;
+}
+
+.visible {
+  display: block;
+}
 
 .form-group label {
   display: block;
