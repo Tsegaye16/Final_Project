@@ -45,7 +45,7 @@ function StudentProfile() {
             <input type='tel' id='phoneNumber' name='phoneNumber' placeholder='Enter your phone number' />
           </div>
 
-          <button type='submit'>Update Profile</button>
+          <button type='submit' className='update'>Update Profile</button>
         </form>
       </div>
     </div>

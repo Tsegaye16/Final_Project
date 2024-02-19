@@ -1,0 +1,347 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+  }
+  
+  a, a:hover, a:focus, a:active{
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  
+  .BinaryTree{
+  
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+    background-color: #ffffff;
+  }
+  
+  #name{
+  
+    width: 100%;
+    font-size: 2vw;
+    margin:"0 auto";
+    font-weight: 800;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #254569;
+    margin-top: 5vh;
+  }
+  
+  #name p{
+    font-size: 1vw;
+  }
+  
+  .bst-main-container{
+    width: 96%;
+    height: 100%;
+    display: flex;
+  }
+  
+  .message-container{
+    margin-left: 0.5em;
+    color: #254569;
+    width: 100%;
+    height: 25em;
+    margin-top: 2vh;
+    overflow-y: auto;
+  }
+  
+  #svgcontainer{
+    margin-top: 2vh;
+  }
+  
+  
+  #info{
+    width: 98%;
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 1.5em;
+  }
+  
+  #info p{
+    color: #254569;
+  }
+  
+  #opBST{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5em;
+    width: 95%;
+  }
+  
+  #zoominfo-wrapper{
+    width: 8em;
+  }
+  
+  #messages{
+    width: 98%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3.5vh;
+  }
+  
+  @media only screen and (min-width: 1400px) and (max-width: 1700px) {
+      #messages{
+      width: 98%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 4.5vh;
+    }
+  }
+  
+  @media only screen and (min-height: 1100px) and (max-height: 1300px) {
+      #messages{
+      width: 98%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 5vh;
+    }
+  }
+  
+  
+  input{
+    width: 15vw;
+    height: 3em;
+    /* padding: 0.5em; */
+    border-style: none;
+    border: 0.1em solid #254569;
+  }
+  
+  .stack-button{
+    width: 5vw;
+    height: 3.4em;
+    color: white;
+    border-style: none;
+    background-color: #254569;
+    cursor: pointer;
+    font-family: 'Poppins';
+  
+  
+  }
+  
+  .stack-button:hover{
+    background-color: #1a314b;
+  }
+  
+  .stack-button:disabled{
+    background-color: grey;
+    cursor:default;
+  }
+  
+  #footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+  }
+  
+  .circulo{
+  
+    transition: all 0.7s ease-out;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+    animation-name: criaNode;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  
+  
+  @keyframes criaNode{
+    
+    0%{
+      r:0;
+    }
+    50%{
+      r:12;
+    }
+    100%{
+      r:7;
+    }
+  
+  }
+  
+  .texto{
+    transition: all 3s ease;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+    animation-name: criaTexto;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  @keyframes criaTexto{
+  
+    0%{
+      font-size:0;
+    }
+    50%{
+      font-size:0.5vw;
+    }
+    100%{
+      font-size:0.3vw;
+    }
+  
+  }
+  
+  .rect{
+    transition: all 1s ease-out;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+    animation-name: criaRect;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  
+  @keyframes criaRect{
+    
+    0%{
+      transform: scale(0);
+    }
+    50%{
+      transform: scale(1.5);
+    }
+    100%{
+      transform: scale(1);
+    }
+  
+  }
+  
+  .linha{
+    
+    transition: all 10s ease;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: move 10s linear;   
+    animation-fill-mode: forwards; 
+  
+  }
+  
+  .linhaStack{
+    
+    transition: all 10s ease;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: move 50s linear;   
+    animation-fill-mode: forwards; 
+  
+  }
+  
+  .linhaList{
+    
+    transition: all 1s ease;
+    stroke-dasharray: 5000;
+    stroke-dashoffset: 5000;
+    animation: move 15s linear;   
+    animation-fill-mode: forwards; 
+  
+  }
+  
+  .linhaSearch{
+    
+    transition: all 1s ease;
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500;
+    animation: move 0.5s linear;   
+    animation-fill-mode: forwards; 
+  
+  }
+  
+  
+  @keyframes move {
+    100% {
+        stroke-dashoffset: 0;
+    }
+  }
+  
+  
+  
+  .Stack{
+    margin-top: 1vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  #infostack{
+    width: 25vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+  
+  #infolist{
+    width: 25vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+  
+  #svgcontainerList{
+    /* background-color: red; */
+  }
+  
+  #StackContainer{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #nameStack{
+    width: 100%;
+    font-size: 2vw;
+    margin:"0 auto";
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #254569;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  #nameStack p{
+    font-size: 1vw;
+  }
+  
+  #popButton{
+    width: 21vw;
+  }
+  
+  .LinkedList{
+    margin-top: 0.5vh;
+  }
+  
+  #varStack{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+  }

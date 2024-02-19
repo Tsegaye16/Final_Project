@@ -139,7 +139,7 @@ function Register() {
           {errors.password && <p style={myStyle}>{errors.password}</p>}
           </div>
 
-          <button type="submit">Register</button>
+          <button type="submit" className='register'>Register</button>
         </form>
 
         <span>Do you have an account?</span>

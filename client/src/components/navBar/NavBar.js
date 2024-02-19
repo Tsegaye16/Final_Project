@@ -7,8 +7,9 @@ import Teampopup from '../../popup/team/TeamPopUp';
 import Contactopup from "../../popup/contact/ContactPopup"
 import FeaturePopup from '../../popup/feature/featurePopup';
 import UserPopup from '../../popup/user/userPopup';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
-const NavBar = ({isUser}) => {
+const NavBar = ({isUser, icon, toggleSidebar}) => {
   const navigate = useNavigate();
   const [showTeamPopup, setShowTeamPopup] = useState(false);
   const [showContactPopup, setShowContactPopup] = useState(false);
@@ -45,7 +46,9 @@ const NavBar = ({isUser}) => {
   return (
     <div className="invite-main">
     <div className='header'>
-        <div className='logo' ><h1>DSA</h1></div>
+    <div className='logo' onClick={toggleSidebar} style={{cursor:"pointer"}}>
+  {isUser && (icon === 'bars' ? <FaBars /> : <FaTimes />)}
+</div>
         <div className='button-list'>
           {isUser && 
             <>

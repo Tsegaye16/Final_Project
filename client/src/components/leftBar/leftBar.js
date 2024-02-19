@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
 
-function LeftBar({ setSelectedItem }) {
+function LeftBar({ setSelectedItem, sidebarWidth }) {
   const [isVisible, setIsVisible] = useState(true);
   const [dataStructureVisible, setDataStructureVisible] = useState(true);
   const [linearDatastructureVisible,setLinearDatastructureVisible] = useState(true)
@@ -54,7 +54,7 @@ function LeftBar({ setSelectedItem }) {
   
   
   return (
-    <div className='main-leftbar'>
+    <div className= {sidebarWidth !== 0 ? 'main-leftbar active' : 'main-leftbar'}>
       
       <div className='dsa-content'>
         <div className='data-structure'>

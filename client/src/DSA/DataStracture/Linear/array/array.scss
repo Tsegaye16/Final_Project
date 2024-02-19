@@ -24,36 +24,82 @@
             
         }
         .introduction{
-            min-height: 0;
+            span{
+                font-weight: bold;
+                font-size: 2rem;
+                
+            }
+
+           p{
             width: 100%;
             display: flex;
             flex-direction: column;
             padding-left: 15px;
             padding-top: 15px;
             padding-right: 50px;
-            font-size: 1.5rem;
+            padding-bottom: 20px;
+            font-size: 22px;
+            box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.75);
+            //box-shadow: 0px -5px 5px -3px rgba(0, 0, 0, 0.75);
+        }
             
-            span{
-                font-weight: bold;
-                font-size: 2rem;
-                text-decoration: underline;
-            }
+            
 
         }
         .operation{
-            min-height: 0;
+            box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.75);
+            .sub-title{
+                font-weight: bold;
+                font-size: 2rem;
+                
+            }
+            p{
             width: 100%;
             display: flex;
             flex-direction: column;
             padding-left: 15px;
             padding-top: 15px;
             padding-right: 50px;
-            font-size: 1.5rem;
-            span{
-                font-weight: bold;
-                font-size: 2rem;
-                text-decoration: underline;
+            font-size: 22px;
+        }
+        ol{
+            margin-left: 10px;
+            
+            li{
+                font-size: 1.5rem;
+                
+                
+                span{
+                    font-size: 1.5rem;
+                    display: flex;
+                    flex-direction: row;
+                    .show{
+                        background-color: lightslategray;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 80px;
+                        height: 40px;
+                        margin-left: 10px;
+                        cursor: pointer;
+                    }
+
+                }
+                .declare-container{
+                    height: 400px;
+                    padding: 20px 20px;
+
+                }
+                .hide{
+                    display: none;
+                }
+                .display{
+                    display: none;
+                }
             }
+        }
+            
+            
 
         }
         .implementation{

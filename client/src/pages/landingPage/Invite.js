@@ -58,7 +58,7 @@ const Invite = () => {
             <span>
             Immerse yourself in the fascinating world of data structures and algorithms through our cutting-edge visualizer. Whether you're a student, developer, or tech enthusiast, our platform provides an engaging and hands-on experience to understand the intricacies of algorithms.
             </span>
-            <button onClick={handleStartClick}>Start</button>
+            <button onClick={handleStartClick} className='start' >Start</button>
           </div>          
           </div>
           <div className='right'>

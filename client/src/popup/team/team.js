@@ -8,11 +8,11 @@ function Team() {
   return (
     <div className='container'>
     <div className='team' id='team'>
-          
-        <div className='team-list'>
-          <div className='introductory'>
+    <div className='introductory'>
             <span>The team behind the project</span>
-          </div>
+    </div>
+        <div className='team-list'>
+          
           <div className='photo'>
             <img src={tsegaye}/>
             <span>Tsegaye Abewa</span>

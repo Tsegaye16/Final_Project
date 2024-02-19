@@ -68,7 +68,7 @@
   outline: none;
 }
 
-.main .register-container button {
+.main .register-container .register {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -78,7 +78,7 @@
   cursor: pointer;
 }
 
-button:hover {
+.main .register-container .register:hover {
   background-color: #0056b3;
 }
 
@@ -110,7 +110,7 @@ a:hover {
     font-size: 14px;
   }
 
-  button {
+  .register {
     font-size: 16px;
   }
 }
@@ -128,7 +128,7 @@ a:hover {
     font-size: 12px;
   }
 
-  button {
+  .register {
     font-size: 14px;
   }
 }
