@@ -7,8 +7,9 @@ import Teampopup from '../../popup/team/TeamPopUp';
 import Contactopup from "../../popup/contact/ContactPopup"
 import FeaturePopup from '../../popup/feature/featurePopup';
 import UserPopup from '../../popup/user/userPopup';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
-const NavBar = ({isUser}) => {
+const NavBar = ({isUser, icon, toggleSidebar}) => {
   const navigate = useNavigate();
   const [showTeamPopup, setShowTeamPopup] = useState(false);
   const [showContactPopup, setShowContactPopup] = useState(false);
@@ -45,11 +46,13 @@ const NavBar = ({isUser}) => {
   return (
     <div className="invite-main">
     <div className='header'>
-        <div className='logo' ><h1>DSA</h1></div>
+    <div className='logo'  >
+  {isUser && (icon === 'bars' ? <FaBars className='icon' onClick={toggleSidebar}/> : <FaTimes  className='icon' onClick={toggleSidebar}/>)}
+</div>
         <div className='button-list'>
           {isUser && 
             <>
-              <div className='button' onClick={handleHome}>
+          <div className='button' onClick={handleHome}>
             <button className='nav-button'>Home</button>
           </div>
         {/* <ScrollLink to="home" smooth={true} duration={900} className='button'>

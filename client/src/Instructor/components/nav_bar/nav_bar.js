@@ -8,6 +8,15 @@ import { IconContext } from 'react-icons';
 import tsegaye from '../../../assets/Tsegaye.jpg';
 
 export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
+  const handleLogout = () => {
+    // Remove the token from local storage
+    localStorage.removeItem('accessToken');
+    // Redirect to the login page (or any other appropriate action)
+   // window.location.reload()
+    window.location.href = '/login';
+  };
+
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -21,9 +30,10 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
               <FaIcons.FaTimes />
             </Link>
           )}
-          <div className='instructor-title'>Instructor Page</div>
+          
           <div className='user' >
-            <button>Logout</button>
+            
+            <button onClick={handleLogout} className='logout'>Logout</button>
             <img src={tsegaye} alt='Tsegaye' />
             <span>Tsegaye</span>
             
@@ -31,11 +41,7 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
         </div>
         <nav className={sidebarWidth !== 0 ? 'nav-menu active' : 'nav-menu'} >
           <ul className='nav-menu-items'>
-            <li className='navbar-toggle'>
-              <Link to='#' className='menu-bars' onClick={toggleSidebar}>
-                <AiIcons.AiOutlineClose />
-              </Link>
-            </li>
+            
             {SidebarData.map((item, index) => (
               <li key={index} className={item.cName}>
                 <Link to={item.path}>

@@ -1,18 +1,17 @@
 // dash_board.scss
 .dashboard-container {
-    width: 100%;
-    height: 100vh;
-  }
+  width: 100%;
+  height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+}
+
+.dashboard {
+  padding: 20px;   
   
-  .main-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 1s;
-  }
-  
-  .dashboard {
-    padding: 20px;   
-    
-  }
-  
+}

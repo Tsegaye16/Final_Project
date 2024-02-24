@@ -42,11 +42,7 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, image, userna
         </div>
         <nav className={sidebarWidth !== 0 ? 'nav-menu active' : 'nav-menu'} >
           <ul className='nav-menu-items'>
-            <li className='navbar-toggle'>
-              <Link to='#' className='menu-bars' onClick={toggleSidebar}>
-                <AiIcons.AiOutlineClose />
-              </Link>
-            </li>
+            
             {SidebarData.map((item, index) => (
               <li key={index} className={item.cName}>
                 <Link to={item.path}>

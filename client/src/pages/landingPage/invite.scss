@@ -51,7 +51,7 @@
 
       .left{
                
-        width: 45%;
+        width: 50%;
         //height: 90%;
         background-color: inherit;
         border-radius: 30px;
@@ -62,7 +62,7 @@
         padding-right: 10px;
         margin-top: 80px;
         margin-bottom: 50px;
-        margin-left: 15px;
+        
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         .moto{
           width: 100%;         
@@ -92,7 +92,7 @@
             color: black;
 
           }
-          button{
+          .start{
             margin-top: 10px;
             height: 50px;
             width: 220px;
@@ -113,7 +113,7 @@
       }
 
       .right{
-        width: 45%;
+        width: 50%;
         height: 90%;
         
         border-radius: 30px;
@@ -124,7 +124,7 @@
         margin-top: 10px;
         
         margin-bottom: 10px;
-        margin-left: 15px;
+        //margin-left: 15px;
         //transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       // .right:hover{
@@ -139,7 +139,7 @@
 
       #feature {
         display: flex;
-        //flex-wrap: wrap;
+        flex-wrap: wrap;
         flex-direction: column;
         
         align-items: center;
@@ -174,9 +174,8 @@
      
       
       
-      .team{
-        
-        
+      .team{        
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -214,5 +213,3 @@
     
   }
 }
-
-
