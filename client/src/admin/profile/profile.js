@@ -6,6 +6,7 @@ import Tsegaye from "./../../assets/Tsegaye.jpg"
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import PersonIcon from '@mui/icons-material/Person';
 //import images from "../../../../server/upload/"
+import empty from "../../assets/empty.webp"
 
 
 const   AdminProfile = () => {
@@ -94,7 +95,7 @@ console.log(user)
         
           <div className='default-visual' key={user.id}>          
         <div className='photo'>
-          {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />: <PersonIcon style={{fontSize:"10rem"}}/>}
+          {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />: <empty style={{fontSize:"10rem"}}/>}
          
           
         </div>
@@ -138,7 +139,7 @@ console.log(user)
         
         <form className='form' onSubmit={handleSave}>          
         <div className='photo'>
-        {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />: <PersonIcon style={{fontSize:"10rem"}}/>}
+        {user.image ? <img src={`http://localhost:8800/${user.image}`} alt='admin' style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />: <PersonIcon style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}/>}
          
           <label htmlFor='image'>{<AddAPhotoIcon/>}</label>
           <input
@@ -150,17 +151,17 @@ console.log(user)
         />
         </div>
           <div  className='information'>
-            <div className='info'>
+          <div className='info' >
               
-            <input
-            type='text'
-            id='name'
-            name='name'
-            placeholder='Your full name'
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-              </div>
+              <input
+              type='text'
+              id='namee'
+              name='name'
+              placeholder='Your full name'
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+                </div>
             <div className='info'>
               
             <input

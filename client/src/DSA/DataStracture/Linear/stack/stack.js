@@ -1,15 +1,18 @@
 import React from 'react'
 import "./stack.scss"
+import Operation from './operation'
 
 function Stack() {
   return (
-    <div className='main-array'>
-      <div className='title'>Title</div>
-      <div className='introduction'>Introduction</div>   
-      <div className='operation'>Operation</div>   
-      <div className='implementation'>Implementation</div>
-      <div className='visualization'>Visualization</div>
-      <div className='summery'>Summary</div>
+    <div className='main-stack'>
+      <div className='title'></div>
+      <div className='introduction'></div>   
+      <div className='operation'></div>   
+      <div className='implementation'></div>
+      <div className='visualization'>
+        <Operation/>
+      </div>
+      <div className='summery'></div>
     </div>
   )
 }
