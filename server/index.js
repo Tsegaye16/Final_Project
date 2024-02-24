@@ -25,6 +25,8 @@ import addQuiz from './instructor/addQuiz.js';
 import viewQuiz from './instructor/viewQuiz.js';
 import deleteQuiz from "./instructor/deleteQuiz.js"
 import addQuestion from './instructor/addQuestion.js';
+import ResetPassword from './user_forgote_password/password_reset.js';
+import UpdatePassword from './user_forgote_password/password_update.js';
 
 
 const app = express();
@@ -140,6 +142,16 @@ app.delete("/deleteQuiz/:id", async (req, res) => {
 //Add questio
 app.post("/addQuestion", async (req, res) => {
   await addQuestion(db, req, res)
+})
+
+// Endpoint to receive user email and initiate the password reset process
+app.post('/user/resetPassword', async (req, res) => {
+  await ResetPassword(db, req, res)
+})
+
+// Endpoint to validate token and update user password
+app.post("/user/updatePassword", async (req, res) =>{
+  await UpdatePassword(db, req, res)
 })
 
 const PORT = 8800;

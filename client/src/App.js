@@ -125,6 +125,8 @@ import AdminProfile from './admin/profile/profile';
 import AdminDashdoard from './admin/dashboard/dashboard';
 import AddQuestion from "./Instructor/manage_quiz/quiz_dashboard/addQuestion"
 import Content from './Instructor/manage_content/Content';
+import ReceiveEmail from './forgot_password/receive_user_email';
+import ResetPassword from './forgot_password/receive_new_password';
 
 
 function App() {
@@ -145,6 +147,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path = "/instructor/question" element = {< AddQuestion />}/>
+        <Route path='/user/forgotPassword' element = {<ReceiveEmail/>}/>
+        <Route path='/user/resetPassword' element = {<ResetPassword/>}/>
       </Routes>
     </Router>
   );

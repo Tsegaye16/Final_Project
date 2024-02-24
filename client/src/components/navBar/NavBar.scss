@@ -51,18 +51,22 @@
       color: inherit;
 
       .nav-button {
+        //display: inline-block;
         //width: 100%;
+      //height: 60px;
         display: inline-block;
         color: inherit;
+        font-size: 130%;
+        border: none;
         border-radius: 15%;
         background-color: inherit;
+        
         
         
       }
 
       .nav-button:hover {
-        background-color: lightgray;
-        color: black;
+        cursor: pointer;
       }
     }
     

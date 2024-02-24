@@ -30,7 +30,7 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, image, userna
           )}
           <div className='instructor-title'>Admin Page</div>
           <div className='botom-list'>
-          <button>Logout</button>
+          <button className='lg-btnn'>Logout</button>
           <div className='user' onClick={handleProfile} >
             
             <img src={image} alt='Tsegaye' />

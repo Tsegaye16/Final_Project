@@ -154,8 +154,8 @@ function Merge_sort() {
           value={delay}
           onChange={handleDelayChange}
         />
-        <button onClick={generateRandomArray}>Generate New Array</button>
-        <button onClick={mergeSort}>Merge Sort</button>
+        <button onClick={generateRandomArray} className='merge-btn'>Generate New Array</button>
+        <button onClick={mergeSort} className='merge-btn' >Merge Sort</button>
       </div>
     </div>
   );

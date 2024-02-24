@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: row;
 }
-button{
+.lg-btnn{
      background-color: inherit;
       color: white;
       padding: 10px 15px;
@@ -41,11 +41,11 @@ button{
       border-radius: 12px;
       cursor: pointer;
      right: 10px;
-      &:hover{
+      /* &:hover{
         background-color: white;
         color: #2c3e50;
         border-radius: 12px;
-      }
+      } */
 }
 
 .menu-bars {
