@@ -171,9 +171,9 @@ const handleDeleteQuiz = async (id) => {
           
         </tr><tr key={`${quiz.id}-actions`}>
             <td className='actions'>
-              <button className="add-question-btn" onClick={() => handleAddQuestion(quiz.name, quiz.id)}>Add Question</button></td>
+              <button className="add-question-btn btnn" onClick={() => handleAddQuestion(quiz.name, quiz.id)}>Add Question</button></td>
             <td className="actions">
-              <button className="remove-btn" onClick={() => handleDeleteQuiz(quiz.id)}>Remove Quiz</button>
+              <button className="remove-btn btnn" onClick={() => handleDeleteQuiz(quiz.id)}>Remove Quiz</button>
             </td>
           </tr></>
       

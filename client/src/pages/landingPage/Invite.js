@@ -79,7 +79,7 @@ const Invite = () => {
           </div>
         </div>
         <div className='contact' id='contact'>
-          <span>Contact me at</span>
+         
           <ContactUs/>
         </div>
        </div>

@@ -17,7 +17,7 @@ const Contactopup = ({ handleClose, show }) => {
   return (
     <div className={showHideClassName} onClick={handleBackgroundClick}>
       <section className="popup-main">
-        Ask any question
+    
         
         <ContactUs />
       </section>

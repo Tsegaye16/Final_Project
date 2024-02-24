@@ -12,14 +12,7 @@ function User() {
   //Logout functionality
  
   const handleLogout = async () => {
-    const accessToken = localStorage.getItem('accessToken');
-    try {
-      // Make a request to your logout endpoint
-      await axios.post('http://localhost:8800/logout', null, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        }
-      });
+   
 
       // Clear client-side authentication data
       // For example, remove tokens from local storage
@@ -28,10 +21,7 @@ function User() {
       // Redirect to the login page or another page
       toast.success('Logout successful');
       navigate('/login');
-    } catch (error) {
-      console.error('Logout failed:', error.message);
-      toast.error('Logout failed');
-    }
+    
   };
   return (
     <div className='user-section'>

@@ -21,9 +21,13 @@
       flex: 1;
       display: flex;
       align-items: center;
-      margin-left: 30px;
-      font-size: 2.5rem;
+      justify-content: flex-start;
+     padding-left: 2%;   
       height: 100%;
+      .icon{
+        cursor: pointer;
+        font-size: 30px;
+      }
     }
 
     .button-list {
@@ -33,25 +37,27 @@
       justify-content: flex-end;
       height: 100%;
 
-      .button {
-        
+      .button {        
         text-decoration: none;
-        margin: 0 15px;
-        border-radius: 15px;
+        margin-right: 3%;
+        //margin-right: ;
+        border-radius: 15%;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 50px;
-        width: 80px;
+        
+       // height: 50%;
+        //width: 200%;
         color: inherit;
 
         .nav-button {
-          width: 100%;
-          border: none;
+          //width: 100%;
+          display: inline-block;
           color: inherit;
-          border-radius: 15px;
+          border-radius: 15%;
           background-color: inherit;
-          height: 100%;
+          
+          
         }
 
         .nav-button:hover {
@@ -65,7 +71,7 @@
           display: flex;
           flex-direction: row;
           align-items: center;
-          margin-right: 150px;
+          margin-right: 40px;
           cursor: pointer;
           img {
             width: 35px;
@@ -87,19 +93,19 @@
     .header{
       .logo{
         flex: 1;
-        h1{
-          font-size: 1rem;
+        padding-left: 0;
+        .icon{
+          font-size: 30px;
         }
       }
       .button-list{
         flex: 3;
         .button{
-          margin: 0 9px;
-          height: 30px;
-          width: 45px;
-          button{
-            border-radius: 10px;
-          }
+          margin-right: 9px;
+         // height: 30px;
+         // width: 45px;
+          
+          //background-color: aqua;
         }
       }
       .user{

@@ -62,6 +62,8 @@ const BubbleSort = () => {
     generateRandomArray(arraySize);
   }, [arraySize]);
 
+
+  
   return (
     <div>
       <div>
@@ -99,6 +101,7 @@ const BubbleSort = () => {
             key={index}
             style={{
               height: `${item.value}px`,
+              width:'40px',
               backgroundColor: item.color,
               display: 'inline-block',
               margin: '2px',

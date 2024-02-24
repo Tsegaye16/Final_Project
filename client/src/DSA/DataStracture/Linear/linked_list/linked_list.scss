@@ -1,14 +1,45 @@
-// *{
-//     padding: 0;
-//     margin: 0;
-//     box-sizing: border-box;
-
-//     .main-array{
-//         width: 100%;
-//         height: 100%;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         flex-direction: column;
-//     }
-// }
+.linked-list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .action-section {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .add-section,
+  .remove-section {
+    display: flex;
+    gap: 10px;
+  }
+  
+  input[type='number'] {
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .visualization-section {
+    margin-top: 20px;
+  }
+  
+  .linked-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .node {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f39c12;
+  }
+  

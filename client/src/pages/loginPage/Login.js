@@ -154,15 +154,14 @@ const Login = () => {
         });
   
         // Extract user ID from the response
-        const userId = response.data.user.id;
-  
+        
         // Store the token in local storage
         localStorage.setItem('accessToken', response.data.token);
   
         // Set a timer to clear the token after one minute
         setTimeout(() => {
           localStorage.removeItem('accessToken');
-          toast.error('Token expired, cleared from local storage', {
+          toast.error('Session expired, Please login again', {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -170,11 +169,19 @@ const Login = () => {
             pauseOnHover: true,
             draggable: true,
           });
-        }, 60000); // 60000 milliseconds = 1 minute
-  
+          window.location.reload()
+        }, 3600000); 
+
+        const getUserRoleFromToken = (token) => {
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          return decodedToken.role_name;
+        };
+        const token = localStorage.getItem('accessToken');
+        const role_name = getUserRoleFromToken(token)
+        const role = role_name.toLowerCase()
         // Redirect to the user-specific route
         setTimeout(() =>{
-          navigate(`/student/${userId}`);
+          navigate(`/${role}`);
         }, 6000)
       } catch (error) {
         // Handle login failure, e.g., show an error message

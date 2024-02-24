@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import emailjs from 'emailjs-com';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './ContactUs.scss';
+//import './ContactUs.scss';
+import { TextField, Button, Typography, Box } from '@mui/material'
 
 export const ContactUs = () => {
   const form = useRef();
@@ -19,12 +20,13 @@ export const ContactUs = () => {
       [name]: value,
     }));
   };
+  
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+  
     emailjs
-      .sendForm('service_26tthlf', 'template_xp5by8d', form.current, 'CF4qOIwsvGf8WTr_E')
+      .sendForm('service_26tthlf', 'template_xp5by8d', e.target, 'CF4qOIwsvGf8WTr_E')
       .then(
         (result) => {
           console.log(result.text);
@@ -41,37 +43,90 @@ export const ContactUs = () => {
         }
       );
   };
+  
 
   return (
-    <div className="contact-form-container">
-      <ToastContainer />
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
+      <Box sx={{ maxWidth: 600, mx: "auto", p: 2 }}>
+        <ToastContainer/>
+        <Typography variant="h4" align="center" mb={2}>
+          Contact Us
+        </Typography>
+        <form onSubmit={sendEmail}>
+          <TextField
+            fullWidth
+            label="Name"
+            value={formData.user_name}
+            onChange={handleChange}
+            name="user_name"
+            margin="normal"
+            required
+          />
+          <TextField
+            fullWidth
+            label="Email"
+            value={formData.user_email}
+            onChange={handleChange}
+            margin="normal"
+            name="user_email"
+            required
+            type="email"
+          />
+          <TextField
+            fullWidth
+            label="Message"
+            value={formData.message}
+            onChange={handleChange}
+            margin="normal"
+            name="message"
+            required
+            multiline
+            rows={4}
+          />
+          <Button variant="contained" type="submit" sx={{ mt: 2 }}>
+            Submit
+          </Button>
+        </form>
+      </Box>
+    </Box>
+  //   <div className="contact-form-container">
+  //     <ToastContainer />
      
-      <form ref={form} onSubmit={sendEmail}>
+  //     <form ref={form} onSubmit={sendEmail}>
         
-        <input
-          type="text"
-          name="user_name"
-          value={formData.user_name}
-          onChange={handleChange}
-          placeholder='User name'
-        />
+  //       <input
+  //       className='user_name'
+  //         type="text"
+  //         name="user_name"
+  //         value={formData.user_name}
+  //         onChange={handleChange}
+  //         placeholder='User name'
+  //       />
         
-        <input
-          type="email"
-          name="user_email"
-          value={formData.user_email}
-          onChange={handleChange}
-          placeholder='Your E-mail'
-        />
+  //       <input
+  //       className='user_name'
+  //         type="email"
+  //         name="user_email"
+  //         value={formData.user_email}
+  //         onChange={handleChange}
+  //         placeholder='Your E-mail'
+  //       />
         
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder='Type........'
-        />
-        <input type="submit" value="Send" />
-      </form>
-    </div>
+  //       <textarea
+  //         name="message"
+  //         value={formData.message}
+  //         onChange={handleChange}
+  //         placeholder='Type........'
+  //       />
+  //       <input type="submit" value="Send" />
+  //     </form>
+  //   </div>
   );
 };

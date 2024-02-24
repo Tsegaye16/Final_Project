@@ -1,21 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import './merge_sort.scss'; // Make sure to create a CSS file for styling
+import './merge_sort.scss'; 
+
 
 function Merge_sort() {
   const [array, setArray] = useState([]);
+  const [arraySize, setArraySize] = useState(10);
+  const [delay, setDelay] = useState(3000);
+
 
   useEffect(() => {
     generateRandomArray();
   }, []);
 
+
   const generateRandomArray = () => {
     const newArray = [];
-    for (let i = 0; i < 10; i++) {
-      newArray.push(Math.floor(Math.random() * 100) + 10);
+    for (let i = 0; i < arraySize; i++) {
+      const value = Math.floor(Math.random() * 100) + 1;
+      newArray.push({ value, height: value * 3 }); 
     }
     setArray(newArray);
   };
 
+
+  const handleArraySizeChange = (e) => {
+    setArraySize(parseInt(e.target.value));
+  };
+
+
+  const handleDelayChange = (e) => {
+    setDelay(parseInt(e.target.value));
+  };
+
+  
   const mergeSort = async () => {
     const animations = await mergeSortHelper([...array]);
     await visualizeMergeSort(animations);
@@ -23,7 +40,7 @@ function Merge_sort() {
 
   const mergeSortHelper = async (arr) => {
     if (arr.length <= 1) {
-      return arr;
+      return [];
     }
 
     const animations = [];
@@ -53,7 +70,7 @@ function Merge_sort() {
     while (i < leftArray.length && j < rightArray.length) {
       animations.push({ type: 'compare', indices: [left + i, mid + 1 + j] });
 
-      if (leftArray[i] <= rightArray[j]) {
+      if (leftArray[i].value <= rightArray[j].value) {
         animations.push({ type: 'overwrite', index: k, value: leftArray[i] });
         arr[k++] = leftArray[i++];
       } else {
@@ -87,35 +104,56 @@ function Merge_sort() {
         setTimeout(() => {
           barOneStyle.backgroundColor = '#f39c12';
           barTwoStyle.backgroundColor = '#f39c12';
-        }, i * 50);
+        }, i * delay);
 
         setTimeout(() => {
           barOneStyle.backgroundColor = '#3498db';
           barTwoStyle.backgroundColor = '#3498db';
-        }, (i + 1) * 50);
+        }, (i + 1) * delay);
       } else if (animation.type === 'overwrite') {
         const { index, value } = animation;
         const barStyle = arrayBars[index].style;
 
         setTimeout(() => {
-          barStyle.height = `${value}px`;
-        }, i * 500);
+          barStyle.height = `${value.height}px`; 
+          array[index] = value; 
+          arrayBars[index].innerHTML = value.value; 
+        }, i * delay );
       }
     }
   };
 
+
   return (
     <div className="merge-sort-visualizer">
       <div className="array-container">
-        {array.map((value, index) => (
+        {array.map((bar, index) => (
           <div
             className="array-bar"
             key={index}
-            style={{ height: `${value}px` }}
-          ></div>
+            style={{ height: `${bar.height}px`, width: '60px' }}
+          >{bar.value}</div>
         ))}
       </div>
-      <div className="button-container">
+      <div className="controls">
+        <label htmlFor="arraySize">Array Size:</label>
+        <input
+          type="number"
+          id="arraySize"
+          min={1}
+          max={100}
+          value={arraySize}
+          onChange={handleArraySizeChange}
+        />
+        <label htmlFor="delay">Delay (ms):</label>
+        <input
+          type="range"
+          id="delay"
+          min="1"
+          max="100"
+          value={delay}
+          onChange={handleDelayChange}
+        />
         <button onClick={generateRandomArray}>Generate New Array</button>
         <button onClick={mergeSort}>Merge Sort</button>
       </div>

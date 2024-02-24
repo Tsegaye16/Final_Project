@@ -64,7 +64,7 @@ const UpdateUserPopup = forwardRef(({ user, onClose, onSave }, ref) => {
         <input type="text" name="username" value={updatedUser.username} onChange={handleInputChange} />
         <label htmlFor="email">Role:</label>
         <select id='role_name' name='role_name' value={updatedUser.role_name} onChange={handleInputChange}>
-              <option value='Admin' disabled>Admin</option>
+              <option value='' disabled>Select role</option>
               <option value='Instructor'>Instructor</option>
               <option value='Student'>Student</option>
         </select>

@@ -25,6 +25,7 @@ import addQuiz from './instructor/addQuiz.js';
 import viewQuiz from './instructor/viewQuiz.js';
 import deleteQuiz from "./instructor/deleteQuiz.js"
 import addQuestion from './instructor/addQuestion.js';
+import studentViewQuiz from './student/view_quiz.js';
 
 
 const app = express();
@@ -63,7 +64,7 @@ app.get('/admin/viewStudent', async (req, res) => {
   await viewStudent(db, req, res);
 });
 
-// Admin view Instructor
+// Adminy view Instructor
 app.get('/admin/viewInstructor', async (req, res) => {
   //console.log('Received request to /admin/viewInstructor');
   await viewInstructor(db, req, res);
@@ -141,6 +142,12 @@ app.delete("/deleteQuiz/:id", async (req, res) => {
 app.post("/addQuestion", async (req, res) => {
   await addQuestion(db, req, res)
 })
+
+//retrieve quize with its information to student
+app.get("/student/viewQuize", async (req, res) => {
+  await studentViewQuiz(db, req, res)
+})
+
 
 const PORT = 8800;
 app.listen(PORT, () => {

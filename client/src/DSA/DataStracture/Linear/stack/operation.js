@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import './operation.css'
 
 const Operation = () => {
-  const navigate = useNavigate();
+ 
 
   const svgref = useRef(); //reference to SVG element
   const svgContainer = useRef(); //reference to the div container that wraps the SVG element

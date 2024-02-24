@@ -1,13 +1,14 @@
 // login.js
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
 const jwtSecretKey = 'AmareAbewaDemekeClubGood';
 
 export default async function loginUser(db, req, res) {
   try {
     const { email, password } = req.body;
-    console.log(email)
-    // Check if the user exists with the provided username
+
+    // Check if the user exists with the provided email
     const userQuery = 'SELECT * FROM users WHERE email = ?';
     db.query(userQuery, [email], async (userErr, userResult) => {
       if (userErr) {
@@ -26,11 +27,25 @@ export default async function loginUser(db, req, res) {
         return res.status(401).json({ success: false, message: 'Invalid password' });
       }
 
-      // Generate a JWT token for authentication with a 1-minute expiration
-      const token = jwt.sign({ userId: userResult[0].id }, jwtSecretKey, { expiresIn: '1m' });
+      // Extract user information
+      const { id, name, username, role_name } = userResult[0];
 
-      // Send the token as a response to the client
-      res.status(200).json({ success: true, token, user: { id: userResult[0].id, email: userResult[0].email } });
+      // If role_name is null, assign it as 'student'
+      const userRole = role_name || 'student';
+
+      // Generate a JWT token for authentication with additional user information
+      const token = jwt.sign(
+        { userId: id, name, email, username, role_name: userRole },
+        jwtSecretKey,
+        { expiresIn: '30m' }
+      );
+
+      // Send the token as a response to the client along with user information
+      res.status(200).json({
+        success: true,
+        token,
+        user: { id, name, email, username, role_name: userRole },
+      });
     });
   } catch (error) {
     console.error(error);

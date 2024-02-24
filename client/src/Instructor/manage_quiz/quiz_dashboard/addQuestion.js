@@ -101,7 +101,7 @@ const AddQuestion = ({ cancel, quiz_name, quiz_id }) => {
   return (
     <div className="add-question-container">
       <ToastContainer/>
-      <h1>{`Adding question on quiz ${quiz_name} ${quiz_id}`}</h1>
+      <h1>{`Adding question on quiz ${quiz_name}`}</h1>
       <label htmlFor="num-questions">Number of Questions:</label>
       <input type="number" id="num-questions" value={numQuestions} onChange={handleNumQuestionsChange} min={0}/>
       

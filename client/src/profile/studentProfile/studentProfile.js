@@ -13,7 +13,7 @@ function StudentProfile() {
         <div className='profile-picture'>
           <img src={Tsegaye} alt='Profile' />
           <label htmlFor='profilePicture'>{<AddAPhotoIcon/>}</label>
-          <input type='file' id='profilePicture' name='profilePicture' accept='image/*' />
+          <input type='file' id='profilePicture' name='profilePicture' accept='image/*' style={{display:'none'}}/>
         </div>
 
         <form>
@@ -42,7 +42,7 @@ function StudentProfile() {
 
           <div className='form-group'>
             <label htmlFor='phoneNumber'>Phone Number:</label>
-            <input type='tel' id='phoneNumber' name='phoneNumber' placeholder='Enter your phone number' />
+            <input type='tel' id='phoneNumber' name='phoneNumber' placeholder='Enter your phone number' className='input' />
           </div>
 
           <button type='submit' className='update'>Update Profile</button>

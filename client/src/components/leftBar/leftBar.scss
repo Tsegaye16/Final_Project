@@ -16,7 +16,7 @@
     .data-structure{
 
       .category {
-        font-size: 18px;
+        font-size: 140%;
         font-weight: bold;
         margin-bottom: 8px;
         cursor: pointer;
@@ -24,6 +24,7 @@
       }
       .sub-category {
         margin-left: 10px;
+        font-size: 90%;
 
         .linear{
           
@@ -38,8 +39,9 @@
             
     
             li {
-              font-size: 14px;
+              font-size: 130%;
               margin-bottom: 5px;
+              margin-left: 13%;
               .icon{
                 margin-right: 10px;
                 color: #d3c1aa
@@ -66,9 +68,10 @@
             
     
             li {
-              font-size: 14px;
+              font-size: 130%;
               margin-bottom: 5px;
               list-style-type: none;
+              margin-left: 13%;
               .icon{
                 margin-right: 10px;
                 color: #d3c1aa
@@ -100,12 +103,15 @@
     .algorithms{
 
       .category {
-        font-size: 18px;
+        font-size: 140%;
         font-weight: bold;
         margin-bottom: 8px;
         cursor: pointer;
       }
       .sub-category {
+        
+        font-size: 90%;
+        
         .search{
           .category{
 
@@ -115,9 +121,10 @@
          
     
             li {
-              font-size: 14px;
+              font-size: 130%;
               margin-bottom: 5px;
               list-style-type: none;
+              margin-left: 13%;
               .icon{
                 margin-right: 10px;
                 color: #d3c1aa
@@ -142,9 +149,10 @@
             
     
             li {
-              font-size: 14px;
+              font-size: 130%;
               margin-bottom: 5px;
               list-style-type: none;
+              margin-left: 13%;
               .icon{
                 margin-right: 10px;
                 color: #d3c1aa
@@ -170,9 +178,10 @@
            
     
             li {
-              font-size: 14px;
+              font-size: 130%;
               margin-bottom: 5px;
               list-style-type: none;
+              margin-left: 13%;
               .icon{
                 margin-right: 10px;
                 color: #d3c1aa;
