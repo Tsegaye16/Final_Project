@@ -26,6 +26,7 @@ const ResetPassword = () => {
       setMessage('Passwords do not match. Please try again.');
       return;
     }
+    console.log(token)
 
     try {
       // Send a request to your server endpoint to update the user's password

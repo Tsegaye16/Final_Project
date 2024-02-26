@@ -1,22 +1,44 @@
-// UserList.js
 import React, { useState, useEffect, useRef } from 'react';
 import './instructor.scss';
 import axios from 'axios';
 import UpdateUserPopup from '../manageStudent/studentPopup';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-//import { toast } from 'react-toastify';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import { useParams } from 'react-router-dom';
 import AdminNavbar from '../dashboard/bar/nav_bar';
-
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, InputAdornment, IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import SortIcon from '@mui/icons-material/Sort';
 const InstructorList = () => {
   const [sidebarWidth, setSidebarWidth] = useState(250);
+  const [users, setUsers] = useState([]);
+  const [sortedUsers, setSortedUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const toggleSidebar = () => {
     setSidebarWidth((prevWidth) => (prevWidth === 0 ? 250 : 0));
   };
-    const [users, setUsers] = useState([]);
+ 
+  useEffect(() => {
+    setSortedUsers(users); // Initially set sortedUsers to users
+  }, [users]);
+
+  // sorting functionality
+  const handleSort = (field) => {
+    const sortedList = [...sortedUsers];
+    sortedList.sort((a, b) => (a[field] > b[field] ? 1 : -1));
+    setSortedUsers(sortedList);
+  };
+
+  // Search functionality
+  const handleSearch = () => {
+    const filteredList = users.filter(
+      (user) =>
+        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.instructor_id.toString().includes(searchQuery.toLowerCase())
+    );
+    setSortedUsers(filteredList);
+  };
 
     //const {id} = useParams()
     useEffect(() => {
@@ -151,27 +173,47 @@ const InstructorList = () => {
   <div className="instructor-list">
       <h2>Instructor List</h2>
       <ToastContainer/>
+      <TextField
+            label="Search by Name or ID"
+            variant="outlined"
+            size="small"
+            onChange={(e) => setSearchQuery(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleSearch}>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            style={{ marginBottom: '15px' }}
+          />
+          <TableContainer component={Paper}>
       <table>
-        <thead>
-          <tr>
-          <th>Instructor ID</th>
-            <th>User ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Role</th>
-            <th>Birth date</th>
-            <th>Phone number</th>
-            <th>sex</th>            
-            <th>image</th>            
-            <th>Operatinos</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users &&
-            users.map((user) => (
-              <tr key={user.id}>
+        <TableHead>
+          <TableRow>
+          <TableCell onClick={() => handleSort('instructor_id')}>
+                    Instructor ID <SortIcon />
+                  </TableCell>
+          
+                  <TableCell onClick={() => handleSort('user_id')}>User ID <SortIcon /></TableCell>
+                  <TableCell onClick={() => handleSort('name')}>Name <SortIcon /></TableCell>
+                  <TableCell>Email</TableCell>
+            <TableCell>Username</TableCell>
+            <TableCell>Password</TableCell>
+            <TableCell>Role</TableCell>
+            <TableCell>Birth date</TableCell>
+            <TableCell>Phone number</TableCell>
+            <TableCell>sex</TableCell>            
+            <TableCell>image</TableCell>            
+            <TableCell>Operations</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          
+            {sortedUsers.map((user) => (
+              <TableRow key={user.instructor_id}>
                 {/* Render user details */}
                 <td>{user.instructor_id}</td>
                 <td>{user.user_id}</td>
@@ -192,10 +234,11 @@ const InstructorList = () => {
                   <button onClick={() => handleUpdateClick(user)} style={{ color: 'black', background: '#3498db', border: 'none', padding: '5px', width:'40px' }}>{<FaEdit />}</button>
                   <button onClick={() => handleDeleteClick(user)} style={{ color: 'black', background: 'red', border: 'none', padding: '5px', width:'40px' }}>{<FaTrash />}</button>
                 </td>
-              </tr>
+              </TableRow>
             ))}
-        </tbody>
+        </TableBody>
       </table>
+      </TableContainer>
       {isUpdatePopupOpen && (
         
         <UpdateUserPopup className='pop-update' ref={updatePopupRef}

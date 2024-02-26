@@ -27,6 +27,10 @@ import deleteQuiz from "./instructor/deleteQuiz.js"
 import addQuestion from './instructor/addQuestion.js';
 import ResetPassword from './user_forgote_password/password_reset.js';
 import UpdatePassword from './user_forgote_password/password_update.js';
+import studentViewQuiz from './student/view_quiz.js';
+import EmailConfirm from './email_confirm.js';
+//import RetrieveQuestion from './student/view_question.js';
+import { promisify } from 'util';
 
 
 const app = express();
@@ -144,6 +148,11 @@ app.post("/addQuestion", async (req, res) => {
   await addQuestion(db, req, res)
 })
 
+//retrieve quize with its information to student
+app.get("/student/viewQuize", async (req, res) => {
+  await studentViewQuiz(db, req, res)
+})
+
 // Endpoint to receive user email and initiate the password reset process
 app.post('/user/resetPassword', async (req, res) => {
   await ResetPassword(db, req, res)
@@ -153,6 +162,68 @@ app.post('/user/resetPassword', async (req, res) => {
 app.post("/user/updatePassword", async (req, res) =>{
   await UpdatePassword(db, req, res)
 })
+app.post('/user/confirmEmail/:token', async (req, res) => {
+  await EmailConfirm(db, req, res)
+})
+
+//Retrieving the quiz with entire question and its corresponding choice based on quiz_id
+
+// functions to retrieve question
+const RetrieveQuestion = async (quiz_id) => {
+  try {
+    const sql = `
+      SELECT q.id as question_id, q.question_text, c.id as choice_id, c.choice_text, c.is_correct
+      FROM question q
+      JOIN choice c ON q.id = c.question_id
+      WHERE q.quiz_id = ?
+    `;
+
+    const query = promisify(db.query).bind(db);
+    const result = await query(sql, [quiz_id]);
+
+    if (!result || !Array.isArray(result)) {
+      console.error('Invalid result format:', result);
+      return null;
+    }
+
+    const questionsWithChoices = result.reduce((acc, row) => {
+      if (!acc[row.question_id]) {
+        acc[row.question_id] = {
+          question_id: row.question_id,
+          question_text: row.question_text,
+          choices: [],
+        };
+      }
+
+      acc[row.question_id].choices.push({
+        choice_id: row.choice_id,
+        choice_text: row.choice_text,
+      });
+
+      return acc;
+    }, {});
+
+    return questionsWithChoices;
+  } catch (error) {
+    console.error('Error retrieving questions and choices:', error);
+    return null;
+  }
+};
+app.post('/student/startQuiz', async (req, res) => {
+  const { quiz_id } = req.body;
+  //console.log("Quiz ID: ",req.body)
+
+  // Retrieve questions and choices based on quiz_id
+  const questionsWithChoices = await RetrieveQuestion(quiz_id);
+  
+  console.log(questionsWithChoices)
+
+  if (questionsWithChoices) {
+   res.status(200).json({ questionsWithChoices });
+  } else {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 const PORT = 8800;
 app.listen(PORT, () => {

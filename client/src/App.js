@@ -127,6 +127,8 @@ import AddQuestion from "./Instructor/manage_quiz/quiz_dashboard/addQuestion"
 import Content from './Instructor/manage_content/Content';
 import ReceiveEmail from './forgot_password/receive_user_email';
 import ResetPassword from './forgot_password/receive_new_password';
+import ConfirmationPage from './confirm_email/ConfirmationPage';
+import QuizQuestions from './student/question_board';
 
 
 function App() {
@@ -137,7 +139,7 @@ function App() {
         <Route path='/admin/profile' element = {<AdminProfile/>}/>
         <Route path = "/admin/instructor" element = {<InstructorList/>}/>
         <Route path='/admin/student' element = {<StudentList/>}/>
-        <Route path='/chatBot' element = {<Quiz/>}/>
+        <Route path='/student/quiz' element = {<Quiz/>}/>
         <Route path = "/student/profile" element = {<StudentProfile/>}/>
         <Route path="/" element={<Invite />} />
         <Route path='/instructor' element={<InstructorDashboard/>}/>
@@ -148,7 +150,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path = "/instructor/question" element = {< AddQuestion />}/>
         <Route path='/user/forgotPassword' element = {<ReceiveEmail/>}/>
-        <Route path='/user/resetPassword' element = {<ResetPassword/>}/>
+        <Route path='/user/resetPassword/:token' element = {<ResetPassword/>}/>
+        <Route path='/user/confirmEmail/:token' element = {<ConfirmationPage/>}/>
+        <Route path='/student/questions/:quizId' element = {<QuizQuestions/>}/>
       </Routes>
     </Router>
   );

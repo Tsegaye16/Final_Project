@@ -1,19 +1,23 @@
 import { promisify } from 'util';
 import bcrypt from 'bcrypt';
 
-// Endpoint to validate token and update user password
 const UpdatePassword = async (db, req, res) => {
-  const { email, token, newPassword } = req.body;
-
+  const { token, newPassword } = req.body;
+  console.log(token)
+ 
   // Check if the token exists and is not expired
-  const checkTokenQuery = 'SELECT * FROM reset_tokens WHERE email = ? AND token = ? AND expires > ?';
+  const checkTokenQuery = 'SELECT * FROM reset_tokens WHERE token = ? AND expires > UNIX_TIMESTAMP(NOW()) * 1000;';
+  
 
   const query = promisify(db.query).bind(db);
 
   try {
-    const tokenResults = await query(checkTokenQuery, [email, token, Date.now()]);
-
+    const tokenResults = await query(checkTokenQuery, [token]);
+    console.log(tokenResults)
+   const userEmail = tokenResults[0].email
+    
     if (tokenResults.length === 0) {
+      console.log(error)
       return res.status(400).json({ message: 'Invalid or expired token' });
     }
 
@@ -22,16 +26,17 @@ const UpdatePassword = async (db, req, res) => {
 
     // Update user password in the database with the hashed password
     const updatePasswordQuery = 'UPDATE users SET password = ? WHERE email = ?';
-    await query(updatePasswordQuery, [hashedPassword, email]);
+    await query(updatePasswordQuery, [hashedPassword, userEmail]);
 
     // Delete used token from the database
     const deleteTokenQuery = 'DELETE FROM reset_tokens WHERE email = ? AND token = ?';
-    await query(deleteTokenQuery, [email, token]);
+    await query(deleteTokenQuery, [userEmail, token]);
 
     return res.json({ message: 'Password reset successful' });
   } catch (error) {
-    return res.status(500).json({ message: 'Database error' });
+    
+    return res.status(500).json({ message: 'An error occurred while resetting the password' });
   }
 };
 
-export default UpdatePassword;
+export default UpdatePassword ;

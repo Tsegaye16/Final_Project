@@ -1,0 +1,32 @@
+/* quiz.css */
+
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  #quiz-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  #quiz-table th, #quiz-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  #quiz-table th {
+    background-color: #f2f2f2;
+  }
+  
+  #quiz-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #quiz-table tr:hover {
+    background-color: #f2f2f2;
+  }
+  

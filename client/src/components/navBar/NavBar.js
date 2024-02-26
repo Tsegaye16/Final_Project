@@ -35,13 +35,7 @@ const NavBar = ({isUser, icon, toggleSidebar}) => {
   const toggleFeaturePopup = () => {
     setShowFeaturePopup(!showFeaturePopup)
   }
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    window.scrollTo({
-      top: section.offsetTop,
-      behavior: 'smooth',
-    });
-  };
+ 
 
   return (
     <div className="invite-main">

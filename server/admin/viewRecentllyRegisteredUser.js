@@ -1,5 +1,5 @@
 const recentlyRegistered = (db, req, res) => {
-    const adminData = "SELECT * FROM users WHERE role_name IS NULL";
+    const adminData = "SELECT * FROM users WHERE role_name IS NULL AND user_id IN (SELECT user_id FROM email_confirmations WHERE is_confirmed = TRUE)";
     db.query(adminData,(err, result) => {
         if (err) {
             //console.error('Error querying database:', err);

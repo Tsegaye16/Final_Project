@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { animateScroll, Link as ScrollLink } from 'react-scroll';
-import { Link } from 'react-router-dom';
+import React from 'react';
+// import { animateScroll, Link as ScrollLink } from 'react-scroll';
+// import { Link } from 'react-router-dom';
 import './invite.scss';
 
 //import { faTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -8,33 +8,21 @@ import './invite.scss';
 
 import NavBar from '../../components/navBar/NavBar';
 import welcome from "../../assets/welcome.avif"
-
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-
 import { ContactUs } from '../../popup/contact/contact';
-//import {  toast } from 'react-toastify';
-import Team from '../../popup/team/team';
-import { data } from './data';
 import Feature from '../../popup/feature/feature';
+import Team from '../../popup/team/team';
 
 
 
-const Invite = () => {
- 
- 
+const Invite = () => { 
   
   const handleStartClick = () => {
     window.location.href = '/login';
   };
 
-  const scrollToFeature = () => {
-    animateScroll.scrollTo(document.getElementById('feature').offsetTop, {
-      duration: 500,
-      smooth: 'easeInOutQuad',
-    });
-  };
+
   
 
   const isUser = false;
@@ -62,7 +50,7 @@ const Invite = () => {
           </div>          
           </div>
           <div className='right'>
-            <img src={welcome}/>
+            <img src={welcome} alt=''/>
           </div>
         </div>
         <div id="feature" className='feature'>
