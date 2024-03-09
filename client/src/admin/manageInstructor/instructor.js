@@ -9,6 +9,7 @@ import AdminNavbar from '../dashboard/bar/nav_bar';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import SortIcon from '@mui/icons-material/Sort';
+import {Tooltip} from '@mui/material';
 const InstructorList = () => {
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [users, setUsers] = useState([]);
@@ -194,11 +195,24 @@ const InstructorList = () => {
         <TableHead>
           <TableRow>
           <TableCell onClick={() => handleSort('instructor_id')}>
-                    Instructor ID <SortIcon />
+                    Instructor ID   
+                    <Tooltip title='sort' arrow>
+                     <SortIcon style={{cursor:'pointer'}}/>
+                    </Tooltip>
                   </TableCell>
           
-                  <TableCell onClick={() => handleSort('user_id')}>User ID <SortIcon /></TableCell>
-                  <TableCell onClick={() => handleSort('name')}>Name <SortIcon /></TableCell>
+                  <TableCell onClick={() => handleSort('user_id')}>
+                    User ID 
+                    <Tooltip title='sort' arrow>
+                      <SortIcon style={{cursor:'pointer'}}/>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell onClick={() => handleSort('name')}>
+                    Name 
+                    <Tooltip title='sort' arrow>
+                    <SortIcon style={{cursor:'pointer'}}/>
+                    </Tooltip>
+                  </TableCell>
                   <TableCell>Email</TableCell>
             <TableCell>Username</TableCell>
             <TableCell>Password</TableCell>

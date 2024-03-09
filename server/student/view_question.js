@@ -1,14 +1,15 @@
-import { promisify } from "util";
+import { promisify } from 'util';
 
 const RetrieveQuestion = async (db, req, res) => {
-    try{
+  try {
+    const { quiz_id } = req.params; // Assuming quiz_id is part of the request parameters
+
     const sql = `
-    SELECT q.id as question_id, q.question_text, c.id as choice_id, c.choice_text
-    FROM question q
-    JOIN choice c ON q.id = c.question_id
-    WHERE q.quiz_id = ?
-  `;
-  
+      SELECT q.id as question_id, q.question_text, c.id as choice_id, c.choice_text, c.is_correct
+      FROM question q
+      JOIN choice c ON q.id = c.question_id
+      WHERE q.quiz_id = $1
+    `;
 
     const query = promisify(db.query).bind(db);
     const result = await query(sql, [quiz_id]);
@@ -30,6 +31,7 @@ const RetrieveQuestion = async (db, req, res) => {
       acc[row.question_id].choices.push({
         choice_id: row.choice_id,
         choice_text: row.choice_text,
+        is_correct: row.is_correct,
       });
 
       return acc;
@@ -40,6 +42,6 @@ const RetrieveQuestion = async (db, req, res) => {
     console.error('Error retrieving questions and choices:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
 export default RetrieveQuestion;

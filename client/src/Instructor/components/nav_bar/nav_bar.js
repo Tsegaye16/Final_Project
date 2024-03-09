@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './sidebar_data';
 import './nav_bar.css';
 import { IconContext } from 'react-icons';
-import tsegaye from '../../../assets/Tsegaye.jpg';
+//import tsegaye from '../../../assets/Tsegaye.jpg';
+import defaults from "../../../assets/default.png"
 
-export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
+export default function Nav_bar({ toggleSidebar, sidebarWidth,userData }) {
   const handleLogout = () => {
     // Remove the token from local storage
     localStorage.removeItem('accessToken');
@@ -15,6 +16,9 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
    // window.location.reload()
     window.location.href = '/login';
   };
+  const image = userData && userData.length > 0 ? `http://localhost:8800/${userData[0].image}` : `${defaults}`;
+  const userName = userData?.length > 0 ? userData[0].username : '';
+
 
 
   return (
@@ -34,8 +38,8 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth }) {
           <div className='user' >
             
             <button onClick={handleLogout} className='logout'>Logout</button>
-            <img src={tsegaye} alt='Tsegaye' />
-            <span>Tsegaye</span>
+            <img src={image} alt='Tsegaye' />
+            <span>{userName}</span>
             
           </div>
         </div>

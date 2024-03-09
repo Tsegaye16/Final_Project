@@ -14,9 +14,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  IconButton
 } from '@mui/material';
 import './quiz.css';
-import QuizQuestions from './question_board';
+import { ArrowBack } from '@mui/icons-material';
+
 
 function Quiz() {
   const [quizzes, setQuizzes] = useState([]);
@@ -53,6 +55,7 @@ function Quiz() {
 
         // Set the state to render QuizQuestions component
         setStartQuizConfirmed(true);
+        navigate(`/student/questions/${selectedQuizId}`);
       })
       .catch(error => {
         console.error('Error starting quiz:', error);
@@ -61,7 +64,17 @@ function Quiz() {
     setConfirmationDialogOpen(false);
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
+    <>
+    <Box display="flex" justifyContent="flex-start" marginTop="20px" marginLeft="20px"> {/* Style back button */}
+        <IconButton color="primary" onClick={handleBack}>
+          <ArrowBack />
+        </IconButton>
+      </Box>
     <Container>
       <Typography variant="h3" gutterBottom>
         Quizzes
@@ -98,7 +111,7 @@ function Quiz() {
         </Box>
       ))}
       {/* Confirmation Dialog */}
-      {startQuizConfirmed && <QuizQuestions quizId={selectedQuizId} />}
+      
       <Dialog open={isConfirmationDialogOpen} onClose={handleConfirmationDialogClose}>
         <DialogTitle>Confirmation</DialogTitle>
         <DialogContent>
@@ -116,6 +129,7 @@ function Quiz() {
         </DialogActions>
       </Dialog>
     </Container>
+    </>
   );
 }
 

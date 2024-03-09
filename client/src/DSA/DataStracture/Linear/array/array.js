@@ -1,22 +1,20 @@
-import React from 'react'
-import "./array.scss"
-import Declaration from './operations/declaration.js'
+import React from 'react';
+import "./array.scss";
+import Declaration from './operations/declaration/declaration.js';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import Insertion from './operations/insertion/insertion.js';
 
 import { useState } from 'react';
 
 function Array() {
   const [checked, setChecked] = useState(false);
-  const [text, setText] = useState('show')
-  const handleShow =() => {
-    setChecked(!checked)
-    if(checked === false){
+  const [text, setText] = useState('show');
 
-      setText('hide')
-    }else{
-      setText('show')
-    }
-  }
+  const handleShow = () => {
+    setChecked(!checked);
+    setText(checked ? 'show' : 'hide');
+  };
+
   const accessing = `#include <stdio.h>
 
 int main() {
@@ -33,14 +31,11 @@ int main() {
     printf("Last element: %d\n", lastElement); // Output: Last element: 50
 
     return 0;
-}
-`
-  
+}`;
+
   return (
     <div className='main-array'>
-     
       <div className='title'>Array</div>
-      
       <div className='introduction'>
         <span>Introduction </span>  
         <p> An array is a fundamental and versatile data structure in computer science
@@ -62,13 +57,11 @@ int main() {
             updating, or accessing elements within the array. 
             
          </p>
-           <ol>
+         <ol>
             <li>
-            
               <span>Declaration 
-              <div className='show' onClick={handleShow}>{text}</div>
+                <div className='show' onClick={handleShow}>{text}</div>
               </span>
-              
               <p>In programming, the term "declaration" refers to the act of 
                 creating a variable and specifying its type. When it comes to 
                 arrays, declaration involves creating an array variable and optionally
@@ -79,10 +72,10 @@ int main() {
                   <li>Type</li>
                   <li>Size(optional if you initialize)</li>
                 </ul>
-                </p> 
-                <div className={`declare-container ${!checked ? 'hide': ''}`}>
-                  <Declaration/>
-                </div>
+              </p> 
+              <div className={`declare-container ${!checked ? 'hide': ''}`}>
+                <Declaration/>
+              </div>
             </li>
             <li>
               <span>Accessing Element</span>
@@ -92,11 +85,18 @@ int main() {
                  how you can access elements from an array:
                  
                  <SyntaxHighlighter language='c' wrapLines customStyle={{fontSize:'1px'}}>
-              {accessing}
-            </SyntaxHighlighter></p>
+                   {accessing}
+                 </SyntaxHighlighter>
+              </p>
             </li>
             <li>
               <span>Insertion</span>
+             <p>
+              some thing about Insertion_sort
+             </p>
+             <div>
+              <Insertion/>
+             </div>
             </li>
             <li>
               <span>Deletion</span>
@@ -104,7 +104,7 @@ int main() {
             <li>
               <span>Updating</span>
             </li>
-           </ol>
+          </ol>
       </div>   
       <div className='implementation'>
         <span>Implementation</span>
@@ -112,11 +112,11 @@ int main() {
       <div className='visualization'>
         <span>Visualization</span>
       </div>
-      <div className='summery'>
+      <div className='summary'>
         <span>Summary</span>
       </div>
     </div>
-  )
+  );
 }
 
-export default Array
+export default Array;

@@ -1,38 +1,76 @@
-.main-stack {
+.main-stack{
+width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;  
+  padding: 20px 20px;
+  
+  .barrel-container{
     display: flex;
+    width: 30%;
+    height: 600px;
+    margin-top: 30px;
+    padding: 0 0;
+    //background-color: aqua;
+    
+
+    .barrel {
+     // position: relative;
+      width: 200px;
+      height: 100%;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column-reverse; // Stack elements at the bottom
+     // overflow: hidden;
+      
+      .stack-element {
+        width: 100%;
+      //  height: 60px;
+        background-color: #007bff;
+        border-bottom: 1px solid #ccc;
+        transition: height 0.3s ease; // Smooth transition when height changes
+      }
+    }
+    .numbers-outside{
+      width: 80px;
+    }
+  }
+  .section-one{
+    //width: 100%;
+    
+    display: flex;
+    width: 70%;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    .input-container{
+      display: flex;
+      flex-direction: row;
+      margin-right: 20px;
+      height: 100px;
+     
+      .stack-button{
+       
+       width: 50px;
+        height: 3.4em;
+        color: white;
+        border-style: none;
+        background-color: #254569;
+        cursor: pointer;
+        font-family: 'Poppins'; 
+      
+      }
+      .input-element{
+        width: 150px;
+        height: 3.4em;
+        /* padding: 0.5em; */
+        border-style: none;
+        border: 0.1em solid #254569;
+      }
+    }
+    .top{
+      font-size: 2rem;
+    }
   }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .introduction {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .operation {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .implementation {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .visualization {
-    margin-bottom: 20px;
-  }
-  
-  .summery {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
+
+}

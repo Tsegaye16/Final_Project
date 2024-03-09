@@ -18,6 +18,25 @@ function QuizDashboard() {
   const [quizzes, setQuizzes] = useState([]);
   const [selectedQuizName, setSelectedQuizName] = useState('');
   const [selectedQuizId, setSelectedQuizId] = useState('')
+  const [id, setId] = useState(0)
+  const [userData, setUserData] = useState(null);
+
+useEffect(() =>{
+  const token = localStorage.getItem('accessToken');
+  const decodedToken = JSON.parse(atob(token.split('.')[1]));
+  setId(decodedToken.user_id)
+})
+
+useEffect(() => {
+  
+  axios.post("http://localhost:8800/student/viewProfile", { id: id })
+    .then(response => {
+      setUserData(response.data)
+      //console.log(response.data)
+    }).catch(err => {
+      console.log(err)
+    })
+}, [id]);
 
   const handleAddQuiz = () => {
     setIsQuiz(true)
@@ -127,7 +146,7 @@ const handleDeleteQuiz = async (id) => {
   return (
     <div className='quiz-dashboard-container'>
        <ToastContainer/>
-      <NavBar toggleSidebar={toggleSidebar} sidebarWidth={sidebarWidth} />
+      <NavBar toggleSidebar={toggleSidebar} sidebarWidth={sidebarWidth} userData={userData}/>
       <div className="main-quiz-content" style={{ marginLeft: `${sidebarWidth}px` }}>
         <div className='add-quiz'>
           <div className='add'  onMouseEnter={dispayHover} onMouseLeave={hideHover} onClick={handleAddQuiz}>+

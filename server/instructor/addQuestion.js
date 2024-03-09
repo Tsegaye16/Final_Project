@@ -4,6 +4,7 @@ const addQuestion = async (db, req, res) => {
     try {
         const data = req.body;
         const questions = data.questions;
+        console.log(questions)
 
         const queryAsync = promisify(db.query).bind(db);
 

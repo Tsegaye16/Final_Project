@@ -130,6 +130,9 @@
         overflow-y: auto;
         transition: 1s;
       }
+      .rendered{
+        width: 100%;
+      }
     }
     
     .chat {

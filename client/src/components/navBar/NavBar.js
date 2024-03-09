@@ -8,18 +8,25 @@ import Contactopup from "../../popup/contact/ContactPopup"
 import FeaturePopup from '../../popup/feature/featurePopup';
 import UserPopup from '../../popup/user/userPopup';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import defaults from "../../assets/default.png"
 
-const NavBar = ({isUser, icon, toggleSidebar}) => {
+const NavBar = ({isUser, icon, toggleSidebar, userData}) => {
   const navigate = useNavigate();
   const [showTeamPopup, setShowTeamPopup] = useState(false);
   const [showContactPopup, setShowContactPopup] = useState(false);
   const [showFeaturePopup, setShowFeaturePopup] = useState(false)
   const [showUserPopup, setShowUserPopup] = useState(false)
+  const image = userData && userData.length > 0 ? `http://localhost:8800/${userData[0].image}` : `${defaults}`;
+  const userName = userData?.length > 0 ? userData[0].username : '';
+  const role_name = userData?.length > 0 ? userData[0].role_name: ""
+  //console.log(role_name)
+
  
   const handleHome = () => {
    
     navigate('/');
   };
+  //console.log(userData)
 
 
   const toggleTeamPopup = () => {
@@ -83,8 +90,8 @@ const NavBar = ({isUser, icon, toggleSidebar}) => {
           {isUser && 
          
           <div className='user' onClick={toggleUserPopup}>
-            <img src={tsegaye} alt='Tsegaye' />
-            <span>Tsegaye</span>
+            <img src={image} alt='Tsegaye' />
+            <span>{userName}</span>
             
           </div>
           
@@ -101,7 +108,7 @@ const NavBar = ({isUser, icon, toggleSidebar}) => {
 
         </FeaturePopup>
 
-        <UserPopup show={showUserPopup} handleClose={toggleUserPopup}>
+        <UserPopup show={showUserPopup} handleClose={toggleUserPopup} role_name = {role_name}>
 
         </UserPopup>
       </div>

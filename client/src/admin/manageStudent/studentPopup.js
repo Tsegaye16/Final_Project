@@ -38,7 +38,7 @@ const UpdateUserPopup = forwardRef(({ user, onClose, onSave }, ref) => {
   return (
     <div className="update-popup" ref={ref}>
       <div className='scrollable'>
-      <h2>Update User</h2>
+      <h2>Update User {updatedUser.name}</h2>
       <form>
         <div className='photo'>
          {/* <PersonIcon style={{fontSize:"7rem"}}/> */}
@@ -48,6 +48,7 @@ const UpdateUserPopup = forwardRef(({ user, onClose, onSave }, ref) => {
          <input
          type='file'
          id='image'
+         
          name='image'
          accept='image/*'
          onChange={handleInputChange}

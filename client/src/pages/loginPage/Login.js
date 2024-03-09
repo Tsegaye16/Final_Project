@@ -124,13 +124,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 // Create a default theme
 const defaultTheme = createTheme();
 
-const Login = () => {
+const Login = ({ setAuthenticated, setUserRole, setToken }) => {
     const [formData, setFormData] = useState({
       email: '',
       password: '',
     });
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
+    
   
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -176,13 +177,25 @@ const Login = () => {
           const decodedToken = JSON.parse(atob(token.split('.')[1]));
           return decodedToken.role_name;
         };
+        const getUserIdFromToken = (token) => {
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          return decodedToken.user_id;
+        };
         const token = localStorage.getItem('accessToken');
         const role_name = getUserRoleFromToken(token)
-        const role = role_name.toLowerCase()
+        const user_id = getUserIdFromToken(token)
+        const role = role_name ? role_name.toLowerCase() : 'student';
+
+        setAuthenticated(true);
+        setUserRole(role);
+        setToken(token);
+
         // Redirect to the user-specific route
+       // 
         setTimeout(() =>{
-          navigate(`/${role}`);
-        }, 6000)
+          navigate(`/${role}/${user_id}`);
+          window.location.reload()
+        }, 1000)
       } catch (error) {
         // Handle login failure, e.g., show an error message
         if (error.response) {

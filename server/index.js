@@ -31,6 +31,7 @@ import studentViewQuiz from './student/view_quiz.js';
 import EmailConfirm from './email_confirm.js';
 //import RetrieveQuestion from './student/view_question.js';
 import { promisify } from 'util';
+import studentProfile from './student/view_profile.js';
 
 
 const app = express();
@@ -172,7 +173,7 @@ app.post('/user/confirmEmail/:token', async (req, res) => {
 const RetrieveQuestion = async (quiz_id) => {
   try {
     const sql = `
-      SELECT q.id as question_id, q.question_text, c.id as choice_id, c.choice_text, c.is_correct
+      SELECT q.id as question_id, q.question_text, c.id as choice_id, c.choice_text, c.is_correct, q.difficulty, q.mark
       FROM question q
       JOIN choice c ON q.id = c.question_id
       WHERE q.quiz_id = ?
@@ -192,12 +193,15 @@ const RetrieveQuestion = async (quiz_id) => {
           question_id: row.question_id,
           question_text: row.question_text,
           choices: [],
+          difficulty:row.difficulty,
+          mark:row.mark,
         };
       }
 
       acc[row.question_id].choices.push({
         choice_id: row.choice_id,
         choice_text: row.choice_text,
+        is_correct:row.is_correct,
       });
 
       return acc;
@@ -224,6 +228,12 @@ app.post('/student/startQuiz', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+//Fetching user information based on id
+
+app.post("/student/viewProfile", async (req, res) => {
+  await studentProfile(db, req, res)
+})
 
 const PORT = 8800;
 app.listen(PORT, () => {

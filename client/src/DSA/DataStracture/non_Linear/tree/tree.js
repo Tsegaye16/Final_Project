@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Tree() {
-  return (
-    <div>Tree</div>
-  )
+  return <div>Tree</div>;
 }
 
-export default Tree
+export default Tree;

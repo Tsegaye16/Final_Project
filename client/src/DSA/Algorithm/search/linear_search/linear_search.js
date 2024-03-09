@@ -7,6 +7,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 // import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import LinearSearch from './logic';
 import { codeStrings } from './logic_data';
+import CodeTemplate from './extra/CodeTemplate';
 
 
 function Linear_search() {
@@ -46,19 +47,11 @@ function Linear_search() {
       <div className='implementation'>
         <span>Implementation</span>
         </div>
-      <div className="language-buttons">
-        <div className='button-list'>
-
-          <button onClick={() => handleLanguageChange('c', codeStrings.c)}>C</button>
-          <button onClick={() => handleLanguageChange('python', codeStrings.python)}>Python</button>
-          <button onClick={() => handleLanguageChange('javascript', codeStrings.javascript) }>JavaScript</button>
-        </div>
+      
       
 
-      <SyntaxHighlighter language={selectedLanguage} style={dark} customStyle={{ fontSize: '20px', lineHeight: '1.6' }}>
-          {codeString}
-      </SyntaxHighlighter>
-      </div>
+      <CodeTemplate/>
+     
       
    
     <div className='visualization'>

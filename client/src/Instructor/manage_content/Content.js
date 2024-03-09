@@ -2,10 +2,10 @@ import React from 'react'
 import Home from '../../pages/homePage/Home'
 
 
-function Content() {
+function Content({userRole, token}) {
   return (
     <div>
-        <Home/>
+        <Home userRole = {userRole} token = {token} />
     </div>
   )
 }
