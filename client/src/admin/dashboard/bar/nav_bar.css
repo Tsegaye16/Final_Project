@@ -1,120 +1,118 @@
 .navbar {
-    background-color: #2c3e50;
-    width: 100%;
-    overflow-x: auto;
-    height: 100px;
-   display: inline-block;
-    justify-content: start;
-    align-items: center;
-    
-  }
-  .navbar .user{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 35px;
-    cursor: pointer;
-  }
-  .navbar .user img{
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px lightgray solid;
-    margin-right: 1px;
-  }
-  .navbar .user span{
-    font-weight: bold;
-    font-size: 1rem;
-    color: white;
-  }
-  .botom-list{
-    width: 25%;
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-  }
-  button{
-       background-color: inherit;
-        color: white;
-        padding: 10px 15px;
-        border: none;
+  background-color: #2c3e50;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 35px;
+  cursor: pointer;
+}
+.navbar .user img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px lightgray solid;
+  margin-right: 1px;
+}
+.navbar .user span {
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+}
+.botom-list {
+  width: 25%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+.lg-btnn {
+  background-color: inherit;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  right: 10px;
+  /* &:hover{
+        background-color: white;
+        color: #2c3e50;
         border-radius: 12px;
-        cursor: pointer;
-       right: 10px;
-        &:hover{
-          background-color: white;
-          color: #2c3e50;
-          border-radius: 12px;
-        }
-  }
-  
-  .menu-bars {
-    margin-left: 2rem;
-    font-size: 2rem;
-    background: none;
-  }
-  
-  .nav-menu {
-    background-color: #2c3e50;
-    width: 250px;
-   
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: 1s;
-    overflow-y: auto;
-  }
-  
-  .nav-menu.active {
-    left: 0;
-    transition: 1s;
-  }
-  
-  .nav-text {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 60px;
-  }
-  
-  .nav-text a {
-    text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 4px;
-  }
-  
-  .nav-text a:hover {
-    background-color: #1a83ff;
-  }
-  
-  .nav-menu-items {
-    width: 100%;
-  }
-  
-  .navbar-toggle {
-    /*background-color: #060b26;*/
-    background-color:#2c3e50 ;
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
-  .instructor-title{
-    color: white;
-    font-size: 2rem;
-  }
-  span {
-    margin-left: 16px;
-  }
+      } */
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}
+
+.nav-menu {
+  background-color: #2c3e50;
+  width: 250px;
+
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 100px;
+  left: -100%;
+  transition: 1s;
+  overflow-y: auto;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 1s;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: #1a83ff;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  /*background-color: #060b26;*/
+  background-color: #2c3e50;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.instructor-title {
+  color: white;
+  font-size: 2rem;
+}
+span {
+  margin-left: 16px;
+}
