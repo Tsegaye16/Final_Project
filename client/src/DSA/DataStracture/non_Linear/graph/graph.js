@@ -15,151 +15,105 @@ function Graph() {
   const [removeEdgeMessage, setRemoveEdgeMessage] = useState(null);
   const [fromNodeToRemove, setFromNodeToRemove] = useState("");
   const [toNodeToRemove, setToNodeToRemove] = useState("");
-  const [nodeColors, setNodeColors] = useState({});
-  const [edgeColors, setEdgeColors] = useState({});
-  const [nodeToTraverse, setNodeToTraverse] = useState("");
-  const [traversalMethod, setTraversalMethod] = useState("");
-  const [traversalPath, setTraversalPath] = useState([]);
-  const [traversing, setTraversing] = useState(false);
+
   // handling graph traversal
+  const [traversalMethod, setTraversalMethod] = useState("");
+  const [startNode, setStartNode] = useState("");
+  const [traversalPath, setTraversalPath] = useState([]);
+  const [traversalCompleted, setTraversalCompleted] = useState(false);
+  const [traversedNodes, setTraversedNodes] = useState([]);
+  // State variable for time delay
+  const [timeDelay, setTimeDelay] = useState(1000); // Default value: 1000ms
 
-  const performBFS = async (
-    adjacencyList,
-    currentNode,
-    setTraversalPath,
-    setNodeColors,
-    setEdgeColors
-  ) => {
-    const visited = {};
-    const queue = [];
-    const path = [];
+  // Function to handle time delay change
+  const handleTimeDelayChange = (event) => {
+    setTimeDelay(event.target.value);
+  };
 
-    queue.push(currentNode);
+  // Function to perform traversal
+  const traverseGraph = async () => {
+    if (traversalMethod && startNode && nodes.length > 0) {
+      let visited = new Set();
+      let queue = [];
+      let path = [];
 
-    while (queue.length > 0) {
-      const currentNode = queue.shift();
-      path.push(currentNode.value);
-      console.log("Processing node:", currentNode.value);
-      // Update node color here
-      setNodeColors((prevColors) => ({
-        ...prevColors,
-        [currentNode.value]: "lightblue",
-      }));
-
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust delay as needed
-
-      const neighbors = currentNode.neighbors || [];
-
-      for (const neighbor of neighbors) {
-        if (!visited[neighbor]) {
-          visited[neighbor] = true;
-          const neighborNode = nodes.find((node) => node.value === neighbor);
-
-          if (neighborNode) {
-            // Update edge color here
-            setEdgeColors((prevColors) => ({
-              ...prevColors,
-              [`${currentNode.value}-${neighbor}`]: "lightblue",
-            }));
-
-            // Update next node color here (optional, can be outside the loop)
-            setNodeColors((prevColors) => ({
-              ...prevColors,
-              [currentNode.value]: "lightblue",
-            }));
-
-            queue.push(neighborNode);
+      // Implement BFS or DFS based on traversal method
+      if (traversalMethod === "BFS") {
+        queue.push(startNode);
+        while (queue.length > 0) {
+          const currentNode = queue.shift();
+          if (!visited.has(currentNode)) {
+            visited.add(currentNode);
+            path.push(currentNode);
+            // Set the state to visualize the traversal step
+            setTraversalPath([...path]);
+            await sleep(timeDelay); // Adjust delay as needed (in milliseconds)
+            const neighbors = getNeighbors(currentNode, visited);
+            queue.push(...neighbors);
           }
         }
+      } else if (traversalMethod === "DFS") {
+        const dfs = async (node) => {
+          visited.add(node);
+          path.push(node);
+          // Set the state to visualize the traversal step
+          setTraversalPath([...path]);
+          await sleep(timeDelay); // Adjust delay as needed (in milliseconds)
+          const neighbors = getNeighbors(node, visited);
+          for (let neighbor of neighbors) {
+            if (!visited.has(neighbor)) {
+              await dfs(neighbor);
+            }
+          }
+        };
+        await dfs(startNode);
       }
-    }
 
-    setTraversalPath(path);
+      // Update traversed nodes state after traversal completes
+      setTraversedNodes([...new Set([...traversedNodes, ...path])]);
+
+      // Display traversal completed message
+      setTraversalCompleted(true);
+      setTimeout(() => {
+        setTraversalCompleted(false);
+      }, timeDelay);
+    }
   };
 
-  const performDFS = async (
-    adjacencyList,
-    currentNode,
-    setTraversalPath,
-    setNodeColors,
-    setEdgeColors
-  ) => {
-    const visited = {};
-    const path = [];
-
-    const dfs = async (currentNode) => {
-      visited[currentNode.value] = true;
-      path.push(currentNode.value);
-
-      // Color the current node
-      setNodeColors((prevColors) => ({
-        ...prevColors,
-        [currentNode.value]: "lightcoral",
-      }));
-
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust delay as needed
-
-      const neighbors = adjacencyList[currentNode.value] || []; // Access neighbors using adjacency list
-
-      for (const neighbor of neighbors) {
-        const neighborNode = nodes.find((node) => node.value === neighbor);
-
-        if (neighborNode && !visited[neighbor]) {
-          // Color the edge
-          setEdgeColors((prevColors) => ({
-            ...prevColors,
-            [`${currentNode.value}-${neighbor}`]: "lightcoral",
-          }));
-
-          // Color the next node to be traversed
-          setNodeColors((prevColors) => ({
-            ...prevColors,
-            [neighbor]: "lightblue", // Adjust color for next node
-          }));
-
-          await dfs(neighborNode);
-        }
-      }
-    };
-
-    await dfs(currentNode);
-    setTraversalPath(path);
+  // Utility function to introduce delay
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  const traverseGraph = async (startNodeValue, traversalMethod) => {
-    setTraversing(true);
-    setTraversalPath([]);
-
-    const adjacencyList = getAdjacencyList(); // You can use either adjacency matrix or list
-    const startNode = nodes.find((node) => node.value === startNodeValue);
-
-    let traversedElements;
-
-    if (traversalMethod === "BFS") {
-      traversedElements = await performBFS(
-        adjacencyList,
-        startNode,
-        setTraversalPath,
-        setNodeColors,
-        setEdgeColors
-      );
-    } else if (traversalMethod === "DFS") {
-      traversedElements = await performDFS(
-        adjacencyList,
-        startNode,
-        setTraversalPath,
-        setNodeColors,
-        setEdgeColors
-      );
-    }
-
-    setTraversing(false);
+  // Function to get neighbors of a node
+  const getNeighbors = (nodeValue) => {
+    const nodeIndex = nodes.findIndex((node) => node.value === nodeValue);
+    return edges
+      .filter((edge) => edge.from === nodeValue)
+      .map((edge) => edge.to)
+      .concat(
+        edges
+          .filter((edge) => edge.to === nodeValue && !edge.directed)
+          .map((edge) => edge.from)
+      )
+      .filter((neighbor) => !traversalPath.includes(neighbor));
   };
 
   // Add this useEffect to reset traversal path when nodes or edges change
   useEffect(() => {
     setTraversalPath([]);
   }, [nodes, edges]);
+
+  // Add this useEffect to reset traversal completed state after 1 second
+  useEffect(() => {
+    let timeout;
+    if (traversalCompleted) {
+      timeout = setTimeout(() => {
+        setTraversalCompleted(false);
+      }, timeDelay);
+    }
+    return () => clearTimeout(timeout);
+  }, [traversalCompleted]);
   ///////////////////////////////////////////////
 
   const svgRef = useRef(null);
@@ -225,7 +179,7 @@ function Graph() {
         );
         setTimeout(() => {
           setAddEdgeMessage(null);
-        }, 5000); // Adjust the duration (in milliseconds) as needed
+        }, timeDelay); // Adjust the duration (in milliseconds) as needed
       } else {
         const newEdge = {
           from: fromLabel,
@@ -241,7 +195,7 @@ function Graph() {
       );
       setTimeout(() => {
         setAddEdgeMessage(null);
-      }, 5000); // Adjust the duration (in milliseconds) as needed
+      }, timeDelay); // Adjust the duration (in milliseconds) as needed
     }
   };
 
@@ -331,6 +285,7 @@ function Graph() {
     setDragOffset({ x: offsetX, y: offsetY });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleNodeMouseMove = (event) => {
     if (draggingNodeId !== null) {
       const { clientX, clientY } = event;
@@ -348,6 +303,7 @@ function Graph() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleNodeMouseUp = () => {
     setDraggingNodeId(null);
     setDragOffset({ x: 0, y: 0 });
@@ -375,7 +331,7 @@ function Graph() {
       );
       setTimeout(() => {
         setRemoveNodeMessage(null);
-      }, 5000); // Adjust the duration (in milliseconds) as needed
+      }, timeDelay); // Adjust the duration (in milliseconds) as needed
       return;
     }
 
@@ -410,7 +366,7 @@ function Graph() {
       );
       setTimeout(() => {
         setRemoveEdgeMessage(null);
-      }, 5000); // Adjust the duration (in milliseconds) as needed
+      }, timeDelay); // Adjust the duration (in milliseconds) as needed
       return;
     }
 
@@ -513,27 +469,59 @@ function Graph() {
             type="text"
             placeholder="start node"
             className="node-number"
-            onChange={(e) => setNodeToTraverse(e.target.value)}
+            value={startNode}
+            onChange={(e) => setStartNode(e.target.value)}
           />
           <select
             className="node-number"
+            value={traversalMethod}
             onChange={(e) => setTraversalMethod(e.target.value)}
           >
+            <option value="" disabled>
+              Traversal Method
+            </option>
             <option value="BFS">BFS</option>
             <option value="DFS">DFS</option>
           </select>
-          <button
-            className="create-button"
-            onClick={() => traverseGraph(nodeToTraverse, traversalMethod)}
-            disabled={traversing}
-          >
+          <button className="create-button" onClick={traverseGraph}>
             Traverse
           </button>
         </div>
+        <div
+          className="time-slider-container"
+          style={{
+            paddingTop: "70px",
+
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <input
+            type="range"
+            min="500" // Minimum delay
+            max="3000" // Maximum delay
+            value={timeDelay}
+            onChange={handleTimeDelayChange}
+            className="slider"
+            style={{
+              transform: "rotate(-90deg)",
+              width: "150px",
+              margin: "10px",
+            }} // Adjust width and margin as needed
+          />
+          {/* Display current time delay value */}
+        </div>
       </div>
       <div>Traversed elements: {traversalPath.join(" -> ")}</div>
+      {traversalCompleted && (
+        <div className="traversal-completed">
+          <span style={{ color: "green", marginRight: "5px" }}>✓</span>
+          Traversal Completed
+        </div>
+      )}
       <div className="logical-representation">
-        <svg width="100%" height="100vh" style={{ backgroundColor: "yellow" }}>
+        <svg width="100%" height="100vh">
           {/* Render nodes */}
           {nodes.map((node) => (
             <g
@@ -545,9 +533,7 @@ function Graph() {
                 cx={node.x}
                 cy={node.y}
                 r="20"
-                fill={
-                  traversalPath.includes(node.value) ? "lightgreen" : "white"
-                }
+                fill={traversalPath.includes(node.value) ? "#bbdefb" : "white"}
                 stroke="black"
                 strokeWidth="2"
               />
@@ -585,7 +571,7 @@ function Graph() {
                 stroke={
                   traversalPath.includes(edge.from) &&
                   traversalPath.includes(edge.to)
-                    ? "lightgreen"
+                    ? "red"
                     : "black"
                 }
                 //strokeDasharray={edge.directed ? "none" : "5, 5"} // Dashed line for undirected

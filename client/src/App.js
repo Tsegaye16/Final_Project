@@ -27,6 +27,7 @@ import ConfirmationPage from "./confirm_email/ConfirmationPage";
 import QuizQuestions from "./student/question_board";
 import Content from "./Instructor/manage_content/Content";
 import useTokenTimeout from "./token_control/token_timeout";
+import Landing from "./pages/landingPage/sample/landing";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -81,7 +82,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Invite />} />
+        <Route path="/" element={<Landing />} />
 
         <Route path="/user/forgotPassword" element={<ReceiveEmail />} />
         <Route path="/user/resetPassword/:token" element={<ResetPassword />} />
