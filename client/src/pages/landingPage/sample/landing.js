@@ -11,11 +11,15 @@ import Btree from "../../../assets/Btree.png";
 import { featuresData } from "../data";
 import FeatureDialog from "./dialog/featureDialog";
 import { motion, AnimatePresence } from "framer-motion";
+import AboutInteractiveContent from "./dialog/About";
+import Team from "./dialog/team";
+import { ContactUs } from "../../../popup/contact/contact";
+import Footer from "./dialog/footer";
 
 const Section = ({ children, border }) => (
   <div
     style={{
-      marginTop: border ? "10px" : "44px", // Add a gap if 'border' is true
+      // marginTop: border ? "10px" : "44px", // Add a gap if 'border' is true
       borderBottom: border ? "2px solid #ccc" : "none",
     }}
   >
@@ -158,82 +162,93 @@ function Landing() {
         </Section>
       </div>
       {/* Feature Section */}
-      <div style={{ backgroundColor: "#f5f5f5" }}>
-        <Section border={true}>
-          <Container>
-            <Grid container spacing={3}>
-              {/* Display each card initially */}
-              {featuresData.map((feature, index) => (
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  key={index}
-                  onClick={() => handleOpenDialog(feature)}
-                  style={{
-                    cursor: "pointer",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <motion.div
-                    whileHover={{ scale: 0.9 }}
-                    initial={{ opacity: 0, y: -200 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    transition={{
-                      duration: 1,
-                      ease: "easeInOut",
-                      type: "spring",
-                      stiffness: 100,
+      <div
+        style={{
+          backgroundColor: "#f5f5f5",
+          borderBottom: "2px solid #ccc",
+        }}
+      >
+        <Paper style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
+          <Typography variant="h4" gutterBottom>
+            Features
+          </Typography>
+          <Section>
+            <Container>
+              <Grid container spacing={3}>
+                {/* Display each card initially */}
+                {featuresData.map((feature, index) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    key={index}
+                    onClick={() => handleOpenDialog(feature)}
+                    style={{
+                      cursor: "pointer",
+                      marginBottom: "20px",
                     }}
-                    whileInView={{ opacity: 1, y: 0 }}
                   >
-                    <Paper style={{ padding: "20px", height: "100%" }}>
-                      <Typography variant="h5" gutterBottom>
-                        {feature.feature}
-                      </Typography>
-                      <img
-                        src={feature.image}
-                        alt={feature.feature}
-                        style={{ maxWidth: "100%", height: "auto" }}
-                      />
-                    </Paper>
-                  </motion.div>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </Section>
+                    <motion.div
+                      whileHover={{ scale: 0.9 }}
+                      initial={{ opacity: 0, y: -100 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{
+                        duration: 1,
+                        ease: "easeInOut",
+                        type: "spring",
+                        stiffness: 100,
+                      }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                    >
+                      <Paper style={{ padding: "20px", height: "100%" }}>
+                        <Typography variant="h5" gutterBottom>
+                          {feature.feature}
+                        </Typography>
+                        <img
+                          src={feature.image}
+                          alt={feature.feature}
+                          style={{ maxWidth: "100%", height: "auto" }}
+                        />
+                      </Paper>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </Container>
+          </Section>
+        </Paper>
       </div>
       {/* About section */}
-      <div style={{ backgroundColor: "#fafafa" }}>
+      <div
+        style={{
+          backgroundColor: "#e1bee7",
+          borderBottom: "2px solid #ccc",
+        }}
+      >
         {/* Main container for the About section */}
-        <Container>
+        <Paper style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
           <Grid container spacing={3}>
             {/* First Section (Full Width) */}
             <Grid item xs={12}>
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, x: -100 }}
-                  //animate={{ opacity: 1, x: 0 }}
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                //animate={{ opacity: 1, x: 0 }}
 
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{
-                    ease: "easeOut",
-                    duration: 1,
-                    type: "spring",
-                    stiffness: 70,
-                  }}
-                  exit={{ opacity: 0, x: -100 }}
-                >
-                  {/* Paper component to style the section */}
-                  <Paper style={{ padding: "20px" }}>
-                    <Typography variant="h4" gutterBottom>
-                      About Our Interactive Data Structure and Algorithm
-                      Visualizer
-                    </Typography>
-                  </Paper>
-                </motion.div>
-              </AnimatePresence>
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{
+                  ease: "easeOut",
+                  duration: 1,
+                  type: "spring",
+                  stiffness: 70,
+                }}
+                exit={{ opacity: 0, x: -100 }}
+              >
+                {/* Paper component to style the section */}
+
+                <Typography variant="h4" gutterBottom>
+                  About Our Interactive Data Structure and Algorithm Visualizer
+                </Typography>
+              </motion.div>
             </Grid>
 
             {/* Second and Third Sections (Divided into Two) */}
@@ -249,17 +264,11 @@ function Landing() {
                         {/* Image 1 */}
                         <Grid item xs={12} style={{ marginBottom: "20px" }}>
                           <motion.img
-                            initial={{ x: -100, opacity: 0 }}
-                            animate={{
-                              x: [-50, 0],
-                              y: [50, 0],
-                              opacity: 1,
-                              scale: [0.95, 1],
-                            }}
+                            initial={{ opacity: 0, x: 100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            whileHover={{ scale: 1.3 }}
+                            whileHover={{ scale: 1.14 }}
                             transition={{ duration: 1, ease: "easeInOut" }}
-                            src={graph}
+                            src={sort}
                             alt=""
                             style={{ width: "100%", height: "auto" }}
                           />
@@ -268,17 +277,11 @@ function Landing() {
 
                         <Grid item xs={12}>
                           <motion.img
-                            initial={{ x: -100, opacity: 0 }}
-                            animate={{
-                              x: [-50, 0],
-                              y: [50, 0],
-                              opacity: 1,
-                              scale: [0.95, 1],
-                            }}
+                            initial={{ opacity: 0, x: 100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            whileHover={{ scale: 1.3 }}
+                            whileHover={{ scale: 1.14 }}
                             transition={{ duration: 1, ease: "easeInOut" }}
-                            src={Btree}
+                            src={sort}
                             alt=""
                             style={{ width: "100%", height: "auto" }}
                           />
@@ -286,15 +289,9 @@ function Landing() {
 
                         <Grid item xs={12}>
                           <motion.img
-                            initial={{ opacity: 0, x: -600 }}
-                            animate={{
-                              x: [-50, 0],
-                              y: [50, 0],
-                              opacity: 1,
-                              scale: [0.95, 1],
-                            }}
+                            initial={{ opacity: 0, x: 100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            whileHover={{ scale: 1.3 }}
+                            whileHover={{ scale: 1.14 }}
                             transition={{ duration: 1, ease: "easeInOut" }}
                             src={sort}
                             alt=""
@@ -306,40 +303,43 @@ function Landing() {
                   </Grid>
 
                   {/* Third Section (Right) */}
+
                   <Grid item xs={12} sm={6}>
-                    {/* Paper component to style the section */}
                     <Paper style={{ padding: "20px" }}>
-                      <Typography variant="h5" gutterBottom>
-                        Third Section (Right)
-                      </Typography>
-                      {/* Add your content here */}
-                      <Typography variant="body1">
-                        This section is positioned on the right side.
-                      </Typography>
+                      <AboutInteractiveContent />
                     </Paper>
                   </Grid>
                 </Grid>
               </Paper>
             </Grid>
           </Grid>
-        </Container>
+        </Paper>
       </div>
 
       {/* Team Section */}
-      <Section>
-        <Container>{/* Your team section content */}</Container>
-      </Section>
+      <div style={{ backgroundColor: "#eeeeee" }}>
+        <Section border={true}>
+          <Container>
+            <Team />
+          </Container>
+        </Section>
+      </div>
 
       {/* Contact Section */}
-      <Section>
-        <Container>{/* Your contact section content */}</Container>
-      </Section>
+      <div style={{ backgroundColor: "#eceff1" }}>
+        <Section border={true}>
+          <Container>
+            <ContactUs />
+          </Container>
+        </Section>
+      </div>
 
       {/* Footer */}
-      <Section>
-        <Container>{/* Your footer content */}</Container>
-      </Section>
-
+      <div style={{ backgroundColor: "#eceff1" }}>
+        <Section border={true}>
+          <Footer />
+        </Section>
+      </div>
       {/* Read More Dialog */}
       <ReadMoreDialog open={openDialog} handleClose={handleCloseDialog} />
 

@@ -28,6 +28,7 @@ import QuizQuestions from "./student/question_board";
 import Content from "./Instructor/manage_content/Content";
 import useTokenTimeout from "./token_control/token_timeout";
 import Landing from "./pages/landingPage/sample/landing";
+import ResponsiveAppBar from "./pages/homePage/appBar";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -83,7 +84,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-
+        <Route path="/appbar" element={<ResponsiveAppBar />} />
         <Route path="/user/forgotPassword" element={<ReceiveEmail />} />
         <Route path="/user/resetPassword/:token" element={<ResetPassword />} />
         <Route
