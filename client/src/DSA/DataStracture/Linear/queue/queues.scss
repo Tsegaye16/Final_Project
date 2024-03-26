@@ -1,65 +1,63 @@
 .queue-container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.enqueued-box {
+  width: 67px;
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px;
+
+  transform: translateX(200%);
+  transition: transform 1s ease-in-out;
+}
+
+.barrel {
+  display: flex;
+  width: 58%; /* Adjust the width of the barrel as needed */
+  border-top: 4px solid #333;
+  border-bottom: 4px solid #333;
+  //overflow: hidden;
+  height: 100px;
+}
+
+.barrel-item {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border-right: 1px solid #333;
+  position: relative;
+  background-color: #ecf0f1;
+
+  &:last-child {
+    border-right: none;
   }
-  .enqueued-box {
-    width: 67px;
-    background-color: #3498db;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 5px;
-    
-    transform: translateX(200%);
-     transition: transform 1s ease-in-out;
-  }
-  
-  .barrel {
-    display: flex;
-    width: 50%; /* Adjust the width of the barrel as needed */
-    border-top: 4px solid #333;
-    border-bottom: 4px solid #333;
-    overflow: hidden;
-    height: 100px;
-  }
-  
-  .barrel-item {
-    flex: 1;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-    border-right: 1px solid #333;
-    position: relative;
-    background-color: #ecf0f1;
-  
-    &:last-child {
-      border-right: none;
-    }
-  }
-  
-  .number-inside {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .numbers-outside {
-    display: flex;
-    justify-content: space-between;
-    width: 620px; /* Adjust the width to match the barrel */
-    margin-top: 20px; /* Adjust the margin as needed */
-  }
-  
-  .numbers-outside div {
-    text-align: center;
-    width: calc(100% / 8);
-    font-size: 14px;
-    color: #333;
-  }
-  
+}
+
+.number-inside {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: #333;
+}
+
+.numbers-outside {
+  display: flex;
+  justify-content: space-between;
+  width: 50%; /* Adjust the width to match the barrel */
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.numbers-outside div {
+  text-align: center;
+  width: 12.5%;
+  font-size: 14px;
+  color: #333;
+}

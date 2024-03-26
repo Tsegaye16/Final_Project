@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
+import { Button, Input, Slider, Typography } from "@mui/material";
 
 // Implement Bubble Sort algorithm
 const BubbleSort = () => {
@@ -7,15 +8,13 @@ const BubbleSort = () => {
   const [arraySize, setArraySize] = useState(10);
   const [speed, setSpeed] = useState(3000);
 
-
-
   // Function to generate a random array
   const generateRandomArray = (size) => {
     const newArray = [];
     for (let i = 0; i < size; i++) {
       newArray.push({
-        value: Math.floor(Math.random() * 100) + 10,
-        color: 'blue',
+        value: Math.floor(Math.random() * 100) * 3 + 2,
+        color: "#3498db",
       });
     }
     setArray(newArray);
@@ -27,27 +26,26 @@ const BubbleSort = () => {
     const arrayCopy = [...array];
     let noSwap;
     for (let i = 0; i < arrayCopy.length - 1; i++) {
-      noSwap = true
+      noSwap = true;
       for (let j = 0; j < arrayCopy.length - 1 - i; j++) {
-        arrayCopy[j].color = 'red';
-        arrayCopy[j + 1].color = 'red';
+        arrayCopy[j].color = "#f39c12";
+        arrayCopy[j + 1].color = "#f39c12";
         setArray([...arrayCopy]);
         await sleep(speed);
-        
+
         if (arrayCopy[j].value > arrayCopy[j + 1].value) {
           const temp = arrayCopy[j];
           arrayCopy[j] = arrayCopy[j + 1];
           arrayCopy[j + 1] = temp;
           setArray([...arrayCopy]);
-          noSwap = false
+          noSwap = false;
         }
-        arrayCopy[j].color = 'blue';
-        arrayCopy[j + 1].color = 'blue';
+        arrayCopy[j].color = "#3498db";
+        arrayCopy[j + 1].color = "#3498db";
         setArray([...arrayCopy]);
-        
       }
-      if(noSwap){
-        break
+      if (noSwap) {
+        break;
       }
     }
 
@@ -62,51 +60,51 @@ const BubbleSort = () => {
     generateRandomArray(arraySize);
   }, [arraySize]);
 
-
-  
   return (
-    <div>
-      <div>
-        <label htmlFor="arraySize">Array Size:</label>
-        <input
+    <div style={{ padding: "20px" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <Typography variant="body1">Array Size:</Typography>
+        <Input
           type="number"
-          id="arraySize"
-          min={0}
+          inputProps={{ min: 1, max: 25 }}
           value={arraySize}
           onChange={(e) => setArraySize(parseInt(e.target.value))}
           disabled={sorting}
+          style={{ marginLeft: "10px" }}
         />
-        <button onClick={() => generateRandomArray(arraySize)} disabled={sorting}>
+        <Button
+          onClick={() => generateRandomArray(arraySize)}
+          disabled={sorting}
+          style={{ marginLeft: "10px" }}
+        >
           Generate Array
-        </button>
+        </Button>
       </div>
-      <div>
-        <label htmlFor="speed">Speed: {speed}</label>
-        <input
-          type="range"
-          id="speed"
-          min="1"
-          max="500"
+      <div style={{ marginBottom: "20px" }}>
+        <Typography variant="body1">Speed: {speed}</Typography>
+        <Slider
+          min={1}
+          max={500}
           value={speed}
           onChange={(e) => setSpeed(parseInt(e.target.value))}
           disabled={sorting}
+          style={{ width: "200px" }}
         />
       </div>
-      <button onClick={bubbleSort} disabled={sorting}>
-        {sorting ? 'Sorting...' : 'Start Bubble Sort'}
-      </button>
-      <div>
+      <Button onClick={bubbleSort} disabled={sorting}>
+        {sorting ? "Sorting..." : "Start Bubble Sort"}
+      </Button>
+      <div style={{ marginTop: "20px" }}>
         {array.map((item, index) => (
           <div
             key={index}
             style={{
               height: `${item.value}px`,
-              width:'40px',
+              width: "60px",
               backgroundColor: item.color,
-              display: 'inline-block',
-              margin: '2px',
-              verticalAlign:'bottom',
-              
+              display: "inline-block",
+              margin: "2px",
+              verticalAlign: "bottom",
             }}
           >
             {item.value}
@@ -116,5 +114,5 @@ const BubbleSort = () => {
     </div>
   );
 };
-  
+
 export default BubbleSort;

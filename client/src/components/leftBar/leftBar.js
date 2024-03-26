@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./leftBar.scss";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import Home from "../../pages/homePage/Home";
-////////////Proggress
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+
 import "react-circular-progressbar/dist/styles.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
@@ -324,40 +321,6 @@ function LeftBar({ setSelectedItem, sidebarWidth }) {
                     />
                   }{" "}
                   Quick Sort
-                </li>
-              </ul>
-            </div>
-            <div className="graph-algo">
-              <div className="category" onClick={toggleGraphAlgorithm}>
-                {graphAlgorithmVisble ? <FaAngleRight /> : <FaAngleDown />}{" "}
-                Graph Algorithm
-              </div>
-              <ul>
-                <li
-                  className={`${!graphAlgorithmVisble ? "" : "graph-algorithm"}`}
-                  onClick={() => {
-                    handleItemClick("bfs");
-                  }}
-                >
-                  {
-                    <FiberManualRecordIcon
-                      style={{ color: "white", fontSize: "14px" }}
-                    />
-                  }{" "}
-                  Breadth First Search (BFS)
-                </li>
-                <li
-                  className={`${!graphAlgorithmVisble ? "" : "graph-algorithm"}`}
-                  onClick={() => {
-                    handleItemClick("dfs");
-                  }}
-                >
-                  {
-                    <FiberManualRecordIcon
-                      style={{ color: "white", fontSize: "14px" }}
-                    />
-                  }{" "}
-                  Depth First Search (DFS)
                 </li>
               </ul>
             </div>

@@ -3,6 +3,8 @@ import { Grid, Paper, Typography, IconButton, Avatar } from "@material-ui/core";
 import { GitHub, LinkedIn, Email, Phone } from "@material-ui/icons";
 import tsegaye from "../../../../assets/Tsegaye.jpg";
 import { motion } from "framer-motion";
+import genet from "../../../../assets/genet.jpg";
+import kefle from "../../../../assets/kefle.jpg";
 
 const TeamMember = ({ name, role, github, linkedin, email, phone, image }) => {
   return (
@@ -36,9 +38,17 @@ const TeamMember = ({ name, role, github, linkedin, email, phone, image }) => {
           {role}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          {/* Brief description about the team member */}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut arcu
-          ac velit pharetra consectetur.
+          <span>👋, I'm Tsegaye</span>
+          <p>
+            fourth-year Information Systems student with a deep passion for
+            problem-solving and software development. Currently on the exciting
+            journey of a 12-month software engineering program at ALX and
+            delving into the world of Applied Data Science with a three-month
+            stint at WorldQuant University. My obsession with technology fuels
+            my desire to contribute to innovative solutions and embrace the
+            ever-evolving landscape of software development. Let's connect and
+            explore the endless possibilities in the realm of tech!
+          </p>
         </Typography>
         <Grid container spacing={2} justify="center">
           <Grid item>
@@ -81,22 +91,6 @@ const Team = () => {
       email: "abewatsegaye16@gmail.com",
       phone: "+251995213296",
       image: tsegaye,
-    },
-    {
-      name: "Genet Andualem",
-      role: "Database Designer",
-      github: "https://github.com/genetandualem",
-      linkedin: "https://www.linkedin.com/in/genetandualem",
-      email: "genet@example.com",
-      phone: "+1234567890",
-    },
-    {
-      name: "Kefle Aseres",
-      role: "Document Specialist",
-      github: "https://github.com/kefleaseres",
-      linkedin: "https://www.linkedin.com/in/kefleaseres",
-      email: "kefle@example.com",
-      phone: "+1234567890",
     },
   ];
 

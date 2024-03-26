@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import "./Home.scss";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
+
 import NavBar from "../../components/navBar/NavBar";
 import LeftBar from "../../components/leftBar/leftBar";
 import Stack from "../../DSA/DataStracture/Linear/stack/stack";
@@ -21,16 +20,17 @@ import Insertion_sort from "../../DSA/Algorithm/sort/insertion_sort/insertion_so
 import Selection_sort from "../../DSA/Algorithm/sort/selection_sort/selection_sort";
 import Merge_sort from "../../DSA/Algorithm/sort/merge_sort/merge_sort";
 import Quick_sort from "../../DSA/Algorithm/sort/quick_sort/quick_sort";
-import BFS from "../../DSA/Algorithm/graph/breadth_first_search/BFS";
-import DFS from "../../DSA/Algorithm/graph/debth_first_search/DFS";
+
 import Tree from "../../DSA/DataStracture/non_Linear/tree/tree";
 import QuizIcon from "@mui/icons-material/Quiz";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, CircularProgress, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import StackList from "../../DSA/DataStracture/Linear/stack/stackList";
+import QueueList from "../../DSA/DataStracture/Linear/queue/queueList";
 
-function Home({ userRole }) {
+function Home({ instructor }) {
   const [selectedItem, setSelectedItem] = useState("");
   const [icon, setIcon] = useState("times");
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -39,12 +39,16 @@ function Home({ userRole }) {
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(new Date().getTime()); // Define startTime here
   //const { id } = useParams();
-  const [userData, setUserData] = useState(null);
   const [isUser, setIsUser] = useState(false);
   const [id, setId] = useState(0);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    const isTokenAvailable = !!token; // Convert to boolean
+
+    // Set isUser based on token availability
+    setIsUser(isTokenAvailable);
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     setId(decodedToken.user_id);
   });
@@ -54,21 +58,11 @@ function Home({ userRole }) {
       .post("http://localhost:8800/student/viewProfile", { id: id })
       .then((response) => {
         setUserData(response.data);
-        //console.log(response.data)
       })
       .catch((err) => {
         console.log(err);
       });
   }, [id]);
-
-  useEffect(() => {
-    // Check if token exists in localStorage
-    const token = localStorage.getItem("accessToken");
-    const isTokenAvailable = !!token; // Convert to boolean
-
-    // Set isUser based on token availability
-    setIsUser(isTokenAvailable);
-  }, []);
 
   // Initialize as false by default
 
@@ -104,9 +98,9 @@ function Home({ userRole }) {
       case "array":
         return <Array />;
       case "stack":
-        return <Stack />;
+        return <StackList />;
       case "queue":
-        return <Queues />;
+        return <QueueList />;
       case "linked-list":
         return <Linked_list />;
       case "binary_tree":
@@ -131,10 +125,7 @@ function Home({ userRole }) {
         return <Merge_sort />;
       case "quick_sort":
         return <Quick_sort />;
-      case "bfs":
-        return <BFS />;
-      case "dfs":
-        return <DFS />;
+
       case "tree":
         return <Tree />;
       default:
@@ -153,6 +144,7 @@ function Home({ userRole }) {
           icon={icon}
           toggleSidebar={toggleSidebar}
           userData={userData}
+          instructor={instructor}
         />
       </div>
       <div className="main-body">
@@ -171,63 +163,67 @@ function Home({ userRole }) {
           }}
         >
           <div className="rendered">{renderSelectedComponent()}</div>
-          <div
-            style={{
-              position: "fixed",
-              right: "20px",
-              bottom: "60px",
-              zIndex: 9999,
-            }}
-          >
-            <Typography
-              variant="caption"
-              component="div"
-              color="textSecondary"
-              sx={{
-                position: "absolute",
-                bottom: "50%",
-                right: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              {Math.round(progress)}%
-            </Typography>
-            <CircularProgress
-              variant="determinate"
-              value={100}
-              size={50}
-              thickness={1}
-              color="secondary"
-              sx={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                marginLeft: "-45px",
-                marginTop: "-45px",
-              }}
-            />
-            <CircularProgress
-              variant="determinate"
-              value={progress}
-              size={50}
-              thickness={2}
-              color="primary"
-              sx={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                marginLeft: "-45px",
-                marginTop: "-45px",
-              }}
-            ></CircularProgress>
-          </div>
-          <div style={{ position: "fixed", right: "20px", top: "80px" }}>
-            <Tooltip title="Take Quiz" arrow>
-              <div className="chat" onClick={handleChat}>
-                <QuizIcon />
+          {!instructor && (
+            <>
+              <div
+                style={{
+                  position: "fixed",
+                  right: "20px",
+                  bottom: "60px",
+                  zIndex: 9999,
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  component="div"
+                  color="textSecondary"
+                  sx={{
+                    position: "absolute",
+                    bottom: "50%",
+                    right: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {Math.round(progress)}%
+                </Typography>
+                <CircularProgress
+                  variant="determinate"
+                  value={100}
+                  size={50}
+                  thickness={1}
+                  color="secondary"
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    marginLeft: "-45px",
+                    marginTop: "-45px",
+                  }}
+                />
+                <CircularProgress
+                  variant="determinate"
+                  value={progress}
+                  size={50}
+                  thickness={2}
+                  color="primary"
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    marginLeft: "-45px",
+                    marginTop: "-45px",
+                  }}
+                ></CircularProgress>
               </div>
-            </Tooltip>
-          </div>
+              <div style={{ position: "fixed", right: "20px", top: "80px" }}>
+                <Tooltip title="Take Quiz" arrow>
+                  <div className="chat" onClick={handleChat}>
+                    <QuizIcon />
+                  </div>
+                </Tooltip>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

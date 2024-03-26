@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import './merge_sort.scss'; 
+import React, { useState, useEffect } from "react";
+import { Button, Input, Slider, Typography } from "@mui/material";
+import "./merge_sort.scss";
 
-
-function Merge_sort() {
+function MergeSort() {
   const [array, setArray] = useState([]);
   const [arraySize, setArraySize] = useState(10);
   const [delay, setDelay] = useState(3000);
-
 
   useEffect(() => {
     generateRandomArray();
   }, []);
 
-
   const generateRandomArray = () => {
     const newArray = [];
     for (let i = 0; i < arraySize; i++) {
-      const value = Math.floor(Math.random() * 100) + 1;
-      newArray.push({ value, height: value * 3 }); 
+      const value = Math.floor(Math.random() * 25) * 3 + 2;
+      newArray.push({ value, height: value * 3 });
     }
     setArray(newArray);
   };
-
 
   const handleArraySizeChange = (e) => {
     setArraySize(parseInt(e.target.value));
   };
 
-
   const handleDelayChange = (e) => {
     setDelay(parseInt(e.target.value));
   };
 
-  
   const mergeSort = async () => {
     const animations = await mergeSortHelper([...array]);
     await visualizeMergeSort(animations);
@@ -68,97 +63,110 @@ function Merge_sort() {
     let k = left;
 
     while (i < leftArray.length && j < rightArray.length) {
-      animations.push({ type: 'compare', indices: [left + i, mid + 1 + j] });
+      animations.push({ type: "compare", indices: [left + i, mid + 1 + j] });
 
       if (leftArray[i].value <= rightArray[j].value) {
-        animations.push({ type: 'overwrite', index: k, value: leftArray[i] });
+        animations.push({ type: "overwrite", index: k, value: leftArray[i] });
         arr[k++] = leftArray[i++];
       } else {
-        animations.push({ type: 'overwrite', index: k, value: rightArray[j] });
+        animations.push({ type: "overwrite", index: k, value: rightArray[j] });
         arr[k++] = rightArray[j++];
       }
     }
 
     while (i < leftArray.length) {
-      animations.push({ type: 'overwrite', index: k, value: leftArray[i] });
+      animations.push({ type: "overwrite", index: k, value: leftArray[i] });
       arr[k++] = leftArray[i++];
     }
 
     while (j < rightArray.length) {
-      animations.push({ type: 'overwrite', index: k, value: rightArray[j] });
+      animations.push({ type: "overwrite", index: k, value: rightArray[j] });
       arr[k++] = rightArray[j++];
     }
   };
 
   const visualizeMergeSort = async (animations) => {
-    const arrayBars = document.getElementsByClassName('array-bar');
+    const arrayBars = document.getElementsByClassName("array-bar");
 
     for (let i = 0; i < animations.length; i++) {
       const animation = animations[i];
 
-      if (animation.type === 'compare') {
+      if (animation.type === "compare") {
         const [barOne, barTwo] = animation.indices;
         const barOneStyle = arrayBars[barOne].style;
         const barTwoStyle = arrayBars[barTwo].style;
 
         setTimeout(() => {
-          barOneStyle.backgroundColor = '#f39c12';
-          barTwoStyle.backgroundColor = '#f39c12';
+          barOneStyle.backgroundColor = "#f39c12";
+          barTwoStyle.backgroundColor = "#f39c12";
         }, i * delay);
 
-        setTimeout(() => {
-          barOneStyle.backgroundColor = '#3498db';
-          barTwoStyle.backgroundColor = '#3498db';
-        }, (i + 1) * delay);
-      } else if (animation.type === 'overwrite') {
+        setTimeout(
+          () => {
+            barOneStyle.backgroundColor = "#3498db";
+            barTwoStyle.backgroundColor = "#3498db";
+          },
+          (i + 1) * delay
+        );
+      } else if (animation.type === "overwrite") {
         const { index, value } = animation;
         const barStyle = arrayBars[index].style;
 
         setTimeout(() => {
-          barStyle.height = `${value.height}px`; 
-          array[index] = value; 
-          arrayBars[index].innerHTML = value.value; 
-        }, i * delay );
+          barStyle.height = `${value.height}px`;
+          array[index] = value;
+          arrayBars[index].innerHTML = value.value;
+        }, i * delay);
       }
     }
   };
 
-
   return (
     <div className="merge-sort-visualizer">
       <div className="array-container">
-        {array.map((bar, index) => (
-          <div
-            className="array-bar"
-            key={index}
-            style={{ height: `${bar.height}px`, width: '60px' }}
-          >{bar.value}</div>
-        ))}
+        <div style={{ marginTop: "20px" }}>
+          {array.map((bar, index) => (
+            <div
+              className="array-bar"
+              key={index}
+              style={{
+                height: `${bar.height}px`,
+                width: "60px",
+                display: "inline-block",
+                margin: "2px",
+                verticalAlign: "bottom",
+              }}
+            >
+              {bar.value}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="controls">
-        <label htmlFor="arraySize">Array Size:</label>
-        <input
+        <Typography variant="body1">Array Size:</Typography>
+        <Input
           type="number"
-          id="arraySize"
-          min={1}
-          max={100}
           value={arraySize}
+          inputProps={{ min: 1, max: 25 }}
           onChange={handleArraySizeChange}
         />
-        <label htmlFor="delay">Delay (ms):</label>
-        <input
-          type="range"
-          id="delay"
-          min="1"
-          max="100"
+        <Typography variant="body1">Delay (ms): {delay}</Typography>
+        <Slider
+          min={100}
+          max={1000}
           value={delay}
           onChange={handleDelayChange}
+          style={{ width: "200px", marginRight: "40px" }}
         />
-        <button onClick={generateRandomArray} className='merge-btn'>Generate New Array</button>
-        <button onClick={mergeSort} className='merge-btn' >Merge Sort</button>
+        <Button onClick={generateRandomArray} className="merge-btn">
+          Generate New Array
+        </Button>
+        <Button onClick={mergeSort} className="merge-btn">
+          Merge Sort
+        </Button>
       </div>
     </div>
   );
 }
 
-export default Merge_sort;
+export default MergeSort;

@@ -11,7 +11,7 @@ import Login from "./pages/loginPage/Login";
 import Invite from "./pages/landingPage/Invite";
 import Register from "./pages/registerPage/Register";
 import InstructorDashboard from "./Instructor/pages/dash_board/dash_board";
-import StudentProfile from "./profile/studentProfile/studentProfile";
+import StudentProfile from "./profile/studentProfile/studentProfileUpdate";
 import Quiz from "./student/quiz";
 import QuizeDashboard from "./Instructor/manage_quiz/quiz_dashboard/quizeDashboard";
 import StudentList from "./admin/manageStudent/student";
@@ -29,6 +29,7 @@ import Content from "./Instructor/manage_content/Content";
 import useTokenTimeout from "./token_control/token_timeout";
 import Landing from "./pages/landingPage/sample/landing";
 import ResponsiveAppBar from "./pages/homePage/appBar";
+import StackList from "./DSA/DataStracture/Linear/stack/stackList";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -84,7 +85,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/appbar" element={<ResponsiveAppBar />} />
+
         <Route path="/user/forgotPassword" element={<ReceiveEmail />} />
         <Route path="/user/resetPassword/:token" element={<ResetPassword />} />
         <Route
@@ -146,7 +147,7 @@ const InstructorRoutes = ({ userRole, token }) => {
   return (
     <Routes>
       <Route path="/profile" element={<StudentProfile />} />
-      <Route path="/:id" element={<InstructorDashboard />} />
+      <Route path="/" element={<InstructorDashboard />} />
       <Route path="/quiz" element={<QuizeDashboard />} />
       <Route path="/question" element={<AddQuestion />} />
       <Route
@@ -160,7 +161,7 @@ const InstructorRoutes = ({ userRole, token }) => {
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/:id" element={<AdminDashboard />} />
+      <Route path="/" element={<AdminDashboard />} />
       <Route path="/profile" element={<AdminProfile />} />
       <Route path="/instructor" element={<InstructorList />} />
       <Route path="/student/" element={<StudentList />} />

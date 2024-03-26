@@ -100,52 +100,70 @@
 // }
 
 // export default Login;
-import React from 'react';
-import { useState } from 'react';
-import axios from 'axios'; // Import axios for making HTTP requests
-import { useNavigate, Usenavigate } from 'react-router-dom'; // Import navigate for routing
-import { toast, ToastContainer } from 'react-toastify'; // Import toast for displaying messages
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast notifications
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import React from "react";
+import { useState } from "react";
+import axios from "axios"; // Import axios for making HTTP requests
+import { useNavigate, Usenavigate } from "react-router-dom"; // Import navigate for routing
+import { toast, ToastContainer } from "react-toastify"; // Import toast for displaying messages
+import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Create a default theme
 const defaultTheme = createTheme();
 
 const Login = ({ setAuthenticated, setUserRole, setToken }) => {
-    const [formData, setFormData] = useState({
-      email: '',
-      password: '',
-    });
-    const navigate = useNavigate();
-    axios.defaults.withCredentials = true;
-    
-  
-    const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      try {
-        // Make a request to your login endpoint
-        const response = await axios.post('http://localhost:8800/login', formData);
-  
-        // Handle the response, e.g., store user information in state or context
-        toast.success('Login successful',{
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make a request to your login endpoint
+      const response = await axios.post(
+        "http://localhost:8800/login",
+        formData
+      );
+
+      // Handle the response, e.g., store user information in state or context
+      toast.success("Login successful", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Extract user ID from the response
+
+      // Store the token in local storage
+      localStorage.setItem("accessToken", response.data.token);
+
+      // Set a timer to clear the token after one minute
+      setTimeout(() => {
+        localStorage.removeItem("accessToken");
+        toast.error("Session expired, Please login again", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -153,80 +171,71 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
           pauseOnHover: true,
           draggable: true,
         });
-  
-        // Extract user ID from the response
-        
-        // Store the token in local storage
-        localStorage.setItem('accessToken', response.data.token);
-  
-        // Set a timer to clear the token after one minute
-        setTimeout(() => {
-          localStorage.removeItem('accessToken');
-          toast.error('Session expired, Please login again', {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-          window.location.reload()
-        }, 3600000); 
+        window.location.reload();
+      }, 3600000);
 
-        const getUserRoleFromToken = (token) => {
-          const decodedToken = JSON.parse(atob(token.split('.')[1]));
-          return decodedToken.role_name;
-        };
-        const getUserIdFromToken = (token) => {
-          const decodedToken = JSON.parse(atob(token.split('.')[1]));
-          return decodedToken.user_id;
-        };
-        const token = localStorage.getItem('accessToken');
-        const role_name = getUserRoleFromToken(token)
-        const user_id = getUserIdFromToken(token)
-        const role = role_name ? role_name.toLowerCase() : 'student';
+      const getUserRoleFromToken = (token) => {
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        return decodedToken.role_name;
+      };
+      const getUserIdFromToken = (token) => {
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        return decodedToken.user_id;
+      };
+      const token = localStorage.getItem("accessToken");
+      const role_name = getUserRoleFromToken(token);
+      const user_id = getUserIdFromToken(token);
+      const role = role_name ? role_name.toLowerCase() : "student";
 
-        setAuthenticated(true);
-        setUserRole(role);
-        setToken(token);
+      setAuthenticated(true);
+      setUserRole(role);
+      setToken(token);
 
-        // Redirect to the user-specific route
-       // 
-        setTimeout(() =>{
-          navigate(`/${role}/${user_id}`);
-          window.location.reload()
-        }, 1000)
-      } catch (error) {
-        // Handle login failure, e.g., show an error message
-        if (error.response) {
-          toast.error(`Login failed: ${error.response.data.message}`);
+      // Redirect to the user-specific route
+      //
+      setTimeout(() => {
+        if (role === "instructor" || role === "admin") {
+          navigate(`/${role}`);
         } else {
-          toast.error(`Login failed: ${error.message}`);
+          navigate(`/${role}/${user_id}`);
         }
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      // Handle login failure, e.g., show an error message
+      if (error.response) {
+        toast.error(`Login failed: ${error.response.data.message}`);
+      } else {
+        toast.error(`Login failed: ${error.message}`);
       }
-    };
-  
+    }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-        <ToastContainer/>
+        <ToastContainer />
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -255,7 +264,13 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} className='login'>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              className="login"
+            >
               Sign In
             </Button>
             <Grid container>

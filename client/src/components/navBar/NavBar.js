@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import "./NavBar.scss";
-import Teampopup from "../../popup/team/TeamPopUp";
-import Contactopup from "../../popup/contact/ContactPopup";
-import FeaturePopup from "../../popup/feature/featurePopup";
-import UserPopup from "../../popup/user/userPopup";
 import {
   AppBar,
   Toolbar,
   IconButton,
-  Button,
   Typography,
   Menu,
   MenuItem,
@@ -18,13 +12,24 @@ import {
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 import defaults from "../../assets/default.png";
 
-const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
+const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
   const navigate = useNavigate();
-  const [showTeamPopup, setShowTeamPopup] = useState(false);
-  const [showContactPopup, setShowContactPopup] = useState(false);
-  const [showFeaturePopup, setShowFeaturePopup] = useState(false);
-  const [showUserPopup, setShowUserPopup] = useState(false);
+
   const [anchorEl, setAnchorEl] = useState(null);
+  const [user_id, setUser_id] = useState(0);
+  const [role_name, setRole_name] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    //console.log(token);
+    // Set isUser based on token availability
+
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+
+    //console.log("Decode", decodedToken);
+    setUser_id(decodedToken.user_id);
+    setRole_name(decodedToken.role_name);
+  }, []);
 
   const handleHome = () => {
     navigate("/");
@@ -38,26 +43,16 @@ const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+  const handleLogout = () => {
+    // Remove the token from local storage
+    localStorage.removeItem("accessToken");
+    window.location.href = "/login";
+  };
 
   const handleMenuItemClick = (path) => {
     navigate(path);
+
     handleCloseMenu();
-  };
-
-  const toggleTeamPopup = () => {
-    setShowTeamPopup(!showTeamPopup);
-  };
-
-  const toggleUserPopup = () => {
-    setShowUserPopup(!showUserPopup);
-  };
-
-  const toggleContactPopup = () => {
-    setShowContactPopup(!showContactPopup);
-  };
-
-  const toggleFeaturePopup = () => {
-    setShowFeaturePopup(!showFeaturePopup);
   };
 
   const renderUserMenu = () => {
@@ -68,7 +63,7 @@ const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
         onClose={handleCloseMenu}
       >
         <MenuItem
-          onClick={() => handleMenuItemClick("/profile")}
+          onClick={() => handleMenuItemClick(`/${role_name}/profile/`)}
           sx={{ display: "flex", alignItems: "center" }}
         >
           <Avatar
@@ -80,17 +75,29 @@ const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
             {userName}
           </Typography>
         </MenuItem>
-        <MenuItem onClick={toggleFeaturePopup}>Feature</MenuItem>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>About</MenuItem>
-        <MenuItem onClick={toggleTeamPopup}>Team</MenuItem>
-        <MenuItem onClick={toggleContactPopup}>Contact</MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick("/settings")}>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick("/logout")}>
-          Logout
-        </MenuItem>
+        <MenuItem onClick={handleHome}>Home</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        {instructor && (
+          <>
+            <MenuItem onClick={() => handleMenuItemClick("/instructor")}>
+              Dashboard
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("/instructor/quiz")}>
+              Manage quiz
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("instructor/content")}>
+              Manage content
+            </MenuItem>
+          </>
+        )}
+        {!instructor && (
+          <>
+            <MenuItem>Feature</MenuItem>
+            <MenuItem>About</MenuItem>
+            <MenuItem>Team</MenuItem>
+            <MenuItem>Contact</MenuItem>
+          </>
+        )}
       </Menu>
     );
   };
@@ -100,7 +107,7 @@ const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
       ? `http://localhost:8800/${userData[0].image}`
       : `${defaults}`;
   const userName = userData?.length > 0 ? userData[0].username : "";
-  const role_name = userData?.length > 0 ? userData[0].role_name : "";
+  //const role_name = userData?.length > 0 ? userData[0].role_name : "";
 
   return (
     <AppBar
@@ -115,10 +122,14 @@ const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
             aria-label="menu"
             onClick={toggleSidebar}
           >
-            {icon === "bars" ? <MenuIcon /> : <CloseIcon />}
+            {icon === "bars" ? (
+              <MenuIcon style={{ fontSize: "1.5em" }} />
+            ) : (
+              <CloseIcon style={{ fontSize: "1.5em" }} />
+            )}
           </IconButton>
         </div>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
+        <Typography variant="h6" style={{ flexGrow: 1, fontSize: "1.5em" }}>
           DSA Visualizer
         </Typography>
         <div className="button-list">
@@ -132,25 +143,9 @@ const NavBar = ({ isUser, icon, toggleSidebar, userData }) => {
               {userName}
             </Typography>
           </div>
-
           {renderUserMenu()}
         </div>
       </Toolbar>
-      <Teampopup show={showTeamPopup} handleClose={toggleTeamPopup}>
-        {/* Content you want to display in the Team popup */}
-      </Teampopup>
-      <Contactopup show={showContactPopup} handleClose={toggleContactPopup}>
-        {/* Content you want to display in the Contact popup */}
-      </Contactopup>
-      <FeaturePopup
-        show={showFeaturePopup}
-        handleClose={toggleFeaturePopup}
-      ></FeaturePopup>
-      <UserPopup
-        show={showUserPopup}
-        handleClose={toggleUserPopup}
-        role_name={role_name}
-      ></UserPopup>
     </AppBar>
   );
 };

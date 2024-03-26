@@ -1,4 +1,4 @@
-import { promisify } from 'util';
+import { promisify } from "util";
 
 const RetrieveQuestion = async (db, req, res) => {
   try {
@@ -15,8 +15,8 @@ const RetrieveQuestion = async (db, req, res) => {
     const result = await query(sql, [quiz_id]);
 
     if (!result.rows || !Array.isArray(result.rows)) {
-      console.error('Invalid result format:', result);
-      return res.status(500).json({ message: 'Internal server error' });
+      //console.error('Invalid result format:', result);
+      return res.status(500).json({ message: "Internal server error" });
     }
 
     const questionsWithChoices = result.rows.reduce((acc, row) => {
@@ -39,8 +39,8 @@ const RetrieveQuestion = async (db, req, res) => {
 
     res.status(200).json({ questionsWithChoices });
   } catch (error) {
-    console.error('Error retrieving questions and choices:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    //console.error('Error retrieving questions and choices:', error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 

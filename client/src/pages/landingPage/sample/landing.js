@@ -4,17 +4,14 @@ import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 import NavigationBar from "./navigation";
 import ReadMoreDialog from "./dialog/readMore";
 import back from "../../../assets/welcome.avif";
-import graph from "../../../assets/sample.png";
-import sort from "../../../assets/sort.png";
-import Btree from "../../../assets/Btree.png";
 
-import { featuresData } from "../data";
-import FeatureDialog from "./dialog/featureDialog";
 import { motion, AnimatePresence } from "framer-motion";
-import AboutInteractiveContent from "./dialog/About";
+
 import Team from "./dialog/team";
 import { ContactUs } from "../../../popup/contact/contact";
 import Footer from "./dialog/footer";
+import FeatureSection from "./dialog/feature";
+import AboutSection from "./dialog/AboutSection";
 
 const Section = ({ children, border }) => (
   <div
@@ -29,11 +26,8 @@ const Section = ({ children, border }) => (
 
 function Landing() {
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedFeature, setSelectedFeature] = useState(null);
 
   const handleOpenDialog = (feature) => {
-    console.log(feature);
-    setSelectedFeature(feature);
     setOpenDialog(true);
   };
 
@@ -162,159 +156,14 @@ function Landing() {
         </Section>
       </div>
       {/* Feature Section */}
-      <div
-        style={{
-          backgroundColor: "#f5f5f5",
-          borderBottom: "2px solid #ccc",
-        }}
-      >
-        <Paper style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
-          <Typography variant="h4" gutterBottom>
-            Features
-          </Typography>
-          <Section>
-            <Container>
-              <Grid container spacing={3}>
-                {/* Display each card initially */}
-                {featuresData.map((feature, index) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    key={index}
-                    onClick={() => handleOpenDialog(feature)}
-                    style={{
-                      cursor: "pointer",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <motion.div
-                      whileHover={{ scale: 0.9 }}
-                      initial={{ opacity: 0, y: -100 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{
-                        duration: 1,
-                        ease: "easeInOut",
-                        type: "spring",
-                        stiffness: 100,
-                      }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                    >
-                      <Paper style={{ padding: "20px", height: "100%" }}>
-                        <Typography variant="h5" gutterBottom>
-                          {feature.feature}
-                        </Typography>
-                        <img
-                          src={feature.image}
-                          alt={feature.feature}
-                          style={{ maxWidth: "100%", height: "auto" }}
-                        />
-                      </Paper>
-                    </motion.div>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
-          </Section>
-        </Paper>
+      <div style={{ backgroundColor: "#f5f5f5" }}>
+        <Section border={true}>
+          <FeatureSection />
+        </Section>
       </div>
       {/* About section */}
-      <div
-        style={{
-          backgroundColor: "#e1bee7",
-          borderBottom: "2px solid #ccc",
-        }}
-      >
-        {/* Main container for the About section */}
-        <Paper style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
-          <Grid container spacing={3}>
-            {/* First Section (Full Width) */}
-            <Grid item xs={12}>
-              <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                //animate={{ opacity: 1, x: 0 }}
 
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{
-                  ease: "easeOut",
-                  duration: 1,
-                  type: "spring",
-                  stiffness: 70,
-                }}
-                exit={{ opacity: 0, x: -100 }}
-              >
-                {/* Paper component to style the section */}
-
-                <Typography variant="h4" gutterBottom>
-                  About Our Interactive Data Structure and Algorithm Visualizer
-                </Typography>
-              </motion.div>
-            </Grid>
-
-            {/* Second and Third Sections (Divided into Two) */}
-            <Grid item xs={12}>
-              {/* Paper component to style the section */}
-              <Paper style={{ padding: "20px" }}>
-                {/* Grid container for dividing the section */}
-                <Grid container spacing={3}>
-                  {/* Second Section (Left) */}
-                  <Grid item xs={12} sm={6}>
-                    <Paper style={{ padding: "20px" }}>
-                      <Grid container spacing={3}>
-                        {/* Image 1 */}
-                        <Grid item xs={12} style={{ marginBottom: "20px" }}>
-                          <motion.img
-                            initial={{ opacity: 0, x: 100, y: 100 }}
-                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            whileHover={{ scale: 1.14 }}
-                            transition={{ duration: 1, ease: "easeInOut" }}
-                            src={sort}
-                            alt=""
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        </Grid>
-                        {/* Image 2 */}
-
-                        <Grid item xs={12}>
-                          <motion.img
-                            initial={{ opacity: 0, x: 100, y: 100 }}
-                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            whileHover={{ scale: 1.14 }}
-                            transition={{ duration: 1, ease: "easeInOut" }}
-                            src={sort}
-                            alt=""
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                          <motion.img
-                            initial={{ opacity: 0, x: 100, y: 100 }}
-                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            whileHover={{ scale: 1.14 }}
-                            transition={{ duration: 1, ease: "easeInOut" }}
-                            src={sort}
-                            alt=""
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </Grid>
-
-                  {/* Third Section (Right) */}
-
-                  <Grid item xs={12} sm={6}>
-                    <Paper style={{ padding: "20px" }}>
-                      <AboutInteractiveContent />
-                    </Paper>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Paper>
-      </div>
+      <AboutSection />
 
       {/* Team Section */}
       <div style={{ backgroundColor: "#eeeeee" }}>
@@ -342,12 +191,6 @@ function Landing() {
       </div>
       {/* Read More Dialog */}
       <ReadMoreDialog open={openDialog} handleClose={handleCloseDialog} />
-
-      <FeatureDialog
-        open={openDialog}
-        handleClose={handleCloseDialog}
-        feature={selectedFeature}
-      />
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import './insertion_sort.scss';
+import React, { useState, useEffect, useCallback } from "react";
+import { Button, Input, Slider, Typography } from "@mui/material";
+import "./insertion_sort.scss"; // Import your SCSS file if needed
 
 function InsertionSort() {
   const [array, setArray] = useState([]);
@@ -12,8 +13,8 @@ function InsertionSort() {
     const newArray = [];
     for (let i = 0; i < size; i++) {
       newArray.push({
-        value: Math.floor(Math.random() * 100) + 10,
-        color: 'blue',
+        value: Math.floor(Math.random() * 100) * 3 + 2,
+        color: "#3498db",
       });
     }
     setArray(newArray);
@@ -28,91 +29,86 @@ function InsertionSort() {
       let currentValue = arrayCopy[i];
       let j = i - 1;
 
-      // Mark the elements being compared as red
-     //arrayCopy[j].color = 'red';
-      currentValue.color = 'red';
+      currentValue.color = "#f39c12";
       setArray([...arrayCopy]);
       await sleep(speed);
 
       while (j >= 0 && arrayCopy[j].value > currentValue.value) {
-        // Move elements to the right
         arrayCopy[j + 1] = arrayCopy[j];
-        arrayCopy[j + 1].color = 'red'; // Mark the element being moved as red
+        arrayCopy[j + 1].color = "#f39c12";
         setArray([...arrayCopy]);
         await sleep(speed);
-        arrayCopy[j + 1].color = 'blue'; // Reset color after moving
+        arrayCopy[j + 1].color = "#3498db";
         j--;
         if (j >= 0) {
-          arrayCopy[j].color = 'red'; // Mark the new element being compared as red
+          arrayCopy[j].color = "#f39c12";
           setArray([...arrayCopy]);
           await sleep(speed);
         }
       }
 
-      // Place the current element in its correct position
       arrayCopy[j + 1] = currentValue;
       setArray([...arrayCopy]);
       await sleep(speed);
 
-      // Reset colors after sorting
-      arrayCopy.forEach((item) => (item.color = 'blue'));
+      arrayCopy.forEach((item) => (item.color = "#3498db"));
       setArray([...arrayCopy]);
     }
 
     setSorting(false);
   }, [array, speed]);
 
-  
-
-  // Function to introduce delay
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  // UseEffect to generate a random array when arraySize changes
   useEffect(() => {
     generateRandomArray(arraySize);
   }, [arraySize]);
 
   return (
-    <div>
-      <div>
-        <label htmlFor="arraySize">Array Size:</label>
-        <input
+    <div style={{ padding: "20px" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <Typography variant="body1">Array Size:</Typography>
+        <Input
           type="number"
-          id="arraySize"
-          min={0}
+          inputProps={{ min: 1, max: 25 }}
           value={arraySize}
           onChange={(e) => setArraySize(parseInt(e.target.value))}
           disabled={sorting}
+          style={{ marginLeft: "10px" }}
         />
-        <button onClick={() => generateRandomArray(arraySize)} disabled={sorting}>
+        <Button
+          onClick={() => generateRandomArray(arraySize)}
+          disabled={sorting}
+          style={{ marginLeft: "10px" }}
+        >
           Generate Array
-        </button>
+        </Button>
       </div>
-      <div>
-        <label htmlFor="speed">Speed: {speed}</label>
-        <input
-          type="range"
-          id="speed"
-          min="1"
-          max="500"
+      <div style={{ marginBottom: "20px" }}>
+        <Typography variant="body1">Speed: {speed}</Typography>
+        <Slider
           value={speed}
+          min={1}
+          max={500}
           onChange={(e) => setSpeed(parseInt(e.target.value))}
           disabled={sorting}
+          style={{ width: "200px" }}
         />
       </div>
-      <button onClick={insertionSort} disabled={sorting}>
-        {sorting ? 'Sorting...' : 'Start Insertion Sort'}
-      </button>
-      <div>
+      <Button onClick={insertionSort} disabled={sorting}>
+        {sorting ? "Sorting..." : "Start Insertion Sort"}
+      </Button>
+      <div style={{ marginTop: "20px" }}>
         {array.map((item, index) => (
           <div
             key={index}
             style={{
               height: `${item.value}px`,
               backgroundColor: item.color,
-              display: 'inline-block',
-              margin: '2px',
-              verticalAlign: 'bottom',
+              width: "60px",
+              display: "inline-block",
+              margin: "2px",
+              verticalAlign: "bottom",
             }}
           >
             {item.value}

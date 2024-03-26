@@ -1,8 +1,6 @@
-import "./styles.css";
-
 import React, { useState } from "react";
-import { codeStrings } from "../logic_data";
-import Selector from "./Selector";
+import { codeStrings } from "./CodeData";
+import Selector from "../../../../../Algorithm/search/linear_search/extra/Selector";
 import AceEditor from "react-ace";
 import "ace-builds/webpack-resolver";
 import "ace-builds/src-noconflict/mode-java";
