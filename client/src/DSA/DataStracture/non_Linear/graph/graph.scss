@@ -99,5 +99,27 @@
     overflow: auto;
   }
   .other-representation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 500px;
+    .adjacency-matrix {
+      width: 50%;
+      height: 100%;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .adjacency-list {
+      width: 50%;
+      height: 100%;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 }

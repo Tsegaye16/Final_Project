@@ -1,434 +1,287 @@
-import React, { useState, useRef } from "react";
-import "./linked_list.scss";
+import React from "react";
+import { Box, Container, Typography } from "@mui/material";
+import Operation from "./logic/Operation";
 
+const useStyles = {
+  root: {
+    backgroundColor: "#f0f0f0",
+    borderRadius: "8px",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+    padding: "24px",
+    marginBottom: "24px",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: "16px",
+  },
+  paragraph: {
+    marginBottom: "24px",
+  },
+  subTitle: {
+    fontWeight: "bold",
+    marginBottom: "8px",
+  },
+  section: {
+    marginBottom: "24px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "8px",
+    padding: "16px",
+  },
+};
 function Linked_list() {
-  const [value, setValue] = useState(""); // State to store input value
-  const [position, setPosition] = useState(""); // State to store selected position
-  const [nodes, setNodes] = useState([]); // State to store nodes
-  const [searchValue, setSearchValue] = useState(""); // State to store search value
-  const animationRef = useRef(null); // Ref to store animation reference
-  const [removePosition, setRemovePosition] = useState("");
-  const [isOperationInProgress, setIsOperationInProgress] = useState(false); // State to track operation progress
-  const [timeDelay, setTimeDelay] = useState(1000);
-
-  // Handling time delay for operation
-  const handleTimeDelayChange = (event) => {
-    setTimeDelay(event.target.value);
-  };
-  // Handling the insertion operation
-  // Function to handle input value change
-  const handleValueChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  // Function to handle position selection change
-  const handlePositionChange = (event) => {
-    setPosition(event.target.value);
-  };
-
-  // Function to handle insert button click
-  const handleInsert = () => {
-    if (!value || !position || isOperationInProgress) {
-      alert("Please enter a value and select a position.");
-      return;
-    }
-
-    let insertIndex;
-    if (position === "at index") {
-      insertIndex = parseInt(prompt("Enter the index:"));
-      if (insertIndex < 0 || insertIndex > nodes.length) {
-        alert("Invalid index.");
-        return;
-      }
-    }
-
-    setIsOperationInProgress(true); // Set operation in progress
-
-    // Visualize search process during insertion at the end or specific index
-    if (position === "at end" || position === "at index") {
-      visualizeSearch(position === "at index" ? insertIndex : nodes.length);
-    } else {
-      insertNode(position);
-      setIsOperationInProgress(false); // Reset operation progress
-    }
-  };
-
-  // Function to visualize search process
-  const visualizeSearch = (endIndex) => {
-    let currentIndex = 0;
-
-    const intervalId = setInterval(() => {
-      if (currentIndex < endIndex) {
-        // Highlight the current node being searched
-        const updatedNodes = nodes.map((node, index) => ({
-          ...node,
-          color: index === currentIndex ? "green" : node.color,
-        }));
-        setNodes(updatedNodes);
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-        insertNode(endIndex);
-        setIsOperationInProgress(false); // Reset operation progress
-      }
-    }, timeDelay); // Adjust the delay between each step as needed
-  };
-
-  // Function to insert node at specified position
-  const insertNode = (index) => {
-    // Create a copy of nodes array
-    const updatedNodes = [...nodes];
-
-    // Insert the new node at the specified index
-    updatedNodes.splice(index, 0, { value, x: 100, y: 100 }); // Insert at the specified index
-
-    // Update the positions of the nodes based on the insertion
-    for (let i = index; i < updatedNodes.length; i++) {
-      updatedNodes[i].x += 100; // Shift the positions of nodes to the right
-    }
-
-    setNodes(updatedNodes);
-  };
-
-  // Handling the delete operation
-
-  // Function to handle position selection change for removal
-  const handleRemovePositionChange = (event) => {
-    setRemovePosition(event.target.value);
-  };
-
-  // Function to handle remove button click
-  const handleRemove = () => {
-    if (isOperationInProgress) {
-      alert("Another operation is in progress.");
-      return;
-    }
-
-    let removeIndex;
-
-    if (removePosition === "from begin") {
-      if (nodes.length === 0) {
-        alert("Linked list is empty.");
-        return;
-      }
-      removeIndex = 0; // Removing from the beginning
-    } else if (removePosition === "from end") {
-      if (nodes.length === 0) {
-        alert("Linked list is empty.");
-        return;
-      }
-      removeIndex = nodes.length - 1; // Removing from the end
-    } else if (removePosition === "from index") {
-      const removeValue = parseInt(
-        document.getElementById("remove-input").value
-      );
-      if (isNaN(removeValue)) {
-        alert("Please enter a valid index.");
-        return;
-      }
-
-      if (removeValue < 0 || removeValue >= nodes.length) {
-        alert("Invalid index.");
-        return;
-      }
-
-      removeIndex = removeValue;
-    }
-
-    setIsOperationInProgress(true); // Set operation in progress
-
-    // Visualize search process before removal
-    visualizeSearchForRemoval(removeIndex);
-  };
-
-  // Function to visualize search process before removal
-  const visualizeSearchForRemoval = (index) => {
-    let currentIndex = 0;
-
-    const intervalId = setInterval(() => {
-      if (currentIndex <= index) {
-        // Highlight the current node being searched
-        const updatedNodes = nodes.map((node, idx) => ({
-          ...node,
-          color: idx === currentIndex ? "green" : node.color,
-        }));
-        setNodes(updatedNodes);
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-        removeNode(index);
-        setIsOperationInProgress(false); // Reset operation progress
-      }
-    }, timeDelay); // Adjust the delay between each step as needed
-  };
-
-  // Function to remove node at specified index
-  const removeNode = (index) => {
-    // Create a copy of nodes array
-    const updatedNodes = [...nodes];
-
-    // Remove the node at the specified index
-    updatedNodes.splice(index, 1);
-
-    // Update the positions of the nodes after removal
-    for (let i = index; i < updatedNodes.length; i++) {
-      updatedNodes[i].x -= 100; // Shift the positions of nodes to the left
-    }
-
-    setNodes(updatedNodes);
-  };
-
-  // Function to handle search value change
-  const handleSearchValueChange = (event) => {
-    setSearchValue(event.target.value);
-  };
-
-  // Function to handle search button click
-  const handleSearch = () => {
-    if (isOperationInProgress) {
-      alert("Another operation is in progress.");
-      return;
-    }
-
-    if (!searchValue) {
-      alert("Please enter a value to search.");
-      return;
-    }
-
-    setIsOperationInProgress(true); // Set operation in progress
-
-    // Visualize search process
-    visualizeSearchByValue();
-  };
-
-  // Function to visualize search process by value
-  const visualizeSearchByValue = () => {
-    let currentIndex = 0;
-    const foundIndex = nodes.findIndex((node) => node.value === searchValue);
-
-    const intervalId = setInterval(() => {
-      if (currentIndex <= foundIndex) {
-        // Highlight the current node being searched
-        const updatedNodes = nodes.map((node, idx) => ({
-          ...node,
-          color: idx === currentIndex ? "green" : node.color,
-        }));
-        setNodes(updatedNodes);
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-        if (foundIndex !== -1) {
-          // Change color of the found node
-          const updatedNodes = [...nodes];
-          updatedNodes[foundIndex].color = "blue";
-          setNodes(updatedNodes);
-        }
-
-        setIsOperationInProgress(false); // Reset operation progress
-      }
-    }, timeDelay); // Adjust the delay between each step as needed
-  };
-
   return (
-    <div className="linked-list-container">
-      <div className="user-interaction">
-        <div className="insert">
-          <input
-            type="number"
-            className="node-number"
-            placeholder="Enter value"
-            value={value}
-            onChange={handleValueChange}
-            disabled={isOperationInProgress} // Disable input during operation
-          />
-          <select
-            className="node-number"
-            value={position}
-            onChange={handlePositionChange}
-            disabled={isOperationInProgress} // Disable input during operation
-          >
-            <option value="">Select position</option>
-            <option value="at begin">At Beginning</option>
-            <option value="at end">At End</option>
-            <option value="at index">At Index</option>
-          </select>
+    <Container maxWidth="lg">
+      <Box sx={useStyles.section}>
+        <Box sx={useStyles.root}>
+          <Typography variant="h6" sx={useStyles.title}>
+            Introduction
+          </Typography>
+          <Typography variant="body1" sx={useStyles.paragraph}>
+            Linked lists and arrays are similar since they both store
+            collections of data. Array is the most common data structure used to
+            store collections of elements. Arrays are convenient to declare and
+            provide the easy syntax to access any element by its index number.
+            Once the array is set up, access to any element is convenient and
+            fast. The disadvantages of arrays are:
+            <ul>
+              <li>
+                The size of the array is fixed. Most often this size is
+                specified at compile time. This makes the programmers to
+                allocate arrays, which seems "large enough" than required.
+              </li>
+              <li>
+                Inserting new elements at the front is potentially expensive
+                because existing elements need to be shifted over to make room.
+              </li>
+              <li>
+                Deleting an element from an array is very difficult and costy
+              </li>
+            </ul>
+            Linked lists have their own strengths and weaknesses, but they
+            happen to be strong where arrays are weak. Generally array's
+            allocates the memory for all its elements in one block whereas
+            linked lists use an entirely different strategy. Linked lists
+            allocate memory for each element separately and only when necessary.
+            <br />
+            <br />A linked list is a non-sequential collection of data items. It
+            is a dynamic data structure. For every data item in a linked list,
+            there is an associated pointer that would give the memory location
+            of the next data item in the linked list.
+            <br />
+            <br />
+            The data items in the linked list are not in consecutive memory
+            locations. They may be anywhere, but the accessing of these data
+            items is easier as each data item contains the address of the next
+            data item.
+            <br />
+            <br />
+            <Typography sx={useStyles.subTitle}>
+              Advantages of linked lists:
+            </Typography>
+            Linked lists have many advantages. Some of the very important
+            advantages are:
+            <ol>
+              <li>
+                Linked lists are dynamic data structures. i.e., they can grow or
+                shrink during the execution of a program.
+              </li>
+              <li>
+                Linked lists have efficient memory utilization. Here, memory is
+                not preallocated. Memory is allocated whenever it is required
+                and it is de-allocated (removed) when it is no longer needed.
+              </li>
+              <li>
+                Insertion and Deletions are easier and efficient. Linked lists
+                provide flexibility in inserting a data item at a specified
+                position and deletion of the data item from the given position.
+              </li>
+              <li>
+                Many complex applications can be easily carried out with linked
+                lists.
+              </li>
+            </ol>
+            <Typography sx={useStyles.subTitle}>
+              Disadvantages of linked lists:
+            </Typography>
+            <ol>
+              <li>
+                It consumes more space because every node requires a additional
+                pointer to store address of the next node.
+              </li>
+              <li>
+                Searching a particular element in list is difficult and also
+                time consuming.
+              </li>
+            </ol>
+            <Typography sx={useStyles.subTitle}>
+              Types of Linked Lists
+            </Typography>
+            Basically we can put linked lists into the following four items:
+            <ol>
+              <li>Singly Linked List.</li>
+              <li>Doubly Linked List</li>
+              <li>Circular Linked List.</li>
+              <li>Doubly Circular Linked List.</li>
+            </ol>
+            In this chapter we will focus on Singly Linked list
+          </Typography>
+        </Box>
+        <Box sx={useStyles.root}>
+          <Typography variant="h6" sx={useStyles.title}>
+            Operations of linked list
+          </Typography>
+          <Typography variant="body1" sx={useStyles.paragraph}>
+            <ol>
+              <li style={{ fontSize: "29px" }}>
+                <Typography variant="h6" sx={useStyles.subTitle}>
+                  Linked list node insertion
+                </Typography>
+              </li>
+              <br />
 
-          <button
-            className="create-button"
-            onClick={handleInsert}
-            disabled={isOperationInProgress} // Disable button during operation
-          >
-            Insert
-          </button>
-        </div>
-        <div className="remove">
-          <input
-            type="number"
-            className="node-number"
-            id="remove-input"
-            placeholder="Enter index"
-            disabled={isOperationInProgress || removePosition !== "from index"} // Disable input when not needed or during operation
-          />
-          <select
-            className="node-number"
-            value={removePosition}
-            onChange={handleRemovePositionChange}
-            disabled={isOperationInProgress} // Disable input during operation
-          >
-            <option value="">Select position</option>
-            <option value="from begin">From Beginning</option>
-            <option value="from end">From End</option>
-            <option value="from index">From Index</option>
-          </select>
-          <button
-            className="create-button"
-            onClick={handleRemove}
-            disabled={isOperationInProgress} // Disable button during operation
-          >
-            Remove
-          </button>
-        </div>
-        <div className="search">
-          <input
-            type="number"
-            className="node-number"
-            placeholder="value"
-            value={searchValue}
-            onChange={handleSearchValueChange}
-            disabled={isOperationInProgress} // Disable input during operation
-          />
-          <button
-            className="create-button"
-            onClick={handleSearch}
-            disabled={isOperationInProgress} // Disable button during operation
-          >
-            Search
-          </button>
-        </div>
-        <div className="time-slider-container">
-          <input
-            type="range"
-            min="500"
-            max="3000"
-            className="slider"
-            value={timeDelay}
-            onChange={handleTimeDelayChange}
-            style={{
-              transform: "rotate(-90deg)",
-              width: "100px",
-              marginTop: "50px",
-            }}
-            disabled={isOperationInProgress} // Disable input during operation
-          />
-          {/* Display current time delay value */}
-        </div>
-      </div>
-      <div className="logical-representation">
-        <svg height="200px" width="100%" style={{ backgroundColor: "yellow" }}>
-          <text
-            x="60"
-            y="35"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fill="black"
-            fontSize="20"
-            fontFamily="Arial"
-          >
-            head
-          </text>
-          {/* a rectangle that represents the head of the linked list */}
-          <rect x="30" y="50" width="50" height="40" fill="white" />
-          {/* diagonal of a rectangle that represents empty data */}
-          <line
-            x1="30"
-            y1="50"
-            x2="80"
-            y2="90"
-            stroke="black"
-            strokeWidth={2}
-          />
-          {/* the lines that points to the next node of linked list */}
-          <line
-            x1="55"
-            y1="90"
-            x2="55"
-            y2="125"
-            stroke="black"
-            strokeWidth={2}
-          />
-          <line
-            x1="55"
-            y1="125"
-            x2="100"
-            y2="125"
-            stroke="black"
-            strokeWidth={2}
-            markerEnd="url(#arrow)"
-          />
+              <Typography>
+                It means to add or insert a node at any point in the link.
+                Insertion can be at the beginning, at the end, or any selected
+                position in the link.
+                <ul>
+                  <li style={{ fontSize: "29px" }}>
+                    <Typography variant="h6" sx={useStyles.subTitle}>
+                      At the beginning
+                    </Typography>
+                    <Typography>
+                      When inserting at the beginning of the link it is not
+                      important to find the link. If the link is empty then the
+                      new node is inserted as the head of the link, and when the
+                      new node is added to an existing link the new node
+                      replaces it as the head of the link.
+                      <Typography sx={useStyles.subTitle}>
+                        Algorithm to insert at the beginning:
+                      </Typography>
+                      <Typography>
+                        <pre>
+                          {`void insertBG(Node *head,int val)
+{
+  Node *temp=new Node(val);
+  if(head==NULL)
+    head=temp;
+  else
+  {
+    temp->next=head;
+    head=temp;
+  }
+}`}
+                        </pre>
+                      </Typography>
+                    </Typography>
+                  </li>
+                  <li style={{ fontSize: "29px" }}>
+                    <Typography variant="h6" sx={useStyles.subTitle}>
+                      At the end
+                    </Typography>
+                    <Typography>
+                      When inserting at the end of the link, the user has to
+                      access all the nodes present to find the endpoint. In case
+                      the list is empty the inserted node acts as both the first
+                      and the last node of the link.
+                      <Typography sx={useStyles.subTitle}>
+                        Algorithm to insert at the end:
+                      </Typography>
+                      <Typography>
+                        <pre>
+                          {`
+                          void insertEND(Node *head,int val)
 
-          {/* Render rectangles representing nodes */}
-          {nodes.map((node, index) => (
-            <g key={index}>
-              <rect
-                x={100 + index * 100} // Adjust the positioning with gaps between nodes
-                y={node.y}
-                width="70"
-                height="50"
-                fill={node.color || "white"} // Use the node's color if available, otherwise default to white
-              />
-              <text
-                x={135 + index * 100} // Adjust the positioning with gaps between nodes
-                y={node.y + 25}
-                dominantBaseline="middle"
-                textAnchor="middle"
-                fill="black"
-                fontSize="16"
-              >
-                {node.value}
-              </text>
-              {/* Render arrow connecting to the next node */}
-              {index < nodes.length - 1 && (
-                <line
-                  x1={170 + index * 100} // Adjust the positioning with gaps between nodes
-                  y1={node.y + 25}
-                  x2={200 + (index + 1) * 100} // Adjust the positioning with gaps between nodes
-                  y2={node.y + 25}
-                  stroke={nodes[index].lineColor || "black"} // Use the line's color if available, otherwise default to black
-                  strokeWidth={2}
-                  markerEnd="url(#arrow)"
-                />
-              )}
-            </g>
-          ))}
-          {/* Render arrow pointing to the first node if it exists */}
-          {nodes.length > 0 && (
-            <line
-              x1={170} // Adjust the positioning with gaps between nodes
-              y1={nodes[0].y + 25}
-              x2={200} // Adjust the positioning with gaps between nodes
-              y2={nodes[0].y + 25}
-              stroke="black"
-              strokeWidth={2}
-              markerEnd="url(#arrow)"
-            />
-          )}
-          {/* Define arrow marker */}
-          <defs>
-            <marker
-              id="arrow"
-              markerWidth="10"
-              markerHeight="10"
-              refX="9"
-              refY="3"
-              orient="auto"
-              markerUnits="strokeWidth"
-            >
-              <path d="M0,0 L0,6 L9,3 z" fill="#000" />
-            </marker>
-          </defs>
-        </svg>
-      </div>
-    </div>
+                          {
+                          
+                                 Node *temp=head;
+                          
+                                 Node *temp1=new Node(val);
+                          
+                                 
+                          
+                                 if(head==NULL)
+                          
+                                  head=temp1;
+                          
+                                 else
+                          
+                                 {
+                          
+                                        while(temp->next!=NULL)
+                          
+                                                   temp=temp->next;
+                          
+                                        
+                          
+                                        temp->next=temp1;
+                          
+                                 }
+                          
+                          }
+                          `}
+                        </pre>
+                      </Typography>
+                    </Typography>
+                  </li>
+                  <li style={{ fontSize: "29px" }}>
+                    <Typography variant="h6" sx={useStyles.subTitle}>
+                      At index
+                    </Typography>
+                    <Typography>
+                      When inserting at any given position, the link is accessed
+                      to find the point where the node is to be added. The new
+                      node is inserted after the given position. If the address
+                      is not given to the previous node, you can traverse the
+                      link to find the desired point.
+                      <Typography sx={useStyles.subTitle}>
+                        Algorithm to insert at the given positino:
+                      </Typography>
+                      <Typography>
+                        <pre>
+                          {`void insert_POS(Node *head,int pos,int val)
+
+{
+
+       Node *temp=head;
+
+       for(int i=0;i<pos-2;i++)
+
+                  temp=temp->next;
+
+       
+
+       Node *temp1=new Node(val);  // insert value of the node
+
+       temp1->next=temp->next;
+
+       temp->next=temp1;
+
+}`}
+                        </pre>
+                      </Typography>
+                    </Typography>
+                  </li>
+                </ul>
+              </Typography>
+            </ol>
+          </Typography>
+          <Operation />
+        </Box>
+        <Box sx={useStyles.root}>
+          <Typography variant="h6" sx={useStyles.title}>
+            Implementation
+          </Typography>
+        </Box>
+        <Box sx={useStyles.root}>
+          <Typography variant="h6" sx={useStyles.title}>
+            Summary
+          </Typography>
+          <Typography variant="body1" sx={useStyles.paragraph}>
+            make it editable later........
+          </Typography>
+        </Box>
+      </Box>
+    </Container>
   );
 }
 

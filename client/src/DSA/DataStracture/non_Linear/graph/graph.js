@@ -135,8 +135,8 @@ function Graph() {
         const newNode = {
           id: i,
           value: randomChar,
-          x: getRandomX(SVG_PADDING, window.innerWidth - SVG_PADDING),
-          y: getRandomY(SVG_PADDING, window.innerHeight - SVG_PADDING),
+          x: getRandomX(SVG_PADDING, window.innerWidth - 400),
+          y: getRandomY(SVG_PADDING, window.innerHeight - 600),
         };
         newNodes.push(newNode);
       }
@@ -521,7 +521,7 @@ function Graph() {
         </div>
       )}
       <div className="logical-representation">
-        <svg width="100%" height="100vh">
+        <svg width="100%" height="350px">
           {/* Render nodes */}
           {nodes.map((node) => (
             <g

@@ -162,7 +162,7 @@ const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<AdminDashboard />} />
-      <Route path="/profile" element={<AdminProfile />} />
+      <Route path="/profile" element={<StudentProfile />} />
       <Route path="/instructor" element={<InstructorList />} />
       <Route path="/student/" element={<StudentList />} />
     </Routes>

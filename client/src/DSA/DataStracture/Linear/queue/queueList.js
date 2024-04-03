@@ -54,11 +54,9 @@ function QueueList() {
             Operation
           </Typography>
 
-          <Typography>
-            <Typography variant="body1">
-              Great! There are several important operations for queues, but
-              let's discuss two fundamental ones: enqueue and dequeue.
-            </Typography>
+          <Typography variant="body1" sx={useStyles.paragraph}>
+            Great! There are several important operations for queues, but let's
+            discuss two fundamental ones: enqueue and dequeue.
             <ol>
               <li>
                 <Typography variant="h6"> Enqueue (Insert):</Typography>

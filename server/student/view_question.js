@@ -13,6 +13,7 @@ const RetrieveQuestion = async (db, req, res) => {
 
     const query = promisify(db.query).bind(db);
     const result = await query(sql, [quiz_id]);
+    // result has a propety like rows, field and so on
 
     if (!result.rows || !Array.isArray(result.rows)) {
       //console.error('Invalid result format:', result);

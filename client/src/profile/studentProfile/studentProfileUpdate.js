@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./studentProfile.scss";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { ToastContainer, toast } from "react-toastify";
 import {
   Button,
   TextField,
@@ -98,9 +99,9 @@ function StudentProfile() {
           },
         }
       );
-      console.log("Profile updated successfully", response.data);
+      toast.success("Profile updated successfully");
     } catch (error) {
-      console.log("Error updating profile", error);
+      toast.error("Error updating profile");
     }
   };
 
@@ -125,6 +126,7 @@ function StudentProfile() {
           >
             <ArrowBackIcon />
           </IconButton>
+          <ToastContainer />
           <form onSubmit={handleSubmit}>
             <div
               className="profile-picture"
@@ -208,7 +210,7 @@ function StudentProfile() {
                   type="date"
                   label="Birth Date"
                   name="birth_date"
-                  value={userData.birth_date}
+                  value={userData.birth_date.substring(0, 10)}
                   onChange={handleInputChange}
                   InputLabelProps={{ shrink: true }}
                 />

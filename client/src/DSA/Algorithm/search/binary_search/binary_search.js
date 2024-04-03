@@ -8,9 +8,9 @@ const BinarySearch = () => {
   const [high, setHigh] = useState(0);
   const [mid, setMid] = useState(0);
   const [searching, setSearching] = useState(false);
-  const [searchSpeed, setSearchSpeed] = useState(3000); // Adjust for desired speed
+  const [searchSpeed, setSearchSpeed] = useState(1000); // Adjust for desired speed
   const [searchResult, setSearchResult] = useState(null); // To store search result
-  const [disabledIndices, setDisabledIndices] = useState([]); // To store disabled indices
+  const [highlightedIndex, setHighlightedIndex] = useState(null); // To store highlighted index during search
 
   useEffect(() => {
     generateElements();
@@ -27,62 +27,53 @@ const BinarySearch = () => {
 
     setElements(newElements);
     setLow(0);
+    // Set high to the index of the last element in the list
     setHigh(newElements.length - 1);
-    setMid(Math.floor(newElements.length / 2));
-    setDisabledIndices([]); // Reset disabled indices
+    setMid(Math.floor((newElements.length - 1) / 2));
   };
 
   const search = async () => {
     setSearching(true);
     setSearchResult(null); // Reset search result
-    setDisabledIndices([]); // Reset disabled indices
+    setHighlightedIndex(null); // Reset highlighted index
 
-    await binarySearch();
+    await binarySearch(low, high);
 
     setSearching(false);
   };
 
-  const binarySearch = async () => {
-    let start = 0;
-    let end = elements.length - 1;
-
+  const binarySearch = async (start, end) => {
     while (start <= end) {
       let mid = Math.floor((start + end) / 2);
 
-      if (elements[mid].value === parseInt(searchValue)) {
+      if (elements[mid].value < parseInt(searchValue)) {
+        setLow(mid + 1);
+        start = mid + 1;
+        await sleep(searchSpeed);
+        setMid(Math.floor((start + end) / 2)); // Update mid based on the new low
+        await sleep(searchSpeed);
+
+        await sleep(searchSpeed);
+      } else if (elements[mid].value > parseInt(searchValue)) {
+        setHigh(mid - 1);
+        end = mid - 1;
+        await sleep(searchSpeed);
+        setMid(Math.floor((start + end) / 2)); // Update mid based on the new high
+
+        await sleep(searchSpeed);
+      } else {
         setMid(mid);
         setSearchResult("Element found!");
-        await sleep(searchSpeed);
-        break;
-      } else if (elements[mid].value < parseInt(searchValue)) {
-        setLow(mid + 1);
-        setDisabledIndices([
-          ...disabledIndices,
-          ...Array.from({ length: mid + 1 }, (_, i) => i),
-        ]);
-        await sleep(searchSpeed);
-        start = mid + 1;
-      } else {
-        setHigh(mid - 1);
-        setDisabledIndices([
-          ...disabledIndices,
-          ...Array.from(
-            { length: elements.length - mid - 1 },
-            (_, i) => mid + 1 + i
-          ),
-        ]);
-        await sleep(searchSpeed);
-        end = mid - 1;
+        setHighlightedIndex(mid);
+        return;
       }
     }
 
-    if (!searchResult) {
-      setMid(-1); // Not found
-      setSearchResult("Element not found.");
-    }
+    setSearchResult("Element not found.");
   };
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   return (
     <div>
       <input
@@ -104,7 +95,7 @@ const BinarySearch = () => {
       <input
         type="range"
         min={100}
-        max={10000}
+        max={30000}
         value={searchSpeed}
         onChange={(e) => setSearchSpeed(parseInt(e.target.value))}
       />
@@ -118,12 +109,11 @@ const BinarySearch = () => {
               width="50"
               height="40"
               fill={
-                disabledIndices.includes(index) ||
-                index === low ||
-                index === mid ||
-                index === high
-                  ? "red"
-                  : "#3498db"
+                highlightedIndex === index
+                  ? "black"
+                  : index === low || index === mid || index === high
+                    ? "red"
+                    : "#3498db"
               }
             />
           ))}
@@ -132,7 +122,7 @@ const BinarySearch = () => {
               key={index}
               x={index * 60 + 20}
               y={20}
-              fill={disabledIndices.includes(index) ? "gray" : "white"}
+              fill={"white"}
               textAnchor="middle"
             >
               {element.value}
@@ -143,14 +133,7 @@ const BinarySearch = () => {
               key={i}
               x={i * 60 + 20}
               y={65}
-              fill={
-                disabledIndices.includes(i) ||
-                i === low ||
-                i === mid ||
-                i === high
-                  ? "red"
-                  : "#3498db"
-              }
+              fill={i === low || i === mid || i === high ? "red" : "#3498db"}
             >
               {i}
             </text>

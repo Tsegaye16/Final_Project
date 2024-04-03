@@ -38,17 +38,9 @@ const TeamMember = ({ name, role, github, linkedin, email, phone, image }) => {
           {role}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          <span>👋, I'm Tsegaye</span>
-          <p>
-            fourth-year Information Systems student with a deep passion for
-            problem-solving and software development. Currently on the exciting
-            journey of a 12-month software engineering program at ALX and
-            delving into the world of Applied Data Science with a three-month
-            stint at WorldQuant University. My obsession with technology fuels
-            my desire to contribute to innovative solutions and embrace the
-            ever-evolving landscape of software development. Let's connect and
-            explore the endless possibilities in the realm of tech!
-          </p>
+          {/* Brief description about the team member */}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut arcu
+          ac velit pharetra consectetur.
         </Typography>
         <Grid container spacing={2} justify="center">
           <Grid item>

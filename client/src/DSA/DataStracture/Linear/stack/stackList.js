@@ -79,7 +79,7 @@ function StackList() {
           </Typography>
         </Box>
         <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.subTitle}>
+          <Typography variant="h6" sx={useStyles.title}>
             Operations
           </Typography>
           <ol>
@@ -175,7 +175,9 @@ function StackList() {
           <CodeTemplate />
         </Box>
         <Box sx={useStyles.root}>
-          <Typography variant="h6">Summary</Typography>
+          <Typography variant="h6" sx={useStyles.title}>
+            Summary
+          </Typography>
           <Typography variant="body1" sx={useStyles.paragraph}>
             make it editable later........
           </Typography>
