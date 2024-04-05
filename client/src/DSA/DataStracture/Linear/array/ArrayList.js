@@ -69,186 +69,189 @@ int main() {
 
   `;
   return (
-    <Container maxWidth="lg">
-      <Box sx={useStyles.section}>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Introduction
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            An array is a fundamental and versatile data structure in computer
-            science that plays a pivotal role in organizing and managing
-            collections of elements. It is a sequential, ordered arrangement of
-            data elements, each identified by an index or a key.
-            <br />
-            <br />
-            Arrays provide a systematic and efficient way to store and access
-            data, offering a contiguous block of memory where elements are
-            stored in consecutive locations. The simplicity and efficiency of
-            arrays make them a cornerstone in various algorithms and programming
-            languages.
-          </Typography>
-        </Box>
-        <Divider sx={{ my: 2 }} />
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.subTitle}>
-            Operation
-          </Typography>
-          <ol>
-            <li>
-              <span>
-                Declaration
-                <IconButton onClick={handleShow}>
-                  {checked ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                </IconButton>
-              </span>
-              <p>
-                In programming, the term "declaration" refers to the act of
-                creating a variable and specifying its type. When it comes to
-                arrays, declaration involves creating an array variable and
-                optionally specifying its size or initializing it with elements.
-                <br />
-                <br />
-                Requirement to declare:
-                <ul>
-                  <li>Variable name</li>
-                  <li>Type</li>
-                  <li>Size(optional if you initialize)</li>
-                </ul>
-              </p>
-              <div className={`declare-container ${!checked ? "hide" : ""}`}>
-                <Declaration />
-              </div>
-            </li>
-
-            <li>
-              <span>Accessing Element</span>
-              <p>
-                Accessing elements from an array is straightforward. You can
-                access elements by their index, which starts from 0 for the
-                first element and increments by 1 for each subsequent element.
-                Here's how you can access elements from an array:
-                <SyntaxHighlighter
-                  language="c"
-                  style={atomOneLight}
-                  wrapLongLines
-                  customStyle={{ fontSize: "14px", lineHeight: "1.5" }}
-                >
-                  {accessing}
-                </SyntaxHighlighter>
-              </p>
-            </li>
-            <li>
-              <span>Insertion</span>
-              <p>
-                Inserting elements into an array can be done at various
-                positions: the beginning, the end, or at a specific index.
-              </p>
-              <div>
-                <div>
-                  <Typography variant="subtitle1">
-                    Inserting at the Beginning:
-                  </Typography>
-                  <ol>
-                    <li>
-                      Check for Space: Before inserting, verify if there's
-                      enough space in the array.
-                    </li>
-                    <li>
-                      Shift Elements: Shift all existing elements one position
-                      to the right.
-                    </li>
-                    <li>
-                      Insert the Element: Place the new element at the beginning
-                      (index 0) of the array.
-                    </li>
-                  </ol>
-                </div>
-                <div>
-                  <Typography variant="subtitle1">
-                    Inserting at the End:
-                  </Typography>
-                  <ol>
-                    <li>
-                      Check for Space: Same as at the beginning, check if
-                      there's space in the array.
-                    </li>
-                    <li>
-                      Calculate the End Index: Find the index of the last
-                      element.
-                    </li>
-                    <li>
-                      Insert the Element: Place the new element at the
-                      calculated index.
-                    </li>
-                  </ol>
-                </div>
-                <div>
-                  <Typography variant="subtitle1">
-                    Inserting at a Specific Index:
-                  </Typography>
-                  <ol>
-                    <li>
-                      Check for Space and Valid Index: Make sure there's space
-                      and the index is valid.
-                    </li>
-                    <li>
-                      Shift Elements: Shift all elements from the target index
-                      to the end of the array.
-                    </li>
-                    <li>
-                      Insert the Element: Place the new element at the target
-                      index.
-                    </li>
-                  </ol>
-                </div>
-                <div>
-                  <Typography variant="subtitle1">Complexity:</Typography>
+    <>
+      <Container maxWidth="lg">
+        <Box sx={useStyles.section}>
+          <Box sx={useStyles.root}>
+            <Typography variant="h6" sx={useStyles.title}>
+              Introduction
+            </Typography>
+            <Typography variant="body1" sx={useStyles.paragraph}>
+              An array is a fundamental and versatile data structure in computer
+              science that plays a pivotal role in organizing and managing
+              collections of elements. It is a sequential, ordered arrangement
+              of data elements, each identified by an index or a key.
+              <br />
+              <br />
+              Arrays provide a systematic and efficient way to store and access
+              data, offering a contiguous block of memory where elements are
+              stored in consecutive locations. The simplicity and efficiency of
+              arrays make them a cornerstone in various algorithms and
+              programming languages.
+            </Typography>
+          </Box>
+          <Divider sx={{ my: 2 }} />
+          <Box sx={useStyles.root}>
+            <Typography variant="h6" sx={useStyles.subTitle}>
+              Operation
+            </Typography>
+            <ol>
+              <li>
+                <span>
+                  Declaration
+                  <IconButton onClick={handleShow}>
+                    {checked ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </span>
+                <p>
+                  In programming, the term "declaration" refers to the act of
+                  creating a variable and specifying its type. When it comes to
+                  arrays, declaration involves creating an array variable and
+                  optionally specifying its size or initializing it with
+                  elements.
+                  <br />
+                  <br />
+                  Requirement to declare:
                   <ul>
-                    <li>
-                      Inserting at the beginning or end has a time complexity of
-                      O(n) in the worst case, where n is the number of elements
-                      in the array. This is because we might need to shift all
-                      elements.
-                    </li>
-                    <li>
-                      Inserting at a specific index also has a worst-case time
-                      complexity of O(n) due to the potential shifting of
-                      elements.
-                    </li>
+                    <li>Variable name</li>
+                    <li>Type</li>
+                    <li>Size(optional if you initialize)</li>
                   </ul>
+                </p>
+                <div className={`declare-container ${!checked ? "hide" : ""}`}>
+                  <Declaration />
                 </div>
-                <div>
-                  <Typography variant="subtitle1">
-                    Things to Consider:
-                  </Typography>
-                  <ul>
-                    <li>
-                      In some languages, arrays have fixed sizes. Consider using
-                      data structures like linked lists for frequent insertions.
-                    </li>
-                    <li>
-                      Depending on the language, there might be built-in
-                      functions for inserting elements.
-                    </li>
-                  </ul>
-                </div>
-                <Insertion />
-              </div>
-            </li>
+              </li>
 
-            <li>
-              <span>Deletion</span>
-            </li>
-            <li>
-              <span>Updating</span>
-            </li>
-          </ol>
+              <li>
+                <span>Accessing Element</span>
+                <p>
+                  Accessing elements from an array is straightforward. You can
+                  access elements by their index, which starts from 0 for the
+                  first element and increments by 1 for each subsequent element.
+                  Here's how you can access elements from an array:
+                  <SyntaxHighlighter
+                    language="c"
+                    style={atomOneLight}
+                    wrapLongLines
+                    customStyle={{ fontSize: "14px", lineHeight: "1.5" }}
+                  >
+                    {accessing}
+                  </SyntaxHighlighter>
+                </p>
+              </li>
+              <li>
+                <span>Insertion</span>
+                <p>
+                  Inserting elements into an array can be done at various
+                  positions: the beginning, the end, or at a specific index.
+                </p>
+                <div>
+                  <div>
+                    <Typography variant="subtitle1">
+                      Inserting at the Beginning:
+                    </Typography>
+                    <ol>
+                      <li>
+                        Check for Space: Before inserting, verify if there's
+                        enough space in the array.
+                      </li>
+                      <li>
+                        Shift Elements: Shift all existing elements one position
+                        to the right.
+                      </li>
+                      <li>
+                        Insert the Element: Place the new element at the
+                        beginning (index 0) of the array.
+                      </li>
+                    </ol>
+                  </div>
+                  <div>
+                    <Typography variant="subtitle1">
+                      Inserting at the End:
+                    </Typography>
+                    <ol>
+                      <li>
+                        Check for Space: Same as at the beginning, check if
+                        there's space in the array.
+                      </li>
+                      <li>
+                        Calculate the End Index: Find the index of the last
+                        element.
+                      </li>
+                      <li>
+                        Insert the Element: Place the new element at the
+                        calculated index.
+                      </li>
+                    </ol>
+                  </div>
+                  <div>
+                    <Typography variant="subtitle1">
+                      Inserting at a Specific Index:
+                    </Typography>
+                    <ol>
+                      <li>
+                        Check for Space and Valid Index: Make sure there's space
+                        and the index is valid.
+                      </li>
+                      <li>
+                        Shift Elements: Shift all elements from the target index
+                        to the end of the array.
+                      </li>
+                      <li>
+                        Insert the Element: Place the new element at the target
+                        index.
+                      </li>
+                    </ol>
+                  </div>
+                  <div>
+                    <Typography variant="subtitle1">Complexity:</Typography>
+                    <ul>
+                      <li>
+                        Inserting at the beginning or end has a time complexity
+                        of O(n) in the worst case, where n is the number of
+                        elements in the array. This is because we might need to
+                        shift all elements.
+                      </li>
+                      <li>
+                        Inserting at a specific index also has a worst-case time
+                        complexity of O(n) due to the potential shifting of
+                        elements.
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <Typography variant="subtitle1">
+                      Things to Consider:
+                    </Typography>
+                    <ul>
+                      <li>
+                        In some languages, arrays have fixed sizes. Consider
+                        using data structures like linked lists for frequent
+                        insertions.
+                      </li>
+                      <li>
+                        Depending on the language, there might be built-in
+                        functions for inserting elements.
+                      </li>
+                    </ul>
+                  </div>
+                  <Insertion />
+                </div>
+              </li>
+
+              <li>
+                <span>Deletion</span>
+              </li>
+              <li>
+                <span>Updating</span>
+              </li>
+            </ol>
+          </Box>
+          <Divider sx={{ my: 2 }} />
         </Box>
-        <Divider sx={{ my: 2 }} />
-        
-      </Box>
-    </Container>
+      </Container>
+    </>
   );
 }
 

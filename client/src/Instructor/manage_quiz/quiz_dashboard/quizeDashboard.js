@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddQuestion from "./addQuestion";
+import Footer from "../../../pages/landingPage/sample/dialog/footer";
 
 function QuizDashboard() {
   const [sidebarWidth, setSidebarWidth] = useState(0);
@@ -143,111 +144,113 @@ function QuizDashboard() {
   };
 
   return (
-    <div className="quiz-dashboard-container">
-      <ToastContainer />
-      <NavBar
-        toggleSidebar={toggleSidebar}
-        sidebarWidth={sidebarWidth}
-        userData={userData}
-      />
-      <div
-        className="main-quiz-content"
-        style={{ marginLeft: `${sidebarWidth}px` }}
-      >
-        <div className="add-quiz">
-          <div
-            className="add"
-            onMouseEnter={dispayHover}
-            onMouseLeave={hideHover}
-            onClick={handleAddQuiz}
-          >
-            +
-            <span className={`spam ${!isHover ? "display" : ""}`}>
-              Add Quiz
-            </span>
+    <>
+      <div className="quiz-dashboard-container">
+        <ToastContainer />
+        <NavBar
+          toggleSidebar={toggleSidebar}
+          sidebarWidth={sidebarWidth}
+          userData={userData}
+        />
+        <div
+          className="main-quiz-content"
+          style={{ marginLeft: `${sidebarWidth}px` }}
+        >
+          <div className="add-quiz">
+            <div
+              className="add"
+              onMouseEnter={dispayHover}
+              onMouseLeave={hideHover}
+              onClick={handleAddQuiz}
+            >
+              +
+              <span className={`spam ${!isHover ? "display" : ""}`}>
+                Add Quiz
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div className="question-board">
-          <div className={`input-container ${isQuiz ? "quiz-display" : ""}`}>
-            <form>
-              <input
-                type="text"
-                placeholder="name"
-                onChange={handleInput}
-                name="name"
+          <div className="question-board">
+            <div className={`input-container ${isQuiz ? "quiz-display" : ""}`}>
+              <form>
+                <input
+                  type="text"
+                  placeholder="name"
+                  onChange={handleInput}
+                  name="name"
+                />
+                <input
+                  type="text"
+                  placeholder="Description"
+                  onChange={handleInput}
+                  name="description"
+                />
+                <div className="button-cont">
+                  <button className="save" onClick={handleQuizSave}>
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    className="cancel"
+                    onClick={handleQuizCacell}
+                  >
+                    cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div
+              className={`question-container ${!isQuestion ? "question-display" : ""}`}
+            >
+              <AddQuestion
+                cancel={handleQuestionCancel}
+                quiz_name={selectedQuizName}
+                quiz_id={selectedQuizId}
               />
-              <input
-                type="text"
-                placeholder="Description"
-                onChange={handleInput}
-                name="description"
-              />
-              <div className="button-cont">
-                <button className="save" onClick={handleQuizSave}>
-                  Save
-                </button>
-                <button
-                  type="button"
-                  className="cancel"
-                  onClick={handleQuizCacell}
-                >
-                  cancel
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
-          <div
-            className={`question-container ${!isQuestion ? "question-display" : ""}`}
-          >
-            <AddQuestion
-              cancel={handleQuestionCancel}
-              quiz_name={selectedQuizName}
-              quiz_id={selectedQuizId}
-            />
-          </div>
-        </div>
 
-        <div className="available-quiz">
-          {quizzes.map((quiz) => (
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <>
-                  <tr key={quiz.id}>
-                    <td>{quiz.name}</td>
-                    <td>{quiz.description}</td>
+          <div className="available-quiz">
+            {quizzes.map((quiz) => (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
                   </tr>
-                  <tr key={`${quiz.id}-actions`}>
-                    <td className="actions">
-                      <button
-                        className="add-question-btn btnn"
-                        onClick={() => handleAddQuestion(quiz.name, quiz.id)}
-                      >
-                        Add Question
-                      </button>
-                    </td>
-                    <td className="actions">
-                      <button
-                        className="remove-btn btnn"
-                        onClick={() => handleDeleteQuiz(quiz.id)}
-                      >
-                        Remove Quiz
-                      </button>
-                    </td>
-                  </tr>
-                </>
-              </tbody>
-            </table>
-          ))}
+                </thead>
+                <tbody>
+                  <>
+                    <tr key={quiz.id}>
+                      <td>{quiz.name}</td>
+                      <td>{quiz.description}</td>
+                    </tr>
+                    <tr key={`${quiz.id}-actions`}>
+                      <td className="actions">
+                        <button
+                          className="add-question-btn btnn"
+                          onClick={() => handleAddQuestion(quiz.name, quiz.id)}
+                        >
+                          Add Question
+                        </button>
+                      </td>
+                      <td className="actions">
+                        <button
+                          className="remove-btn btnn"
+                          onClick={() => handleDeleteQuiz(quiz.id)}
+                        >
+                          Remove Quiz
+                        </button>
+                      </td>
+                    </tr>
+                  </>
+                </tbody>
+              </table>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

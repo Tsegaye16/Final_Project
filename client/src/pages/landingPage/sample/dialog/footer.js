@@ -6,7 +6,7 @@ import { Container, Grid, Typography, Link } from "@material-ui/core";
 const Footer = () => {
   return (
     <footer
-      style={{ backgroundColor: "#2c3e50", color: "#fff", padding: "20px 0" }}
+      style={{ backgroundColor: "#2c3e50", color: "#fff", padding: "10px 0" }}
     >
       <Container>
         {/* Footer content */}

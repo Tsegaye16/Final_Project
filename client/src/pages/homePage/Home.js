@@ -29,13 +29,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import StackList from "../../DSA/DataStracture/Linear/stack/stackList";
 import QueueList from "../../DSA/DataStracture/Linear/queue/queueList";
+import Footer from "../landingPage/sample/dialog/footer";
 
 function Home({ instructor }) {
   const [selectedItem, setSelectedItem] = useState("");
   const [icon, setIcon] = useState("times");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
-  const [sidebarWidth, setSidebarWidth] = useState(260);
+  const [sidebarWidth, setSidebarWidth] = useState(240);
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(new Date().getTime()); // Define startTime here
   //const { id } = useParams();
@@ -69,7 +70,7 @@ function Home({ instructor }) {
   const toggleSidebar = () => {
     setIcon((prevIcon) => (prevIcon === "bars" ? "times" : "bars"));
     setSidebarOpen((prevState) => !prevState);
-    setSidebarWidth((prevWidth) => (prevWidth === 0 ? 260 : 0));
+    setSidebarWidth((prevWidth) => (prevWidth === 0 ? 240 : 0));
   };
 
   const handleChat = () => {
@@ -160,9 +161,12 @@ function Home({ instructor }) {
             marginLeft: `${sidebarWidth}px`,
             width: "100%",
             position: "relative",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <div className="rendered">{renderSelectedComponent()}</div>
+          <Footer />
           {!instructor && (
             <>
               <div

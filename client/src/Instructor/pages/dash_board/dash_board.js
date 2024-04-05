@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./dash_board.scss"; // Make sure to import the CSS file
 import NavBar from "../../components/nav_bar/nav_bar";
 import axios from "axios";
+import Footer from "../../../pages/landingPage/sample/dialog/footer";
 
 function DashBoard() {
   const [sidebarWidth, setSidebarWidth] = useState(0);
@@ -42,6 +43,7 @@ function DashBoard() {
           <h1>Style it properly later on...................</h1>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
