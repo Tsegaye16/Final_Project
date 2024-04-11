@@ -7,13 +7,15 @@ function Hash_table() {
   const [speed, setSpeed] = useState(500);
   const [insertValue, setInsertValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [deleteValue, setDeleteValue] = useState("");
-  const [searchIndex, setSearchIndex] = useState(null);
   const [searchResult, setSearchResult] = useState("");
-  const [searchHighlight, setSearchHighlight] = useState([]); // New state for search visualization
+  const [isSearching, setIsSearching] = useState(false); // New state for search in progress
+  const [searchResultIndex, setSearchResultIndex] = useState(null);
+  const [colorCircles, setColorCircles] = useState(false);
+  const [beignCompare, setBeingCompare] = useState("");
+  const [removeValue, setRemoveValue] = useState("");
 
   // create the hash table with given tableSize
-  const creatinitialTable = (size) => {
+  const createInitialTable = (size) => {
     let newTable = [];
     for (let i = 0; i < size; i++) {
       newTable[i] = null;
@@ -22,7 +24,9 @@ function Hash_table() {
   };
 
   const handleCreateTable = () => {
-    creatinitialTable(tableSize);
+    setSearchResultIndex(null);
+    setIsSearching(false);
+    createInitialTable(tableSize);
   };
 
   const handleTime = (event) => {
@@ -42,10 +46,12 @@ function Hash_table() {
     // Create a copy of the index array
     const newIndex = [...index];
 
+    // If the index position is empty, insert the value directly
     if (newIndex[pos] === null || newIndex[pos] === undefined) {
       newIndex[pos] = [item];
     } else {
-      newIndex[pos].push(item);
+      // If there's a collision, append the value to the existing chain
+      newIndex[pos] = [...newIndex[pos], item];
     }
 
     // Update the state with the modified copy
@@ -54,40 +60,102 @@ function Hash_table() {
     return pos;
   };
 
-  // Searching in the table using the search algorithm
-  const searchInTable = async () => {
-    const value = parseInt(searchValue);
-    const pos = getHashCode(value, tableSize); // Get the hash of the search value
-    setSearchIndex(pos);
-    const bucket = index[pos] || []; // Get the bucket corresponding to the hash index
-    let found = false; // Flag to track if the value is found
+  // Inside the searchInTable function
 
-    // Color the hash index
-    setSearchHighlight([pos]);
+  const searchInTable = async (value) => {
+    setIsSearching(true); // Set searching state to true
+    setSearchResult(""); // Clear previous search result
+    setColorCircles(true); // Enable coloring of circles during search
 
-    // Introduce a delay before coloring the inserted values
-    await sleep(parseInt(speed));
+    const pos = getHashCode(value, tableSize);
+    setSearchResultIndex(pos); // Store the index where the search was performed
+    await new Promise((resolve) => setTimeout(resolve, speed));
+    if (index[pos] === null || index[pos] === undefined) {
+      setSearchResult(`${value} not found`);
+      setIsSearching(false); // Set searching state to false after delay
+      setColorCircles(false); // Disable coloring of circles after the search process
+      return;
+    }
 
-    // Loop through each value within the bucket and color them one after the other
-    for (let i = 0; i < bucket.length; i++) {
-      await sleep(parseInt(speed)); // Introduce delay
-      setSearchHighlight((prevHighlight) => [...prevHighlight, pos]);
-      if (bucket[i] === value) {
-        // If value found
-        setSearchResult(`${value} found at index ${pos}`);
+    let current = index[pos];
+    let found = false;
+
+    for (let i = 0; i <= current.length; i++) {
+      // Highlight the current index being searched
+      setSearchResultIndex(pos);
+
+      // Highlight the current element with a delay
+      await new Promise((resolve) => setTimeout(resolve, speed));
+      setBeingCompare(current[i]); // Highlight the current value
+
+      if (current[i] === value) {
         found = true;
+        setSearchResult(`${value} found  at index ${pos}`);
         break;
+      } else {
+        setSearchResult(`${current[i]} is being compared`); // Update search progress
       }
     }
 
-    // If value not found after searching the entire bucket
     if (!found) {
-      setSearchResult(`${value} not found in the table`);
+      setSearchResult(`${value} not found`);
     }
+
+    setColorCircles(false); // Disable coloring of circles after the search process
+    setIsSearching(false); // Set searching state to false after delay
   };
 
-  const sleep = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  const removeFromTable = async (value) => {
+    setIsSearching(true); // Set searching state to true
+    setSearchResult(""); // Clear previous search result
+    setColorCircles(true); // Enable coloring of circles during search
+
+    const pos = getHashCode(value, tableSize);
+    setSearchResultIndex(pos); // Store the index where the search was performed
+    //setBeingCompare(value); // Highlight the value to be removed
+
+    await new Promise((resolve) => setTimeout(resolve, speed)); // Delay to highlight index and value
+
+    if (index[pos] === null || index[pos] === undefined) {
+      setSearchResult(`${value} not found`);
+      setIsSearching(false); // Set searching state to false after delay
+      setColorCircles(false); // Disable coloring of circles after the search process
+      return;
+    }
+
+    let current = index[pos];
+    let found = false;
+
+    for (let i = 0; i < current.length; i++) {
+      // Highlight the current index being searched
+      setSearchResultIndex(pos);
+
+      // Highlight the current element with a delay
+      await new Promise((resolve) => setTimeout(resolve, speed));
+      setBeingCompare(current[i]); // Highlight the current value
+
+      if (current[i] === value) {
+        found = true;
+        // After a short delay, remove the item visually
+        setTimeout(() => {
+          const updatedIndex = [...index];
+          updatedIndex[pos].splice(i, 1);
+          setIndex(updatedIndex);
+          setSearchResult(`${value} removed from index ${pos}`);
+          setIsSearching(false); // Set searching state to false after delay
+          setColorCircles(false); // Disable coloring of circles after the search process
+        }, speed);
+        break;
+      } else {
+        setSearchResult(`${current[i]} is being compared`);
+      }
+    }
+
+    if (!found) {
+      setSearchResult(`${value} not found`);
+      setIsSearching(false); // Set searching state to false after delay
+      setColorCircles(false); // Disable coloring of circles after the search process
+    }
   };
 
   return (
@@ -100,10 +168,15 @@ function Hash_table() {
             type="number"
             className="node-number"
             placeholder="table size"
+            disabled={isSearching}
             value={tableSize}
             onChange={(e) => setTableSize(parseInt(e.target.value))}
           />
-          <button className="create-button" onClick={handleCreateTable}>
+          <button
+            className="create-button"
+            onClick={handleCreateTable}
+            disabled={isSearching}
+          >
             create
           </button>
         </div>
@@ -114,11 +187,13 @@ function Hash_table() {
             max={500}
             className="node-number"
             placeholder="value"
+            disabled={isSearching}
             value={insertValue}
             onChange={(e) => setInsertValue(parseInt(e.target.value))}
           />
           <button
             className="create-button"
+            disabled={isSearching}
             onClick={() => insertIntoTable(insertValue)}
           >
             insert
@@ -130,21 +205,38 @@ function Hash_table() {
             className="node-number"
             placeholder="value"
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            disabled={isSearching}
+            onChange={(e) => setSearchValue(parseInt(e.target.value))}
           />
-          <button className="create-button" onClick={searchInTable}>
+          <button
+            className="create-button"
+            disabled={isSearching} // Disable if searching or no table
+            onClick={() => searchInTable(searchValue)}
+          >
             search
           </button>
         </div>
         <div className="remove-value">
-          <input type="number" className="node-number" placeholder="value" />
-          <button className="create-button">remove</button>
+          <input
+            type="number"
+            disabled={isSearching}
+            className="node-number"
+            placeholder="value"
+            value={removeValue}
+            onChange={(e) => setRemoveValue(parseInt(e.target.value))}
+          />
+          <button
+            className="create-button"
+            disabled={isSearching}
+            onClick={() => removeFromTable(removeValue)}
+          >
+            remove
+          </button>
         </div>
         <div
           className="time-slider-container"
           style={{
             paddingTop: "40px",
-
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -154,6 +246,7 @@ function Hash_table() {
             type="range"
             min="1000" // Minimum one second
             max="60000"
+            disabled={isSearching}
             className="slider"
             style={{
               width: "150px",
@@ -175,7 +268,11 @@ function Hash_table() {
                 cx={30}
                 cy={i * 70 + 50}
                 r="25"
-                fill={searchHighlight.includes(i) ? "yellow" : "white"}
+                fill={
+                  colorCircles && i === searchResultIndex
+                    ? "yellow" // Yellow for currently searching index
+                    : "lightgray"
+                }
                 stroke="black"
                 strokeWidth="2"
               />
@@ -193,17 +290,17 @@ function Hash_table() {
                       stroke="black"
                       markerEnd="url(#arrow)"
                     />
-                    {/* Highlight circles being searched */}
+                    {/* Color the circle being searched or found during search */}
                     <circle
                       cx={j * 70 + 110}
                       cy={i * 70 + 50}
                       r="16"
                       fill={
-                        index[i] && index[i].includes(item)
-                          ? searchHighlight.includes(i) // Highlight circles being searched
-                            ? "yellow"
-                            : "lightgray"
-                          : "white"
+                        searchResultIndex !== null &&
+                        i === searchResultIndex &&
+                        item === beignCompare
+                          ? "green" // Green for found item
+                          : "lightgray"
                       }
                       stroke="black"
                     />
@@ -212,6 +309,8 @@ function Hash_table() {
                       y={i * 70 + 55}
                       textAnchor="middle"
                       fontSize="14"
+                      fill="black"
+                      // Green for found item text
                     >
                       {item}
                     </text>
@@ -219,6 +318,7 @@ function Hash_table() {
                 ))}
             </React.Fragment>
           ))}
+
           <defs>
             <marker
               id="arrow"

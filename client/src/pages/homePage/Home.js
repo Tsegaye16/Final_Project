@@ -4,15 +4,16 @@ import "./Home.scss";
 
 import NavBar from "../../components/navBar/NavBar";
 import LeftBar from "../../components/leftBar/leftBar";
-import Stack from "../../DSA/DataStracture/Linear/stack/stack";
+
 import Array from "../../DSA/DataStracture/Linear/array/array";
 import Welcome from "../../DSA/welcome/welcome";
-import Queues from "../../DSA/DataStracture/Linear/queue/queues";
+
 import Linked_list from "../../DSA/DataStracture/Linear/linked_list/linked_list";
 import BT from "../../DSA/DataStracture/non_Linear/binary_Tree/BT";
 import BST from "../../DSA/DataStracture/non_Linear/binary_tree_search/BST";
 import Hash_table from "../../DSA/DataStracture/non_Linear/hash_table/hash_table";
-import Graph from "../../DSA/DataStracture/non_Linear/graph/graph";
+//import Graph from "../../DSA/DataStracture/non_Linear/graph/graph";
+import Graph from "../../DSA/DataStracture/non_Linear/graph/graph.js";
 import Linear_search from "../../DSA/Algorithm/search/linear_search/linear_search";
 import Binary_search from "../../DSA/Algorithm/search/binary_search/binary_search";
 import Bubble_sort from "../../DSA/Algorithm/sort/bubble_sort/bubble_sort";
@@ -25,11 +26,10 @@ import Tree from "../../DSA/DataStracture/non_Linear/tree/tree";
 import QuizIcon from "@mui/icons-material/Quiz";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, CircularProgress, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+
 import axios from "axios";
 import StackList from "../../DSA/DataStracture/Linear/stack/stackList";
 import QueueList from "../../DSA/DataStracture/Linear/queue/queueList";
-import Footer from "../landingPage/sample/dialog/footer";
 
 function Home({ instructor }) {
   const [selectedItem, setSelectedItem] = useState("");
@@ -39,12 +39,22 @@ function Home({ instructor }) {
   const [sidebarWidth, setSidebarWidth] = useState(240);
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(new Date().getTime()); // Define startTime here
-  //const { id } = useParams();
+  const [elapsedTime, setElapsedTime] = useState(0);
   const [isUser, setIsUser] = useState(false);
   const [id, setId] = useState(0);
+
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    axios
+      .post("http://localhost:8800/instructor/elapsed")
+      .then((response) => {
+        setElapsedTime(response.data.time[0].duration);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
+
     const token = localStorage.getItem("accessToken");
     const isTokenAvailable = !!token; // Convert to boolean
 
@@ -52,7 +62,7 @@ function Home({ instructor }) {
     setIsUser(isTokenAvailable);
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     setId(decodedToken.user_id);
-  });
+  }, []);
 
   useEffect(() => {
     axios
@@ -79,9 +89,9 @@ function Home({ instructor }) {
 
   const updateProgress = () => {
     const currentTime = new Date().getTime();
-    const elapsedTime = (currentTime - startTime) / 1000; // in seconds
-    const totalSeconds = 3600; // assume 1 minute for completion
-    const newProgress = (elapsedTime / totalSeconds) * 100;
+    const elapsedTimes = (currentTime - startTime) / 1000; // in seconds
+    const totalSeconds = elapsedTime * 60 * 60; // assume 1 minute for completion
+    const newProgress = (elapsedTimes / totalSeconds) * 100;
 
     // Ensure progress doesn't exceed 100%
     setProgress(Math.min(newProgress, 100));
@@ -97,38 +107,38 @@ function Home({ instructor }) {
   const renderSelectedComponent = () => {
     switch (selectedItem) {
       case "array":
-        return <Array />;
+        return <Array title={selectedItem} userData={userData} />;
       case "stack":
-        return <StackList />;
+        return <StackList title={selectedItem} userData={userData} />;
       case "queue":
-        return <QueueList />;
+        return <QueueList title={selectedItem} userData={userData} />;
       case "linked-list":
-        return <Linked_list />;
+        return <Linked_list title={selectedItem} userData={userData} />;
       case "binary_tree":
-        return <BT />;
+        return <BT title={selectedItem} userData={userData} />;
       case "bst":
-        return <BST />;
+        return <BST title={selectedItem} userData={userData} />;
       case "hash_table":
-        return <Hash_table />;
+        return <Hash_table title={selectedItem} userData={userData} />;
       case "graph":
-        return <Graph />;
+        return <Graph title={selectedItem} userData={userData} />;
       case "linear_search":
-        return <Linear_search />;
+        return <Linear_search title={selectedItem} userData={userData} />;
       case "binary_search":
-        return <Binary_search />;
+        return <Binary_search title={selectedItem} userData={userData} />;
       case "bubble_sort":
-        return <Bubble_sort />;
+        return <Bubble_sort title={selectedItem} userData={userData} />;
       case "insertion_sort":
-        return <Insertion_sort />;
+        return <Insertion_sort title={selectedItem} userData={userData} />;
       case "selection_sort":
-        return <Selection_sort />;
+        return <Selection_sort title={selectedItem} userData={userData} />;
       case "merge_sort":
-        return <Merge_sort />;
+        return <Merge_sort title={selectedItem} userData={userData} />;
       case "quick_sort":
-        return <Quick_sort />;
+        return <Quick_sort title={selectedItem} userData={userData} />;
 
       case "tree":
-        return <Tree />;
+        return <Tree title={selectedItem} userData={userData} />;
       default:
         return <Welcome />;
     }
@@ -166,7 +176,7 @@ function Home({ instructor }) {
           }}
         >
           <div className="rendered">{renderSelectedComponent()}</div>
-          <Footer />
+
           {!instructor && (
             <>
               <div

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Button, Input, Slider, Typography } from "@mui/material";
+import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import "./insertion_sort.scss"; // Import your SCSS file if needed
 
 function InsertionSort() {
@@ -65,40 +65,61 @@ function InsertionSort() {
   }, [arraySize]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ marginBottom: "20px" }}>
-        <Typography variant="body1">Array Size:</Typography>
-        <Input
-          type="number"
-          inputProps={{ min: 1, max: 25 }}
-          value={arraySize}
-          onChange={(e) => setArraySize(parseInt(e.target.value))}
-          disabled={sorting}
-          style={{ marginLeft: "10px" }}
-        />
-        <Button
-          onClick={() => generateRandomArray(arraySize)}
-          disabled={sorting}
-          style={{ marginLeft: "10px" }}
+    <Box display="flex" flexDirection="column" alignItems="center" padding="0">
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="20px"
+        bgcolor="rgb(239, 235, 235)"
+        padding="20px"
+        borderRadius="5px"
+        width="100%"
+        borderBottom="2px solid black"
+      >
+        <Box
+          display="flex"
+          flexDirection="row"
+          width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
+          flexWrap="wrap" // Allowing items to wrap when screen size is reduced
         >
-          Generate Array
-        </Button>
-      </div>
-      <div style={{ marginBottom: "20px" }}>
-        <Typography variant="body1">Speed: {speed}</Typography>
-        <Slider
-          value={speed}
-          min={1}
-          max={500}
-          onChange={(e) => setSpeed(parseInt(e.target.value))}
-          disabled={sorting}
-          style={{ width: "200px" }}
-        />
-      </div>
-      <Button onClick={insertionSort} disabled={sorting}>
-        {sorting ? "Sorting..." : "Start Insertion Sort"}
-      </Button>
-      <div style={{ marginTop: "20px" }}>
+          <Typography variant="body1">Array Size:</Typography>
+          <Input
+            type="number"
+            inputProps={{ min: 1, max: 25 }}
+            value={arraySize}
+            onChange={(e) => setArraySize(parseInt(e.target.value))}
+            disabled={sorting}
+            style={{ marginLeft: "10px" }}
+          />
+          <Button
+            onClick={() => generateRandomArray(arraySize)}
+            disabled={sorting}
+            style={{ marginLeft: "10px" }}
+          >
+            Generate Array
+          </Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Button onClick={insertionSort} disabled={sorting}>
+            {sorting ? "Sorting..." : "Start Insertion Sort"}
+          </Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Typography variant="body1">Speed: {speed}</Typography>
+          <Slider
+            value={speed}
+            min={1}
+            max={500}
+            onChange={(e) => setSpeed(parseInt(e.target.value))}
+            disabled={sorting}
+            style={{ width: "200px" }}
+          />
+        </Box>
+      </Box>
+
+      <Box marginTop="20px">
         {array.map((item, index) => (
           <div
             key={index}
@@ -114,8 +135,8 @@ function InsertionSort() {
             {item.value}
           </div>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

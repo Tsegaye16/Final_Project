@@ -8,7 +8,7 @@ import {
 import "./app.css";
 import Home from "./pages/homePage/Home";
 import Login from "./pages/loginPage/Login";
-import Invite from "./pages/landingPage/Invite";
+
 import Register from "./pages/registerPage/Register";
 import InstructorDashboard from "./Instructor/pages/dash_board/dash_board";
 import StudentProfile from "./profile/studentProfile/studentProfileUpdate";
@@ -16,7 +16,7 @@ import Quiz from "./student/quiz";
 import QuizeDashboard from "./Instructor/manage_quiz/quiz_dashboard/quizeDashboard";
 import StudentList from "./admin/manageStudent/student";
 import InstructorList from "./admin/manageInstructor/instructor";
-import AdminProfile from "./admin/profile/profile";
+
 import AdminDashboard from "./admin/dashboard/dashboard";
 import AddQuestion from "./Instructor/manage_quiz/quiz_dashboard/addQuestion";
 import NotFound from "./pages/error_handling/NotFound";
@@ -28,8 +28,10 @@ import QuizQuestions from "./student/question_board";
 import Content from "./Instructor/manage_content/Content";
 import useTokenTimeout from "./token_control/token_timeout";
 import Landing from "./pages/landingPage/sample/landing";
-import ResponsiveAppBar from "./pages/homePage/appBar";
-import StackList from "./DSA/DataStracture/Linear/stack/stackList";
+import Team from "./pages/landingPage/sample/dialog/team";
+import AboutSection from "./pages/landingPage/sample/dialog/AboutSection";
+import FeatureSection from "./pages/landingPage/sample/dialog/feature";
+import { ContactUs } from "./popup/contact/contact";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -41,7 +43,7 @@ function App() {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("accessToken");
-    console.log(storedToken);
+
     if (storedToken) {
       setToken(storedToken); // Set the token from local storage
       setAuthenticated(true); // User is authenticated
@@ -135,6 +137,10 @@ function App() {
 const StudentRoutes = ({ userRole, token }) => {
   return (
     <Routes>
+      <Route path="/about" element={<AboutSection />} />
+      <Route path="/contact" element={<ContactUs />} />
+      <Route path="/feature" element={<FeatureSection />} />
+      <Route path="/team" element={<Team />} />
       <Route path="/:id" element={<Home userRole={userRole} token={token} />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/profile" element={<StudentProfile />} />
@@ -146,7 +152,11 @@ const StudentRoutes = ({ userRole, token }) => {
 const InstructorRoutes = ({ userRole, token }) => {
   return (
     <Routes>
+      <Route path="/contact" element={<ContactUs />} />
       <Route path="/profile" element={<StudentProfile />} />
+      <Route path="/about" element={<AboutSection />} />
+      <Route path="/feature" element={<FeatureSection />} />
+      <Route path="/team" element={<Team />} />
       <Route path="/" element={<InstructorDashboard />} />
       <Route path="/quiz" element={<QuizeDashboard />} />
       <Route path="/question" element={<AddQuestion />} />
@@ -163,6 +173,7 @@ const AdminRoutes = () => {
     <Routes>
       <Route path="/" element={<AdminDashboard />} />
       <Route path="/profile" element={<StudentProfile />} />
+      <Route path="/team" element={<Team />} />
       <Route path="/instructor" element={<InstructorList />} />
       <Route path="/student/" element={<StudentList />} />
     </Routes>

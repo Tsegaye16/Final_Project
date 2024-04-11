@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Button, Input, Slider, Typography } from "@mui/material";
+import { Button, Input, Slider, Typography, Box } from "@mui/material";
 
 // Implement Bubble Sort algorithm
 const BubbleSort = () => {
@@ -61,40 +61,70 @@ const BubbleSort = () => {
   }, [arraySize]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ marginBottom: "20px" }}>
-        <Typography variant="body1">Array Size:</Typography>
-        <Input
-          type="number"
-          inputProps={{ min: 1, max: 25 }}
-          value={arraySize}
-          onChange={(e) => setArraySize(parseInt(e.target.value))}
-          disabled={sorting}
-          style={{ marginLeft: "10px" }}
-        />
-        <Button
-          onClick={() => generateRandomArray(arraySize)}
-          disabled={sorting}
-          style={{ marginLeft: "10px" }}
+    <Box display="flex" flexDirection="column" alignItems="center" padding="0">
+      {/* First part with background color */}
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="20px"
+        bgcolor="rgb(239, 235, 235)"
+        padding="20px"
+        borderRadius="5px"
+        width="100%"
+        borderBottom="2px solid black"
+      >
+        <Box
+          display="flex"
+          flexDirection="row"
+          width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
+          flexWrap="wrap" // Allowing items to wrap when screen size is reduced
         >
-          Generate Array
-        </Button>
-      </div>
-      <div style={{ marginBottom: "20px" }}>
-        <Typography variant="body1">Speed: {speed}</Typography>
-        <Slider
-          min={1}
-          max={500}
-          value={speed}
-          onChange={(e) => setSpeed(parseInt(e.target.value))}
-          disabled={sorting}
-          style={{ width: "200px" }}
-        />
-      </div>
-      <Button onClick={bubbleSort} disabled={sorting}>
-        {sorting ? "Sorting..." : "Start Bubble Sort"}
-      </Button>
-      <div style={{ marginTop: "20px" }}>
+          <Typography variant="body1">Array Size:</Typography>
+          <Input
+            type="number"
+            inputProps={{ min: 1, max: 25 }}
+            value={arraySize}
+            onChange={(e) => setArraySize(parseInt(e.target.value))}
+            disabled={sorting}
+            style={{ marginLeft: "10px" }}
+          />
+          <Button
+            onClick={() => generateRandomArray(arraySize)}
+            disabled={sorting}
+            style={{ marginLeft: "10px" }}
+          >
+            Generate Array
+          </Button>
+        </Box>
+
+        <Box display="flex" flexDirection="row" width="100%">
+          <Button
+            onClick={bubbleSort}
+            disabled={sorting}
+            style={{ marginBottom: "20px" }}
+          >
+            {sorting ? "Sorting..." : "Start Bubble Sort"}
+          </Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Typography variant="body1" style={{ marginTop: "10px" }}>
+            Speed: {speed}
+          </Typography>
+          <Slider
+            min={1}
+            max={500}
+            value={speed}
+            onChange={(e) => setSpeed(parseInt(e.target.value))}
+            disabled={sorting}
+            style={{ width: "40%" }}
+          />
+        </Box>
+      </Box>
+
+      {/* Visualization part */}
+      <Box marginTop="20px">
         {array.map((item, index) => (
           <div
             key={index}
@@ -110,8 +140,8 @@ const BubbleSort = () => {
             {item.value}
           </div>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

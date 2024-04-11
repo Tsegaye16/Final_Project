@@ -65,8 +65,8 @@ q.display()
   
     `,
   "C/C++": `
-  #include <stdio.h>
-  #include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
   
 struct Node {
     int val;

@@ -16,7 +16,6 @@ import AboutSection from "./dialog/AboutSection";
 const Section = ({ children, border }) => (
   <div
     style={{
-      // marginTop: border ? "10px" : "44px", // Add a gap if 'border' is true
       borderBottom: border ? "2px solid #ccc" : "none",
     }}
   >

@@ -22,8 +22,6 @@ const CodeTemplate = ({ algo }) => {
         className="editor"
         mode={getMode()}
         theme="textmate"
-        useWrapMode={true}
-        showGutter={true}
         fontSize={14}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}

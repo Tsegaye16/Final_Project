@@ -9,6 +9,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import UpdateUserPopup from "../manageStudent/studentPopup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserManagement from "./user_management";
 
 function AdminDashdoard() {
   const [sidebarWidth, setSidebarWidth] = useState(250);
@@ -154,7 +155,7 @@ function AdminDashdoard() {
         username={username}
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
-        <div className="intro">wellcome {user.name}</div>
+        <UserManagement />
         <div className="table-container">
           <h2>Recently Registered user</h2>
           <table>

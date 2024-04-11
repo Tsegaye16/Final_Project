@@ -243,7 +243,7 @@ const StudentList = () => {
                   <TableCell>Username</TableCell>
                   <TableCell>Password</TableCell>
                   <TableCell>Role</TableCell>
-                  <TableCell>BirTableCell date</TableCell>
+                  <TableCell>Birth date</TableCell>
                   <TableCell>Phone number</TableCell>
                   <TableCell>sex</TableCell>
                   <TableCell>image</TableCell>

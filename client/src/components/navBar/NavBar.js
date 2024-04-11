@@ -85,17 +85,23 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
             <MenuItem onClick={() => handleMenuItemClick("/instructor/quiz")}>
               Manage quiz
             </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("instructor/content")}>
-              Manage content
-            </MenuItem>
+            <MenuItem>Manage content</MenuItem>
           </>
         )}
         {!instructor && (
           <>
-            <MenuItem>Feature</MenuItem>
-            <MenuItem>About</MenuItem>
-            <MenuItem>Team</MenuItem>
-            <MenuItem>Contact</MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("/student/feature")}>
+              Feature
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("/student/about")}>
+              About
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("/student/team")}>
+              Team
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("/student/contact")}>
+              Contact
+            </MenuItem>
           </>
         )}
       </Menu>

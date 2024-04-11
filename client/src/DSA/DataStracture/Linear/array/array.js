@@ -139,7 +139,6 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import Declaration from "./operations/declaration/declaration";
@@ -149,7 +148,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Insertion from "./operations/insertion/insertion";
 import CodeTemplate from "./operations/code/CodeTemplate";
-import Footer from "../../../../pages/landingPage/sample/dialog/footer";
+import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -397,14 +396,7 @@ int main() {
             <CodeTemplate />
           </Box>
 
-          <Box sx={useStyles.root}>
-            <Typography variant="h6" sx={useStyles.title}>
-              Summary
-            </Typography>
-            <Typography variant="body1" sx={useStyles.paragraph}>
-              make it editable later........
-            </Typography>
-          </Box>
+          <Content />
         </Box>
       </Container>
       {/* <Footer /> */}

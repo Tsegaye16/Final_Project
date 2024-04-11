@@ -116,6 +116,7 @@ export default function Nav_bar({ toggleSidebar, sidebarWidth, userData }) {
             {renderUserMenu()}
           </div>
         </div>
+
         <nav className={sidebarWidth !== 0 ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items">
             {SidebarData.map((item, index) => (

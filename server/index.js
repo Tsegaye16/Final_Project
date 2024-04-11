@@ -33,6 +33,12 @@ import EmailConfirm from "./email_confirm.js";
 import { promisify } from "util";
 import studentProfile from "./student/view_profile.js";
 import StudenUpdateProfile from "./student/update_profile.js";
+import viewElapsed from "./instructor/retrieve_elapsed_time.js";
+import updateElapsed from "./instructor/update_elapsed.js";
+import postedNote from "./student/retrieve_note.js";
+import updateNote from "./student/update_note.js";
+import deleteNote from "./student/delete_note.js";
+import addNote from "./student/add_note.js";
 
 const app = express();
 app.use(express.json());
@@ -256,6 +262,30 @@ app.post("/student/viewProfile", async (req, res) => {
 
 app.post("/student/updateProfile", upload.single("image"), async (req, res) => {
   await StudenUpdateProfile(db, req, res);
+});
+
+app.post("/instructor/elapsed", async (req, res) => {
+  await viewElapsed(db, req, res);
+});
+
+app.post("/instructor/updateelapsed", async (req, res) => {
+  await updateElapsed(db, req, res);
+});
+
+app.get("/studen/postednote", async (req, res) => {
+  await postedNote(db, req, res);
+});
+
+app.post("/student/updatenote", async (req, res) => {
+  await updateNote(db, req, res);
+});
+
+app.post("/user/deletenote", async (req, res) => {
+  await deleteNote(db, req, res);
+});
+
+app.post("/user/addnote", async (req, res) => {
+  await addNote(db, req, res);
 });
 
 const PORT = 8800;

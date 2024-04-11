@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Slider, Typography } from "@mui/material";
+import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import "./merge_sort.scss";
 
 function MergeSort() {
@@ -122,8 +122,53 @@ function MergeSort() {
   };
 
   return (
-    <div className="merge-sort-visualizer">
-      <div className="array-container">
+    <Box display="flex" flexDirection="column" alignItems="center" padding="0">
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="20px"
+        bgcolor="rgb(239, 235, 235)"
+        padding="20px"
+        borderRadius="5px"
+        width="100%"
+        borderBottom="2px solid black"
+      >
+        <Box
+          display="flex"
+          flexDirection="row"
+          width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
+          flexWrap="wrap" // Allowing items to wrap when screen size is reduced
+        >
+          <Typography variant="body1">Array Size:</Typography>
+          <Input
+            type="number"
+            value={arraySize}
+            inputProps={{ min: 1, max: 25 }}
+            onChange={handleArraySizeChange}
+          />
+          <Button onClick={generateRandomArray} className="merge-btn">
+            Generate New Array
+          </Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Button onClick={mergeSort} className="merge-btn">
+            Start Merge Sort
+          </Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Typography variant="body1">Delay (ms): {delay}</Typography>
+          <Slider
+            min={100}
+            max={1000}
+            value={delay}
+            onChange={handleDelayChange}
+            style={{ width: "200px", marginRight: "40px" }}
+          />
+        </Box>
+      </Box>
+      <Box marginTop="20px">
         <div style={{ marginTop: "20px" }}>
           {array.map((bar, index) => (
             <div
@@ -141,31 +186,8 @@ function MergeSort() {
             </div>
           ))}
         </div>
-      </div>
-      <div className="controls">
-        <Typography variant="body1">Array Size:</Typography>
-        <Input
-          type="number"
-          value={arraySize}
-          inputProps={{ min: 1, max: 25 }}
-          onChange={handleArraySizeChange}
-        />
-        <Typography variant="body1">Delay (ms): {delay}</Typography>
-        <Slider
-          min={100}
-          max={1000}
-          value={delay}
-          onChange={handleDelayChange}
-          style={{ width: "200px", marginRight: "40px" }}
-        />
-        <Button onClick={generateRandomArray} className="merge-btn">
-          Generate New Array
-        </Button>
-        <Button onClick={mergeSort} className="merge-btn">
-          Merge Sort
-        </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

@@ -84,6 +84,24 @@ const Team = () => {
       phone: "+251995213296",
       image: tsegaye,
     },
+    {
+      name: "Genet Andualem",
+      role: "Database designer",
+      github: "https://github.com/Tsegaye16",
+      linkedin: "https://www.linkedin.com/in/tsegaye-abewa-45b456289",
+      email: "andualemgenet29@gmail.com",
+      phone: "+251929868882",
+      image: genet,
+    },
+    {
+      name: "Kefle Aseres",
+      role: "Document specialist",
+      github: "https://github.com/kefleaseres1",
+      linkedin: "https://www.linkedin.com/in/kefle-aseres-329232234/",
+      email: "kefleaseres@gmail.com",
+      phone: "+25123134277",
+      image: kefle,
+    },
   ];
 
   return (

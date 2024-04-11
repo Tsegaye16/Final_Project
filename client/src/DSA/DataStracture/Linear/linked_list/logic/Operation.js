@@ -15,8 +15,7 @@ function Operation() {
   const handleTimeDelayChange = (event) => {
     setTimeDelay(event.target.value);
   };
-  // Handling the insertion operation
-  // Function to handle input value change
+
   const handleValueChange = (event) => {
     setValue(event.target.value);
   };

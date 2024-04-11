@@ -38,19 +38,19 @@ export const SidebarData = [
   },
   {
     title: "Feature",
-    path: "/feature",
+    path: "/instructor/feature",
     icon: <FcTodoList />,
     cName: "nav-text",
   },
   {
     title: "About",
-    path: "/about",
+    path: "/instructor/about",
     icon: <InfoOutlinedIcon />,
     cName: "nav-text",
   },
   {
     title: "Contact",
-    path: "/contact",
+    path: "/instructor/contact",
     icon: <PermPhoneMsgOutlinedIcon />,
     cName: "nav-text",
   },

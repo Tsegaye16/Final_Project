@@ -1,6 +1,11 @@
 import React from "react";
+
 import { Box, Container, Typography } from "@mui/material";
+
 import Operation from "./logic/Operation";
+import CodeTemplate from "./code/CodeTemplate";
+
+import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -17,6 +22,11 @@ const useStyles = {
   paragraph: {
     marginBottom: "24px",
   },
+  posted: {
+    marginBottom: "24px",
+    backgroundColor: "#ffcdd2",
+    padding: "20px",
+  },
   subTitle: {
     fontWeight: "bold",
     marginBottom: "8px",
@@ -28,7 +38,7 @@ const useStyles = {
     padding: "16px",
   },
 };
-function Linked_list() {
+function Linked_list({ title, userData }) {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -86,8 +96,8 @@ function Linked_list() {
                 shrink during the execution of a program.
               </li>
               <li>
-                Linked lists have efficient memory utilization. Here, memory is
-                not preallocated. Memory is allocated whenever it is required
+                Linked lists have efficient memory utilization. Here, memory
+                isnot preallocated. Memory is allocated whenever it is required
                 and it is de-allocated (removed) when it is no longer needed.
               </li>
               <li>
@@ -126,6 +136,7 @@ function Linked_list() {
             In this chapter we will focus on Singly Linked list
           </Typography>
         </Box>
+
         <Box sx={useStyles.root}>
           <Typography variant="h6" sx={useStyles.title}>
             Operations of linked list
@@ -138,7 +149,6 @@ function Linked_list() {
                 </Typography>
               </li>
               <br />
-
               <Typography>
                 It means to add or insert a node at any point in the link.
                 Insertion can be at the beginning, at the end, or any selected
@@ -238,17 +248,12 @@ function Linked_list() {
                       </Typography>
                       <Typography>
                         <pre>
-                          {`void insert_POS(Node *head,int pos,int val)
-
-{
-
-       Node *temp=head;
-
-       for(int i=0;i<pos-2;i++)
-
-                  temp=temp->next;
-
-       
+                          {`
+      void insert_POS(Node *head,int pos,int val)
+      {
+        Node *temp=head;
+        for(int i=0;i<pos-2;i++)
+          temp=temp->next;  
 
        Node *temp1=new Node(val);  // insert value of the node
 
@@ -256,9 +261,171 @@ function Linked_list() {
 
        temp->next=temp1;
 
-}`}
+
+       {
+                          
+        Node *temp=head;
+ 
+        Node *temp1=new Node(val);
+ 
+        
+ 
+        if(head==NULL)
+ 
+         head=temp1;
+ 
+        else
+ 
+        {
+ 
+               while(temp->next!=NULL)
+ 
+                          temp=temp->next;
+ 
+               
+ 
+               temp->next=temp1;
+ 
+        }
+ 
+ }
+ `}
                         </pre>
                       </Typography>
+                    </Typography>
+                  </li>
+                  <li style={{ fontSize: "29px" }}>
+                    <Typography variant="h6" sx={useStyles.subTitle}>
+                      At index
+                    </Typography>
+                    <Typography>
+                      When inserting at any given position, the link is accessed
+                      to find the point where the node is to be added. The new
+                      node is inserted after the given position. If the address
+                      is not given to the previous node, you can traverse the
+                      link to find the desired point.
+                      <Typography sx={useStyles.subTitle}>
+                        Algorithm to insert at the given positino:
+                      </Typography>
+                      <Typography>
+                        <pre>
+                          {`
+        void insert_POS(Node *head,int pos,int val)
+        {
+          Node *temp=head;
+          for(int i=0;i<pos-2;i++)
+            temp=temp->next;
+            Node *temp1=new Node(val);  // insert value of the node
+            temp1->next=temp->next;
+            temp->next=temp1;
+
+        }`}
+                        </pre>
+                      </Typography>
+                    </Typography>
+                  </li>
+                </ul>
+              </Typography>
+              <li style={{ fontSize: "29px" }}>
+                <Typography variant="h6" sx={useStyles.subTitle}>
+                  Linked list node deletion
+                </Typography>
+              </li>
+              <br />
+              <Typography>
+                Another primitive operation that can be done in a singly linked
+                list is the deletion of a node. Memory is to be released for the
+                node to be deleted. A node can be deleted from the list from
+                three different places namely.
+                <ul>
+                  <li style={{ fontSize: "29px" }}>
+                    <Typography variant="h6" sx={useStyles.subTitle}>
+                      Deleting a node from the beginning
+                    </Typography>
+                    <Typography>
+                      The following steps are followed, to delete a node at the
+                      beginning of the list:
+                      <ul>
+                        <li>
+                          <Typography>
+                            If list is empty then display "Empty list" message
+                          </Typography>
+                        </li>
+                        <li>
+                          <Typography>
+                            If the list is not empty, follow the steps given
+                            below:
+                            <pre>
+                              {`
+     
+temp = start; 
+start = start -> next;
+free(temp);
+    `}
+                            </pre>
+                          </Typography>
+                        </li>
+                      </ul>
+                      <Typography sx={useStyles.subTitle}>
+                        Algorithm to delete from the beginning:
+                      </Typography>
+                      <Typography>
+                        <pre>
+                          {`
+    void delete_at_beg()
+    {
+      node *temp;
+      if(start == NULL)
+      {
+        printf("\\n No nodes are exist..");
+        return ;
+      }
+      else
+      {
+        temp = start;
+        start = temp -> next;
+        free(temp);
+        printf("\\n Node deleted ");
+      }
+    }
+  `}
+                        </pre>
+                      </Typography>
+                    </Typography>
+                  </li>
+                  <li style={{ fontSize: "29px" }}>
+                    <Typography variant="h6" sx={useStyles.subTitle}>
+                      Deleting a node from the end
+                    </Typography>
+                    <Typography>
+                      The following steps are followed to delete a node at the
+                      end of the list
+                      <ul>
+                        <li>
+                          <Typography>
+                            If list is empty then display "Empty list" message
+                          </Typography>
+                        </li>
+                        <li>
+                          <Typography>
+                            If the list is not empty, follow the steps given
+                            below
+                            <pre>
+                              {`
+  temp = prev = start;
+  while(temp -> next != NULL)
+  {
+    prev = temp;
+    temp = temp -> next;
+  }
+  prev -> next = NULL;
+  free(temp);
+    
+`}
+                            </pre>
+                          </Typography>
+                        </li>
+                      </ul>
                     </Typography>
                   </li>
                 </ul>
@@ -271,15 +438,10 @@ function Linked_list() {
           <Typography variant="h6" sx={useStyles.title}>
             Implementation
           </Typography>
+          <CodeTemplate />
         </Box>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Summary
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            make it editable later........
-          </Typography>
-        </Box>
+
+        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );
