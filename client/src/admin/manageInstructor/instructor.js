@@ -7,8 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminNavbar from "../dashboard/bar/nav_bar";
 import {
-  Button,
-  Table,
   TableBody,
   TableCell,
   TableContainer,
@@ -38,6 +36,7 @@ const InstructorList = () => {
 
   useEffect(() => {
     handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users, searchQuery]);
 
   // sorting functionality
@@ -239,7 +238,7 @@ const InstructorList = () => {
                   </TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Username</TableCell>
-                  <TableCell>Password</TableCell>
+
                   <TableCell>Role</TableCell>
                   <TableCell>Birth date</TableCell>
                   <TableCell>Phone number</TableCell>
@@ -257,11 +256,7 @@ const InstructorList = () => {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.username}</td>
-                    <td>
-                      {user.password
-                        ? `${user.password.substring(0, 3)}***${user.password.slice(-3)}`
-                        : "No password available"}
-                    </td>
+
                     <td>{user.role_name ? user.role_name : "No"}</td>
 
                     <td>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, Input, Slider, Typography, Box } from "@mui/material";
 
 const BinarySearch = () => {
   const [numberOfElements, setNumberOfElements] = useState(10);
@@ -75,82 +76,116 @@ const BinarySearch = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   return (
-    <div>
-      <input
-        type="number"
-        placeholder="Number of elements"
-        value={numberOfElements}
-        onChange={(e) => setNumberOfElements(parseInt(e.target.value))}
-      />
-      <button onClick={generateElements}>Generate</button>
-      <input
-        type="number"
-        placeholder="Value"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      <button onClick={search} disabled={searching}>
-        Search
-      </button>
-      <input
-        type="range"
-        min={100}
-        max={30000}
-        value={searchSpeed}
-        onChange={(e) => setSearchSpeed(parseInt(e.target.value))}
-      />
-      <div style={{ marginTop: "20px" }}>
-        <svg width="100%" height="200">
-          {elements.map((element, index) => (
-            <rect
-              key={index}
-              x={index * 60}
-              y={0}
-              width="50"
-              height="40"
-              fill={
-                highlightedIndex === index
-                  ? "black"
-                  : index === low || index === mid || index === high
-                    ? "red"
-                    : "#3498db"
-              }
-            />
-          ))}
-          {elements.map((element, index) => (
-            <text
-              key={index}
-              x={index * 60 + 20}
-              y={20}
-              fill={"white"}
-              textAnchor="middle"
-            >
-              {element.value}
+    <Box display="flex" flexDirection="column" alignItems="center" padding="0">
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="20px"
+        bgcolor="rgb(239, 235, 235)"
+        padding="20px"
+        borderRadius="5px"
+        width="100%"
+        borderBottom="2px solid black"
+      >
+        <Box
+          display="flex"
+          flexDirection="row"
+          width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
+          flexWrap="wrap" // Allowing items to wrap when screen size is reduced
+        >
+          <Input
+            type="number"
+            placeholder="Number of elements"
+            inputProps={{ min: 3, max: 25 }}
+            value={numberOfElements}
+            onChange={(e) => setNumberOfElements(parseInt(e.target.value))}
+          />
+          <Button onClick={generateElements}>Generate</Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Input
+            type="number"
+            placeholder="Value"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <Button onClick={search} disabled={searching}>
+            Search
+          </Button>
+        </Box>
+        <Box display="flex" flexDirection="row" width="100%">
+          <Slider
+            min={100}
+            max={30000}
+            value={searchSpeed}
+            onChange={(e) => setSearchSpeed(parseInt(e.target.value))}
+            style={{ width: "40%" }}
+          />
+        </Box>
+      </Box>
+      <Box marginTop="20px" width="100%" overflowX="auto">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            overflowX: "auto",
+          }}
+        >
+          <svg width={elements.length * 60} height="200">
+            {elements.map((element, index) => (
+              <rect
+                key={index}
+                x={index * 60}
+                y={0}
+                width="50"
+                height="40"
+                fill={
+                  highlightedIndex === index
+                    ? "black"
+                    : index === low || index === mid || index === high
+                      ? "red"
+                      : "#3498db"
+                }
+              />
+            ))}
+            {elements.map((element, index) => (
+              <text
+                key={index}
+                x={index * 60 + 20}
+                y={20}
+                fill={"white"}
+                textAnchor="middle"
+              >
+                {element.value}
+              </text>
+            ))}
+            {elements.map((el, i) => (
+              <text
+                key={i}
+                x={i * 60 + 20}
+                y={65}
+                fill={i === low || i === mid || i === high ? "red" : "#3498db"}
+              >
+                {i}
+              </text>
+            ))}
+            <text x={low * 60 + 20} y={85} fill="red" textAnchor="middle">
+              low
             </text>
-          ))}
-          {elements.map((el, i) => (
-            <text
-              key={i}
-              x={i * 60 + 20}
-              y={65}
-              fill={i === low || i === mid || i === high ? "red" : "#3498db"}
-            >
-              {i}
+            <text x={mid * 60 + 20} y={85} fill="red" textAnchor="middle">
+              mid
             </text>
-          ))}
-          <text x={low * 60 + 20} y={85} fill="red" textAnchor="middle">
-            low
-          </text>
-          <text x={mid * 60 + 20} y={85} fill="red" textAnchor="middle">
-            mid
-          </text>
-          <text x={high * 60 + 20} y={85} fill="red" textAnchor="middle">
-            high
-          </text>
-        </svg>
-        <div>{searchResult}</div> {/* Display search result */}
-      </div>
-    </div>
+            <text x={high * 60 + 20} y={85} fill="red" textAnchor="middle">
+              high
+            </text>
+          </svg>
+          <div>{searchResult}</div> {/* Display search result */}
+        </div>
+      </Box>
+    </Box>
   );
 };
 

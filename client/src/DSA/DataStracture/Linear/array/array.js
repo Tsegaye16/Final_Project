@@ -177,7 +177,7 @@ const useStyles = {
   },
 };
 
-function Array() {
+function Array({ title, userData }) {
   const [checked, setChecked] = useState(false);
   const [text, setText] = useState("show");
 
@@ -396,7 +396,7 @@ int main() {
             <CodeTemplate />
           </Box>
 
-          <Content />
+          <Content title={title} userData={userData} />
         </Box>
       </Container>
       {/* <Footer /> */}

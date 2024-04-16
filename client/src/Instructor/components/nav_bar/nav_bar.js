@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
+
 import { Link } from "react-router-dom";
 import { SidebarData } from "./sidebar_data";
-import "./nav_bar.css";
+import "./nav_bar.scss";
 import { IconContext } from "react-icons";
 //import tsegaye from '../../../assets/Tsegaye.jpg';
 import defaults from "../../../assets/default.png";
 import { useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  MenuItem,
-  Avatar,
-} from "@mui/material";
-import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
+import { Typography, Menu, MenuItem, Avatar } from "@mui/material";
 
 export default function Nav_bar({ toggleSidebar, sidebarWidth, userData }) {
   const handleLogout = () => {

@@ -1,31 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
+
 import { Link } from "react-router-dom";
 import { SidebarData } from "./data";
 import "./nav_bar.css";
 import { IconContext } from "react-icons";
-import tsegaye from "../../../assets/Tsegaye.jpg";
-import UserPopup from "../../../popup/user/userPopup";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  MenuItem,
-  Avatar,
-} from "@mui/material";
 
-import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
+import { Typography, Menu, MenuItem, Avatar } from "@mui/material";
 
-export default function AdminNavbar({
-  toggleSidebar,
-  sidebarWidth,
-  image,
-  username,
-}) {
+import defaults from "../../../assets/default.png";
+
+export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -53,6 +39,11 @@ export default function AdminNavbar({
 
     handleCloseMenu();
   };
+  const image =
+    userData && userData.length > 0
+      ? `http://localhost:8800/${userData[0].image}`
+      : `${defaults}`;
+  const userName = userData?.length > 0 ? userData[0].username : "";
 
   const renderUserMenu = () => {
     return (
@@ -71,7 +62,7 @@ export default function AdminNavbar({
             sx={{ width: 32, height: 32, marginRight: 1 }}
           />
           <Typography variant="body1" sx={{ fontWeight: 600 }}>
-            {username}
+            {userName}
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleHome}>Home</MenuItem>
@@ -112,7 +103,7 @@ export default function AdminNavbar({
                 variant="body1"
                 style={{ marginLeft: "8px", color: "white" }}
               >
-                {username}
+                {userName}
               </Typography>
             </div>
             {renderUserMenu()}

@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Container, Typography } from "@mui/material";
 import Queues from "./queues";
 import CodeTemplate from "./code/CodeTemplate";
+import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -29,7 +30,7 @@ const useStyles = {
     padding: "16px",
   },
 };
-function QueueList() {
+function QueueList({ title, userData }) {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -105,14 +106,7 @@ function QueueList() {
           <Typography variant="h6">Implementation</Typography>
           <CodeTemplate />
         </Box>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Summary
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            make it editable later.....
-          </Typography>
-        </Box>
+        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );

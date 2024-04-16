@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const UpdatePassword = async (db, req, res) => {
   const { token, newPassword } = req.body;
-  console.log(token)
+  
  
   // Check if the token exists and is not expired
   const checkTokenQuery = 'SELECT * FROM reset_tokens WHERE token = ? AND expires > UNIX_TIMESTAMP(NOW()) * 1000;';
@@ -13,11 +13,11 @@ const UpdatePassword = async (db, req, res) => {
 
   try {
     const tokenResults = await query(checkTokenQuery, [token]);
-    console.log(tokenResults)
+    
    const userEmail = tokenResults[0].email
     
     if (tokenResults.length === 0) {
-      console.log(error)
+     
       return res.status(400).json({ message: 'Invalid or expired token' });
     }
 

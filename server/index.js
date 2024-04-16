@@ -39,6 +39,8 @@ import postedNote from "./student/retrieve_note.js";
 import updateNote from "./student/update_note.js";
 import deleteNote from "./student/delete_note.js";
 import addNote from "./student/add_note.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -65,7 +67,7 @@ app.use(express.urlencoded({ extended: true }));
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "Amare_Abewa12",
+  password: process.env.DB_Password,
   database: "project",
   //debug: true,
 });
@@ -288,7 +290,7 @@ app.post("/user/addnote", async (req, res) => {
   await addNote(db, req, res);
 });
 
-const PORT = 8800;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

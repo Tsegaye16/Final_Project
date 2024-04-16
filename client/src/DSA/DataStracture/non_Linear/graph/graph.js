@@ -3,6 +3,7 @@ import GraphLogic from "./logic/graph_logic";
 import { Box, Container, Typography } from "@mui/material";
 // import Operation from "./logic/Operation";
 // import CodeTemplate from "./code/CodeTemplate";
+import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -31,7 +32,7 @@ const useStyles = {
   },
 };
 
-function Graph() {
+function Graph({ title, userData }) {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -224,14 +225,7 @@ function Graph() {
             drop the implementation here....
           </Typography>
         </Box>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Summary
-          </Typography>
-          <Typography variant="body1" sx={useStyles.subTitle}>
-            make it editable later....
-          </Typography>
-        </Box>
+        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );

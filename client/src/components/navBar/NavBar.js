@@ -28,7 +28,9 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
 
     //console.log("Decode", decodedToken);
     setUser_id(decodedToken.user_id);
-    setRole_name(decodedToken.role_name);
+    setRole_name(
+      decodedToken.role_name === null ? "student" : decodedToken.role_name
+    );
   }, []);
 
   const handleHome = () => {

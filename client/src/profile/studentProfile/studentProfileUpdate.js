@@ -51,13 +51,12 @@ function StudentProfile() {
       .post("http://localhost:8800/student/viewProfile", { id })
       .then((response) => {
         setUserData(response.data[0]);
-        console.log("USER DATA: ", userData);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  console.log("USER DATA: ", userData);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -210,7 +209,11 @@ function StudentProfile() {
                   type="date"
                   label="Birth Date"
                   name="birth_date"
-                  value={userData.birth_date.substring(0, 10)}
+                  value={
+                    userData.birth_date
+                      ? userData.birth_date.substring(0, 10)
+                      : ""
+                  }
                   onChange={handleInputChange}
                   InputLabelProps={{ shrink: true }}
                 />

@@ -7,7 +7,7 @@ const StudenUpdateProfile = async (db, req, res) => {
       req.body;
     console.log(birth_date);
     const image = req.file ? req.file.filename : null;
-    console.log("Image", image);
+
     const query = promisify(db.query).bind(db);
     const dob = birth_date ? new Date(birth_date) : null;
 
@@ -27,11 +27,9 @@ const StudenUpdateProfile = async (db, req, res) => {
       "UPDATE users SET name = ?, email = ?, username = ?, birth_date = ?, phone_number = ?, sex = ?, image = ? WHERE user_id = ?",
       [name, email, username, dob, phone_number, sex, image, id]
     );
-    console.log("updation result", dod);
 
     res.status(200).json({ message: `User updated successfully.` });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: "Fetching data error" });
   }
 };

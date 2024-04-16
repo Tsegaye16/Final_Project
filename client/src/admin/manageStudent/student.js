@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./admin.scss";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+
 import UpdateUserPopup from "./studentPopup";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,8 +11,6 @@ import AdminNavbar from "../dashboard/bar/nav_bar";
 import SearchIcon from "@mui/icons-material/Search";
 import SortIcon from "@mui/icons-material/Sort";
 import {
-  Button,
-  Table,
   TableBody,
   TableCell,
   TableContainer,
@@ -241,7 +239,7 @@ const StudentList = () => {
                   </TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Username</TableCell>
-                  <TableCell>Password</TableCell>
+
                   <TableCell>Role</TableCell>
                   <TableCell>Birth date</TableCell>
                   <TableCell>Phone number</TableCell>
@@ -260,11 +258,7 @@ const StudentList = () => {
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>{user.username}</td>
-                      <td>
-                        {user.password
-                          ? `${user.password.substring(0, 3)}***${user.password.slice(-3)}`
-                          : "No password available"}
-                      </td>
+
                       <td>{user.role_name ? user.role_name : "No"}</td>
 
                       <td>

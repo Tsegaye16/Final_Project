@@ -22,11 +22,8 @@ const updateElapsed = async (db, req, res) => {
     // Execute the update query
     const result = await query(updateQuery, [instructorId, duration, 2]);
 
-    console.log(result); // Optional: Log the result if needed
-
     res.status(200).json({ message: "Elapsed time updated successfully" });
   } catch (err) {
-    console.error("Error updating elapsed time:", err);
     res.status(500).send({ message: "Failed to update elapsed time" });
   }
 };

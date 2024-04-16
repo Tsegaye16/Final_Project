@@ -19,7 +19,7 @@ const updateRecentUser = async (db, req, res) => {
         'UPDATE users SET name = ?, email = ?, username = ?, role_name = ?, image = IFNULL(?, image) WHERE user_id = ?',
         [name, email, username, role_name, image, user_id]
       );
-  console.log(role_name)
+  
       if (role_name === 'Instructor') {
         // If the role is changed to 'Instructor', delete from students table and insert into instructors table
         //await query('DELETE FROM students WHERE user_id = ?', [user_id]);

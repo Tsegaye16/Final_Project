@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import Team from "./dialog/team";
 import { ContactUs } from "../../../popup/contact/contact";
-import Footer from "./dialog/footer";
+
 import FeatureSection from "./dialog/feature";
 import AboutSection from "./dialog/AboutSection";
 
@@ -64,7 +64,7 @@ function Landing() {
       <NavigationBar id="navbar" />
       {/* Home Section */}
       <div style={{ backgroundColor: "#eceff1" }}>
-        <Section border={true}>
+        <Section border={true} minHeight="400px">
           <Container style={{ paddingTop: "84px" }}>
             <Grid container spacing={3}>
               {/* First Card */}
@@ -182,12 +182,6 @@ function Landing() {
         </Section>
       </div>
 
-      {/* Footer */}
-      <div style={{ backgroundColor: "#eceff1" }}>
-        <Section border={true}>
-          <Footer />
-        </Section>
-      </div>
       {/* Read More Dialog */}
       <ReadMoreDialog open={openDialog} handleClose={handleCloseDialog} />
     </div>

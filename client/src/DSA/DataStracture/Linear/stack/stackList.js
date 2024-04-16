@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Stack from "./stack";
 import CodeTemplate from "./code/CodeTemplate";
+import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -32,7 +33,7 @@ const useStyles = {
   },
 };
 
-function StackList() {
+function StackList({ title, userData }) {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -174,14 +175,7 @@ function StackList() {
           </Typography>
           <CodeTemplate />
         </Box>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Summary
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            make it editable later........
-          </Typography>
-        </Box>
+        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );

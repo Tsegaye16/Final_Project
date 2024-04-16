@@ -1,9 +1,8 @@
-// dash_board.js
 import React, { useState, useEffect, useRef } from "react";
 import "./dashboard.scss"; // Make sure to import the CSS file
-//import NavBar from '../../components/nav_bar/nav_bar';
+
 import AdminNavbar from "./bar/nav_bar";
-import AdminProfile from "../profile/profile";
+
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import UpdateUserPopup from "../manageStudent/studentPopup";
@@ -17,27 +16,30 @@ function AdminDashdoard() {
   const toggleSidebar = () => {
     setSidebarWidth((prevWidth) => (prevWidth === 0 ? 250 : 0));
   };
-  // To retrieve Admin user name and name on user icons purpose only
-  const [user, setUser] = useState({});
+  const [id, setId] = useState(0);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    setId(decodedToken.user_id);
+  }, []);
+
   useEffect(() => {
     axios
-      .get("http://localhost:8800/admin/viewHerself")
-      .then((resp) => {
-        const userData = resp.data[0];
-        setUser({ ...userData });
+      .post("http://localhost:8800/student/viewProfile", { id: id })
+      .then((response) => {
+        setUserData(response.data);
+        //console.log(response.data)
       })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
-  const image = `http://localhost:8800/${user.image}`;
-  const username = user.username;
+      .catch((err) => {});
+  }, [id]);
   // To retrieve recently registered user on admin dashboard
   const [users, setUsers] = useState([]);
   //const {id} = useParams()
   useEffect(() => {
     axios
-      .get("http://localhost:8800/admin/viewRecent/")
+      .get("http://localhost:8800/admin/viewRecent")
       .then((resp) => setUsers(resp.data))
       .catch((error) => {
         console.error("Error fetching user attributes:", error);
@@ -53,7 +55,6 @@ function AdminDashdoard() {
   };
   // Send the updated information to server-side
   const handleUpdateSave = (updatedUser) => {
-    // Send the updated user information to the backend server
     const formData = new FormData();
     formData.append("user_id", updatedUser.user_id);
     formData.append("name", updatedUser.name);
@@ -151,8 +152,7 @@ function AdminDashdoard() {
       <AdminNavbar
         toggleSidebar={toggleSidebar}
         sidebarWidth={sidebarWidth}
-        image={image}
-        username={username}
+        userData={userData}
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
         <UserManagement />
@@ -166,7 +166,7 @@ function AdminDashdoard() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Username</th>
-                <th>Password</th>
+
                 <th>Role</th>
                 <th>Birth date</th>
                 <th>Phone number</th>
@@ -183,11 +183,7 @@ function AdminDashdoard() {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.username}</td>
-                    <td>
-                      {user.password
-                        ? `${user.password.substring(0, 3)}***${user.password.slice(-3)}`
-                        : "No password available"}
-                    </td>
+
                     <td>{user.role_name ? user.role_name : "No"}</td>
                     <td>
                       {user.birth_date

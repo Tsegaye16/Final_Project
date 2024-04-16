@@ -68,7 +68,7 @@ function Content({ title, userData }) {
 
   // Filter and set instructor and student notes based on user role and title
   useEffect(() => {
-    if (noteData && userData && userData[0]) {
+    if (noteData) {
       if (userData[0].role_name === "Instructor") {
         const instructorNotes = noteData.filter(
           (note) => note.poster_role === "Instructor" && note.title === title
@@ -202,159 +202,145 @@ function Content({ title, userData }) {
       <Typography variant="h6" sx={useStyles.title}>
         Summary
       </Typography>
-      {/* Display only the summary text and add icon when userData is not available */}
-      {!userData ? (
+      {/* Render notes based on user role */}
+      {userData[0].role_name === "Instructor" && (
         <Box>
-          <Typography variant="h6">
-            Share your perception 👉
-            <IconButton disabled>
-              <AddIcon />
-            </IconButton>
-          </Typography>
-        </Box>
-      ) : (
-        <>
-          {/* Render the rest of the component when userData is available */}
-          {userData[0].role_name === "Instructor" && (
-            <Box>
-              {instructorNotes.map((note) => (
-                <Box key={note.id} sx={useStyles.section}>
-                  {editNoteId === note.id ? (
-                    <>
-                      <TextareaAutosize
-                        value={editedInstructorNote}
-                        onChange={(e) =>
-                          setEditedInstructorNote(e.target.value)
-                        }
-                        minRows={6}
-                        style={{ width: "100%", marginBottom: 16 }}
-                      />
-                      <Button
-                        onClick={() => handleSaveEdit(note.id, "Instructor")}
-                      >
-                        Save
-                      </Button>
-                      <Button onClick={handleCancelEdit}>Cancel</Button>
-                    </>
-                  ) : (
-                    <>
-                      <Typography variant="body1" sx={useStyles.paragraph}>
-                        {note.note_text}
-                      </Typography>
-                      <Tooltip title="Edit" arrow>
-                        <IconButton
-                          onClick={() =>
-                            handleEdit(note.id, note.note_text, "Instructor")
-                          }
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="Delete" arrow>
-                        <IconButton onClick={() => handleDelete(note.id)}>
-                          <Delete />
-                        </IconButton>
-                      </Tooltip>
-                    </>
-                  )}
-                </Box>
-              ))}
-              {!isAddingNote && (
-                <Typography variant="h6">
-                  Share your perception 👉
-                  <IconButton onClick={() => setIsAddingNote(true)}>
-                    <AddIcon />
-                  </IconButton>
-                </Typography>
-              )}
-              {isAddingNote && (
-                <Box sx={useStyles.section}>
+          {/* Render instructor notes */}
+
+          {instructorNotes.map((note) => (
+            <Box key={note.id} sx={useStyles.section}>
+              {/* Render edit textarea if editNoteId matches current note id */}
+              {editNoteId === note.id ? (
+                <>
                   <TextareaAutosize
-                    value={newNote}
-                    onChange={(e) => setNewNote(e.target.value)}
+                    value={editedInstructorNote}
+                    onChange={(e) => setEditedInstructorNote(e.target.value)}
                     minRows={6}
                     style={{ width: "100%", marginBottom: 16 }}
-                    placeholder="Enter your note here..."
                   />
-                  <Button onClick={handleAddNote}>Save</Button>
-                  <Button onClick={() => setIsAddingNote(false)}>Cancel</Button>
-                </Box>
-              )}
-            </Box>
-          )}
-
-          {userData[0].role_name === "Student" && (
-            <Box>
-              {instructorNotes.map((note) => (
-                <Box key={note.id} sx={useStyles.section}>
+                  <Button onClick={() => handleSaveEdit(note.id, "Instructor")}>
+                    Save
+                  </Button>
+                  <Button onClick={handleCancelEdit}>Cancel</Button>
+                </>
+              ) : (
+                <>
                   <Typography variant="body1" sx={useStyles.paragraph}>
                     {note.note_text}
                   </Typography>
-                </Box>
-              ))}
-              {studentNotes.map((note) => (
-                <Box key={note.id} sx={useStyles.section}>
-                  {editNoteId === note.id ? (
-                    <>
-                      <TextareaAutosize
-                        value={editedStudentNote}
-                        onChange={(e) => setEditedStudentNote(e.target.value)}
-                        minRows={6}
-                        style={{ width: "100%", marginBottom: 16 }}
-                      />
-                      <Button
-                        onClick={() => handleSaveEdit(note.id, "Student")}
-                      >
-                        Save
-                      </Button>
-                      <Button onClick={handleCancelEdit}>Cancel</Button>
-                    </>
-                  ) : (
-                    <>
-                      <Typography variant="body1" sx={useStyles.paragraph}>
-                        {note.note_text}
-                      </Typography>
-                      <Tooltip title="Edit" arrow></Tooltip>
-                      <IconButton
-                        onClick={() =>
-                          handleEdit(note.id, note.note_text, "Student")
-                        }
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <Tooltip title="Delete" arrow>
-                        <IconButton onClick={() => handleDelete(note.id)}>
-                          <Delete />
-                        </IconButton>
-                      </Tooltip>
-                    </>
-                  )}
-                </Box>
-              ))}
-              {!isAddingNote && (
-                <Typography variant="h6">
-                  Jot down your perception by clicking 👉{" "}
-                  <IconButton onClick={() => setIsAddingNote(true)}>
-                    <AddIcon />
-                  </IconButton>
-                </Typography>
-              )}
-              {isAddingNote && (
-                <Box sx={useStyles.section}>
-                  <TextareaAutosize
-                    value={newNote}
-                    onChange={(e) => setNewNote(e.target.value)}
-                    minRows={6}
-                    style={{ width: "100%", marginBottom: 16 }}
-                    placeholder="Enter your note here..."
-                  />
-                  <Button onClick={handleAddNote}>Save</Button>
-                  <Button onClick={() => setIsAddingNote(false)}>Cancel</Button>
-                </Box>
+                  <Tooltip title="Edit" arrow>
+                    <IconButton
+                      onClick={() =>
+                        handleEdit(note.id, note.note_text, "Instructor")
+                      }
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Delete" arrow>
+                    <IconButton onClick={() => handleDelete(note.id)}>
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                </>
               )}
             </Box>
+          ))}
+          {!isAddingNote && (
+            <Typography variant="h6">
+              Share your perception 👉
+              <IconButton onClick={() => setIsAddingNote(true)}>
+                <AddIcon />
+              </IconButton>
+            </Typography>
           )}
-        </>
+          {isAddingNote && (
+            <Box sx={useStyles.section}>
+              <TextareaAutosize
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
+                minRows={6}
+                style={{ width: "100%", marginBottom: 16 }}
+                placeholder="Enter your note here..."
+              />
+              <Button onClick={handleAddNote}>Save</Button>
+              <Button onClick={() => setIsAddingNote(false)}>Cancel</Button>
+            </Box>
+          )}
+          {/* Add textarea for adding new note */}
+        </Box>
+      )}
+
+      {userData[0].role_name === "Student" && (
+        <Box>
+          {instructorNotes.map((note) => (
+            <Box key={note.id} sx={useStyles.section}>
+              <Typography variant="body1" sx={useStyles.paragraph}>
+                {note.note_text}
+              </Typography>
+            </Box>
+          ))}
+          {studentNotes.map((note) => (
+            <Box key={note.id} sx={useStyles.section}>
+              {/* Render edit textarea if editNoteId matches current note id */}
+              {editNoteId === note.id ? (
+                <>
+                  <TextareaAutosize
+                    value={editedStudentNote}
+                    onChange={(e) => setEditedStudentNote(e.target.value)}
+                    minRows={6}
+                    style={{ width: "100%", marginBottom: 16 }}
+                  />
+                  <Button onClick={() => handleSaveEdit(note.id, "Student")}>
+                    Save
+                  </Button>
+                  <Button onClick={handleCancelEdit}>Cancel</Button>
+                </>
+              ) : (
+                <>
+                  <Typography variant="body1" sx={useStyles.paragraph}>
+                    {note.note_text}
+                  </Typography>
+                  <Tooltip title="Edit" arrow></Tooltip>
+                  <IconButton
+                    onClick={() =>
+                      handleEdit(note.id, note.note_text, "Student")
+                    }
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <Tooltip title="Delete" arrow>
+                    <IconButton onClick={() => handleDelete(note.id)}>
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+            </Box>
+          ))}
+          {!isAddingNote && (
+            <Typography variant="h6">
+              Jot down your perception by clicking 👉{" "}
+              <IconButton onClick={() => setIsAddingNote(true)}>
+                <AddIcon />
+              </IconButton>
+            </Typography>
+          )}
+          {/* Add textarea for adding new note */}
+          {isAddingNote && (
+            <Box sx={useStyles.section}>
+              <TextareaAutosize
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
+                minRows={6}
+                style={{ width: "100%", marginBottom: 16 }}
+                placeholder="Enter your note here..."
+              />
+              <Button onClick={handleAddNote}>Save</Button>
+              <Button onClick={() => setIsAddingNote(false)}>Cancel</Button>
+            </Box>
+          )}
+        </Box>
       )}
     </Box>
   );

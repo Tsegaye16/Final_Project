@@ -2,9 +2,9 @@ import { promisify } from "util";
 
 const deleteNote = async (db, req, res) => {
   try {
-    console.log("req.body: ", req.body);
+    
     const { id } = req.body;
-    console.log("Id: ", id);
+    
     const query = promisify(db.query).bind(db);
     const sql = "DELETE FROM note WHERE id = ?";
     const result = await query(sql, [id]);

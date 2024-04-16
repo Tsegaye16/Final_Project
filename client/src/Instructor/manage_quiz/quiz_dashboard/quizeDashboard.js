@@ -43,6 +43,7 @@ function QuizDashboard() {
   const handleAddQuiz = () => {
     setIsQuiz(true);
     setIsQuestion(false);
+    console.log("Poster Id: ", userData[0]);
   };
   const handleAddQuestion = (quizName, quizId) => {
     setSelectedQuizName(quizName);
@@ -58,7 +59,7 @@ function QuizDashboard() {
     }));
   };
   const handleQuizSave = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     // Validation: Check if both name and description are filled
     if (!input.name || !input.description) {
@@ -69,19 +70,25 @@ function QuizDashboard() {
     setIsQuiz(false);
 
     try {
-      await axios.post("http://localhost:8800/addQuiz/", input);
+      const data = {
+        ...input,
+        poster_id: id,
+      };
+      await axios.post("http://localhost:8800/addQuiz/", data);
 
       toast.success("Added successfully");
 
+      try {
+        const response = await axios.get("http://localhost:8800/getQuizzes");
+        setQuizzes(response.data.quizzes);
+        console.log(quizzes);
+      } catch (error) {
+        console.error("Failed to fetch quizzes:", error);
+      }
       setInput({
         name: "",
         description: "",
       });
-
-      // Redirect to the same page
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
     } catch (error) {
       console.error("Failed:", error);
     }
