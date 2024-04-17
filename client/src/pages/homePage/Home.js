@@ -40,8 +40,6 @@ function Home() {
 
   const renderSelectedComponent = () => {
     switch (selectedItem) {
-      case "array":
-        return <Array />;
       case "stack":
         return <StackList />;
       case "queue":

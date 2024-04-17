@@ -55,16 +55,12 @@ const NavBar = ({ icon, toggleSidebar }) => {
         </MenuItem>
         <MenuItem>Home</MenuItem>
 
-        <MenuItem onClick={() => handleMenuItemClick("/student/feature")}>
+        <MenuItem onClick={() => handleMenuItemClick("/feature")}>
           Feature
         </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick("/student/about")}>
-          About
-        </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick("/student/team")}>
-          Team
-        </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick("/student/contact")}>
+        <MenuItem onClick={() => handleMenuItemClick("/about")}>About</MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("/team")}>Team</MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("/contact")}>
           Contact
         </MenuItem>
       </Menu>

@@ -3,7 +3,6 @@ import GraphLogic from "./logic/graph_logic";
 import { Box, Container, Typography } from "@mui/material";
 // import Operation from "./logic/Operation";
 // import CodeTemplate from "./code/CodeTemplate";
-import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -32,7 +31,7 @@ const useStyles = {
   },
 };
 
-function Graph({ title, userData }) {
+function Graph() {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -225,7 +224,6 @@ function Graph({ title, userData }) {
             drop the implementation here....
           </Typography>
         </Box>
-        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );

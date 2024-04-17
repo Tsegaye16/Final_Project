@@ -1,7 +1,6 @@
 import React from "react";
 import BSTLogic from "./logic/bst_logic.js";
 import { Box, Container, Typography } from "@mui/material";
-import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -30,7 +29,7 @@ const useStyles = {
   },
 };
 
-function BST({ title, userData }) {
+function BST() {
   // Initial tree structure
   return (
     <Container maxWidth="lg">
@@ -59,7 +58,6 @@ function BST({ title, userData }) {
             drop a code here....
           </Typography>
         </Box>
-        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );

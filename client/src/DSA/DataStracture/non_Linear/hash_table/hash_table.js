@@ -1,7 +1,6 @@
 import React from "react";
 import HashLogic from "./logic/hash_logic";
 import { Box, Container, Typography } from "@mui/material";
-import Content from "../../../content/content";
 
 const useStyles = {
   root: {
@@ -29,7 +28,7 @@ const useStyles = {
     padding: "16px",
   },
 };
-function Hash_table({ title, userData }) {
+function Hash_table() {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -57,7 +56,6 @@ function Hash_table({ title, userData }) {
             drop a code here....
           </Typography>
         </Box>
-        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );

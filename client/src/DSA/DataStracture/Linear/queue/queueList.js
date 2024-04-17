@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Container, Typography } from "@mui/material";
 import Queues from "./queues";
 import CodeTemplate from "./code/CodeTemplate";
-import Content from "../../../content/content";
+
 
 const useStyles = {
   root: {
@@ -30,7 +30,7 @@ const useStyles = {
     padding: "16px",
   },
 };
-function QueueList({ title, userData }) {
+function QueueList() {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -106,7 +106,7 @@ function QueueList({ title, userData }) {
           <Typography variant="h6">Implementation</Typography>
           <CodeTemplate />
         </Box>
-        <Content title={title} userData={userData} />
+       
       </Box>
     </Container>
   );

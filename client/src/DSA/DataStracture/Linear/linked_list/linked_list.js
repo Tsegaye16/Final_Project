@@ -5,8 +5,6 @@ import { Box, Container, Typography } from "@mui/material";
 import Operation from "./logic/Operation";
 import CodeTemplate from "./code/CodeTemplate";
 
-import Content from "../../../content/content";
-
 const useStyles = {
   root: {
     backgroundColor: "#f0f0f0",
@@ -38,7 +36,7 @@ const useStyles = {
     padding: "16px",
   },
 };
-function Linked_list({ title, userData }) {
+function Linked_list() {
   return (
     <Container maxWidth="lg">
       <Box sx={useStyles.section}>
@@ -440,8 +438,6 @@ free(temp);
           </Typography>
           <CodeTemplate />
         </Box>
-
-        <Content title={title} userData={userData} />
       </Box>
     </Container>
   );
