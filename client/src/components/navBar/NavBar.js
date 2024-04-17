@@ -12,26 +12,10 @@ import {
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 import defaults from "../../assets/default.png";
 
-const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
+const NavBar = ({ icon, toggleSidebar }) => {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [user_id, setUser_id] = useState(0);
-  const [role_name, setRole_name] = useState("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    //console.log(token);
-    // Set isUser based on token availability
-
-    const decodedToken = JSON.parse(atob(token.split(".")[1]));
-
-    //console.log("Decode", decodedToken);
-    setUser_id(decodedToken.user_id);
-    setRole_name(
-      decodedToken.role_name === null ? "student" : decodedToken.role_name
-    );
-  }, []);
 
   const handleHome = () => {
     navigate("/");
@@ -44,11 +28,6 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
-  };
-  const handleLogout = () => {
-    // Remove the token from local storage
-    localStorage.removeItem("accessToken");
-    window.location.href = "/login";
   };
 
   const handleMenuItemClick = (path) => {
@@ -64,58 +43,33 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
       >
-        <MenuItem
-          onClick={() => handleMenuItemClick(`/${role_name}/profile/`)}
-          sx={{ display: "flex", alignItems: "center" }}
-        >
+        <MenuItem sx={{ display: "flex", alignItems: "center" }}>
           <Avatar
             alt="User Avatar"
-            src={image}
+            src={"image"}
             sx={{ width: 32, height: 32, marginRight: 1 }}
           />
           <Typography variant="body1" sx={{ fontWeight: 600 }}>
-            {userName}
+            {"userName"}
           </Typography>
         </MenuItem>
-        <MenuItem onClick={handleHome}>Home</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        {instructor && (
-          <>
-            <MenuItem onClick={() => handleMenuItemClick("/instructor")}>
-              Dashboard
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("/instructor/quiz")}>
-              Manage quiz
-            </MenuItem>
-            <MenuItem>Manage content</MenuItem>
-          </>
-        )}
-        {!instructor && (
-          <>
-            <MenuItem onClick={() => handleMenuItemClick("/student/feature")}>
-              Feature
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("/student/about")}>
-              About
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("/student/team")}>
-              Team
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("/student/contact")}>
-              Contact
-            </MenuItem>
-          </>
-        )}
+        <MenuItem>Home</MenuItem>
+
+        <MenuItem onClick={() => handleMenuItemClick("/student/feature")}>
+          Feature
+        </MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("/student/about")}>
+          About
+        </MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("/student/team")}>
+          Team
+        </MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("/student/contact")}>
+          Contact
+        </MenuItem>
       </Menu>
     );
   };
-
-  const image =
-    userData && userData.length > 0
-      ? `http://localhost:8800/${userData[0].image}`
-      : `${defaults}`;
-  const userName = userData?.length > 0 ? userData[0].username : "";
-  //const role_name = userData?.length > 0 ? userData[0].role_name : "";
 
   return (
     <AppBar
@@ -146,9 +100,9 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
             onClick={handleMenuClick}
             style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
           >
-            <Avatar alt="User Avatar" src={image} />
+            <Avatar alt="User Avatar" src={"mage"} />
             <Typography variant="body1" style={{ marginLeft: "8px" }}>
-              {userName}
+              {"userName"}
             </Typography>
           </div>
           {renderUserMenu()}
