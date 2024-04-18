@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Home.scss";
 import NavBar from "../../components/navBar/NavBar";
 import LeftBar from "../../components/leftBar/leftBar";
-import Array from "../../DSA/DataStracture/Linear/array/array";
+
 import Welcome from "../../DSA/welcome/welcome";
 import Linked_list from "../../DSA/DataStracture/Linear/linked_list/linked_list";
-import BT from "../../DSA/DataStracture/non_Linear/binary_Tree/BT";
+
 import BST from "../../DSA/DataStracture/non_Linear/binary_tree_search/BST";
 import Hash_table from "../../DSA/DataStracture/non_Linear/hash_table/hash_table";
 import Graph from "../../DSA/DataStracture/non_Linear/graph/graph.js";
@@ -16,7 +16,7 @@ import Insertion_sort from "../../DSA/Algorithm/sort/insertion_sort/insertion_so
 import Selection_sort from "../../DSA/Algorithm/sort/selection_sort/selection_sort";
 import Merge_sort from "../../DSA/Algorithm/sort/merge_sort/merge_sort";
 import Quick_sort from "../../DSA/Algorithm/sort/quick_sort/quick_sort";
-import Tree from "../../DSA/DataStracture/non_Linear/tree/tree";
+
 import { useNavigate } from "react-router-dom";
 import StackList from "../../DSA/DataStracture/Linear/stack/stackList";
 import QueueList from "../../DSA/DataStracture/Linear/queue/queueList";
@@ -46,8 +46,7 @@ function Home() {
         return <QueueList />;
       case "linked-list":
         return <Linked_list />;
-      case "binary_tree":
-        return <BT />;
+
       case "bst":
         return <BST />;
       case "hash_table":
@@ -69,8 +68,6 @@ function Home() {
       case "quick_sort":
         return <Quick_sort />;
 
-      case "tree":
-        return <Tree />;
       default:
         return <Welcome />;
     }
