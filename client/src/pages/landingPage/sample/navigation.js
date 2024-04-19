@@ -3,7 +3,8 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import { Box, Avatar } from "@mui/material";
+import logo from "../../../assets/favicon.ico";
 
 const NavigationBar = () => {
   return (
@@ -11,7 +12,8 @@ const NavigationBar = () => {
       position="fixed"
       sx={{ backgroundColor: "#2c3e50", display: "flex" }}
     >
-      <Toolbar disableGutters>
+      <Toolbar disableGutters style={{ paddingLeft: "20%" }}>
+        <Avatar src={logo} sx={{ mr: 2 }} />
         <Typography variant="h6" noWrap component="div" sx={{ mr: 2 }}>
           DSA
         </Typography>

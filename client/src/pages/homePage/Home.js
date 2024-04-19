@@ -114,8 +114,7 @@ function Home({ instructor }) {
         return <QueueList title={selectedItem} userData={userData} />;
       case "linked-list":
         return <Linked_list title={selectedItem} userData={userData} />;
-      case "binary_tree":
-        return <BT title={selectedItem} userData={userData} />;
+
       case "bst":
         return <BST title={selectedItem} userData={userData} />;
       case "hash_table":
@@ -137,8 +136,6 @@ function Home({ instructor }) {
       case "quick_sort":
         return <Quick_sort title={selectedItem} userData={userData} />;
 
-      case "tree":
-        return <Tree title={selectedItem} userData={userData} />;
       default:
         return <Welcome />;
     }

@@ -143,32 +143,6 @@ function LeftBar({ setSelectedItem, sidebarWidth }) {
                 <li
                   className={` ${!noneLinearDatastructureVisible ? "" : "visible-none-linear"}`}
                   onClick={() => {
-                    handleItemClick("tree");
-                  }}
-                >
-                  {
-                    <FiberManualRecordIcon
-                      style={{ color: "white", fontSize: "14px" }}
-                    />
-                  }{" "}
-                  Tree
-                </li>
-                <li
-                  className={` ${!noneLinearDatastructureVisible ? "" : "visible-none-linear"}`}
-                  onClick={() => {
-                    handleItemClick("binary_tree");
-                  }}
-                >
-                  {
-                    <FiberManualRecordIcon
-                      style={{ color: "white", fontSize: "14px" }}
-                    />
-                  }{" "}
-                  Binary Tree
-                </li>
-                <li
-                  className={` ${!noneLinearDatastructureVisible ? "" : "visible-none-linear"}`}
-                  onClick={() => {
                     handleItemClick("bst");
                   }}
                 >
@@ -283,19 +257,7 @@ function LeftBar({ setSelectedItem, sidebarWidth }) {
                   }{" "}
                   Insertion Sort
                 </li>
-                <li
-                  className={`${!sortingAlgorithVisible ? "" : "sorting-visible"}`}
-                  onClick={() => {
-                    handleItemClick("selection_sort");
-                  }}
-                >
-                  {
-                    <FiberManualRecordIcon
-                      style={{ color: "white", fontSize: "14px" }}
-                    />
-                  }{" "}
-                  Selection Sort
-                </li>
+
                 <li
                   className={`${!sortingAlgorithVisible ? "" : "sorting-visible"}`}
                   onClick={() => {
@@ -308,19 +270,6 @@ function LeftBar({ setSelectedItem, sidebarWidth }) {
                     />
                   }{" "}
                   Merge Sort
-                </li>
-                <li
-                  className={`${!sortingAlgorithVisible ? "" : "sorting-visible"}`}
-                  onClick={() => {
-                    handleItemClick("quick_sort");
-                  }}
-                >
-                  {
-                    <FiberManualRecordIcon
-                      style={{ color: "white", fontSize: "14px" }}
-                    />
-                  }{" "}
-                  Quick Sort
                 </li>
               </ul>
             </div>
