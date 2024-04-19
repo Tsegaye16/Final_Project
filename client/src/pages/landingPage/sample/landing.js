@@ -58,6 +58,7 @@ function Landing() {
     ); // Toggle every 2 seconds
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
+  const backs = false;
 
   return (
     <div>
@@ -157,18 +158,18 @@ function Landing() {
       {/* Feature Section */}
       <div style={{ backgroundColor: "#f5f5f5" }}>
         <Section border={true}>
-          <FeatureSection />
+          <FeatureSection back={backs} />
         </Section>
       </div>
       {/* About section */}
 
-      <AboutSection />
+      <AboutSection back={backs} />
 
       {/* Team Section */}
       <div style={{ backgroundColor: "#eeeeee" }}>
         <Section border={true}>
           <Container>
-            <Team />
+            <Team back={backs} />
           </Container>
         </Section>
       </div>
@@ -177,7 +178,7 @@ function Landing() {
       <div style={{ backgroundColor: "#eceff1" }}>
         <Section border={true}>
           <Container>
-            <ContactUs />
+            <ContactUs back={backs} />
           </Container>
         </Section>
       </div>

@@ -1,13 +1,30 @@
 import React from "react";
-import { Typography, Grid, Paper } from "@material-ui/core";
+import { Typography, Grid, Paper, IconButton } from "@material-ui/core";
 import { motion } from "framer-motion";
 import sort from "../../../../assets/sort.png";
 import AboutInteractiveContent from "./About";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Tooltip } from "@material-ui/core";
 
-const AboutSection = () => {
+const AboutSection = ({ back }) => {
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate(-1);
+  };
   return (
     <div style={{ borderBottom: "2px solid #ccc" }}>
-      <Paper style={{ padding: "20px", backgroundColor: "#e0e0e0" }}>
+      {!back && (
+        <Tooltip title="back" arrow>
+          <IconButton
+            onClick={handleBack}
+            style={{ position: "absolute", top: 10, left: 10 }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </Tooltip>
+      )}
+      <Paper style={{ padding: "50px", backgroundColor: "#e0e0e0" }}>
         <Grid container spacing={3}>
           {/* First Section (Full Width) */}
           <Grid item xs={12}>

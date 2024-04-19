@@ -1,12 +1,28 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid, Paper, Typography, IconButton, Avatar } from "@material-ui/core";
 import { GitHub, LinkedIn, Email, Phone } from "@material-ui/icons";
 import tsegaye from "../../../../assets/Tsegaye.jpg";
 import { motion } from "framer-motion";
 import genet from "../../../../assets/genet.jpg";
 import kefle from "../../../../assets/kefle.jpg";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const TeamMember = ({ name, role, github, linkedin, email, phone, image }) => {
+const TeamMember = ({
+  name,
+  role,
+  github,
+  linkedin,
+  email,
+  phone,
+  image,
+  back,
+}) => {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -14,6 +30,14 @@ const TeamMember = ({ name, role, github, linkedin, email, phone, image }) => {
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
     >
+      {!back && (
+        <IconButton
+          onClick={handleBack}
+          style={{ position: "absolute", top: 10, left: 10 }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+      )}
       <Paper
         elevation={3}
         style={{ padding: "20px", marginBottom: "20px", textAlign: "center" }}
@@ -42,7 +66,7 @@ const TeamMember = ({ name, role, github, linkedin, email, phone, image }) => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut arcu
           ac velit pharetra consectetur.
         </Typography>
-        <Grid container spacing={2} justify="center">
+        <Grid container spacing={2} justifyContent="center">
           <Grid item>
             <IconButton href={github} target="_blank" rel="noopener noreferrer">
               <GitHub />

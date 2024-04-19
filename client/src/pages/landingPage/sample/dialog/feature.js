@@ -1,14 +1,23 @@
 // FeatureSection.js
 import React, { useState } from "react";
-import { Grid, Paper, Typography, Container } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Container,
+  IconButton,
+} from "@material-ui/core";
 import { motion } from "framer-motion";
 import { featuresData } from "../../data";
 import FeatureDialog from "./featureDialog";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
+import { Tooltip } from "@material-ui/core";
 
 const Section = ({ children }) => (
   <Paper style={{ padding: "20px", marginBottom: "20px" }}>{children}</Paper>
 );
-const FeatureSection = () => {
+const FeatureSection = ({ back }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState(null);
   const handleOpenDialog = (feature) => {
@@ -16,13 +25,27 @@ const FeatureSection = () => {
     setSelectedFeature(feature);
     setOpenDialog(true);
   };
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
 
   return (
-    <Paper style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
+    <Paper style={{ padding: "50px", backgroundColor: "#f5f5f5" }}>
+      {!back && (
+        <Tooltip title="back" arrow>
+          <IconButton
+            onClick={handleBack}
+            style={{ position: "absolute", top: 10, left: 10 }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </Tooltip>
+      )}
       <Typography variant="h4" gutterBottom>
         Features
       </Typography>
