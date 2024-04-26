@@ -62,7 +62,12 @@
     "build": "react-scripts build",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preinstall": "npm install -g npm@latest",
+    "npm_install": "npm install --force",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "postdeploy": "gh-pages-clean"
   },
   "eslintConfig": {
     "extends": [

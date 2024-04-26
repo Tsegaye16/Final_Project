@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import "./Home.scss";
+
 import NavBar from "../../components/navBar/NavBar";
 import LeftBar from "../../components/leftBar/leftBar";
 
 import Welcome from "../../DSA/welcome/welcome";
+
 import Linked_list from "../../DSA/DataStracture/Linear/linked_list/linked_list";
 
 import BST from "../../DSA/DataStracture/non_Linear/binary_tree_search/BST";
 import Hash_table from "../../DSA/DataStracture/non_Linear/hash_table/hash_table";
+//import Graph from "../../DSA/DataStracture/non_Linear/graph/graph";
 import Graph from "../../DSA/DataStracture/non_Linear/graph/graph.js";
 import Linear_search from "../../DSA/Algorithm/search/linear_search/linear_search";
 import Binary_search from "../../DSA/Algorithm/search/binary_search/binary_search";
@@ -17,16 +21,21 @@ import Selection_sort from "../../DSA/Algorithm/sort/selection_sort/selection_so
 import Merge_sort from "../../DSA/Algorithm/sort/merge_sort/merge_sort";
 import Quick_sort from "../../DSA/Algorithm/sort/quick_sort/quick_sort";
 
+import QuizIcon from "@mui/icons-material/Quiz";
 import { useNavigate } from "react-router-dom";
+import { Tooltip, CircularProgress, Typography } from "@mui/material";
+
+import axios from "axios";
 import StackList from "../../DSA/DataStracture/Linear/stack/stackList";
 import QueueList from "../../DSA/DataStracture/Linear/queue/queueList";
 
-function Home() {
+function Home({ instructor }) {
   const [selectedItem, setSelectedItem] = useState("");
   const [icon, setIcon] = useState("times");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
   const [sidebarWidth, setSidebarWidth] = useState(240);
+  const [progress, setProgress] = useState(0);
 
   // Initialize as false by default
 
@@ -36,7 +45,9 @@ function Home() {
     setSidebarWidth((prevWidth) => (prevWidth === 0 ? 240 : 0));
   };
 
-  // Update progress every second
+  const handleChat = () => {
+    navigate("/student/quiz");
+  };
 
   const renderSelectedComponent = () => {
     switch (selectedItem) {
@@ -96,6 +107,68 @@ function Home() {
           }}
         >
           <div className="rendered">{renderSelectedComponent()}</div>
+
+          {!instructor && (
+            <>
+              <div
+                style={{
+                  position: "fixed",
+                  right: "20px",
+                  bottom: "60px",
+                  zIndex: 9999,
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  component="div"
+                  color="textSecondary"
+                  sx={{
+                    position: "absolute",
+                    bottom: "50%",
+                    right: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {Math.round(progress)}%
+                </Typography>
+                <CircularProgress
+                  variant="determinate"
+                  value={100}
+                  size={50}
+                  thickness={1}
+                  color="secondary"
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    marginLeft: "-45px",
+                    marginTop: "-45px",
+                  }}
+                />
+                <CircularProgress
+                  variant="determinate"
+                  value={progress}
+                  size={50}
+                  thickness={2}
+                  color="primary"
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    marginLeft: "-45px",
+                    marginTop: "-45px",
+                  }}
+                ></CircularProgress>
+              </div>
+              <div style={{ position: "fixed", right: "20px", top: "80px" }}>
+                <Tooltip title="Take Quiz" arrow>
+                  <div className="chat" onClick={handleChat}>
+                    <QuizIcon />
+                  </div>
+                </Tooltip>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

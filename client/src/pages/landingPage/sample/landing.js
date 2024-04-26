@@ -114,7 +114,7 @@ function Landing() {
                           Read More
                         </Button>
                         <Button
-                          href="/login"
+                          href="/student"
                           variant="contained"
                           color="primary"
                           style={{

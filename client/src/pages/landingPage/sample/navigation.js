@@ -17,11 +17,8 @@ const NavigationBar = () => {
         </Typography>
         <Box sx={{ flexGrow: 1 }} />{" "}
         {/* Empty box to push buttons to the right */}
-        <Button color="inherit" href="/login">
-          Login
-        </Button>
-        <Button color="inherit" href="/register">
-          Signup
+        <Button color="inherit" href="/student">
+          Start learning
         </Button>
       </Toolbar>
     </AppBar>
