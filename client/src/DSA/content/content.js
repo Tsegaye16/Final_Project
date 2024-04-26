@@ -6,13 +6,18 @@ import {
   IconButton,
   TextareaAutosize,
   Button,
+  Grid,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import { Delete } from "@mui/icons-material";
-
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Tooltip } from "@mui/material";
 import axios from "axios";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const useStyles = {
   root: {
@@ -212,7 +217,7 @@ function Content({ title, userData }) {
               {/* Render edit textarea if editNoteId matches current note id */}
               {editNoteId === note.id ? (
                 <>
-                  <TextareaAutosize
+                  {/* <TextareaAutosize
                     value={editedInstructorNote}
                     onChange={(e) => setEditedInstructorNote(e.target.value)}
                     minRows={6}
@@ -221,13 +226,34 @@ function Content({ title, userData }) {
                   <Button onClick={() => handleSaveEdit(note.id, "Instructor")}>
                     Save
                   </Button>
-                  <Button onClick={handleCancelEdit}>Cancel</Button>
+                  <Button onClick={handleCancelEdit}>Cancel</Button> */}
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={12} style={{ backgroundColor: "white" }}>
+                      <ReactQuill
+                        value={editedInstructorNote}
+                        onChange={(value) => setEditedInstructorNote(value)}
+                        modules={modules}
+                        formats={formats}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        onClick={() => handleSaveEdit(note.id, "Instructor")}
+                      >
+                        Save
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button variant="outlined" onClick={handleCancelEdit}>
+                        Cancel
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </>
               ) : (
                 <>
-                  <Typography variant="body1" sx={useStyles.paragraph}>
-                    {note.note_text}
-                  </Typography>
+                  <div dangerouslySetInnerHTML={{ __html: note.note_text }} />
                   <Tooltip title="Edit" arrow>
                     <IconButton
                       onClick={() =>
@@ -256,7 +282,7 @@ function Content({ title, userData }) {
           )}
           {isAddingNote && (
             <Box sx={useStyles.section}>
-              <TextareaAutosize
+              {/* <TextareaAutosize
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
                 minRows={6}
@@ -264,7 +290,30 @@ function Content({ title, userData }) {
                 placeholder="Enter your note here..."
               />
               <Button onClick={handleAddNote}>Save</Button>
-              <Button onClick={() => setIsAddingNote(false)}>Cancel</Button>
+              <Button onClick={() => setIsAddingNote(false)}>Cancel</Button> */}
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={12} style={{ backgroundColor: "white" }}>
+                  <ReactQuill
+                    value={newNote}
+                    onChange={(value) => setNewNote(value)}
+                    modules={modules}
+                    formats={formats}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" onClick={handleAddNote}>
+                    Save
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setIsAddingNote(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
             </Box>
           )}
           {/* Add textarea for adding new note */}
@@ -275,9 +324,7 @@ function Content({ title, userData }) {
         <Box>
           {instructorNotes.map((note) => (
             <Box key={note.id} sx={useStyles.section}>
-              <Typography variant="body1" sx={useStyles.paragraph}>
-                {note.note_text}
-              </Typography>
+              <div dangerouslySetInnerHTML={{ __html: note.note_text }} />
             </Box>
           ))}
           {studentNotes.map((note) => (
@@ -285,22 +332,33 @@ function Content({ title, userData }) {
               {/* Render edit textarea if editNoteId matches current note id */}
               {editNoteId === note.id ? (
                 <>
-                  <TextareaAutosize
-                    value={editedStudentNote}
-                    onChange={(e) => setEditedStudentNote(e.target.value)}
-                    minRows={6}
-                    style={{ width: "100%", marginBottom: 16 }}
-                  />
-                  <Button onClick={() => handleSaveEdit(note.id, "Student")}>
-                    Save
-                  </Button>
-                  <Button onClick={handleCancelEdit}>Cancel</Button>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={12} style={{ backgroundColor: "white" }}>
+                      <ReactQuill
+                        value={editedStudentNote}
+                        onChange={(value) => setEditedStudentNote(value)}
+                        modules={modules}
+                        formats={formats}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        onClick={() => handleSaveEdit(note.id, "Student")}
+                      >
+                        Save
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button variant="outlined" onClick={handleCancelEdit}>
+                        Cancel
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </>
               ) : (
                 <>
-                  <Typography variant="body1" sx={useStyles.paragraph}>
-                    {note.note_text}
-                  </Typography>
+                  <div dangerouslySetInnerHTML={{ __html: note.note_text }} />
                   <Tooltip title="Edit" arrow></Tooltip>
                   <IconButton
                     onClick={() =>
@@ -329,15 +387,29 @@ function Content({ title, userData }) {
           {/* Add textarea for adding new note */}
           {isAddingNote && (
             <Box sx={useStyles.section}>
-              <TextareaAutosize
-                value={newNote}
-                onChange={(e) => setNewNote(e.target.value)}
-                minRows={6}
-                style={{ width: "100%", marginBottom: 16 }}
-                placeholder="Enter your note here..."
-              />
-              <Button onClick={handleAddNote}>Save</Button>
-              <Button onClick={() => setIsAddingNote(false)}>Cancel</Button>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={12} style={{ backgroundColor: "white" }}>
+                  <ReactQuill
+                    value={newNote}
+                    onChange={setNewNote}
+                    modules={modules}
+                    formats={formats}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" onClick={handleAddNote}>
+                    Save
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setIsAddingNote(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
             </Box>
           )}
         </Box>
@@ -347,3 +419,38 @@ function Content({ title, userData }) {
 }
 
 export default Content;
+
+const modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { header: [3, 4, 5, 6] }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    ["code-block"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+
+    ["clean"],
+  ],
+  clipboard: {
+    matchVisual: false,
+  },
+};
+
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "code-block",
+  "list",
+  "bullet",
+  "indent",
+];

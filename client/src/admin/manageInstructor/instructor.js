@@ -102,21 +102,7 @@ const InstructorList = () => {
         console.error("Error updating user:", error);
       });
   };
-  // To retrieve Admin user name and name on user icons purpose only
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    axios
-      .get("http://localhost:8800/admin/viewHerself")
-      .then((resp) => {
-        const userData = resp.data[0];
-        setUser({ ...userData });
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
-  const image = `http://localhost:8800/${user.image}`;
-  const username = user.username;
+
   // To handle delete button
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [deleteCandidate, setDeleteCandidate] = useState(null);
@@ -184,16 +170,35 @@ const InstructorList = () => {
     };
   }, []);
 
+  // To retrieve Admin user name and name on user icons purpose only
+  const [id, setId] = useState(0);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    setId(decodedToken.user_id);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8800/student/viewProfile", { id: id })
+      .then((response) => {
+        setUserData(response.data);
+        //console.log(response.data)
+      })
+      .catch((err) => {});
+  }, [id]);
+
   return (
     <div className="instructor-container">
       <AdminNavbar
         toggleSidebar={toggleSidebar}
         sidebarWidth={sidebarWidth}
-        image={image}
-        username={username}
+        userData={userData}
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
-        <div className="intro">wellcome {user.name}</div>
+        <div className="intro">wellcome {userData && userData.length > 0 ? userData[0].name : "Admin"}</div>
         <div className="instructor-list">
           <h2>Instructor List</h2>
           <ToastContainer />

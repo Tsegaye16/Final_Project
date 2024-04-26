@@ -7,7 +7,6 @@ function AdminDashboard() {
     { name: "Page Visitors", pageVisitors: 1000 },
     { name: "Total user", totalUsers: 500 },
     { name: "User feedback", userFeedback: 20 },
-    { name: "User Rate", rate: 4.2 },
   ]);
   useEffect(() => {
     // Fetch metrics data from API or other source
@@ -18,15 +17,14 @@ function AdminDashboard() {
       { name: "Page Visitors", value: 1000 },
       { name: "Total user", value: 500 },
       { name: "User feedback", value: 20 },
-      { name: "User Rate", value: 4.2 },
     ]);
   }, []);
 
   return (
     <Grid container spacing={3}>
       {metrics.map(({ name, value }) => (
-        <Grid key={metrics.name} item xs={12} sm={6} md={3}>
-          <Paper elevation={3} sx={{ p: 2 }}>
+        <Grid key={metrics.name} item xs={12} sm={6} md={4}>
+          <Paper elevation={6} sx={{ p: 4 }}>
             <Typography variant="h6">{name}</Typography>
             <Typography variant="h4">
               <CountUp

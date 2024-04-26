@@ -331,7 +331,7 @@ function GraphLogic() {
       );
       setTimeout(() => {
         setRemoveNodeMessage(null);
-      }, timeDelay); // Adjust the duration (in milliseconds) as needed
+      }, 2000); // Adjust the duration (in milliseconds) as needed
       return;
     }
 
@@ -596,49 +596,53 @@ function GraphLogic() {
           </defs>
         </svg>
       </div>
-      <div
-        className="other-representation"
-        style={{ border: "1px solid #ddd", padding: "10px" }}
-      >
-        <div className="adjacency-matrix">
-          <h3>Adjacency Matrix</h3>
-          <table style={{ borderCollapse: "collapse", margin: "0 auto" }}>
-            <tbody>
-              {getAdjacencyMatrix().map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {row.map((cellValue, colIndex) => (
-                    <td
-                      key={`${rowIndex}-${colIndex}`}
-                      style={{ border: "1px solid #ddd", padding: "5px" }}
-                    >
-                      {cellValue}
+      {nodes.length > 0 ? (
+        <div
+          className="other-representation"
+          style={{ border: "1px solid #ddd", padding: "10px" }}
+        >
+          <div className="adjacency-matrix">
+            <h3>Adjacency Matrix</h3>
+            <table style={{ borderCollapse: "collapse", margin: "0 auto" }}>
+              <tbody>
+                {getAdjacencyMatrix().map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.map((cellValue, colIndex) => (
+                      <td
+                        key={`${rowIndex}-${colIndex}`}
+                        style={{ border: "1px solid #ddd", padding: "5px" }}
+                      >
+                        {cellValue}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="adjacency-list">
+            <h3>Adjacency List</h3>
+            <table style={{ borderCollapse: "collapse", margin: "0 auto" }}>
+              <tbody>
+                {getAdjacencyList().map((node, index) => (
+                  <tr key={index}>
+                    <td style={{ border: "1px solid #ddd", padding: "5px" }}>
+                      {node.value}
                     </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    <td style={{ border: "1px solid #ddd", padding: "5px" }}>
+                      {node.neighbors.length > 0
+                        ? node.neighbors.join(", ") // Join neighbors with comma and space
+                        : "None"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="adjacency-list">
-          <h3>Adjacency List</h3>
-          <table style={{ borderCollapse: "collapse", margin: "0 auto" }}>
-            <tbody>
-              {getAdjacencyList().map((node, index) => (
-                <tr key={index}>
-                  <td style={{ border: "1px solid #ddd", padding: "5px" }}>
-                    {node.value}
-                  </td>
-                  <td style={{ border: "1px solid #ddd", padding: "5px" }}>
-                    {node.neighbors.length > 0
-                      ? node.neighbors.join(", ") // Join neighbors with comma and space
-                      : "None"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }

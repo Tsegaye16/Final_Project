@@ -13,6 +13,9 @@ function HashLogic() {
   const [colorCircles, setColorCircles] = useState(false);
   const [beignCompare, setBeingCompare] = useState("");
   const [removeValue, setRemoveValue] = useState("");
+  const [insertMessage, setInsertMessage] = useState(null);
+  const [searchMessage, setSearchMessage] = useState(null);
+  const [removeMessage, setRemoveMessage] = useState(null);
 
   // create the hash table with given tableSize
   const createInitialTable = (size) => {
@@ -41,6 +44,14 @@ function HashLogic() {
 
   // Append the inserted value to its correct index
   const insertIntoTable = (item) => {
+    if (!item || isNaN(item)) {
+      // Check if the input is empty or not a number
+      setInsertMessage("Please enter a valid number to insert.");
+      setTimeout(() => {
+        setInsertMessage(null);
+      }, 2000);
+      return;
+    }
     const pos = getHashCode(item, tableSize);
 
     // Create a copy of the index array
@@ -63,6 +74,14 @@ function HashLogic() {
   // Inside the searchInTable function
 
   const searchInTable = async (value) => {
+    if (!value || isNaN(value)) {
+      // Check if the input is empty or not a number
+      setSearchMessage("Please enter a valid number to search.");
+      setTimeout(() => {
+        setSearchMessage(null);
+      }, 2000);
+      return;
+    }
     setIsSearching(true); // Set searching state to true
     setSearchResult(""); // Clear previous search result
     setColorCircles(true); // Enable coloring of circles during search
@@ -106,6 +125,13 @@ function HashLogic() {
   };
 
   const removeFromTable = async (value) => {
+    if (!value || isNaN(value)) {
+      setRemoveMessage("Please enter a valid number to search.");
+      setTimeout(() => {
+        setSearchMessage(null);
+      }, 2000);
+      return;
+    }
     setIsSearching(true); // Set searching state to true
     setSearchResult(""); // Clear previous search result
     setColorCircles(true); // Enable coloring of circles during search
@@ -157,6 +183,17 @@ function HashLogic() {
       setColorCircles(false); // Disable coloring of circles after the search process
     }
   };
+  function calculateHeight() {
+    if (!index || !index.length) {
+      return 0; // Handle empty data case
+    }
+
+    const numRows = index.length;
+    const rowHeight = 70; // Adjust based on your element heights
+    const padding = 10; // Adjust padding as needed
+
+    return numRows * rowHeight + padding;
+  }
 
   return (
     <div className="hash-container">
@@ -198,6 +235,9 @@ function HashLogic() {
           >
             insert
           </button>
+          {insertMessage && (
+            <div className="warning-message">{insertMessage}</div>
+          )}
         </div>
         <div className="search-value">
           <input
@@ -215,6 +255,9 @@ function HashLogic() {
           >
             search
           </button>
+          {searchMessage && (
+            <div className="warning-message">{searchMessage}</div>
+          )}
         </div>
         <div className="remove-value">
           <input
@@ -232,6 +275,9 @@ function HashLogic() {
           >
             remove
           </button>
+          {removeMessage && (
+            <div className="warning-message">{removeMessage}</div>
+          )}
         </div>
         <div
           className="time-slider-container"
@@ -260,7 +306,7 @@ function HashLogic() {
         <p>{searchResult}</p>
       </div>
       <div className="logical-representation">
-        <svg width="100%" height={1000}>
+        <svg width="100%" height={calculateHeight()}>
           {index.map((column, i) => (
             <React.Fragment key={i}>
               {/* Highlight hash index */}

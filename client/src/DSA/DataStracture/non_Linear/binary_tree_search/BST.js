@@ -2,6 +2,7 @@ import React from "react";
 import BSTLogic from "./logic/bst_logic.js";
 import { Box, Container, Typography } from "@mui/material";
 import Content from "../../../content/content";
+import CodeTemplate from "./code/CodeTemplate.js";
 
 const useStyles = {
   root: {
@@ -33,35 +34,35 @@ const useStyles = {
 function BST({ title, userData }) {
   // Initial tree structure
   return (
-    <Container maxWidth="lg">
-      <Box sx={useStyles.section}>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Introduction
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            paragraph about Binary Search Tree introduction....
-          </Typography>
+    <>
+      <BSTLogic />
+      <Container maxWidth="lg">
+        <Box sx={useStyles.section}>
+          <Box sx={useStyles.root}>
+            <Typography variant="h6" sx={useStyles.title}>
+              Introduction
+            </Typography>
+          </Box>
+          <Box sx={useStyles.root}>
+            <Typography variant="h6" sx={useStyles.title}>
+              Operation on Binary Search Tree
+            </Typography>
+            <Typography variant="body1" sx={useStyles.paragraph}>
+              paragraph about Binary Search Tree operations....
+            </Typography>
+          </Box>
+          <Box sx={useStyles.root}>
+            <Typography variant="h6" sx={useStyles.title}>
+              Implementation of Binary Search Tree
+            </Typography>
+            <Typography variant="body1" sx={useStyles.paragraph}>
+              <CodeTemplate />
+            </Typography>
+          </Box>
+          <Content title={title} userData={userData} />
         </Box>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Operation on Binary Search Tree
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            paragraph about Binary Search Tree operations....
-          </Typography>
-        </Box>
-        <Box sx={useStyles.root}>
-          <Typography variant="h6" sx={useStyles.title}>
-            Implementation of Binary Search Tree
-          </Typography>
-          <Typography variant="body1" sx={useStyles.paragraph}>
-            drop a code here....
-          </Typography>
-        </Box>
-        <Content title={title} userData={userData} />
-      </Box>
-    </Container>
+      </Container>
+    </>
   );
 }
 

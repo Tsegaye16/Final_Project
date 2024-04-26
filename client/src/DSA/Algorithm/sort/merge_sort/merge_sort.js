@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import "./merge_sort.scss";
+import Content from "../../../content/content";
 
-function MergeSort() {
+function MergeSort({ title, userData }) {
   const [array, setArray] = useState([]);
   const [arraySize, setArraySize] = useState(10);
   const [delay, setDelay] = useState(3000);
@@ -122,72 +123,81 @@ function MergeSort() {
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" padding="0">
+    <>
       <Box
         display="flex"
-        flexDirection="row"
+        flexDirection="column"
         alignItems="center"
-        justifyContent="space-between"
-        marginBottom="20px"
-        bgcolor="rgb(239, 235, 235)"
-        padding="20px"
-        borderRadius="5px"
-        width="100%"
-        borderBottom="2px solid black"
+        padding="0"
+        marginBottom="30px"
       >
         <Box
           display="flex"
           flexDirection="row"
-          width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
-          flexWrap="wrap" // Allowing items to wrap when screen size is reduced
+          alignItems="center"
+          justifyContent="space-between"
+          marginBottom="20px"
+          bgcolor="rgb(239, 235, 235)"
+          padding="20px"
+          borderRadius="5px"
+          width="100%"
+          borderBottom="2px solid black"
         >
-          <Typography variant="body1">Array Size:</Typography>
-          <Input
-            type="number"
-            value={arraySize}
-            inputProps={{ min: 1, max: 25 }}
-            onChange={handleArraySizeChange}
-          />
-          <Button onClick={generateRandomArray} className="merge-btn">
-            Generate New Array
-          </Button>
+          <Box
+            display="flex"
+            flexDirection="row"
+            width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
+            flexWrap="wrap" // Allowing items to wrap when screen size is reduced
+          >
+            <Typography variant="body1">Array Size:</Typography>
+            <Input
+              type="number"
+              value={arraySize}
+              inputProps={{ min: 1, max: 25 }}
+              onChange={handleArraySizeChange}
+            />
+            <Button onClick={generateRandomArray} className="merge-btn">
+              Generate New Array
+            </Button>
+          </Box>
+          <Box display="flex" flexDirection="row" width="100%">
+            <Button onClick={mergeSort} className="merge-btn">
+              Start Merge Sort
+            </Button>
+          </Box>
+          <Box display="flex" flexDirection="row" width="100%">
+            <Typography variant="body1">Delay (ms): {delay}</Typography>
+            <Slider
+              min={100}
+              max={1000}
+              value={delay}
+              onChange={handleDelayChange}
+              style={{ width: "200px", marginRight: "40px" }}
+            />
+          </Box>
         </Box>
-        <Box display="flex" flexDirection="row" width="100%">
-          <Button onClick={mergeSort} className="merge-btn">
-            Start Merge Sort
-          </Button>
-        </Box>
-        <Box display="flex" flexDirection="row" width="100%">
-          <Typography variant="body1">Delay (ms): {delay}</Typography>
-          <Slider
-            min={100}
-            max={1000}
-            value={delay}
-            onChange={handleDelayChange}
-            style={{ width: "200px", marginRight: "40px" }}
-          />
+        <Box marginTop="20px">
+          <div style={{ marginTop: "20px" }}>
+            {array.map((bar, index) => (
+              <div
+                className="array-bar"
+                key={index}
+                style={{
+                  height: `${bar.height}px`,
+                  width: "60px",
+                  display: "inline-block",
+                  margin: "2px",
+                  verticalAlign: "bottom",
+                }}
+              >
+                {bar.value}
+              </div>
+            ))}
+          </div>
         </Box>
       </Box>
-      <Box marginTop="20px">
-        <div style={{ marginTop: "20px" }}>
-          {array.map((bar, index) => (
-            <div
-              className="array-bar"
-              key={index}
-              style={{
-                height: `${bar.height}px`,
-                width: "60px",
-                display: "inline-block",
-                margin: "2px",
-                verticalAlign: "bottom",
-              }}
-            >
-              {bar.value}
-            </div>
-          ))}
-        </div>
-      </Box>
-    </Box>
+      <Content title={title} userData={userData} />
+    </>
   );
 }
 

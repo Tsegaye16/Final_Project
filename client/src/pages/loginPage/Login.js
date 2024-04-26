@@ -103,15 +103,14 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
-import { useNavigate, Usenavigate } from "react-router-dom"; // Import navigate for routing
+import { useNavigate } from "react-router-dom"; // Import navigate for routing
 import { toast, ToastContainer } from "react-toastify"; // Import toast for displaying messages
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -128,6 +127,34 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({
+    email: "",
+
+    password: "",
+  });
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = { ...errors };
+
+    // Validate each field
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      valid = false;
+    } else {
+      newErrors.email = "";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+      valid = false;
+    } else {
+      newErrors.password = "";
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
@@ -137,6 +164,9 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
 
     try {
       // Make a request to your login endpoint
@@ -247,6 +277,8 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
               autoFocus
               onChange={handleChange}
               value={formData.email}
+              error={Boolean(errors.email)}
+              helperText={errors.email}
             />
             <TextField
               margin="normal"
@@ -259,11 +291,10 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
               autoComplete="current-password"
               onChange={handleChange}
               value={formData.password}
+              error={Boolean(errors.password)}
+              helperText={errors.password}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth

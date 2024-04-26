@@ -44,13 +44,16 @@ const useStyles = makeStyles({
 function CustomCard({ userData }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [elapsedTime, setElapsedTime] = useState("");
+  const [elapsedTime, setElapsedTime] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
   };
   const handleChange = (event) => {
-    setElapsedTime(parseInt(event.target.value));
+    const value = event.target.value;
+    if (!isNaN(value) || value === "") {
+      setElapsedTime(value); // Set the elapsed time
+    }
   };
 
   const handleClose = () => {

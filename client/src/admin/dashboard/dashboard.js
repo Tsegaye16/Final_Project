@@ -1,14 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./dashboard.scss"; // Make sure to import the CSS file
-
 import AdminNavbar from "./bar/nav_bar";
-
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import UpdateUserPopup from "../manageStudent/studentPopup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserManagement from "./user_management";
+import AddUser from "../add_user/add_user";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@material-ui/core";
+import { Add as AddIcon } from "@material-ui/icons";
 
 function AdminDashdoard() {
   const [sidebarWidth, setSidebarWidth] = useState(250);
@@ -147,6 +154,20 @@ function AdminDashdoard() {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+
+  const [openRegisterDialog, setOpenRegisterDialog] = useState(false);
+
+  const handleOpenRegisterDialog = () => {
+    setOpenRegisterDialog(true);
+  };
+
+  const handleCloseRegisterDialog = () => {
+    setOpenRegisterDialog(false);
+  };
+  const handleAddUserAndCloseDialog = () => {
+    setOpenRegisterDialog(false);
+  };
+
   return (
     <div className="dashboard-container">
       <AdminNavbar
@@ -156,8 +177,32 @@ function AdminDashdoard() {
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
         <UserManagement />
+
         <div className="table-container">
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            style={{ marginLeft: "10%", marginBottom: "20px" }}
+            onClick={handleOpenRegisterDialog}
+          >
+            Register User
+          </Button>
+          <Dialog open={openRegisterDialog} onClose={handleCloseRegisterDialog}>
+            <DialogTitle>Register New User</DialogTitle>
+            <DialogContent>
+              {/* Render your Register component here */}
+              <AddUser setOpenRegisterDialog={handleAddUserAndCloseDialog} />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseRegisterDialog} color="primary">
+                Cancel
+              </Button>
+              {/* Add any additional action buttons if needed */}
+            </DialogActions>
+          </Dialog>
           <h2>Recently Registered user</h2>
+
           <table>
             <ToastContainer />
             <thead>
@@ -274,5 +319,4 @@ function AdminDashdoard() {
     </div>
   );
 }
-
 export default AdminDashdoard;

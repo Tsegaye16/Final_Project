@@ -29,7 +29,6 @@ import ResetPassword from "./user_forgote_password/password_reset.js";
 import UpdatePassword from "./user_forgote_password/password_update.js";
 import studentViewQuiz from "./student/view_quiz.js";
 import EmailConfirm from "./email_confirm.js";
-//import RetrieveQuestion from './student/view_question.js';
 import { promisify } from "util";
 import studentProfile from "./student/view_profile.js";
 import StudenUpdateProfile from "./student/update_profile.js";
@@ -41,7 +40,6 @@ import deleteNote from "./student/delete_note.js";
 import addNote from "./student/add_note.js";
 import dotenv from "dotenv";
 dotenv.config();
-
 const app = express();
 app.use(express.json());
 app.use(
@@ -69,6 +67,7 @@ const db = mysql.createPool({
   user: "root",
   password: process.env.DB_Password,
   database: "project",
+  charset: "UTF8MB4_GENERAL_CI",
   //debug: true,
 });
 app.use(express.static("uploads"));
