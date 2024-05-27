@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/styles';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import { makeStyles } from "@mui/styles";
+import { Navigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "100vh",
   },
   message: {
-    marginBottom: '16px',
+    marginBottom: "16px",
   },
 });
 
@@ -22,7 +22,6 @@ function Unauthorized() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Redirect to login page after 3 seconds
       return <Navigate to="/login" />;
     }, 3000);
 

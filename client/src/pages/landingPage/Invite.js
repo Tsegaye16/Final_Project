@@ -1,10 +1,8 @@
 import React from "react";
-// import { animateScroll, Link as ScrollLink } from 'react-scroll';
-// import { Link } from 'react-router-dom';
+
 import "./invite.scss";
 
-//import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-//import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-solid-svg-icons';
+
 
 import NavBar from "../../components/navBar/NavBar";
 import welcome from "../../assets/welcome.avif";

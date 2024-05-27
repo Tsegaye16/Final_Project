@@ -6,9 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      // Add your global styles here
-    },
+    root: {},
   })
 );
 
