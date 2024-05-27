@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
-import './logic.scss';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState, useRef } from "react";
+import "./logic.scss";
+import { ToastContainer, toast } from "react-toastify";
 
 const LinearSearch = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [searchValue, setSearchValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [array, setArray] = useState([]);
   const [searchIndex, setSearchIndex] = useState(null);
   const [delayTime, setDelayTime] = useState(1000);
@@ -14,9 +14,9 @@ const LinearSearch = () => {
   const currentSearchIndex = useRef(0);
 
   const createNode = () => {
-    const newNode = { value: inputValue, color: '#fff' };
+    const newNode = { value: inputValue, color: "#fff" };
     setArray((prevArray) => [...prevArray, newNode]);
-    setInputValue('');
+    setInputValue("");
   };
 
   const linearSearch = () => {
@@ -26,7 +26,7 @@ const LinearSearch = () => {
       if (currentSearchIndex.current >= array.length) {
         clearInterval(intervalRef.current);
         setIsPlaying(false);
-        
+
         return;
       }
 
@@ -35,28 +35,26 @@ const LinearSearch = () => {
       // Uncolor the previous node
       if (currentSearchIndex.current > 0) {
         if (newArray[currentSearchIndex.current - 1].value !== searchValue) {
-          newArray[currentSearchIndex.current - 1].color = '#ffffff'; // Uncolor if the previous node's value is not equal to the searched one
+          newArray[currentSearchIndex.current - 1].color = "#ffffff"; // Uncolor if the previous node's value is not equal to the searched one
         }
       }
 
       newArray[currentSearchIndex.current].color =
-        newArray[currentSearchIndex.current].value === searchValue ? '#00ff00' : '#f0ad4e'; // Green if matched, else orange
+        newArray[currentSearchIndex.current].value === searchValue
+          ? "#00ff00"
+          : "#f0ad4e"; // Green if matched, else orange
       setArray(newArray);
 
       if (newArray[currentSearchIndex.current].value === searchValue) {
         setSearchIndex(currentSearchIndex.current);
         found = true;
         toast.success(`Found at index ${currentSearchIndex.current}`);
-        
       } else if (currentSearchIndex.current === array.length - 1 && !found) {
-        toast.error('Not found');
+        toast.error("Not found");
       }
-      
-      
+
       currentSearchIndex.current += 1;
-      
     }, delayTime);
-   
   };
 
   const handlePlayPause = () => {
@@ -89,16 +87,16 @@ const LinearSearch = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           placeholder="Search value"
         />
-        <button onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
+        <button onClick={handlePlayPause}>
+          {isPlaying ? "Pause" : "Play"}
+        </button>
       </div>
-
-      
 
       <div className="visualization">
         {array.map((node, index) => (
           <div
             key={index}
-            className={`node ${searchIndex === index ? 'searched' : ''}`}
+            className={`node ${searchIndex === index ? "searched" : ""}`}
             style={{ backgroundColor: node.color }}
           >
             {node.value}

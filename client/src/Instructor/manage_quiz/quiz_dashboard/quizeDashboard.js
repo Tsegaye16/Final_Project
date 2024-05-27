@@ -5,7 +5,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddQuestion from "./addQuestion";
-import Footer from "../../../pages/landingPage/sample/dialog/footer";
 
 function QuizDashboard() {
   const [sidebarWidth, setSidebarWidth] = useState(0);

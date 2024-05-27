@@ -38,6 +38,12 @@ import postedNote from "./student/retrieve_note.js";
 import updateNote from "./student/update_note.js";
 import deleteNote from "./student/delete_note.js";
 import addNote from "./student/add_note.js";
+import TotalUser from "./admin/total_user.js";
+import addUser from "./admin/addUser.js";
+import userMessage from "./contact.js";
+import userFeedback from "./feedBack.js";
+import newMessage from "./newMessage.js";
+import messageReplay from "./admin/messageReply.js";
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
@@ -75,6 +81,9 @@ app.use(express.static("uploads"));
 // Registration
 app.post("/register", async (req, res) => {
   await registerUser(db, req, res);
+});
+app.post("/admin/adduser", async (req, res) => {
+  await addUser(db, req, res);
 });
 
 // Login
@@ -287,6 +296,21 @@ app.post("/user/deletenote", async (req, res) => {
 
 app.post("/user/addnote", async (req, res) => {
   await addNote(db, req, res);
+});
+app.post("/totaluser", async (req, res) => {
+  await TotalUser(db, req, res);
+});
+app.post("/user/message", async (req, res) => {
+  await userMessage(db, req, res);
+});
+app.post("/user/feedback", async (req, res) => {
+  await userFeedback(db, req, res);
+});
+app.post("/new/message", async (req, res) => {
+  await newMessage(db, req, res);
+});
+app.post("/admin/replay", async (req, res) => {
+  await messageReplay(db, req, res);
 });
 
 const PORT = process.env.PORT;

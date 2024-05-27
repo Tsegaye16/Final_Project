@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import "./insertion_sort.scss"; // Import your SCSS file if needed
 import Content from "../../../content/content";
+import CodeTemplate from "./Code/CodeTemplate";
 
 function InsertionSort({ title, userData }) {
   const [array, setArray] = useState([]);
@@ -127,7 +128,7 @@ function InsertionSort({ title, userData }) {
           </Box>
         </Box>
 
-        <Box marginTop="20px">
+        <Box marginTop="20px" marginBottom="30px">
           {array.map((item, index) => (
             <div
               key={index}
@@ -144,6 +145,7 @@ function InsertionSort({ title, userData }) {
             </div>
           ))}
         </Box>
+        <CodeTemplate />
       </Box>
       <Content title={title} userData={userData} />
     </>

@@ -7,6 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { TextField, Button, Typography, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "@mui/material";
+import axios from "axios";
 
 export const ContactUs = ({ back }) => {
   const form = useRef();
@@ -30,29 +31,19 @@ export const ContactUs = ({ back }) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_26tthlf",
-        "template_xp5by8d",
-        e.target,
-        "CF4qOIwsvGf8WTr_E"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          toast.success("Message sent successfully!");
-          setFormData({
-            user_name: "",
-            user_email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          console.log(error.text);
-          toast.error("Failed to send message, please try again");
-        }
-      );
+    axios
+      .post("http://localhost:8800/user/message", formData)
+      .then((resp) => {
+        toast.success("message sent successfully!!!");
+        setFormData({
+          user_name: "",
+          user_email: "",
+          message: "",
+        });
+      })
+      .catch((err) => {
+        toast.error("message sent error");
+      });
   };
 
   return (

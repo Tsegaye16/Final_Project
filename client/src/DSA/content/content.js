@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  Box,
-  Typography,
-  IconButton,
-  TextareaAutosize,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Box, Typography, IconButton, Button, Grid } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import { Delete } from "@mui/icons-material";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
+
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Tooltip } from "@mui/material";
 import axios from "axios";
@@ -55,9 +47,11 @@ function Content({ title, userData }) {
   const [noteData, setNoteData] = useState(null);
   const [instructorNotes, setInstructorNotes] = useState([]);
   const [studentNotes, setStudentNotes] = useState([]);
+  const [nullNotes, setNullNotes] = useState([]);
   const [editNoteId, setEditNoteId] = useState(null);
   const [editedInstructorNote, setEditedInstructorNote] = useState("");
   const [editedStudentNote, setEditedStudentNote] = useState("");
+  const [editedNullNote, setEditedNullNote] = useState("");
   const [newNote, setNewNote] = useState(""); // New state to hold the text of the new note
   const [isAddingNote, setIsAddingNote] = useState(false);
 
@@ -73,10 +67,14 @@ function Content({ title, userData }) {
 
   // Filter and set instructor and student notes based on user role and title
   useEffect(() => {
+    console.log("sample reacct query");
     if (noteData) {
       if (userData[0].role_name === "Instructor") {
         const instructorNotes = noteData.filter(
-          (note) => note.poster_role === "Instructor" && note.title === title
+          (note) =>
+            note.poster_role === "Instructor" &&
+            note.poster_id === userData[0].user_id &&
+            note.title === title
         );
         setInstructorNotes(instructorNotes);
       } else if (userData[0].role_name === "Student") {
@@ -91,6 +89,19 @@ function Content({ title, userData }) {
         );
         setInstructorNotes(instructorNotes);
         setStudentNotes(studentNotes);
+      } else if (userData[0].role_name === null) {
+        const instructorNotes = noteData.filter(
+          (note) => note.poster_role === "Instructor" && note.title === title
+        );
+        const nullNotes = noteData.filter(
+          (note) =>
+            note.poster_role === null &&
+            note.poster_id === userData[0].user_id &&
+            note.title === title
+        );
+        setInstructorNotes(instructorNotes);
+        setNullNotes(nullNotes);
+        //setStudentNotes(studentNotes);
       }
     }
   }, [userData, noteData, title]);
@@ -102,15 +113,23 @@ function Content({ title, userData }) {
       setEditedInstructorNote(initialNote);
     } else if (role === "Student") {
       setEditedStudentNote(initialNote);
+    } else if (role === "null") {
+      setEditedNullNote(initialNote);
     }
   };
 
   // Handle save button click
   const handleSaveEdit = (id, role) => {
     // Select appropriate state and setter based on role
-    const editedNote =
-      role === "Instructor" ? editedInstructorNote : editedStudentNote;
+    let editedNote = "";
 
+    if (role === "Instructor") {
+      editedNote = editedInstructorNote;
+    } else if (role === "Student") {
+      editedNote = editedStudentNote;
+    } else if (role === "null") {
+      editedNote = editedNullNote;
+    }
     // Send edited note data to backend
     const editedData = {
       id: id,
@@ -130,6 +149,8 @@ function Content({ title, userData }) {
           setEditedInstructorNote("");
         } else if (role === "Student") {
           setEditedStudentNote("");
+        } else if (role === null) {
+          setEditedNullNote("");
         }
         // Fetch updated note data
         axios
@@ -204,9 +225,6 @@ function Content({ title, userData }) {
 
   return (
     <Box sx={useStyles.root}>
-      <Typography variant="h6" sx={useStyles.title}>
-        Summary
-      </Typography>
       {/* Render notes based on user role */}
       {userData[0].role_name === "Instructor" && (
         <Box>
@@ -364,6 +382,100 @@ function Content({ title, userData }) {
                     onClick={() =>
                       handleEdit(note.id, note.note_text, "Student")
                     }
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <Tooltip title="Delete" arrow>
+                    <IconButton onClick={() => handleDelete(note.id)}>
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+            </Box>
+          ))}
+          {!isAddingNote && (
+            <Typography variant="h6">
+              Jot down your perception by clicking 👉{" "}
+              <IconButton onClick={() => setIsAddingNote(true)}>
+                <AddIcon />
+              </IconButton>
+            </Typography>
+          )}
+          {/* Add textarea for adding new note */}
+          {isAddingNote && (
+            <Box sx={useStyles.section}>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={12} style={{ backgroundColor: "white" }}>
+                  <ReactQuill
+                    value={newNote}
+                    onChange={setNewNote}
+                    modules={modules}
+                    formats={formats}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" onClick={handleAddNote}>
+                    Save
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setIsAddingNote(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          )}
+        </Box>
+      )}
+
+      {/* //////////////////////////////////////////////////////////// */}
+      {userData[0].role_name === null && (
+        <Box>
+          {instructorNotes.map((note) => (
+            <Box key={note.id} sx={useStyles.section}>
+              <div dangerouslySetInnerHTML={{ __html: note.note_text }} />
+            </Box>
+          ))}
+          {nullNotes.map((note) => (
+            <Box key={note.id} sx={useStyles.section}>
+              {/* Render edit textarea if editNoteId matches current note id */}
+              {editNoteId === note.id ? (
+                <>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={12} style={{ backgroundColor: "white" }}>
+                      <ReactQuill
+                        value={editedNullNote}
+                        onChange={(value) => setEditedNullNote(value)}
+                        modules={modules}
+                        formats={formats}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        onClick={() => handleSaveEdit(note.id, "null")}
+                      >
+                        Save
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button variant="outlined" onClick={handleCancelEdit}>
+                        Cancel
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <div dangerouslySetInnerHTML={{ __html: note.note_text }} />
+                  <Tooltip title="Edit" arrow></Tooltip>
+                  <IconButton
+                    onClick={() => handleEdit(note.id, note.note_text, "null")}
                   >
                     <EditIcon />
                   </IconButton>

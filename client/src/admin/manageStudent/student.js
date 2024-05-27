@@ -199,10 +199,6 @@ const StudentList = () => {
         userData={userData}
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
-        <div className="intro">
-          wellcome{" "}
-          {userData && userData.length > 0 ? userData[0].name : "Admin"}{" "}
-        </div>
         <div className="student-list">
           <h2>Student List</h2>
           <TextField

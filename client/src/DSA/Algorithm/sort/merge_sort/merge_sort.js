@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import "./merge_sort.scss";
 import Content from "../../../content/content";
+import CodeTemplate from "./Code/CodeTemplate";
 
 function MergeSort({ title, userData }) {
   const [array, setArray] = useState([]);
@@ -176,7 +177,7 @@ function MergeSort({ title, userData }) {
             />
           </Box>
         </Box>
-        <Box marginTop="20px">
+        <Box marginTop="20px" marginBottom="30px">
           <div style={{ marginTop: "20px" }}>
             {array.map((bar, index) => (
               <div
@@ -195,6 +196,7 @@ function MergeSort({ title, userData }) {
             ))}
           </div>
         </Box>
+        <CodeTemplate />
       </Box>
       <Content title={title} userData={userData} />
     </>

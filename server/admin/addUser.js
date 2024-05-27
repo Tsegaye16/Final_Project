@@ -1,9 +1,10 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { promisify } from "util";
-import transporter from "./user_forgote_password/node_mailer.js";
+import transporter from "../user_forgote_password/node_mailer.js";
+//import transporter from "../user_forgote_password/node_mailer";
 
-export default async function registerUser(db, req, res) {
+export default async function addUser(db, req, res) {
   try {
     const { name, email, username, password } = req.body;
 
@@ -11,13 +12,12 @@ export default async function registerUser(db, req, res) {
     const emailCheckQuery =
       "SELECT is_confirmed FROM email_confirmations WHERE user_id = (SELECT user_id FROM users WHERE email = ?)";
     const promisifiedQuery = promisify(db.query).bind(db);
-    
+
     const emailCheckResult = await promisifiedQuery(emailCheckQuery, [email]);
-   
 
     if (emailCheckResult.length > 0) {
       const { is_confirmed } = emailCheckResult[0];
-      
+
       if (is_confirmed === 1) {
         // User already exists with the provided email and it's confirmed
         return res.status(409).json({

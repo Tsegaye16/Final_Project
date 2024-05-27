@@ -1,105 +1,3 @@
-// import React, { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-// import './Login.css';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-
-// function Login() {
-//   const [formData, setFormData] = useState({
-//     email: '',
-//     password: '',
-//   });
-//   const navigate = useNavigate();
-//   axios.defaults.withCredentials = true;
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       // Make a request to your login endpoint
-//       const response = await axios.post('http://localhost:8800/login', formData);
-
-//       // Handle the response, e.g., store user information in state or context
-//       toast.success('Login successful',{
-//         position: "top-right",
-//         autoClose: 3000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: true,
-//         draggable: true,
-//       });
-
-//       // Extract user ID from the response
-//       const userId = response.data.user.id;
-
-//       // Store the token in local storage
-//       localStorage.setItem('accessToken', response.data.token);
-
-//       // Set a timer to clear the token after one minute
-//       setTimeout(() => {
-//         localStorage.removeItem('accessToken');
-//         toast.error('Token expired, cleared from local storage', {
-//           position: "top-right",
-//           autoClose: 3000,
-//           hideProgressBar: false,
-//           closeOnClick: true,
-//           pauseOnHover: true,
-//           draggable: true,
-//         });
-//       }, 60000); // 60000 milliseconds = 1 minute
-
-//       // Redirect to the user-specific route
-//       setTimeout(() =>{
-//         navigate(`/student/${userId}`);
-//       }, 6000)
-//     } catch (error) {
-//       // Handle login failure, e.g., show an error message
-//       if (error.response) {
-//         toast.error(`Login failed: ${error.response.data.message}`);
-//       } else {
-//         toast.error(`Login failed: ${error.message}`);
-//       }
-//     }
-//   };
-
-//   return (
-//     <div className="login">
-//       <div className="login-container">
-//         <h1>Login</h1>
-//         <ToastContainer />
-//         <form onSubmit={handleSubmit}>
-//           <div className="form-group">
-//             <label>E-mail:</label>
-//             <input
-//               type="text"
-//               name="email"
-//               value={formData.email}
-//               onChange={handleChange}
-//             />
-//           </div>
-//           <div className="form-group">
-//             <label>Password:</label>
-//             <input
-//               type="password"
-//               name="password"
-//               value={formData.password}
-//               onChange={handleChange}
-//             />
-//           </div>
-//           <button type="submit">Login</button>
-//         </form>
-//         <p>Don't have an account yet? <Link to="/register">Register</Link></p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
 import React from "react";
 import { useState } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
@@ -110,7 +8,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -118,6 +15,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 
 // Create a default theme
 const defaultTheme = createTheme();
@@ -132,6 +33,7 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
 
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
   const validateForm = () => {
     let valid = true;
     const newErrors = { ...errors };
@@ -185,9 +87,6 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
         draggable: true,
       });
 
-      // Extract user ID from the response
-
-      // Store the token in local storage
       localStorage.setItem("accessToken", response.data.token);
 
       // Set a timer to clear the token after one minute
@@ -208,10 +107,12 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         return decodedToken.role_name;
       };
+
       const getUserIdFromToken = (token) => {
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         return decodedToken.user_id;
       };
+
       const token = localStorage.getItem("accessToken");
       const role_name = getUserRoleFromToken(token);
       const user_id = getUserIdFromToken(token);
@@ -221,8 +122,6 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
       setUserRole(role);
       setToken(token);
 
-      // Redirect to the user-specific route
-      //
       setTimeout(() => {
         if (role === "instructor" || role === "admin") {
           navigate(`/${role}`);
@@ -239,6 +138,10 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
         toast.error(`Login failed: ${error.message}`);
       }
     }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -286,13 +189,26 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
               fullWidth
               name="password"
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="current-password"
               onChange={handleChange}
               value={formData.password}
               error={Boolean(errors.password)}
               helperText={errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Button

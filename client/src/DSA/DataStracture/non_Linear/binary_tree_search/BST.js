@@ -40,19 +40,6 @@ function BST({ title, userData }) {
         <Box sx={useStyles.section}>
           <Box sx={useStyles.root}>
             <Typography variant="h6" sx={useStyles.title}>
-              Introduction
-            </Typography>
-          </Box>
-          <Box sx={useStyles.root}>
-            <Typography variant="h6" sx={useStyles.title}>
-              Operation on Binary Search Tree
-            </Typography>
-            <Typography variant="body1" sx={useStyles.paragraph}>
-              paragraph about Binary Search Tree operations....
-            </Typography>
-          </Box>
-          <Box sx={useStyles.root}>
-            <Typography variant="h6" sx={useStyles.title}>
               Implementation of Binary Search Tree
             </Typography>
             <Typography variant="body1" sx={useStyles.paragraph}>

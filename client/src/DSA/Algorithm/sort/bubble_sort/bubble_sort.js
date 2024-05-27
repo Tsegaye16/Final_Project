@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import Content from "../../../content/content";
-
+import CodeTemplate from "./Code/CodeTemplate";
 // Implement Bubble Sort algorithm
 const BubbleSort = ({ title, userData }) => {
   const [array, setArray] = useState([]);
@@ -132,7 +132,7 @@ const BubbleSort = ({ title, userData }) => {
         </Box>
 
         {/* Visualization part */}
-        <Box marginTop="20px">
+        <Box marginTop="20px" marginBottom="30px">
           {array.map((item, index) => (
             <div
               key={index}
@@ -149,7 +149,9 @@ const BubbleSort = ({ title, userData }) => {
             </div>
           ))}
         </Box>
+        <CodeTemplate />
       </Box>
+
       <Content title={title} userData={userData} />
     </>
   );

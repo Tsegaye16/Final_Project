@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import "./Home.scss";
-
 import NavBar from "../../components/navBar/NavBar";
 import LeftBar from "../../components/leftBar/leftBar";
-
 import Array from "../../DSA/DataStracture/Linear/array/array";
 import Welcome from "../../DSA/welcome/welcome";
-
 import Linked_list from "../../DSA/DataStracture/Linear/linked_list/linked_list";
-import BT from "../../DSA/DataStracture/non_Linear/binary_Tree/BT";
 import BST from "../../DSA/DataStracture/non_Linear/binary_tree_search/BST";
 import Hash_table from "../../DSA/DataStracture/non_Linear/hash_table/hash_table";
-//import Graph from "../../DSA/DataStracture/non_Linear/graph/graph";
 import Graph from "../../DSA/DataStracture/non_Linear/graph/graph.js";
 import Linear_search from "../../DSA/Algorithm/search/linear_search/linear_search";
 import Binary_search from "../../DSA/Algorithm/search/binary_search/binary_search";
@@ -21,12 +15,9 @@ import Insertion_sort from "../../DSA/Algorithm/sort/insertion_sort/insertion_so
 import Selection_sort from "../../DSA/Algorithm/sort/selection_sort/selection_sort";
 import Merge_sort from "../../DSA/Algorithm/sort/merge_sort/merge_sort";
 import Quick_sort from "../../DSA/Algorithm/sort/quick_sort/quick_sort";
-
-import Tree from "../../DSA/DataStracture/non_Linear/tree/tree";
 import QuizIcon from "@mui/icons-material/Quiz";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, CircularProgress, Typography } from "@mui/material";
-
 import axios from "axios";
 import StackList from "../../DSA/DataStracture/Linear/stack/stackList";
 import QueueList from "../../DSA/DataStracture/Linear/queue/queueList";

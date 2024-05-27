@@ -2,6 +2,7 @@ import React from "react";
 import HashLogic from "./logic/hash_logic";
 import { Box, Container, Typography } from "@mui/material";
 import Content from "../../../content/content";
+import CodeTemplate from "./code/CodeTemplate";
 
 const useStyles = {
   root: {
@@ -37,27 +38,10 @@ function Hash_table({ title, userData }) {
         <Box sx={useStyles.section}>
           <Box sx={useStyles.root}>
             <Typography variant="h6" sx={useStyles.title}>
-              Introduction
-            </Typography>
-            <Typography variant="body1" sx={useStyles.paragraph}>
-              paragraph about hash introduction....
-            </Typography>
-          </Box>
-          <Box sx={useStyles.root}>
-            <Typography variant="h6" sx={useStyles.title}>
-              Operation on hash
-            </Typography>
-            <Typography variant="body1" sx={useStyles.paragraph}>
-              paragraph about hash operations....
-            </Typography>
-          </Box>
-          <Box sx={useStyles.root}>
-            <Typography variant="h6" sx={useStyles.title}>
               Implementation of hash
             </Typography>
-            <Typography variant="body1" sx={useStyles.paragraph}>
-              drop a code here....
-            </Typography>
+
+            <CodeTemplate />
           </Box>
           <Content title={title} userData={userData} />
         </Box>

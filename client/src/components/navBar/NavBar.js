@@ -78,7 +78,7 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleHome}>Home</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+
         {instructor && (
           <>
             <MenuItem onClick={() => handleMenuItemClick("/instructor")}>
@@ -106,6 +106,7 @@ const NavBar = ({ icon, toggleSidebar, userData, instructor }) => {
             </MenuItem>
           </>
         )}
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     );
   };

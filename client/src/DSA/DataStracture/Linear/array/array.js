@@ -377,15 +377,6 @@ int main() {
                   <Insertion />
                 </div>
               </li>
-
-              <li>
-                <span>Deletion</span>
-                <h1>comming soon............</h1>
-              </li>
-              <li>
-                <span>Updating</span>
-                <h1>comming soon............</h1>
-              </li>
             </ol>
           </Box>
 

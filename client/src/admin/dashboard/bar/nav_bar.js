@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 
@@ -7,13 +7,51 @@ import { SidebarData } from "./data";
 import "./nav_bar.css";
 import { IconContext } from "react-icons";
 
-import { Typography, Menu, MenuItem, Avatar } from "@mui/material";
+import {
+  Typography,
+  Menu,
+  MenuItem,
+  Avatar,
+  Badge,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+} from "@mui/material";
 
 import defaults from "../../../assets/default.png";
+import axios from "axios";
 
 export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [messages, setMessages] = useState([]);
+  const [openMessageDialog, setOpenMessageDialog] = useState(false);
+  const [replyDialogOpen, setReplyDialogOpen] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [selectedMessage, setSelectedMessage] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchMessages();
+    const interval = setInterval(fetchMessages, 1000); // Call fetchMessages every 5 minutes
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
+  const fetchMessages = () => {
+    axios
+      .post("http://localhost:8800/new/message")
+      .then((resp) => {
+        setNotificationCount(resp.data.length);
+        setMessages(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleHome = () => {
     navigate("/");
@@ -21,12 +59,12 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
   };
 
   const handleLogout = () => {
-    // Remove the token from local storage
     localStorage.removeItem("accessToken");
     window.location.href = "/login";
   };
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
+
+  const handleMenuClick = (e) => {
+    setAnchorEl(e.currentTarget);
   };
 
   const handleCloseMenu = () => {
@@ -35,10 +73,49 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
 
   const handleMenuItemClick = (path) => {
     navigate(path);
-    //console.log(userData);
-
     handleCloseMenu();
   };
+
+  const handleOpenMessageDialog = () => {
+    setOpenMessageDialog(true);
+  };
+
+  const handleCloseMessageDialog = () => {
+    setOpenMessageDialog(false);
+  };
+
+  const handleReply = (message) => {
+    setSelectedMessage(message);
+    setReplyDialogOpen(true);
+  };
+
+  const handleCloseReplyDialog = () => {
+    setReplyDialogOpen(false);
+    setReplyText("");
+    setSelectedMessage(null);
+  };
+
+  const handleSendReply = () => {
+    // Send reply to backend
+    const { id, name, message, email } = selectedMessage;
+    axios
+      .post("http://localhost:8800/admin/replay", {
+        messageId: id,
+        name: name,
+        reply: replyText,
+        message,
+        email,
+      })
+      .then((response) => {
+        console.log("Reply sent successfully:", response.data);
+        handleCloseReplyDialog();
+        fetchMessages();
+      })
+      .catch((error) => {
+        console.error("Error sending reply:", error);
+      });
+  };
+
   const image =
     userData && userData.length > 0
       ? `http://localhost:8800/${userData[0].image}`
@@ -70,10 +147,6 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
       </Menu>
     );
   };
-  // let navigate = useNavigate()
-  // const handleProfile = ()=>{
-  //     navigate("/admin/profile")
-  // }
 
   return (
     <>
@@ -88,7 +161,17 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
               <FaIcons.FaTimes />
             </Link>
           )}
+
           <div className="user">
+            <Badge
+              badgeContent={notificationCount}
+              color="error"
+              onClick={handleOpenMessageDialog}
+            >
+              <div className="notification-icon">
+                <FaIcons.FaBell />
+              </div>
+            </Badge>
             <div
               className="user"
               onClick={handleMenuClick}
@@ -96,6 +179,7 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",
+                marginLeft: "20px",
               }}
             >
               <Avatar alt="User Avatar" src={image} />
@@ -109,6 +193,58 @@ export default function AdminNavbar({ toggleSidebar, sidebarWidth, userData }) {
             {renderUserMenu()}
           </div>
         </div>
+        <Dialog
+          open={openMessageDialog}
+          onClose={handleCloseMessageDialog}
+          maxWidth="md"
+        >
+          <DialogTitle>Messages</DialogTitle>
+          <DialogContent>
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                style={{
+                  margin: "8px",
+                  padding: "16px",
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: "4px",
+                  wordWrap: "break-word",
+                  wordBreak: "break-all",
+                }}
+              >
+                <Typography>{message.message}</Typography>
+                <Button onClick={() => handleReply(message)}>Reply</Button>
+              </div>
+            ))}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseMessageDialog}>Close</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={replyDialogOpen} onClose={handleCloseReplyDialog}>
+          <DialogTitle>Reply</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Reply"
+              fullWidth
+              multiline
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseReplyDialog}>Cancel</Button>
+            <Button
+              onClick={handleSendReply}
+              variant="contained"
+              color="primary"
+            >
+              Send
+            </Button>
+          </DialogActions>
+        </Dialog>
         <nav className={sidebarWidth !== 0 ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items">
             {SidebarData.map((item, index) => (

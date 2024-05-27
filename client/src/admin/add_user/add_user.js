@@ -72,7 +72,7 @@ function AddUser({ setOpenRegisterDialog }) {
     }
     try {
       const response = await axios.post(
-        "http://localhost:8800/register",
+        "http://localhost:8800/admin/adduser",
         values
       );
       const { message } = response.data;

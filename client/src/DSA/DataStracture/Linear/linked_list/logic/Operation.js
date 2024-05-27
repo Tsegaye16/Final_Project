@@ -199,25 +199,39 @@ function Operation() {
   };
 
   // Function to visualize search process by value
+  // Function to visualize search process by value
   const visualizeSearchByValue = () => {
     let currentIndex = 0;
+    let foundIndexes = []; // Array to store indexes of found elements
     const foundIndex = nodes.findIndex((node) => node.value === searchValue);
 
     const intervalId = setInterval(() => {
-      if (currentIndex <= foundIndex) {
+      if (currentIndex < nodes.length) {
         // Highlight the current node being searched
         const updatedNodes = nodes.map((node, idx) => ({
           ...node,
           color: idx === currentIndex ? "green" : node.color,
         }));
         setNodes(updatedNodes);
+
+        // If the value is found, add its index to the foundIndexes array
+        if (nodes[currentIndex].value === searchValue) {
+          foundIndexes.push(currentIndex);
+        }
+
         currentIndex++;
       } else {
         clearInterval(intervalId);
-        if (foundIndex !== -1) {
-          // Change color of the found node
+
+        if (foundIndex === -1) {
+          // If the element is not found, display a message
+          alert("Element not found.");
+        } else {
+          // Change color of all found nodes to blue
           const updatedNodes = [...nodes];
-          updatedNodes[foundIndex].color = "blue";
+          foundIndexes.forEach((index) => {
+            updatedNodes[index].color = "blue";
+          });
           setNodes(updatedNodes);
         }
 

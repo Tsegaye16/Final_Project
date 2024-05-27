@@ -61,11 +61,7 @@ const TeamMember = ({
         >
           {role}
         </Typography>
-        <Typography variant="body1" gutterBottom>
-          {/* Brief description about the team member */}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut arcu
-          ac velit pharetra consectetur.
-        </Typography>
+
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
             <IconButton href={github} target="_blank" rel="noopener noreferrer">

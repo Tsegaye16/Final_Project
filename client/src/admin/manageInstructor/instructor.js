@@ -198,7 +198,6 @@ const InstructorList = () => {
         userData={userData}
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
-        <div className="intro">wellcome {userData && userData.length > 0 ? userData[0].name : "Admin"}</div>
         <div className="instructor-list">
           <h2>Instructor List</h2>
           <ToastContainer />

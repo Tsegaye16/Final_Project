@@ -3,7 +3,6 @@ import image from "../../assets/DSA-welcome.png";
 import { Container, Box, Typography, makeStyles } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
 import CustomizedAccordions from "./fak";
-import Footer from "../../pages/landingPage/sample/dialog/footer";
 
 const useStyles = makeStyles((theme) => ({
   root1: {

@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/Back_up
+mysqlbackup.bat
 # testing
 /coverage
 

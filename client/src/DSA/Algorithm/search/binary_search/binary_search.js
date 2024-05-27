@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, Slider, Typography, Box } from "@mui/material";
 import Content from "../../../content/content";
+import CodeTemplate from "./code/CodeTemplate";
 
 const BinarySearch = ({ title, userData }) => {
   const [numberOfElements, setNumberOfElements] = useState(10);
@@ -194,6 +195,7 @@ const BinarySearch = ({ title, userData }) => {
             <div>{searchResult}</div>
           </div>
         </Box>
+        <CodeTemplate />
       </Box>
       <Content title={title} userData={userData} />
     </>
