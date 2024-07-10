@@ -8,7 +8,7 @@ const updateStudentProfile = async (db, req, res) => {
     
     // Check if an image is provided in the request
     const image = req.file ? req.file.filename : null;
-    console.log("IMAGE: ", image)
+    
 
     // Use the MySQL connection pool to execute queries
     const query = promisify(db.query).bind(db);

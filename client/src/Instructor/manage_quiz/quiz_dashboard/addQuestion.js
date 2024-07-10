@@ -3,6 +3,7 @@ import axios from 'axios';
 import './addQuestion.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container, Typography, TextField, Select, MenuItem, Button, Grid } from '@mui/material';
 
 const AddQuestion = ({ cancel, quiz_name, quiz_id }) => {
   const [numQuestions, setNumQuestions] = useState(0);
@@ -101,7 +102,7 @@ const AddQuestion = ({ cancel, quiz_name, quiz_id }) => {
   return (
     <div className="add-question-container">
       <ToastContainer/>
-      <h1>{`Adding question on quiz ${quiz_name} ${quiz_id}`}</h1>
+      <h1>{`Adding question on quiz ${quiz_name}`}</h1>
       <label htmlFor="num-questions">Number of Questions:</label>
       <input type="number" id="num-questions" value={numQuestions} onChange={handleNumQuestionsChange} min={0}/>
       
@@ -121,32 +122,46 @@ const AddQuestion = ({ cancel, quiz_name, quiz_id }) => {
               />
             ))}
           </div>
-          <div className='selection-field'>
-            <div className='correct-answer'>
-              <select id={`correct-answer-${index}`} value={questions[index].correctAnswer} onChange={(e) => handleCorrectAnswerChange(index, e)}>
-                <option value="">Select Correct answer</option>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} sm={4}>
+              <Select
+                value={questions[index].correctAnswer}
+                onChange={(e) => handleCorrectAnswerChange(index, e)}
+                fullWidth
+                displayEmpty
+                margin="normal"
+              >
+                <MenuItem value="">Select Correct answer</MenuItem>
                 {questions[index].choices.map((choice, choiceIndex) => (
-                  <option key={choiceIndex} value={choiceIndex}>{`Choice ${choiceIndex + 1}`}</option>
+                  <MenuItem key={choiceIndex} value={choiceIndex}>{`Choice ${choiceIndex + 1}`}</MenuItem>
                 ))}
-              </select>
-            </div>
-            <div className='difficulty'>
-              <select id={`difficulty-${index}`} value={difficultyLevels[index]} onChange={(e) => handleDifficultyChange(index, e)}>
-                <option value="">Select Difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-            </div>
-            <div className='mark'>
-              <input type="number" placeholder="Mark" value={marks[index]} onChange={(e) => handleMarkChange(index, e)} min={0}/>
-            </div>
-          </div>
+              </Select>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Select
+                value={difficultyLevels[index]}
+                onChange={(e) => handleDifficultyChange(index, e)}
+                fullWidth
+                displayEmpty
+                margin="normal"
+              >
+                <MenuItem value="">Select Difficulty</MenuItem>
+                <MenuItem value="easy">Easy</MenuItem>
+                <MenuItem value="medium">Medium</MenuItem>
+                <MenuItem value="hard">Hard</MenuItem>
+              </Select>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <input type="number"  placeholder="Mark" value={marks[index]} onChange={(e) => handleMarkChange(index, e)} min={0}/>
+              </Grid>
+            
+            </Grid>
+            
         </div>
       ))}
       <div className='button-cont'>        
-        <button className={`save ${isSaveDisabled ? 'disable': ''}`} disabled={isSaveDisabled} onClick={handleSubmit}>Save</button>
-        <button className='cancel' onClick={handleCancel}>Cancel</button>
+        <Button variant="contained" className={`save ${isSaveDisabled ? 'disable': ''}`} disabled={isSaveDisabled} onClick={handleSubmit}>Save</Button>
+        <Button variant="contained" className='cancel' onClick={handleCancel}>Cancel</Button>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@
   color: white;
 
   .header {
-    height: 100px;
+    height: 70px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -20,25 +20,25 @@
     border-bottom: 1px solid lightgray;
     position: fixed;
     top: 0;
-    z-index: 1000; 
-      }
-      
+    z-index: 1000;
+  }
+
   .body-container {
     flex: 1;
     color: black;
-    
-    overflow-y: auto; 
-    .body{
+
+    overflow-y: auto;
+    .body {
       padding-top: 0;
       margin-top: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      
-      .home{
+
+      .home {
         padding-top: 0;
-        
+
         width: 100%;
         background-color: inherit;
         display: flex;
@@ -46,114 +46,106 @@
         align-items: center;
         justify-content: center;
         border-bottom: solid 2px lightgray;
-       
-       
 
-      .left{
-               
-        width: 45%;
-        //height: 90%;
-        background-color: inherit;
-        border-radius: 30px;
-        display: flex; 
-        
-        flex-direction: column;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-top: 80px;
-        margin-bottom: 50px;
-        margin-left: 15px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        .moto{
-          width: 100%;         
-          
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 3rem;
-          font-weight: bolder;
-          margin-bottom: 30px;
-          
-        }
-        .expression{
-          width: 100%;        
-          border-radius: 10px;
-          
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 30px;
+        .left {
+          width: 50%;
+          //height: 90%;
+          background-color: inherit;
+          border-radius: 30px;
+          //display: flex;
+
           flex-direction: column;
-          //margin-bottom: 60px;
+          padding-left: 10px;
+          padding-right: 10px;
+          margin-top: 80px;
+          margin-bottom: 50px;
 
-          span{
-            font-size: 1.5rem;
-            color: black;
+          transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+          .moto {
+            width: 100%;
 
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            font-weight: bolder;
+            margin-bottom: 30px;
           }
-          button{
-            margin-top: 10px;
-            height: 50px;
-            width: 220px;
-            border: none;
-            font-size: larger;
-            border-radius: 8px;
-            background-color: dodgerblue;
+          .expression {
+            width: 100%;
+            border-radius: 10px;
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-direction: column;
+            //margin-bottom: 60px;
+
+            span {
+              //font-size: 1.5rem;
+              color: black;
+            }
+            .start {
+              margin-top: 10px;
+              height: 50px;
+              width: 220px;
+              border: none;
+              font-size: larger;
+              border-radius: 8px;
+              background-color: dodgerblue;
+            }
           }
         }
-        
-      }
-      .left:hover{
-        border: lightgrey solid 1px;
-        transform: translateY(-40px); /* Move the container up by 10 pixels */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        
-      }
+        .left:hover {
+          border: lightgrey solid 1px;
+          transform: translateY(-40px); /* Move the container up by 10 pixels */
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-      .right{
-        width: 45%;
-        height: 90%;
-        
-        border-radius: 30px;
-        display: flex;
-        flex-direction: column;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-top: 10px;
-        
-        margin-bottom: 10px;
-        margin-left: 15px;
-        //transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .right {
+          width: 50%;
+          height: 90%;
+
+          border-radius: 30px;
+          display: flex;
+          flex-direction: column;
+          padding-left: 10px;
+          padding-right: 10px;
+          margin-top: 10px;
+
+          margin-bottom: 10px;
+          //margin-left: 15px;
+          //transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        // .right:hover{
+        //   border: lightgrey solid 1px;
+        //   //transform: translateY(-40px); /* Move the container up by 10 pixels */
+        //   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+        // }
       }
-      // .right:hover{
-      //   border: lightgrey solid 1px;
-      //   //transform: translateY(-40px); /* Move the container up by 10 pixels */
-      //   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        
-      // }
-        
-      }
-      
 
       #feature {
         display: flex;
-        //flex-wrap: wrap;
+        flex-wrap: wrap;
         flex-direction: column;
-        
+
         align-items: center;
         justify-content: center;
         width: 100%;
         border-bottom: solid 2px lightgray;
-        .imported-feature{
+        .imported-feature {
           width: 100%;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
           justify-content: center;
         }
-        .feature-title{
+        .feature-title {
           width: 100%;
           display: flex;
           align-items: center;
@@ -161,32 +153,17 @@
           font-size: 3rem;
           //background-color: aqua;
         }
-      
-       
-         
-
-
-
-
-
-
       }
-     
-      
-      
-      .team{
-        
-        
+
+      .team {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        
-       
-        
       }
-      .contact{
+      .contact {
         width: 100%;
-        background:url("../../assets/contact.jpg");
+        // background:url("../../assets/contact.jpg");
         padding-top: 25px;
         padding-bottom: 25px;
         margin-top: 60px;
@@ -194,7 +171,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        span{
+        span {
           margin: 25px 0 20px 0;
           font-size: 2rem;
         }
@@ -211,8 +188,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
   }
 }
-
-

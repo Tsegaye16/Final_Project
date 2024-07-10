@@ -1,5 +1,5 @@
 export const codeStrings = {
-    python:`def Linear_Search(list1,value):
+  Python:`def Linear_Search(list1,value):
     list2=[]
     flag=True
     for i in range(len(list1)):
@@ -12,7 +12,7 @@ export const codeStrings = {
         print("The value is found at the index of :")
         for j in list2:
             print(j,end=" ")`,
-    c:`#include <stdio.h>
+            'C/C++':`#include <stdio.h>
 
     void LinearSearch(int list1[], int value) {
         int size = sizeof(list1) / sizeof(list1[0]);
@@ -49,7 +49,7 @@ export const codeStrings = {
     
         return 0;
     }`,
-    javascript: `
+    JavaScript: `
     function linear_search(arr, item) {
       let flag = [];
       for (let i = 0; i < arr.length; i++) {

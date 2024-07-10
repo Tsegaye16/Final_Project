@@ -1,0 +1,66 @@
+.bst-container {
+  min-width: 1200px;
+  display: flex;
+  flex-direction: column;
+
+  .user-interaction {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(239, 235, 235);
+    border-bottom: black solid 2px;
+    .insert {
+      width: 25%;
+      padding: 1% 1%;
+      // background-color: aqua;
+      .node-number {
+        width: 75%;
+        height: 5vh;
+        font-size: calc(0.8 * 5vh);
+        margin-bottom: 1.5%;
+      }
+      .create-button {
+        width: 60%;
+        height: 5vh;
+        font-size: clamp(12px, calc(0.6 * 5vh), 16px);
+      }
+    }
+    .delete {
+      width: 25%;
+      padding: 1% 1%;
+      // background-color: aqua;
+      .node-number {
+        width: 75%;
+        height: 5vh;
+        font-size: calc(0.8 * 5vh);
+        margin-bottom: 1.5%;
+      }
+      .create-button {
+        width: 60%;
+        height: 5vh;
+        font-size: clamp(12px, calc(0.6 * 5vh), 16px);
+      }
+    }
+    .traverse {
+      width: 25%;
+      padding: 1% 1%;
+      // background-color: aqua;
+      .node-number {
+        width: 75%;
+        height: 5vh;
+        font-size: calc(0.8 * 5vh);
+        margin-bottom: 1.5%;
+      }
+      .create-button {
+        width: 60%;
+        height: 5vh;
+        font-size: clamp(12px, calc(0.6 * 5vh), 16px);
+      }
+    }
+  }
+  .representation {
+    display: flex;
+    width: 100%;
+    overflow: auto;
+  }
+}
