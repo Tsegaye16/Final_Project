@@ -142,7 +142,7 @@ function BT() {
   };
 
   const animateOperation = (result, isInsert, isDelete) => {
-    const animateInterval = 1000; // Adjust the interval as needed
+    const animateInterval = 1000;
     let currentIndex = 0;
 
     const animateStep = () => {
