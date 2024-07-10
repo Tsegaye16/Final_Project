@@ -148,7 +148,6 @@ function BT() {
     const animateStep = () => {
       const currentNodes = result.nodes.slice(0, currentIndex + 1);
 
-      // Color the nodes
       setHighlightedNodes(currentNodes);
 
       if (currentIndex > 0) {
@@ -168,7 +167,6 @@ function BT() {
         setTree(result.tree);
         setHighlightedNodes([]);
 
-        // If it's an insertion, directly color the inserted node and its parent
         if (isInsert && result.insertedNode) {
           setHighlightedNodes([
             result.insertedNode.value,
