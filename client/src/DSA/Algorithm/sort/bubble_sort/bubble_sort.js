@@ -83,12 +83,7 @@ const BubbleSort = ({ title, userData }) => {
           width="100%"
           borderBottom="2px solid black"
         >
-          <Box
-            display="flex"
-            flexDirection="row"
-            width="100%" // Setting width to 100% to ensure it takes full width on smaller screens
-            flexWrap="wrap" // Allowing items to wrap when screen size is reduced
-          >
+          <Box display="flex" flexDirection="row" width="100%" flexWrap="wrap">
             <Typography variant="body1">Array Size:</Typography>
             <Input
               type="number"
