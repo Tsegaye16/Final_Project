@@ -8,7 +8,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { motion } from "framer-motion";
-import { featuresData } from "../../data";
+import { featuresData } from "../data";
 import FeatureDialog from "./featureDialog";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";

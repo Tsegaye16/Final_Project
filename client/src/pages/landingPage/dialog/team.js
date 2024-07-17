@@ -2,10 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid, Paper, Typography, IconButton, Avatar } from "@material-ui/core";
 import { GitHub, LinkedIn, Email, Phone } from "@material-ui/icons";
-import tsegaye from "../../../../assets/Tsegaye.jpg";
+import tsegaye from "../../../assets/Tsegaye.jpg";
 import { motion } from "framer-motion";
-import genet from "../../../../assets/genet.jpg";
-import kefle from "../../../../assets/kefle.jpg";
+import genet from "../../../assets/genet.jpg";
+import kefle from "../../../assets/kefle.jpg";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const TeamMember = ({

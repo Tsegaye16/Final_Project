@@ -6,7 +6,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import UpdateUserPopup from "../manageStudent/studentPopup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UserManagement from "./user_management";
+import AdminUserManagement from "./user_management";
 import AddUser from "../add_user/add_user";
 import {
   Button,
@@ -176,7 +176,7 @@ function AdminDashdoard() {
         userData={userData}
       />
       <div className="main-content" style={{ marginLeft: `${sidebarWidth}px` }}>
-        <UserManagement />
+        <AdminUserManagement />
 
         <div className="table-container">
           <Button

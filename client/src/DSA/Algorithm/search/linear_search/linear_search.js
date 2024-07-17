@@ -1,11 +1,11 @@
 import React from "react";
 import "./linear_search.scss";
-import LinearSearch from "./logic";
+import LinearSearchLogic from "./logic";
 
 import CodeTemplate from "./extra/CodeTemplate";
 import Content from "../../../content/content";
 
-function Linear_search({ title, userData }) {
+function LinearSearch({ title, userData }) {
   return (
     <>
       <div className="main-Lsearch">
@@ -21,4 +21,4 @@ function Linear_search({ title, userData }) {
   );
 }
 
-export default Linear_search;
+export default LinearSearch;

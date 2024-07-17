@@ -1,10 +1,8 @@
-import React from 'react'
-import "./quick_sort.scss"
+import React from "react";
+import "./quick_sort.scss";
 
-function Quick_sort() {
-  return (
-    <div>Quick_sort</div>
-  )
+function QuickSort() {
+  return <div>Quick_sort</div>;
 }
 
-export default Quick_sort
+export default QuickSort;
