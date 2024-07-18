@@ -1,10 +1,8 @@
-import React from 'react'
-import "./selection_sort.scss"
+import React from "react";
+import "./selection_sort.scss";
 
-function Selection_sort() {
-  return (
-    <div>Selection_sort</div>
-  )
+function SelectionSort() {
+  return <div>Selection_sort</div>;
 }
 
-export default Selection_sort
+export default SelectionSort;

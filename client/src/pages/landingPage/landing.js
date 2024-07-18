@@ -3,12 +3,13 @@ import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 
 import NavigationBar from "./navigation";
 import ReadMoreDialog from "./dialog/readMore";
-import back from "../../../assets/welcome.avif";
+import back from "../../assets/welcome.avif";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 import Team from "./dialog/team";
-import { ContactUs } from "../../../popup/contact/contact";
+
+import { ContactUs } from "./dialog/contacts/contact";
 
 import FeatureSection from "./dialog/feature";
 import AboutSection from "./dialog/AboutSection";

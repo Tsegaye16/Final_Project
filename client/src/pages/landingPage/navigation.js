@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box, Avatar } from "@mui/material";
-import logo from "../../../assets/favicon.ico";
+import logo from "../../assets/favicon.ico";
 
 const NavigationBar = () => {
   return (

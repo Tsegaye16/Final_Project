@@ -3,7 +3,7 @@ import { Grid, Paper, Typography } from "@mui/material";
 import CountUp from "react-countup";
 import axios from "axios";
 
-function AdminDashboard() {
+function AdminUserManagement() {
   const [metrics, setMetrics] = useState([
     { name: "Total user", totalUsers: 0 },
     { name: "User feedback", userFeedback: 0 },
@@ -62,4 +62,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default AdminUserManagement;

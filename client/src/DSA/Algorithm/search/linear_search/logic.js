@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./logic.scss";
 import { ToastContainer, toast } from "react-toastify";
 
-const LinearSearch = () => {
+const LinearSearchLogic = () => {
   const [inputValue, setInputValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [array, setArray] = useState([]);
@@ -123,4 +123,4 @@ const LinearSearch = () => {
   );
 };
 
-export default LinearSearch;
+export default LinearSearchLogic;
