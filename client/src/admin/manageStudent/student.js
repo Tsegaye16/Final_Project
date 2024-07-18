@@ -73,7 +73,7 @@ const StudentList = () => {
     formData.append("image", updatedUser.image); // Make sure updatedUser.image is the File object
 
     axios
-      .post("http://localhost:8800/admin/updateStudent/", formData, {
+      .put("http://localhost:8800/admin/updateStudent/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import Login from "../pages/loginPage/Login";
 import Landing from "../pages/landingPage/landing";
 import Register from "../pages/registerPage/Register";
-import ReceiveEmail from "../forgot_password/receive_user_email";
-import ResetPassword from "../forgot_password/receive_new_password";
-import ConfirmationPage from "../confirm_email/ConfirmationPage";
+import ReceiveEmail from "../utils/forgot_password/receive_user_email";
+import ResetPassword from "../utils/forgot_password/receive_new_password";
+import ConfirmationPage from "../utils/ConfirmationPage";
 import NotFound from "../pages/error_handling/NotFound";
 import Unauthorized from "../pages/error_handling/Unauthorized";
 import useTokenTimeout from "../hooks/useTokenTimeout";
@@ -31,29 +31,27 @@ const AppRoutes = () => {
       setAuthenticated(true);
       const role = getUserRoleFromToken(storedToken) || "Student";
       setUserRole(role);
+    } else {
+      setAuthenticated(false);
     }
     setLoading(false);
   }, []);
 
   const RedirectToDashboard = () => {
-    if (!token) {
-      return <Navigate to="/" />;
-    }
     if (loading) {
       return <LoadingSpinner />;
     }
     if (!authenticated) {
       return <Navigate to="/login" />;
+    }
+    if (userRole === "Student") {
+      return <Navigate to="/student" />;
+    } else if (userRole === "Instructor") {
+      return <Navigate to="/instructor" />;
+    } else if (userRole === "Admin") {
+      return <Navigate to="/admin" />;
     } else {
-      if (userRole === "Student") {
-        return <Navigate to="/student" />;
-      } else if (userRole === "Instructor") {
-        return <Navigate to="/instructor" />;
-      } else if (userRole === "Admin") {
-        return <Navigate to="/admin" />;
-      } else {
-        return <Navigate to="/" />;
-      }
+      return <Navigate to="/" />;
     }
   };
 
@@ -94,8 +92,8 @@ const AppRoutes = () => {
           )}
         </>
       )}
-      <Route path="*" element={<Unauthorized />} />
-      <Route path="/unauthorized" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
+      <Route path="/unauthorized" element={<Unauthorized />} />
     </Routes>
   );
 };

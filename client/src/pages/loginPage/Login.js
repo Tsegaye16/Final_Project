@@ -73,7 +73,7 @@ const Login = ({ setAuthenticated, setUserRole, setToken }) => {
     try {
       // Make a request to your login endpoint
       const response = await axios.post(
-        "http://localhost:8800/login",
+        "http://localhost:8800/users/login",
         formData
       );
 

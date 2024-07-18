@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "../pages/homePage/Home";
+//import Home from "../pages/studentHomePage/Home";
+import Home from "../student/studentHomePage/Home";
 import Quiz from "../student/quiz";
-import StudentProfile from "../profile/studentProfile/studentProfileUpdate";
+import StudentProfile from "../pages/profile/userProfile";
 import QuizQuestions from "../student/question_board";
 import AboutSection from "../pages/landingPage/dialog/AboutSection";
 import { ContactUs } from "../pages/landingPage/dialog/contacts/contact";

@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import InstructorDashboard from "../Instructor/pages/dash_board/dash_board";
-import QuizDashboard from "../Instructor/manage_quiz/quiz_dashboard/quizeDashboard";
-import AddQuestion from "../Instructor/manage_quiz/quiz_dashboard/addQuestion";
+import InstructorDashboard from "../Instructor/pages/dash_board";
+import QuizDashboard from "../Instructor/manage_quiz/quizeDashboard";
+import AddQuestion from "../Instructor/manage_quiz/addQuestion";
 import InstructorsideHome from "../Instructor/manage_content/Content";
-import StudentProfile from "../profile/studentProfile/studentProfileUpdate";
+import StudentProfile from "../pages/profile/userProfile";
 import AboutSection from "../pages/landingPage/dialog/AboutSection";
 import { ContactUs } from "../pages/landingPage/dialog/contacts/contact";
 import FeatureSection from "../pages/landingPage/dialog/feature";

@@ -6,7 +6,7 @@ const updateInstructorProfile = async (db, req, res) => {
 
     const { user_id, name, email, username } = req.body;
     const role_name = req.body.role_name;
-    //console.log(role_name)
+    console.log("ROLE NAME", role_name);
     const image = req.file ? req.file.filename : null;
 
     // Use the MySQL connection pool to execute queries
@@ -17,12 +17,12 @@ const updateInstructorProfile = async (db, req, res) => {
     );
     const currentImage = currentImageResult[0]
       ? currentImageResult[0].image
-      : null;
+      : image;
 
     // Update the user record
     await query(
       "UPDATE users SET name = ?, email = ?, username = ?, role_name = ?, image = IFNULL(?, image) WHERE user_id = ?",
-      [name, email, username, role_name, image, user_id]
+      [name, email, username, role_name, currentImage, user_id]
     );
 
     if (role_name === "Student") {

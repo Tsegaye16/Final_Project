@@ -70,7 +70,7 @@ function AdminDashdoard() {
     formData.append("role_name", updatedUser.role_name);
     formData.append("image", updatedUser.image);
     axios
-      .post("http://localhost:8800/admin/updateRecentUser/", formData, {
+      .put("http://localhost:8800/admin/updateRecentUser/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "../../pages/homePage/Home";
+import Home from "../../student/studentHomePage/Home";
 
 function InstructorsideHome({ userRole, token }) {
   const instructor = true;

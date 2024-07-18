@@ -84,7 +84,7 @@ const InstructorList = () => {
     formData.append("role_name", updatedUser.role_name);
     formData.append("image", updatedUser.image);
     axios
-      .post("http://localhost:8800/admin/updateInstructor/", formData, {
+      .put("http://localhost:8800/admin/updateInstructor", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

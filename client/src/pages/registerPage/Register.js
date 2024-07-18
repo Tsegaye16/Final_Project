@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Register.css";
+//import "./Register.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -81,7 +81,7 @@ export default function Register() {
     }
     try {
       const response = await axios.post(
-        "http://localhost:8800/register",
+        "http://localhost:8800/users/register",
         values
       );
       const { message } = response.data;

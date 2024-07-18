@@ -43,7 +43,7 @@ const ResetPassword = async (db, req, res) => {
       to: email,
       subject: "Password Reset",
       html: `
-      <p>Thank you for registering! Click the button below to confirm your email:</p>
+      <p>Click here to reset password</p>
       <a href="${resetLink}">
         <button style="background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor:pointer">
           Confirm Email

@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql";
 import cookieParser from "cookie-parser";
-import registerUser from "./register.js";
-import loginUser from "./login.js";
+import registerUser from "./auth/register.js";
+//import registerUser from "./register.js";
+import loginUser from "./auth/login.js";
+import logoutUser from "./auth/logout.js";
 import viewStudent from "./admin/viewStudent.js";
 import viewInstructor from "./admin/viewInstructor.js";
 import viewAdmin from "./admin/viewHerself.js";
-import logoutUser from "./logout.js";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
@@ -27,9 +28,9 @@ import deleteQuiz from "./instructor/deleteQuiz.js";
 import addQuestion from "./instructor/addQuestion.js";
 import ResetPassword from "./user_forgote_password/password_reset.js";
 import UpdatePassword from "./user_forgote_password/password_update.js";
+import RetrieveQuestion from "./student/view_question.js";
 import studentViewQuiz from "./student/view_quiz.js";
-import EmailConfirm from "./email_confirm.js";
-import { promisify } from "util";
+import EmailConfirm from "./auth/email_confirm.js";
 import studentProfile from "./student/view_profile.js";
 import StudenUpdateProfile from "./student/update_profile.js";
 import viewElapsed from "./instructor/retrieve_elapsed_time.js";
@@ -40,9 +41,9 @@ import deleteNote from "./student/delete_note.js";
 import addNote from "./student/add_note.js";
 import TotalUser from "./admin/total_user.js";
 import addUser from "./admin/addUser.js";
-import userMessage from "./contact.js";
-import userFeedback from "./feedBack.js";
-import newMessage from "./newMessage.js";
+import userMessage from "./messaging/contact.js";
+import userFeedback from "./messaging/notification.js";
+import newMessage from "./messaging/newMessage.js";
 import messageReplay from "./admin/messageReply.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -51,7 +52,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: ["POST", "GET", "DELETE"],
+    methods: ["POST", "GET", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
       "Origin",
@@ -79,16 +80,29 @@ const db = mysql.createPool({
 app.use(express.static("uploads"));
 
 // Registration
-app.post("/register", async (req, res) => {
+app.post("/users/register", async (req, res) => {
   await registerUser(db, req, res);
+});
+// Login
+app.post("/users/login", async (req, res) => {
+  await loginUser(db, req, res);
+});
+//Logout
+app.post("/users/logout", logoutUser);
+// Endpoint to receive user email and initiate the password reset process
+app.post("/users/reset-password", async (req, res) => {
+  await ResetPassword(db, req, res);
+});
+
+// Endpoint to validate token and update user password
+app.post("/users/update-password", async (req, res) => {
+  await UpdatePassword(db, req, res);
+});
+app.post("/users/confirm-email/:token", async (req, res) => {
+  await EmailConfirm(db, req, res);
 });
 app.post("/admin/adduser", async (req, res) => {
   await addUser(db, req, res);
-});
-
-// Login
-app.post("/login", async (req, res) => {
-  await loginUser(db, req, res);
 });
 
 // Admin View Student
@@ -108,8 +122,6 @@ app.get("/admin/viewHerself", async (req, res) => {
   await viewAdmin(db, req, res);
 });
 
-//Logout
-app.post("/logout", logoutUser);
 //Update Admin profile
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -129,11 +141,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.post("/admin/updateAdmin", upload.single("image"), async (req, res) => {
+app.put("/admin/updateAdmin", upload.single("image"), async (req, res) => {
   await updateAdminProfile(db, req, res);
 });
 
-app.post("/admin/updateStudent", upload.single("image"), async (req, res) => {
+app.put("/admin/updateStudent", upload.single("image"), async (req, res) => {
   await updateStudentProfile(db, req, res);
 });
 
@@ -141,21 +153,13 @@ app.get("/admin/viewRecent", async (req, res) => {
   await recentlyRegistered(db, req, res);
 });
 
-app.post(
-  "/admin/updateRecentUser",
-  upload.single("image"),
-  async (req, res) => {
-    await updateRecentUser(db, req, res);
-  }
-);
+app.put("/admin/updateRecentUser", upload.single("image"), async (req, res) => {
+  await updateRecentUser(db, req, res);
+});
 
-app.post(
-  "/admin/updateInstructor",
-  upload.single("image"),
-  async (req, res) => {
-    await updateInstructorProfile(db, req, res);
-  }
-);
+app.put("/admin/updateInstructor", upload.single("image"), async (req, res) => {
+  await updateInstructorProfile(db, req, res);
+});
 app.delete("/admin/deleteInstructor/:instructor_id", async (req, res) => {
   await deleteInstructor(db, req, res);
 });
@@ -167,20 +171,20 @@ app.delete("/admin/deleteUser/:user_id", async (req, res) => {
 });
 
 //Instructor add quiz
-app.post("/addQuiz", async (req, res) => {
+app.post("/instructors/addQuiz", async (req, res) => {
   await addQuiz(db, req, res);
 });
 //Retrieve quiz
-app.get("/getQuizzes", async (req, res) => {
+app.get("/instructors/getQuizzes", async (req, res) => {
   await viewQuiz(db, req, res);
 });
 //Delete quiz
-app.delete("/deleteQuiz/:id", async (req, res) => {
+app.delete("/instructors/deleteQuiz/:id", async (req, res) => {
   await deleteQuiz(db, req, res);
 });
 
 //Add questio
-app.post("/addQuestion", async (req, res) => {
+app.post("/instructors/addQuestion", async (req, res) => {
   await addQuestion(db, req, res);
 });
 
@@ -189,71 +193,10 @@ app.get("/student/viewQuize", async (req, res) => {
   await studentViewQuiz(db, req, res);
 });
 
-// Endpoint to receive user email and initiate the password reset process
-app.post("/user/resetPassword", async (req, res) => {
-  await ResetPassword(db, req, res);
-});
-
-// Endpoint to validate token and update user password
-app.post("/user/updatePassword", async (req, res) => {
-  await UpdatePassword(db, req, res);
-});
-app.post("/user/confirmEmail/:token", async (req, res) => {
-  await EmailConfirm(db, req, res);
-});
-
-//Retrieving the quiz with entire question and its corresponding choice based on quiz_id
-
 // functions to retrieve question
-const RetrieveQuestion = async (quiz_id) => {
-  try {
-    const sql = `
-      SELECT q.id as question_id, q.question_text, c.id as choice_id, c.choice_text, c.is_correct, q.difficulty, q.mark
-      FROM question q
-      JOIN choice c ON q.id = c.question_id
-      WHERE q.quiz_id = ?
-    `;
 
-    const query = promisify(db.query).bind(db);
-    const result = await query(sql, [quiz_id]);
-
-    if (!result || !Array.isArray(result)) {
-      console.error("Invalid result format:", result);
-      return null;
-    }
-
-    const questionsWithChoices = result.reduce((acc, row) => {
-      if (!acc[row.question_id]) {
-        acc[row.question_id] = {
-          question_id: row.question_id,
-          question_text: row.question_text,
-          choices: [],
-          difficulty: row.difficulty,
-          mark: row.mark,
-        };
-      }
-
-      acc[row.question_id].choices.push({
-        choice_id: row.choice_id,
-        choice_text: row.choice_text,
-        is_correct: row.is_correct,
-      });
-
-      return acc;
-    }, {});
-
-    return questionsWithChoices;
-  } catch (error) {
-    console.error("Error retrieving questions and choices:", error);
-    return null;
-  }
-};
 app.post("/student/startQuiz", async (req, res) => {
-  const { quiz_id } = req.body;
-  //console.log("Quiz ID: ",req.body)
-
-  // Retrieve questions and choices based on quiz_id
-  const questionsWithChoices = await RetrieveQuestion(quiz_id);
+  const questionsWithChoices = await RetrieveQuestion(db, req, res);
 
   console.log(questionsWithChoices);
 

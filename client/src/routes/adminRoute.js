@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AdminDashdoard from "../admin/dashboard/dashboard";
 import StudentList from "../admin/manageStudent/student";
-import StudentProfile from "../profile/studentProfile/studentProfileUpdate";
+import StudentProfile from "../pages/profile/userProfile";
 import InstructorList from "../admin/manageInstructor/instructor";
 import Team from "../pages/landingPage/dialog/team";
 
