@@ -3,7 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//import "./Register.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,13 +20,16 @@ export default function Register() {
     email: "",
     username: "",
     password: "",
+    passwordConfirm: "",
   });
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     username: "",
     password: "",
+    passwordConfirm: "",
   });
+
   const validateForm = () => {
     let valid = true;
     const newErrors = { ...errors };
@@ -62,9 +63,17 @@ export default function Register() {
       newErrors.password = "";
     }
 
+    if (values.password !== values.passwordConfirm) {
+      newErrors.passwordConfirm = "Passwords do not match";
+      valid = false;
+    } else {
+      newErrors.passwordConfirm = "";
+    }
+
     setErrors(newErrors);
     return valid;
   };
+
   const navigate = useNavigate();
 
   const handleInput = (event) => {
@@ -81,7 +90,7 @@ export default function Register() {
     }
     try {
       const response = await axios.post(
-        "http://localhost:8800/users/register",
+        "http://127.0.0.1:4000/dsa/users/signup",
         values
       );
       const { message } = response.data;
@@ -155,7 +164,6 @@ export default function Register() {
                 name="name"
                 required
                 fullWidth
-                // id="firstName"
                 label="Full Name"
                 autoFocus
                 onChange={handleInput}
@@ -167,10 +175,9 @@ export default function Register() {
               <TextField
                 required
                 fullWidth
-                // id="lastName"
                 label="E-mail"
                 name="email"
-                autoComplete="family-name"
+                autoComplete="email"
                 onChange={handleInput}
                 error={Boolean(errors.email)}
                 helperText={errors.email}
@@ -180,10 +187,9 @@ export default function Register() {
               <TextField
                 required
                 fullWidth
-                //  id="email"
-                label="User name"
+                label="Username"
                 name="username"
-                autoComplete="family-name"
+                autoComplete="username"
                 onChange={handleInput}
                 error={Boolean(errors.username)}
                 helperText={errors.username}
@@ -196,11 +202,23 @@ export default function Register() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
                 autoComplete="new-password"
                 onChange={handleInput}
                 error={Boolean(errors.password)}
                 helperText={errors.password}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="passwordConfirm"
+                label="Confirm Password"
+                type="password"
+                autoComplete="new-password"
+                onChange={handleInput}
+                error={Boolean(errors.passwordConfirm)}
+                helperText={errors.passwordConfirm}
               />
             </Grid>
           </Grid>
