@@ -303,4 +303,4 @@ The proposed system will have two (2) databases for recovery and backup. One for
 ### __3.2.8.	Resource Issues__ 
 The system needs resources that have high processor speed and memory for server and client
 ### __3.2.9.	Documentation__ 
-Our system will have well-defined documents which help to easily maintain the system. We will also prepare a short and understandable file for users on how to use the system. And the development process will be provided for the user to read to know about the process and what type of model used to develop the system
+Our system will have well-defined documents which help to easily maintain the system. We will also prepare a short and understandable file for users on how to use the system. And the development process will be provided for the user to read to know about the process and what type of model used to develop the system.
