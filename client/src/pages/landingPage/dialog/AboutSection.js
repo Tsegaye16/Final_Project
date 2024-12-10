@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Grid, Paper, IconButton } from "@material-ui/core";
 import { motion } from "framer-motion";
-import sort from "../../../../assets/sort.png";
+import sort from "../../../assets/sort.png";
 import AboutInteractiveContent from "./About";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";

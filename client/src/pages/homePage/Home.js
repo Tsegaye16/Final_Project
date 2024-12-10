@@ -8,13 +8,13 @@ import Linked_list from "../../DSA/DataStracture/Linear/linked_list/linked_list"
 import BST from "../../DSA/DataStracture/non_Linear/binary_tree_search/BST";
 import Hash_table from "../../DSA/DataStracture/non_Linear/hash_table/hash_table";
 import Graph from "../../DSA/DataStracture/non_Linear/graph/graph.js";
-import Linear_search from "../../DSA/Algorithm/search/linear_search/linear_search";
-import Binary_search from "../../DSA/Algorithm/search/binary_search/binary_search";
-import Bubble_sort from "../../DSA/Algorithm/sort/bubble_sort/bubble_sort";
-import Insertion_sort from "../../DSA/Algorithm/sort/insertion_sort/insertion_sort";
-import Selection_sort from "../../DSA/Algorithm/sort/selection_sort/selection_sort";
-import Merge_sort from "../../DSA/Algorithm/sort/merge_sort/merge_sort";
-import Quick_sort from "../../DSA/Algorithm/sort/quick_sort/quick_sort";
+import LinearSearch from "../../DSA/Algorithm/search/linear_search/linear_search";
+import BinarySearch from "../../DSA/Algorithm/search/binary_search/binary_search";
+import BubbleSort from "../../DSA/Algorithm/sort/bubble_sort/bubble_sort";
+import InsertionSort from "../../DSA/Algorithm/sort/insertion_sort/insertion_sort";
+import SelectionSort from "../../DSA/Algorithm/sort/selection_sort/selection_sort";
+import MergeSort from "../../DSA/Algorithm/sort/merge_sort/merge_sort";
+import QuickSort from "../../DSA/Algorithm/sort/quick_sort/quick_sort";
 import QuizIcon from "@mui/icons-material/Quiz";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, CircularProgress, Typography } from "@mui/material";
@@ -113,19 +113,19 @@ function Home({ instructor }) {
       case "graph":
         return <Graph title={selectedItem} userData={userData} />;
       case "linear_search":
-        return <Linear_search title={selectedItem} userData={userData} />;
+        return <LinearSearch title={selectedItem} userData={userData} />;
       case "binary_search":
-        return <Binary_search title={selectedItem} userData={userData} />;
+        return <BinarySearch title={selectedItem} userData={userData} />;
       case "bubble_sort":
-        return <Bubble_sort title={selectedItem} userData={userData} />;
+        return <BubbleSort title={selectedItem} userData={userData} />;
       case "insertion_sort":
-        return <Insertion_sort title={selectedItem} userData={userData} />;
+        return <InsertionSort title={selectedItem} userData={userData} />;
       case "selection_sort":
-        return <Selection_sort title={selectedItem} userData={userData} />;
+        return <SelectionSort title={selectedItem} userData={userData} />;
       case "merge_sort":
-        return <Merge_sort title={selectedItem} userData={userData} />;
+        return <MergeSort title={selectedItem} userData={userData} />;
       case "quick_sort":
-        return <Quick_sort title={selectedItem} userData={userData} />;
+        return <QuickSort title={selectedItem} userData={userData} />;
 
       default:
         return <Welcome />;
